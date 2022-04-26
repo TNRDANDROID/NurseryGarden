@@ -24,7 +24,7 @@
                 android:bottomRightRadius="0dp"
                 android:topLeftRadius="@dimen/_19sdp"
                 android:topRightRadius="0dp" />
-            <solid android:color="#F5F5F5" />
+            <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
 </layer-list>

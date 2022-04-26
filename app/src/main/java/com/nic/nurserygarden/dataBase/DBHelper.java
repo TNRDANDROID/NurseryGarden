@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "NutriGarden";
+    private static final String DATABASE_NAME = "NurseryGarden";
     private static final int DATABASE_VERSION = 1;
 
 
@@ -24,6 +24,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SAVE_TREE_IMAGE_TABLE = "save_tree_image_table";
     public static final String SAVE_BEFORE_TREE_IMAGE_TABLE = "save_before_tree_image_table";
     public static final String SAVE_AFTER_TREE_IMAGE_TABLE = "save_after_tree_image_table";
+
+    ///Nursery Tables
+    public static final String NURSERY_USER_DETAILS = "nursery_user_details";
+    public static final String NURSERY_LAND_TYPE = "nursery_land_type";
+    public static final String NURSERY_LAND_SAVE_DETAILS = "nursery_land_save_details";
+    public static final String BATCH_DETAILS = "batch_details";
+    public static final String BATCH_IMAGES_DETAILS = "batch_images_details";
+    public static final String BATCH_SPECIES_DETAILS = "batch_species_details";
 
     private Context context;
 
@@ -139,6 +147,53 @@ public class DBHelper extends SQLiteOpenHelper {
                 "after_photo BLOB," +
                 "after_photo_lat TEXT," +
                 "after_photo_long TEXT)");
+
+
+        /////Nursery Tables
+        db.execSQL("CREATE TABLE " + NURSERY_USER_DETAILS + " ("
+                +"nursery_id INTEGER,"+
+                "nursery_level_id INTEGER,"+
+                "nursery_name_en TEXT," +
+                "nursery_name_ta TEXT," +
+                "nursery_address TEXT," +
+                "dname TEXT," +
+                "bname TEXT," +
+                "pvname TEXT)");
+
+        db.execSQL("CREATE TABLE " + NURSERY_LAND_TYPE + " ("
+                +"land_type_id INTEGER,"+
+                "land_type_name_en TEXT,"+
+                "land_type_name_ta TEXT)");
+
+        db.execSQL("CREATE TABLE " + NURSERY_LAND_SAVE_DETAILS + " ("
+                +"land_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "land_type_id INTEGER,"+
+                "image BLOB,"+
+                "server_flag TEXT,"+
+                "latitude TEXT,"+
+                "longtitude TEXT)");
+
+        db.execSQL("CREATE TABLE " + BATCH_DETAILS + " ("
+                +"batch_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_id INTEGER,"+
+                "batch_number INTEGER,"+
+                "created_date TEXT,"+
+                "server_flag TEXT)");
+
+        db.execSQL("CREATE TABLE " + BATCH_IMAGES_DETAILS + " ("
+                +"batch_images_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_primary_id INTEGER,"+
+                "batch_id INTEGER,"+
+                "image BLOB,"+
+                "lattitude TEXT,"+
+                "longtitude TEXT)");
+
+        db.execSQL("CREATE TABLE " + BATCH_SPECIES_DETAILS + " ("
+                +"batch_species_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_primary_id INTEGER,"+
+                "batch_id INTEGER,"+
+                "species_id TEXT,"+
+                "no_of_count TEXT)");
 
 
     }

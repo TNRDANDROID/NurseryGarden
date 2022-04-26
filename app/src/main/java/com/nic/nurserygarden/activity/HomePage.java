@@ -32,7 +32,7 @@ import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.HomeScreenBinding;
 import com.nic.nurserygarden.dialog.MyDialog;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.support.ProgressHUD;
 import com.nic.nurserygarden.utils.UrlGenerator;
@@ -53,8 +53,8 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
     public static SQLiteDatabase db;
     private String isHome;
     Handler myHandler = new Handler();
-    private List<PMAYSurvey> Village = new ArrayList<>();
-    private List<PMAYSurvey> Habitation = new ArrayList<>();
+    private List<NurserySurvey> Village = new ArrayList<>();
+    private List<NurserySurvey> Habitation = new ArrayList<>();
     String lastInsertedID;
     String isAlive = "", isLegal = "", isMigrated = "";
     private ProgressHUD progressHUD;
@@ -275,13 +275,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         VillageList = db.rawQuery("SELECT * FROM " + DBHelper.VILLAGE_TABLE_NAME + " where dcode = "+prefManager.getDistrictCode()+ " and bcode = '" + filterVillage + "'", null);
 
         Village.clear();
-        PMAYSurvey villageListValue = new PMAYSurvey();
+        NurserySurvey villageListValue = new NurserySurvey();
         villageListValue.setPvName("Select Village");
         Village.add(villageListValue);
         if (VillageList.getCount() > 0) {
             if (VillageList.moveToFirst()) {
                 do {
-                    PMAYSurvey villageList = new PMAYSurvey();
+                    NurserySurvey villageList = new NurserySurvey();
                     String districtCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.DISTRICT_CODE));
                     String blockCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.BLOCK_CODE));
                     String pvCode = VillageList.getString(VillageList.getColumnIndexOrThrow(AppConstant.PV_CODE));
@@ -306,13 +306,13 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         HABList = db.rawQuery("SELECT * FROM " + DBHelper.HABITATION_TABLE_NAME + " where dcode = '" + dcode + "'and bcode = '" + bcode + "' and pvcode = '" + pvcode + "' order by habitation_name asc", null);
 
         Habitation.clear();
-        PMAYSurvey habitationListValue = new PMAYSurvey();
+        NurserySurvey habitationListValue = new NurserySurvey();
         habitationListValue.setHabitationName("Select Habitation");
         Habitation.add(habitationListValue);
         if (HABList.getCount() > 0) {
             if (HABList.moveToFirst()) {
                 do {
-                    PMAYSurvey habList = new PMAYSurvey();
+                    NurserySurvey habList = new NurserySurvey();
                     String districtCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.DISTRICT_CODE));
                     String blockCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.BLOCK_CODE));
                     String pvCode = HABList.getString(HABList.getColumnIndexOrThrow(AppConstant.PV_CODE));
@@ -342,7 +342,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void logout() {
         dbData.open();
-        ArrayList<PMAYSurvey> ImageCount = dbData.getSavedPMAYDetails();
+        ArrayList<NurserySurvey> ImageCount = dbData.getSavedPMAYDetails();
         if (!Utils.isOnline()) {
             Utils.showAlert(this, "Logging out while offline may leads to loss of data!");
         } else {
@@ -377,7 +377,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void getPMAYList() {
         try {
-            new ApiService(this).makeJSONObjectRequest("PMAYList", Api.Method.POST, UrlGenerator.getPMAYListUrl(), pmayListJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("PMAYList", Api.Method.POST, UrlGenerator.getNurseryGardenService(), pmayListJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -572,7 +572,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void syncButtonVisibility() {
         dbData.open();
-        ArrayList<PMAYSurvey> workImageCount = dbData.getSavedPMAYDetails();
+        ArrayList<NurserySurvey> workImageCount = dbData.getSavedPMAYDetails();
 
         if (workImageCount.size() > 0) {
             homeScreenBinding.synData.setVisibility(View.VISIBLE);
@@ -612,7 +612,7 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
         protected Void doInBackground(JSONObject... params) {
             dbData.deletePMAYTable();
             dbData.open();
-            ArrayList<PMAYSurvey> all_pmayListCount = dbData.getAll_PMAYList("","");
+            ArrayList<NurserySurvey> all_pmayListCount = dbData.getAll_PMAYList("","");
             if (all_pmayListCount.size() <= 0) {
                 if (params.length > 0) {
                     JSONArray jsonArray = new JSONArray();
@@ -622,19 +622,19 @@ public class HomePage extends AppCompatActivity implements Api.ServerResponseLis
                         e.printStackTrace();
                     }
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        PMAYSurvey pmaySurvey = new PMAYSurvey();
+                        NurserySurvey nurserySurvey = new NurserySurvey();
                         try {
-                            pmaySurvey.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
-                            pmaySurvey.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HAB_CODE));
-                            pmaySurvey.setBeneficiaryName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_NAME));
-                            pmaySurvey.setSeccId(jsonArray.getJSONObject(i).getString(AppConstant.SECC_ID));
-                            pmaySurvey.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
-                            pmaySurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
-                            pmaySurvey.setPersonAlive(jsonArray.getJSONObject(i).getString(AppConstant.PERSON_ALIVE));
-                            pmaySurvey.setIsLegel(jsonArray.getJSONObject(i).getString(AppConstant.LEGAL_HEIR_AVAILABLE));
-                            pmaySurvey.setIsMigrated(jsonArray.getJSONObject(i).getString(AppConstant.PERSON_MIGRATED));
+                            nurserySurvey.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
+                            nurserySurvey.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HAB_CODE));
+                            nurserySurvey.setBeneficiaryName(jsonArray.getJSONObject(i).getString(AppConstant.BENEFICIARY_NAME));
+                            nurserySurvey.setSeccId(jsonArray.getJSONObject(i).getString(AppConstant.SECC_ID));
+                            nurserySurvey.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
+                            nurserySurvey.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
+                            nurserySurvey.setPersonAlive(jsonArray.getJSONObject(i).getString(AppConstant.PERSON_ALIVE));
+                            nurserySurvey.setIsLegel(jsonArray.getJSONObject(i).getString(AppConstant.LEGAL_HEIR_AVAILABLE));
+                            nurserySurvey.setIsMigrated(jsonArray.getJSONObject(i).getString(AppConstant.PERSON_MIGRATED));
 
-                            dbData.insertPMAY(pmaySurvey);
+                            dbData.insertPMAY(nurserySurvey);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

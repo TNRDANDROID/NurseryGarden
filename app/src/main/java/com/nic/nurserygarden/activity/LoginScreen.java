@@ -31,7 +31,7 @@ import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.dataBase.dbData;
 
 import com.nic.nurserygarden.databinding.LoginScreenBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.support.ProgressHUD;
 import com.nic.nurserygarden.utils.FontCache;
@@ -348,7 +348,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         @Override
         protected Void doInBackground(JSONObject... params) {
             dbData.open();
-            ArrayList<PMAYSurvey> villagelist_count = dbData.getAll_Village(prefManager.getDistrictCode(),prefManager.getBlockCode());
+            ArrayList<NurserySurvey> villagelist_count = dbData.getAll_Village(prefManager.getDistrictCode(),prefManager.getBlockCode());
             if (villagelist_count.size() <= 0) {
                 if (params.length > 0) {
                     JSONArray jsonArray = new JSONArray();
@@ -358,7 +358,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        PMAYSurvey villageListValue = new PMAYSurvey();
+                        NurserySurvey villageListValue = new NurserySurvey();
                         try {
                             villageListValue.setDistictCode(jsonArray.getJSONObject(i).getString(AppConstant.DISTRICT_CODE));
                             villageListValue.setBlockCode(jsonArray.getJSONObject(i).getString(AppConstant.BLOCK_CODE));
@@ -384,7 +384,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         @Override
         protected Void doInBackground(JSONObject... params) {
             dbData.open();
-            ArrayList<PMAYSurvey> hablist_count = dbData.getAll_Habitation(prefManager.getDistrictCode(),prefManager.getBlockCode());
+            ArrayList<NurserySurvey> hablist_count = dbData.getAll_Habitation(prefManager.getDistrictCode(),prefManager.getBlockCode());
             if (hablist_count.size() <= 0) {
                 if (params.length > 0) {
                     JSONArray jsonArray = new JSONArray();
@@ -394,7 +394,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        PMAYSurvey habListValue = new PMAYSurvey();
+                        NurserySurvey habListValue = new NurserySurvey();
                         try {
                             habListValue.setDistictCode(jsonArray.getJSONObject(i).getString(AppConstant.DISTRICT_CODE));
                             habListValue.setBlockCode(jsonArray.getJSONObject(i).getString(AppConstant.BLOCK_CODE));

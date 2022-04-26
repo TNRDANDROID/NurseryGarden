@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.nic.nurserygarden.R;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import java.util.List;
  * Created by shanmugapriyan on 25/05/16.
  */
 public class CommonAdapter extends BaseAdapter {
-    private List<PMAYSurvey> pmgsySurveys;
+    private List<NurserySurvey> pmgsySurveys;
     private Context mContext;
     private String type;
 
 
-    public CommonAdapter(Context mContext, List<PMAYSurvey> pmgsySurvey, String type) {
+    public CommonAdapter(Context mContext, List<NurserySurvey> pmgsySurvey, String type) {
         this.pmgsySurveys = pmgsySurvey;
         this.mContext = mContext;
         this.type = type;
@@ -49,7 +49,7 @@ public class CommonAdapter extends BaseAdapter {
 //        TextView tv_type = (TextView) view.findViewById(R.id.tv_spinner_item);
         View view = inflater.inflate(R.layout.spinner_value, parent, false);
         TextView tv_type = (TextView) view.findViewById(R.id.spinner_list_value);
-        PMAYSurvey pmgsySurvey = pmgsySurveys.get(position);
+        NurserySurvey pmgsySurvey = pmgsySurveys.get(position);
 
         if (type.equalsIgnoreCase("BlockList")) {
             tv_type.setText(pmgsySurvey.getBlockName());
@@ -67,8 +67,9 @@ public class CommonAdapter extends BaseAdapter {
         else if (type.equalsIgnoreCase("type_tree_List")) {
             tv_type.setText(pmgsySurvey.getWork_name());
         }
-        else if (type.equalsIgnoreCase("self_Group_Member_List")) {
-            tv_type.setText(pmgsySurvey.getMember_name());
+
+        else if (type.equalsIgnoreCase("landTypeList")) {
+            tv_type.setText(pmgsySurvey.getLand_type_name_en());
         }
         return view;
     }

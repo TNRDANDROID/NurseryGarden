@@ -1175,6 +1175,20 @@ public class Utils {
         Log.d("nutri_garden_master", "" + dataSet);
         return dataSet;
     }
+    public static JSONObject nursery_user_details_JsonParams_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_user_details);
+        Log.d("nursery_user_details", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject nursery_land_type_JsonParams_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_land_type);
+        Log.d("nursery_land_type", "" + dataSet);
+        return dataSet;
+    }
 
     public static JSONObject HabitationListDistrictBlockVillageWiseJsonParams(Activity activity) throws JSONException {
         prefManager = new PrefManager(activity);

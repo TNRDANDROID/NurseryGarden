@@ -25,7 +25,7 @@ import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.NewPendingAdapterBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.utils.Utils;
 
@@ -40,13 +40,13 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
 
     private static Activity context;
     private PrefManager prefManager;
-    private List<PMAYSurvey> pendingListValues;
+    private List<NurserySurvey> pendingListValues;
     JSONObject dataset = new JSONObject();
     dbData dbData;
     private LayoutInflater layoutInflater;
     public  DBHelper dbHelper;
     public  SQLiteDatabase db;
-    public NewPendingAdapter(Activity context, List<PMAYSurvey> pendingListValues,dbData dbData) {
+    public NewPendingAdapter(Activity context, List<NurserySurvey> pendingListValues, dbData dbData) {
 
         this.context = context;
         prefManager = new PrefManager(context);
@@ -153,8 +153,8 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
         int shg_member_code = pendingListValues.get(position).getShg_member_code();
         int work_code = pendingListValues.get(position).getWork_code();
 
-        ArrayList<PMAYSurvey> getBeforeImageDetail = dbData.getParticular_Before_Save_Tree_Image_Table(shg_code,shg_member_code);
-        ArrayList<PMAYSurvey> getAfterImageDetail = dbData.getParticular_After_Save_Tree_Image_Table(shg_code,shg_member_code);
+        ArrayList<NurserySurvey> getBeforeImageDetail = dbData.getParticular_Before_Save_Tree_Image_Table(shg_code,shg_member_code);
+        ArrayList<NurserySurvey> getAfterImageDetail = dbData.getParticular_After_Save_Tree_Image_Table(shg_code,shg_member_code);
 
 
         try {

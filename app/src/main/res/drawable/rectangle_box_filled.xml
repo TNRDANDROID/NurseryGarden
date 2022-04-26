@@ -4,6 +4,12 @@
 
     <gradient android:angle="0"
         android:startColor="@color/colorPrimary"
-        android:endColor="@color/colorPrimaryDark"/>
+        android:endColor="@color/colorAccentlight"/>
+
+    <corners
+        android:bottomLeftRadius="5dp"
+        android:bottomRightRadius="5dp"
+        android:topLeftRadius="5dp"
+        android:topRightRadius="5dp" />
 
 </shape>

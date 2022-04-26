@@ -29,7 +29,7 @@
     <uses-permission android:name="android.permission.FLAG_GRANT_READ_URI_PERMISSION" />
 
     <application
-        android:name="com.nic.nurserygarden.application.NICApplication"
+        android:name=".application.NICApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_app_logo"
         android:label="@string/app_name"
@@ -40,24 +40,29 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.nic.nurserygarden.activity.ViewNutriGarden"
+        <activity android:name=".activity.LandActivity.AddViewLand"></activity>
+        <activity android:name=".activity.BatchActivity.AddViewBatchDetails" />
+        <activity
+            android:name=".activity.ViewNutriGarden"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"></activity>
-        <activity android:name="com.nic.nurserygarden.activity.NewPendingScreen"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity
+            android:name=".activity.NewPendingScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
-        <activity android:name="com.nic.nurserygarden.activity.NewHomePage"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity
+            android:name=".activity.NewHomePage"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.nic.nurserygarden.activity.SplashScreen">
+        <activity android:name=".activity.SplashScreen">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -72,49 +77,50 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nic.nurserygarden.activity.LoginScreen"
+            android:name=".activity.LoginScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.HomePage"
+            android:name=".activity.HomePage"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.CameraScreen"
+            android:name=".activity.CameraScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.FullImageActivity"
+            android:name=".activity.FullImageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.AppUpdateDialog"
+            android:name=".activity.AppUpdateDialog"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.PendingScreen"
+            android:name=".activity.PendingScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.TakePhotoScreen"
+            android:name=".activity.TakePhotoScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.nurserygarden.activity.ViewServerDataScreen"
+            android:name=".activity.ViewServerDataScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity android:name="com.nic.nurserygarden.activity.MainPage"
+        <activity
+            android:name=".activity.MainPage"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

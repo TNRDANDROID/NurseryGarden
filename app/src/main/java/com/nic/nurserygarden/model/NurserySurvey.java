@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
  * Created by AchanthiSundar on 01-11-2017.
  */
 
-public class PMAYSurvey {
+public class NurserySurvey {
 
     private String distictCode;
     private String districtName;
@@ -378,4 +378,108 @@ public class PMAYSurvey {
 
 
 
+    //////New Nursery Tables Getter Setter
+
+    //// Nursery User Details getter Setter
+    private int nursery_id;
+    private int nursery_level_id;
+    private String nursery_name_en;
+    private String nursery_name_ta;
+    private String nursery_address;
+    private String nursery_dname;
+    private String nursery_bname;
+    private String nursery_pvname;
+
+    ///Master Table Land Type getter Setter
+    private int land_type_id;
+    private String land_type_name_en;
+    private String land_type_name_ta;
+
+    public int getNursery_id() {
+        return nursery_id;
+    }
+
+    public void setNursery_id(int nursery_id) {
+        this.nursery_id = nursery_id;
+    }
+
+    public int getNursery_level_id() {
+        return nursery_level_id;
+    }
+
+    public void setNursery_level_id(int nursery_level_id) {
+        this.nursery_level_id = nursery_level_id;
+    }
+
+    public String getNursery_name_en() {
+        return nursery_name_en;
+    }
+
+    public void setNursery_name_en(String nursery_name_en) {
+        this.nursery_name_en = nursery_name_en;
+    }
+
+    public String getNursery_name_ta() {
+        return nursery_name_ta;
+    }
+
+    public void setNursery_name_ta(String nursery_name_ta) {
+        this.nursery_name_ta = nursery_name_ta;
+    }
+
+    public String getNursery_address() {
+        return nursery_address;
+    }
+
+    public void setNursery_address(String nursery_address) {
+        this.nursery_address = nursery_address;
+    }
+
+    public String getNursery_dname() {
+        return nursery_dname;
+    }
+
+    public void setNursery_dname(String nursery_dname) {
+        this.nursery_dname = nursery_dname;
+    }
+
+    public String getNursery_bname() {
+        return nursery_bname;
+    }
+
+    public void setNursery_bname(String nursery_bname) {
+        this.nursery_bname = nursery_bname;
+    }
+
+    public String getNursery_pvname() {
+        return nursery_pvname;
+    }
+
+    public void setNursery_pvname(String nursery_pvname) {
+        this.nursery_pvname = nursery_pvname;
+    }
+
+    public int getLand_type_id() {
+        return land_type_id;
+    }
+
+    public void setLand_type_id(int land_type_id) {
+        this.land_type_id = land_type_id;
+    }
+
+    public String getLand_type_name_en() {
+        return land_type_name_en;
+    }
+
+    public void setLand_type_name_en(String land_type_name_en) {
+        this.land_type_name_en = land_type_name_en;
+    }
+
+    public String getLand_type_name_ta() {
+        return land_type_name_ta;
+    }
+
+    public void setLand_type_name_ta(String land_type_name_ta) {
+        this.land_type_name_ta = land_type_name_ta;
+    }
 }

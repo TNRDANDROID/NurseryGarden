@@ -14,7 +14,7 @@ import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.TakePhotoBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.utils.Utils;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class TakePhotoScreen extends AppCompatActivity {
 
         if(type_of_photo == 2){
             dbData.open();
-            ArrayList<PMAYSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"1");
+            ArrayList<NurserySurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"1");
 
             if (!(imageOffline.size() > 0)){
                 Utils.showAlert(this, "Please Capture Beneficiary Image");
@@ -86,7 +86,7 @@ public class TakePhotoScreen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         dbData.open();
-        ArrayList<PMAYSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"");
+        ArrayList<NurserySurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"");
         if(imageOffline.size() == 2){
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
@@ -109,7 +109,7 @@ public class TakePhotoScreen extends AppCompatActivity {
 
     public void onBackPress() {
         dbData.open();
-        ArrayList<PMAYSurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"");
+        ArrayList<NurserySurvey> imageOffline = dbData.getSavedPMAYImages(pmay_id,"");
         if(imageOffline.size() == 2){
             super.onBackPressed();
             setResult(Activity.RESULT_CANCELED);

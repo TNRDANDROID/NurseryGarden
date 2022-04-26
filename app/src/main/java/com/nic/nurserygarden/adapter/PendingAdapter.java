@@ -20,7 +20,7 @@ import com.nic.nurserygarden.activity.PendingScreen;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.databinding.PendingAdapterBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.utils.Utils;
 
@@ -36,12 +36,12 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
     private static Activity context;
     private PrefManager prefManager;
-    private List<PMAYSurvey> pendingListValues;
+    private List<NurserySurvey> pendingListValues;
     static JSONObject dataset = new JSONObject();
 
     private LayoutInflater layoutInflater;
 
-    public PendingAdapter(Activity context, List<PMAYSurvey> pendingListValues) {
+    public PendingAdapter(Activity context, List<NurserySurvey> pendingListValues) {
 
         this.context = context;
         prefManager = new PrefManager(context);

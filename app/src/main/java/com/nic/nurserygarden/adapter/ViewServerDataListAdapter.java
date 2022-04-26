@@ -17,22 +17,22 @@ import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.FullImageActivity;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.databinding.ViewServerDataAdapterBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDataListAdapter.MyViewHolder> implements Filterable {
-    private List<PMAYSurvey> serverDataListValues;
-    private List<PMAYSurvey> serverDataListValuesFiltered;
+    private List<NurserySurvey> serverDataListValues;
+    private List<NurserySurvey> serverDataListValuesFiltered;
     private String letter;
     private Context context;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
 
     private LayoutInflater layoutInflater;
 
-    public ViewServerDataListAdapter(Context context, List<PMAYSurvey> serverDataListValues) {
+    public ViewServerDataListAdapter(Context context, List<NurserySurvey> serverDataListValues) {
         this.context = context;
         this.serverDataListValues = serverDataListValues;
         this.serverDataListValuesFiltered = serverDataListValues;
@@ -102,8 +102,8 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
                 if (charString.isEmpty()) {
                     serverDataListValuesFiltered = serverDataListValues;
                 } else {
-                    List<PMAYSurvey> filteredList = new ArrayList<>();
-                    for (PMAYSurvey row : serverDataListValues) {
+                    List<NurserySurvey> filteredList = new ArrayList<>();
+                    for (NurserySurvey row : serverDataListValues) {
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
@@ -122,7 +122,7 @@ public class ViewServerDataListAdapter extends RecyclerView.Adapter<ViewServerDa
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                serverDataListValuesFiltered = (ArrayList<PMAYSurvey>) filterResults.values;
+                serverDataListValuesFiltered = (ArrayList<NurserySurvey>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

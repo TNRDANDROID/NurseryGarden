@@ -21,7 +21,7 @@ import com.nic.nurserygarden.api.ServerResponse;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.ActivityViewNutriGardenBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.utils.UrlGenerator;
 import com.nic.nurserygarden.utils.Utils;
@@ -47,9 +47,9 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
     int self_Group_member_code=0;
     int tree_type_code=0;
 
-    ArrayList<PMAYSurvey> self_GroupList;
-    ArrayList<PMAYSurvey> fin_Year_List;
-    ArrayList<PMAYSurvey> nutriGarednDetails;
+    ArrayList<NurserySurvey> self_GroupList;
+    ArrayList<NurserySurvey> fin_Year_List;
+    ArrayList<NurserySurvey> nutriGarednDetails;
 
     NutriGardernDetailsServerAdapter nutriGardernDetailsServerAdapter;
     @Override
@@ -116,7 +116,7 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
     public void loadSelfGroupTable(){
         self_GroupList = new ArrayList<>();
         dbData.open();
-        PMAYSurvey self_group_list_item = new PMAYSurvey();
+        NurserySurvey self_group_list_item = new NurserySurvey();
         self_group_list_item.setShg_code(0);
         self_group_list_item.setShg_name(getResources().getString(R.string.select_self_help_group));
         self_GroupList.add(self_group_list_item);
@@ -128,7 +128,7 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
     public void loadFinYearTable(){
         fin_Year_List = new ArrayList<>();
         dbData.open();
-        PMAYSurvey fin_Year_List_item = new PMAYSurvey();
+        NurserySurvey fin_Year_List_item = new NurserySurvey();
         fin_Year_List_item.setFin_year(getResources().getString(R.string.select_fin_year));
         fin_Year_List.add(fin_Year_List_item);
         fin_Year_List.addAll(dbData.getAll_Master_Fin_Year());
@@ -139,7 +139,7 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
 
     public void getdetails_of_nutri_garden_view() {
         try {
-            new ApiService(this).makeJSONObjectRequest("details_of_nutri_garden_view", Api.Method.POST, UrlGenerator.getPMAYListUrl(), details_of_nutri_garden_viewParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("details_of_nutri_garden_view", Api.Method.POST, UrlGenerator.getNurseryGardenService(), details_of_nutri_garden_viewParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -217,7 +217,7 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
                     }
                     nutriGarednDetails = new ArrayList<>();
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        PMAYSurvey nutriGardenDetails = new PMAYSurvey();
+                        NurserySurvey nutriGardenDetails = new NurserySurvey();
                         try {
                             nutriGardenDetails.setFin_year(jsonArray.getJSONObject(i).getString("fin_year"));
                             nutriGardenDetails.setShg_code(jsonArray.getJSONObject(i).getInt("shg_code"));
@@ -261,7 +261,7 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
             dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
             dataSet.put(AppConstant.DATA_CONTENT, authKey);
 
-            new ApiService(this).makeJSONObjectRequest("DeleteTreeJson", Api.Method.POST, UrlGenerator.getPMAYListUrl(), dataSet, "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("DeleteTreeJson", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
 
         } catch (JSONException e) {
             e.printStackTrace();

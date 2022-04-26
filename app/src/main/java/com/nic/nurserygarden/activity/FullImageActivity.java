@@ -28,7 +28,7 @@ import com.nic.nurserygarden.api.ServerResponse;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.FullImageRecyclerBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.utils.UrlGenerator;
 import com.nic.nurserygarden.utils.Utils;
@@ -43,9 +43,9 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
     private FullImageRecyclerBinding fullImageRecyclerBinding;
     private FullImageAdapter fullImageAdapter;
     private PrefManager prefManager;
-    private static  ArrayList<PMAYSurvey> activityImage = new ArrayList<>();
+    private static  ArrayList<NurserySurvey> activityImage = new ArrayList<>();
     private com.nic.nurserygarden.dataBase.dbData dbData = new dbData(this);
-    ArrayList<PMAYSurvey> imageListTree;
+    ArrayList<NurserySurvey> imageListTree;
 
     String fin_year="";
     int shg_code=0;
@@ -85,18 +85,18 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
 
     }
     public class fetchImagetask extends AsyncTask<Void, Void,
-            ArrayList<PMAYSurvey>> {
+            ArrayList<NurserySurvey>> {
         @Override
-        protected ArrayList<PMAYSurvey> doInBackground(Void... params) {
+        protected ArrayList<NurserySurvey> doInBackground(Void... params) {
 
             dbData.open();
             activityImage = new ArrayList<>();
-            ArrayList<PMAYSurvey> getBeforeImageDetail = dbData.getParticular_Before_Save_Tree_Image_Table(shg_code,shg_member_code);
-            ArrayList<PMAYSurvey> getAfterImageDetail = dbData.getParticular_After_Save_Tree_Image_Table(shg_code,shg_member_code);
+            ArrayList<NurserySurvey> getBeforeImageDetail = dbData.getParticular_Before_Save_Tree_Image_Table(shg_code,shg_member_code);
+            ArrayList<NurserySurvey> getAfterImageDetail = dbData.getParticular_After_Save_Tree_Image_Table(shg_code,shg_member_code);
 
             imageListTree = new ArrayList<>();
-            PMAYSurvey imageTree = new PMAYSurvey();
-            PMAYSurvey imageTree1 = new PMAYSurvey();
+            NurserySurvey imageTree = new NurserySurvey();
+            NurserySurvey imageTree1 = new NurserySurvey();
             imageTree.setImage(getBeforeImageDetail.get(0).getBefore_photo());
             imageTree1.setImage(getAfterImageDetail.get(0).getAfter_photo());
             imageListTree.add(imageTree);
@@ -107,7 +107,7 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
         }
 
         @Override
-        protected void onPostExecute(final ArrayList<PMAYSurvey> imageList) {
+        protected void onPostExecute(final ArrayList<NurserySurvey> imageList) {
             super.onPostExecute(imageList);
             setAdapter();
         }
@@ -140,7 +140,7 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
 
     public void getOnlineImage() {
         try {
-            new ApiService(this).makeJSONObjectRequest("OnlineImage", Api.Method.POST, UrlGenerator.getPMAYListUrl(), ImagesJsonParams(), "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("OnlineImage", Api.Method.POST, UrlGenerator.getNurseryGardenService(), ImagesJsonParams(), "not cache", this);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -191,8 +191,8 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
             imageListTree = new ArrayList<>();
             for(int i = 0; i < jsonArray.length(); i++ ) {
                 try {
-                    PMAYSurvey imageOnline = new PMAYSurvey();
-                    PMAYSurvey imageOnline1 = new PMAYSurvey();
+                    NurserySurvey imageOnline = new NurserySurvey();
+                    NurserySurvey imageOnline1 = new NurserySurvey();
 
                     byte[] before_decodedString = Base64.decode(jsonArray.getJSONObject(i).getString("before_plant_image"), Base64.DEFAULT);
                     Bitmap before_decodedByte = BitmapFactory.decodeByteArray(before_decodedString, 0, before_decodedString.length);

@@ -80,14 +80,11 @@
                     android:layout_height="match_parent"
                     >
 
-
-
                     <RelativeLayout
                         android:id="@+id/rellay1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        >
+                        android:visibility="gone">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -194,13 +191,354 @@
 
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/user_nursery_details_layout"
+                        android:layout_below="@+id/rellay1">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="@dimen/_15sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginRight="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="@dimen/_20sdp"
+                            app:cardElevation="@dimen/_7sdp"
+                            app:cardBackgroundColor="@color/white">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Nursery Id"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_id"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Nursery Level Id"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_level_id"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Nursery Name En"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_name_en"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Nursery Name Ta"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_name_ta"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Nursery Address"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_address"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="District Name"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_dname"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Block Name"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_bname"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text="Village Name"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.3"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/d_grey1"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:text=":"/>
+                                    <TextView
+                                        android:id="@+id/nursery_pvname"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.5"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <RelativeLayout
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        >
+                                        <Button
+                                            android:id="@+id/add_land"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_45sdp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_gravity="center_horizontal"
+                                            android:background="@drawable/grad_curve"
+                                            android:text="Add/View Land"
+                                            android:clickable="true"
+                                            android:textAlignment="center"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:focusable="true" />
+
+
+                                    </RelativeLayout>
+                                    <RelativeLayout
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        >
+                                        <Button
+                                            android:id="@+id/add_batch"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_45sdp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_gravity="center_horizontal"
+                                            android:background="@drawable/grad_curve"
+                                            android:text="Add/View Batch"
+                                            android:clickable="true"
+                                            android:textAlignment="center"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:focusable="true" />
+
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_marginTop="@dimen/_39sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/pending_lg"
-                        android:layout_below="@+id/rellay1">
+                        android:layout_below="@+id/user_nursery_details_layout">
 
                         <LinearLayout
                             android:visibility="gone"

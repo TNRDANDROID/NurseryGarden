@@ -42,6 +42,8 @@ public class AppConstant {
     public static String KEY_VILLAGE_LIST_DISTRICT_BLOCK_WISE = "village_list_district_block_wise";
     public static String KEY_HABITATION_LIST_DISTRICT_BLOCK_WISE = "habitation_list_district_block_wise";
     public static String KEY_nutri_garden_master_form_list = "nutri_garden_master_form_list";
+    public static String KEY_nursery_user_details = "nursery_user_details";
+    public static String KEY_nursery_land_type = "nursery_land_type";
 
     public static String BENEFICIARY_NAME = "beneficiary_name";
     public static String BENEFICIARY_FATHER_NAME = "beneficiary_father_name";

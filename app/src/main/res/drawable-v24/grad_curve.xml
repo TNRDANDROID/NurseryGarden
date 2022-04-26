@@ -14,7 +14,7 @@
 
             <gradient   android:angle="45"
                 android:endColor="@color/colorPrimaryDark"
-                android:startColor="@color/d_grey3"/>
+                android:startColor="@color/colorPrimary"/>
 
         </shape>
     </item>

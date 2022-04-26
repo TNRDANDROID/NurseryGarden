@@ -26,8 +26,7 @@ import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.ActivityNewPendingScreenBinding;
-import com.nic.nurserygarden.databinding.PendingScreenBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.utils.UrlGenerator;
 import com.nic.nurserygarden.utils.Utils;
@@ -76,18 +75,18 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
 
 
     public class fetchPendingtask extends AsyncTask<Void, Void,
-            ArrayList<PMAYSurvey>> {
+            ArrayList<NurserySurvey>> {
         @Override
-        protected ArrayList<PMAYSurvey> doInBackground(Void... params) {
+        protected ArrayList<NurserySurvey> doInBackground(Void... params) {
             dbData.open();
-            ArrayList<PMAYSurvey> pmaySurveys = new ArrayList<>();
-            pmaySurveys = dbData.getAllTreeImages();
-            Log.d("Tree_COUNT", String.valueOf(pmaySurveys.size()));
-            return pmaySurveys;
+            ArrayList<NurserySurvey> nurserySurveys = new ArrayList<>();
+            nurserySurveys = dbData.getAllTreeImages();
+            Log.d("Tree_COUNT", String.valueOf(nurserySurveys.size()));
+            return nurserySurveys;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<PMAYSurvey> treeList) {
+        protected void onPostExecute(ArrayList<NurserySurvey> treeList) {
             super.onPostExecute(treeList);
             recyclerView.setVisibility(View.VISIBLE);
             pendingAdapter = new NewPendingAdapter(NewPendingScreen.this, treeList,dbData);
@@ -106,7 +105,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
             dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
             dataSet.put(AppConstant.DATA_CONTENT, authKey);
 
-            new ApiService(this).makeJSONObjectRequest("saveTreeImages", Api.Method.POST, UrlGenerator.getPMAYListUrl(), dataSet, "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("saveTreeImages", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
 
         } catch (JSONException e) {
             e.printStackTrace();

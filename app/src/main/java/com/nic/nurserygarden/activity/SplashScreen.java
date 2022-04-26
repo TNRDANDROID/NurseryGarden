@@ -32,16 +32,16 @@ public class SplashScreen extends AppCompatActivity implements
         splashScreenBinding = DataBindingUtil.setContentView(this, R.layout.splash_screen);
         splashScreenBinding.setActivity(this);
         prefManager = new PrefManager(this);
-        if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("production")) {
+        //if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("production")) {
             if (Utils.isOnline()) {
                 checkAppVersion();
             } else {
                 showSignInScreen();
 
             }
-        } else {
+        /*} else {
             showSignInScreen();
-        }
+        }*/
     }
 
 

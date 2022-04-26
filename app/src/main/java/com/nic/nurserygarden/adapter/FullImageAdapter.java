@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.GalleryThumbnailBinding;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 
 
@@ -25,11 +25,11 @@ public class FullImageAdapter extends RecyclerView.Adapter<FullImageAdapter.MyVi
 
     private Context context;
     private PrefManager prefManager;
-    private List<PMAYSurvey> imagePreviewlistvalues;
+    private List<NurserySurvey> imagePreviewlistvalues;
     private final com.nic.nurserygarden.dataBase.dbData dbData;
     private LayoutInflater layoutInflater;
 
-    public FullImageAdapter(Context context, List<PMAYSurvey> imagePreviewlistvalues, dbData dbData) {
+    public FullImageAdapter(Context context, List<NurserySurvey> imagePreviewlistvalues, dbData dbData) {
 
         this.context = context;
         prefManager = new PrefManager(context);

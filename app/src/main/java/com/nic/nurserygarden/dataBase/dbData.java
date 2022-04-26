@@ -11,7 +11,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.nic.nurserygarden.constant.AppConstant;
-import com.nic.nurserygarden.model.PMAYSurvey;
+import com.nic.nurserygarden.model.NurserySurvey;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class dbData {
 
 
     /****** VILLAGE TABLE *****/
-    public PMAYSurvey insertVillage(PMAYSurvey pmgsySurvey) {
+    public NurserySurvey insertVillage(NurserySurvey pmgsySurvey) {
 
         ContentValues values = new ContentValues();
         values.put(AppConstant.DISTRICT_CODE, pmgsySurvey.getDistictCode());
@@ -53,9 +53,9 @@ public class dbData {
 
         return pmgsySurvey;
     }
-    public ArrayList<PMAYSurvey > getAll_Village(String dcode,String bcode) {
+    public ArrayList<NurserySurvey> getAll_Village(String dcode, String bcode) {
 
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         try {
@@ -64,7 +64,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setDistictCode(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.DISTRICT_CODE)));
                     card.setBlockCode(cursor.getString(cursor
@@ -87,7 +87,7 @@ public class dbData {
         return cards;
     }
 
-    public PMAYSurvey insertHabitation(PMAYSurvey pmgsySurvey) {
+    public NurserySurvey insertHabitation(NurserySurvey pmgsySurvey) {
 
         ContentValues values = new ContentValues();
         values.put(AppConstant.DISTRICT_CODE, pmgsySurvey.getDistictCode());
@@ -101,9 +101,9 @@ public class dbData {
 
         return pmgsySurvey;
     }
-    public ArrayList<PMAYSurvey > getAll_Habitation(String dcode,String bcode) {
+    public ArrayList<NurserySurvey> getAll_Habitation(String dcode, String bcode) {
 
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         try {
@@ -112,7 +112,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setDistictCode(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.DISTRICT_CODE)));
                     card.setBlockCode(cursor.getString(cursor
@@ -137,7 +137,7 @@ public class dbData {
         return cards;
     }
 
-    public PMAYSurvey insertPMAY(PMAYSurvey pmgsySurvey) {
+    public NurserySurvey insertPMAY(NurserySurvey pmgsySurvey) {
 
         ContentValues values = new ContentValues();
         values.put(AppConstant.PV_CODE, pmgsySurvey.getPvCode());
@@ -156,9 +156,9 @@ public class dbData {
         return pmgsySurvey;
     }
 
-    public ArrayList<PMAYSurvey > getAll_PMAYList(String pvcode,String habcode) {
+    public ArrayList<NurserySurvey> getAll_PMAYList(String pvcode, String habcode) {
 
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         String condition = "";
@@ -175,7 +175,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setPvCode(cursor.getString(cursor
                             .getColumnIndexOrThrow(AppConstant.PV_CODE)));
                     card.setHabCode(cursor.getString(cursor
@@ -208,9 +208,9 @@ public class dbData {
         return cards;
     }
 
-    public ArrayList<PMAYSurvey> getSavedPMAYDetails() {
+    public ArrayList<NurserySurvey> getSavedPMAYDetails() {
 
-        ArrayList<PMAYSurvey> cards = new ArrayList<>();
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection = null;
         String[] selectionArgs = null;
@@ -223,7 +223,7 @@ public class dbData {
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
 
-                    PMAYSurvey card = new PMAYSurvey();
+                    NurserySurvey card = new NurserySurvey();
 
 
                     card.setPmayId(cursor.getString(cursor
@@ -273,7 +273,7 @@ public class dbData {
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
 
-                    PMAYSurvey card = new PMAYSurvey();
+                    NurserySurvey card = new NurserySurvey();
 
                     card.setPmayId(cursor.getString(cursor
                             .getColumnIndexOrThrow("id")));
@@ -319,9 +319,9 @@ public class dbData {
     }
 
 
-    public ArrayList<PMAYSurvey> getSavedPMAYImages(String pmay_id,String type_of_photo) {
+    public ArrayList<NurserySurvey> getSavedPMAYImages(String pmay_id, String type_of_photo) {
 
-        ArrayList<PMAYSurvey> cards = new ArrayList<>();
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection = null;
         String[] selectionArgs = null;
@@ -346,7 +346,7 @@ public class dbData {
                     byte[] decodedString = Base64.decode(photo, Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                    PMAYSurvey card = new PMAYSurvey();
+                    NurserySurvey card = new NurserySurvey();
 
 
                     card.setPmayId(cursor.getString(cursor
@@ -375,27 +375,27 @@ public class dbData {
 
 
     /////New ******************** Task****************
-    public void insert_Master_Fin_Year(PMAYSurvey pmgsySurvey) {
+    public void insert_Master_Fin_Year(NurserySurvey pmgsySurvey) {
         ContentValues values = new ContentValues();
         values.put("fin_year", pmgsySurvey.getFin_year());
         long id = db.insert(DBHelper.MASTER_FIN_YEAR_TABLE,null,values);
         Log.d("Inserted_id_fin_year", String.valueOf(id));
     }
-    public void insert_Master_Work_Type(PMAYSurvey pmgsySurvey) {
+    public void insert_Master_Work_Type(NurserySurvey pmgsySurvey) {
         ContentValues values = new ContentValues();
         values.put("work_code", pmgsySurvey.getWork_code());
         values.put("work_name", pmgsySurvey.getWork_name());
         long id = db.insert(DBHelper.MASTER_WORK_TYPE_TABLE,null,values);
         Log.d("Inserted_id_work_type", String.valueOf(id));
     }
-    public void insert_Master_Self_Help_Group(PMAYSurvey pmgsySurvey) {
+    public void insert_Master_Self_Help_Group(NurserySurvey pmgsySurvey) {
         ContentValues values = new ContentValues();
         values.put("shg_code", pmgsySurvey.getShg_code());
         values.put("shg_name", pmgsySurvey.getShg_name());
         long id = db.insert(DBHelper.MASTER_SELF_HELP_GROUP_TABLE,null,values);
         Log.d("Inserted_id_s_g_t", String.valueOf(id));
     }
-    public void insert_Master_Self_Help_Group_Member(PMAYSurvey pmgsySurvey) {
+    public void insert_Master_Self_Help_Group_Member(NurserySurvey pmgsySurvey) {
         ContentValues values = new ContentValues();
         values.put("shg_code", pmgsySurvey.getShg_code());
         values.put("shg_member_code", pmgsySurvey.getShg_member_code());
@@ -403,9 +403,30 @@ public class dbData {
         long id = db.insert(DBHelper.MASTER_SELF_HELP_GROUP_MEMBER_TABLE,null,values);
         Log.d("Inserted_id_s_g_m_t", String.valueOf(id));
     }
+    public void insert_nursery_user_details(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("nursery_id", pmgsySurvey.getNursery_id());
+        values.put("nursery_level_id", pmgsySurvey.getNursery_level_id());
+        values.put("nursery_name_en", pmgsySurvey.getNursery_name_en());
+        values.put("nursery_name_ta", pmgsySurvey.getNursery_name_ta());
+        values.put("nursery_address", pmgsySurvey.getNursery_address());
+        values.put("dname", pmgsySurvey.getNursery_dname());
+        values.put("bname", pmgsySurvey.getNursery_bname());
+        values.put("pvname", pmgsySurvey.getNursery_pvname());
+        long id = db.insert(DBHelper.NURSERY_USER_DETAILS,null,values);
+        Log.d("Insert_NURSERY_USER", String.valueOf(id));
+    }
+    public void insert_nursery_land_type(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("land_type_id", pmgsySurvey.getLand_type_id());
+        values.put("land_type_name_en", pmgsySurvey.getLand_type_name_en());
+        values.put("land_type_name_ta", pmgsySurvey.getLand_type_name_ta());
+        long id = db.insert(DBHelper.NURSERY_LAND_TYPE,null,values);
+        Log.d("Insert_nursery_land", String.valueOf(id));
+    }
 
-    public ArrayList<PMAYSurvey > getAll_Master_Fin_Year() {
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getAll_Master_Fin_Year() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         try {
@@ -414,7 +435,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setFin_year(cursor.getString(cursor
                             .getColumnIndexOrThrow("fin_year")));
                     cards.add(card);
@@ -429,8 +450,8 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<PMAYSurvey > getAll_Master_Work_Type() {
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getAll_Master_Work_Type() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         try {
@@ -439,7 +460,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setWork_code(cursor.getInt(cursor
                             .getColumnIndexOrThrow("work_code")));
                     card.setWork_name(cursor.getString(cursor
@@ -456,8 +477,8 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<PMAYSurvey > getAll_Master_Self_Help_Group() {
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getAll_Master_Self_Help_Group() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
 
         try {
@@ -466,7 +487,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setShg_code(cursor.getInt(cursor
                             .getColumnIndexOrThrow("shg_code")));
                     card.setShg_name(cursor.getString(cursor
@@ -483,8 +504,8 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<PMAYSurvey > getAll_Master_Self_Help_Group_Member(int shg_code) {
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getAll_Master_Self_Help_Group_Member(int shg_code) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection;
         String[] selectionArgs;
@@ -498,7 +519,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
                     card.setShg_code(cursor.getInt(cursor
                             .getColumnIndexOrThrow("shg_code")));
                     card.setShg_member_code(cursor.getInt(cursor
@@ -517,8 +538,8 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<PMAYSurvey > getParticular_Before_Save_Tree_Image_Table(int shg_code,int shg_member_code) {
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getParticular_Before_Save_Tree_Image_Table(int shg_code, int shg_member_code) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection;
         String[] selectionArgs;
@@ -531,7 +552,7 @@ public class dbData {
 
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
 
                     card.setShg_code(cursor.getInt(cursor
                             .getColumnIndexOrThrow("shg_code")));
@@ -560,8 +581,8 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<PMAYSurvey > getParticular_After_Save_Tree_Image_Table(int shg_code,int shg_member_code) {
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getParticular_After_Save_Tree_Image_Table(int shg_code, int shg_member_code) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection;
         String[] selectionArgs;
@@ -575,7 +596,7 @@ public class dbData {
             //       COLUMNS, null, null, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
 
                     card.setShg_code(cursor.getInt(cursor
                             .getColumnIndexOrThrow("shg_code")));
@@ -604,8 +625,8 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<PMAYSurvey> getAllTreeImages(){
-        ArrayList<PMAYSurvey > cards = new ArrayList<>();
+    public ArrayList<NurserySurvey> getAllTreeImages(){
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection;
         String[] selectionArgs;
@@ -614,7 +635,7 @@ public class dbData {
             cursor = db.rawQuery(AppConstant.SQL_QUERY,null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    PMAYSurvey  card = new PMAYSurvey ();
+                    NurserySurvey card = new NurserySurvey();
 
                     card.setShg_code(cursor.getInt(cursor
                             .getColumnIndexOrThrow("shg_code")));
@@ -647,11 +668,80 @@ public class dbData {
     }
 
 
+
+
     public Bitmap bytearrtoBitmap(byte[] photo){
         byte[] imgbytes = Base64.decode(photo, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgbytes, 0,
                 imgbytes.length);
         return bitmap;
+    }
+
+
+    //////Nursery Tables
+    public ArrayList<NurserySurvey> get_nursery_user_details() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_USER_DETAILS,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setNursery_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("nursery_id")));
+                    card.setNursery_level_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("nursery_level_id")));
+                    card.setNursery_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("nursery_name_en")));
+                    card.setNursery_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("nursery_name_ta")));
+                    card.setNursery_address(cursor.getString(cursor
+                            .getColumnIndexOrThrow("nursery_address")));
+                    card.setNursery_dname(cursor.getString(cursor
+                            .getColumnIndexOrThrow("dname")));
+                    card.setNursery_bname(cursor.getString(cursor
+                            .getColumnIndexOrThrow("bname")));
+                    card.setNursery_pvname(cursor.getString(cursor
+                            .getColumnIndexOrThrow("pvname")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_nursery_land_type() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_LAND_TYPE,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setLand_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("land_type_id")));
+                    card.setLand_type_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("land_type_name_en")));
+                    card.setLand_type_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("land_type_name_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
     }
 
     //////////////////////*****************/////////////
@@ -676,6 +766,10 @@ public class dbData {
     public void deleteSAVE_BEFORE_TREE_IMAGE_TABLE() { db.execSQL("delete from " + DBHelper.SAVE_BEFORE_TREE_IMAGE_TABLE);}
     public void deleteSAVE_AFTER_TREE_IMAGE_TABLE() { db.execSQL("delete from " + DBHelper.SAVE_AFTER_TREE_IMAGE_TABLE);}
 
+    /////Delete Nursery Tables
+    public void delete_nursery_user_details() { db.execSQL("delete from " + DBHelper.NURSERY_USER_DETAILS);}
+    public void delete_nursery_land_type() { db.execSQL("delete from " + DBHelper.NURSERY_LAND_TYPE);}
+
 
 
 
@@ -693,6 +787,11 @@ public class dbData {
 
         deleteSAVE_BEFORE_TREE_IMAGE_TABLE();
         deleteSAVE_AFTER_TREE_IMAGE_TABLE();
+
+
+        //////Nursery Tables
+        delete_nursery_user_details();
+        delete_nursery_land_type();
     }
 
 
