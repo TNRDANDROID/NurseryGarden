@@ -84,7 +84,7 @@
                         android:id="@+id/rellay1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -134,6 +134,7 @@
                                         android:textSize="14sp" />
 
                                     <RelativeLayout
+                                        android:visibility="gone"
                                         android:layout_below="@+id/designation"
                                         android:layout_marginTop="@dimen/_30sdp"
                                         android:layout_width="match_parent"
