@@ -1189,6 +1189,13 @@ public class Utils {
         Log.d("nursery_land_type", "" + dataSet);
         return dataSet;
     }
+    public static JSONObject nursery_species_type_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_species_types);
+        Log.d("nursery_species_type", "" + dataSet);
+        return dataSet;
+    }
 
     public static JSONObject HabitationListDistrictBlockVillageWiseJsonParams(Activity activity) throws JSONException {
         prefManager = new PrefManager(activity);

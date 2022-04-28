@@ -110,7 +110,7 @@
                 android:layout_marginBottom="20dp"
                 >
                 <Button
-                    android:id="@+id/btn_save_inspection"
+                    android:id="@+id/btn_save_local"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_alignParentBottom="true"

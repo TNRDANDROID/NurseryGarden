@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -63,6 +64,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -102,7 +104,11 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     private List<View> viewArrayList = new ArrayList<>();
 
     String activity_type = "";
+    String land_type_name_en = "";
+    String land_type_name_ta = "";
     int land_type_id =0;
+    int nursery_id =0;
+    String land_address="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,6 +136,10 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     public void intializeUI() {
         if(activity_type.equals("Land")){
             land_type_id = getIntent().getIntExtra("land_type_id",0);
+            nursery_id = getIntent().getIntExtra("nursery_id",0);
+            land_type_name_en = getIntent().getStringExtra("land_type_name_en");
+            land_type_name_ta = getIntent().getStringExtra("land_type_name_ta");
+            land_address = getIntent().getStringExtra("land_address");
             cameraScreenBinding.singleCaptureLayout.setVisibility(View.VISIBLE);
             cameraScreenBinding.multiCaptureLayout.setVisibility(View.GONE);
         }
@@ -146,6 +156,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
         //pmay_id = getIntent().getStringExtra("lastInsertedID");
         cameraScreenBinding.btnSave.setOnClickListener(this::onClick);
+        cameraScreenBinding.btnSaveLocal.setOnClickListener(this::onClick);
 
     }
 
@@ -158,6 +169,10 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                     saveLandImage();
                 }
                 break;
+            case R.id.btn_save_local:
+                if(activity_type.equals("Batch")) {
+                    saveImageButtonClick();
+                }
         }
     }
 
@@ -262,7 +277,12 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             ContentValues values = new ContentValues();
 
+            values.put("nursery_land_id", 0);
+            values.put("nursery_id",nursery_id);
             values.put("land_type_id", land_type_id);
+            values.put("land_address", land_address);
+            values.put("land_type_name_en", land_type_name_en);
+            values.put("land_type_name_ta", land_type_name_ta);
             values.put(AppConstant.KEY_IMAGE, imageInByte);
             values.put("server_flag", "0");
             values.put("latitude", offlatTextValue.toString());
@@ -297,19 +317,27 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         return dist;
     }
     private void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 
-        File file = CameraUtils.getOutputMediaFile(MEDIA_TYPE_IMAGE);
-        if (file != null) {
-            imageStoragePath = file.getAbsolutePath();
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+
         }
+        else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        Uri fileUri = CameraUtils.getOutputMediaFileUri(this, file);
+            File file = CameraUtils.getOutputMediaFile(MEDIA_TYPE_IMAGE);
+            if (file != null) {
+                imageStoragePath = file.getAbsolutePath();
+            }
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            Uri fileUri = CameraUtils.getOutputMediaFileUri(this, file);
 
-        // start the image capture Intent
-        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+            // start the image capture Intent
+            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+        }
         if (MyLocationListener.latitude > 0) {
             offlatTextValue = MyLocationListener.latitude;
             offlongTextValue = MyLocationListener.longitude;
@@ -319,7 +347,19 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     public void getLatLong() {
         mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mlocListener = new MyLocationListener();
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        criteria.setAltitudeRequired(false);
+        criteria.setSpeedRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setBearingRequired(false);
 
+        //API level 9 and up
+        criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
+        criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
+        Integer gpsFreqInMillis = 1000;
+        Integer gpsFreqInDistance = 1;
 
         // permission was granted, yay! Do the
         // location-related task you need to do.
@@ -328,7 +368,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                 == PackageManager.PERMISSION_GRANTED) {
 
             //Request location updates:
-            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+            //mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+            mlocManager.requestLocationUpdates(gpsFreqInMillis, gpsFreqInDistance, criteria, mlocListener, null);
 
         }
 
@@ -444,6 +485,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             }
             cameraScreenBinding.imageView.setImageBitmap(rotatedBitmap);
             imageView.setImageBitmap(rotatedBitmap);
+            latitude_text.setText(""+offlatTextValue);
+            longtitude_text.setText(""+offlongTextValue);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -460,12 +503,22 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // Refreshing the gallery
-                CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    Bitmap photo= (Bitmap) data.getExtras().get("data");
+                    imageView.setImageBitmap(photo);
+                    image_view_preview.setVisibility(View.GONE);
+                    imageView.setVisibility(View.VISIBLE);
+                    latitude_text.setText(""+offlatTextValue);
+                    longtitude_text.setText(""+offlongTextValue);
+                }
+                else {
+                    // Refreshing the gallery
+                    CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
 
-                // successfully captured the image
-                // display it in image view
-                previewCapturedImage();
+                    // successfully captured the image
+                    // display it in image view
+                    previewCapturedImage();
+                }
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
@@ -532,73 +585,84 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
 
-    public void saveImageButtonClick(){
-        JSONArray imageJson = new JSONArray();
-        long rowInserted=0;
-        int childCount = cameraScreenBinding.cameraLayout.getChildCount();
-        int count = 0;
-        if (childCount > 0) {
-            for (int i = 0; i < childCount; i++) {
-                JSONArray imageArray = new JSONArray();
+    public void saveImageButtonClick() {
+        long batch_primary_id = 0;
+        try {
+            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
-                View vv = cameraScreenBinding.cameraLayout.getChildAt(i);
-                imageView = vv.findViewById(R.id.image_view);
-                myEditTextView = vv.findViewById(R.id.description);
-                latitude_text = vv.findViewById(R.id.latitude);
-                longtitude_text = vv.findViewById(R.id.longtitude);
+            ContentValues values = new ContentValues();
+
+            values.put("batch_id", 0);
+            values.put("batch_number", 0);
+            values.put("created_date", currentDateTimeString);
+            values.put("server_flag", "0");
+
+            batch_primary_id = db.insert(DBHelper.BATCH_DETAILS, null, values);
+
+        } catch (Exception e) {
+
+        }
+        if (batch_primary_id>0){
+            JSONArray imageJson = new JSONArray();
+            long rowInserted = 0;
+            int childCount = cameraScreenBinding.cameraLayout.getChildCount();
+            int count = 0;
+            if (childCount > 0) {
+                for (int i = 0; i < childCount; i++) {
+                    JSONArray imageArray = new JSONArray();
+
+                    View vv = cameraScreenBinding.cameraLayout.getChildAt(i);
+                    imageView = vv.findViewById(R.id.image_view);
+                    myEditTextView = vv.findViewById(R.id.description);
+                    latitude_text = vv.findViewById(R.id.latitude);
+                    longtitude_text = vv.findViewById(R.id.longtitude);
 
 
-                if(imageView.getDrawable()!=null){
-                    //if(!myEditTextView.getText().toString().equals("")){
-                    count = count+1;
-                    byte[] imageInByte = new byte[0];
-                    String image_str = "";
-                    String description="";
-                    try {
-                        description = myEditTextView.getText().toString();
-                        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        imageInByte = baos.toByteArray();
+                    if (imageView.getDrawable() != null) {
+                        //if(!myEditTextView.getText().toString().equals("")){
+                        count = count + 1;
+                        byte[] imageInByte = new byte[0];
+                        String image_str = "";
+                        String description = "";
+                        try {
+                            description = myEditTextView.getText().toString();
+                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            imageInByte = baos.toByteArray();
 
 
-                    } catch (Exception e) {
-                        Utils.showAlert(CameraScreen.this, getResources().getString(R.string.at_least_capture_one_photo));
-                    }
-
-                    if (MyLocationListener.latitude > 0) {
-                        offlatTextValue = MyLocationListener.latitude;
-                        offlongTextValue =MyLocationListener.longitude;
-                    }
-
-                    /*ContentValues imageValue = new ContentValues();
-                    imageValue.put("swm_infra_details_id", swm_infra_details_id);
-                    imageValue.put("dcode", prefManager.getDistrictCode());
-                    imageValue.put("bcode", prefManager.getBlockCode());
-                    imageValue.put("pvcode", prefManager.getPvCode());
-                    imageValue.put("is_there_any_waste_dump", type);
-                    imageValue.put("lattitude", latitude_text.getText().toString());
-                    imageValue.put("longtitude", longtitude_text.getText().toString());
-                    imageValue.put("image", imageInByte);
-
-                    rowInserted = db.insert(DBHelper.SWM_WASTE_DUMP_PHOTOS_DETAILS, null, imageValue);*/
-
-                    if(count==childCount){
-                        if(rowInserted>0){
-
-                            showToast();
+                        } catch (Exception e) {
+                            Utils.showAlert(CameraScreen.this, getResources().getString(R.string.at_least_capture_one_photo));
                         }
 
+
+                        ContentValues imageValue = new ContentValues();
+                        imageValue.put("batch_primary_id", batch_primary_id);
+                        imageValue.put("batch_id", 0);
+                        imageValue.put("server_flag", "0");
+                        imageValue.put("image", imageInByte);
+                        imageValue.put("lattitude", latitude_text.getText().toString());
+                        imageValue.put("longtitude", longtitude_text.getText().toString());
+
+
+                        rowInserted = db.insert(DBHelper.BATCH_IMAGES_DETAILS, null, imageValue);
+
+                        if (count == childCount) {
+                            if (rowInserted > 0) {
+
+                                showToast();
+                            }
+
+                        }
+
+
+                    } else {
+                        Utils.showAlert(CameraScreen.this, getResources().getString(R.string.please_capture_image));
                     }
-
-
-                }
-                else {
-                    Utils.showAlert(CameraScreen.this,getResources().getString(R.string.please_capture_image));
                 }
             }
         }
-
         focusOnView(cameraScreenBinding.scrollView);
     }
     public void addImageButtonClick(){
@@ -676,6 +740,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("CheckResult")
     public void showToast(){
         Toasty.success(CameraScreen.this,getResources().getString(R.string.inserted_success),Toasty.LENGTH_SHORT);
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
 
 }

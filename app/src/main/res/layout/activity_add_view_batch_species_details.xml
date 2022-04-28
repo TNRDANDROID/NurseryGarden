@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.nic.nurserygarden.activity.LandActivity.AddViewLand" />
+            type="com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="@dimen/margin"
-                        android:text="Land Details"
+                        android:text="Species Details"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         style="@style/font_circular_bold"
@@ -62,29 +62,27 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-            <androidx.core.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 android:id="@+id/scroll_view">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/land_recycler_layout">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/species_recycler_layout">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/content_layout">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/land_recycler"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/species_recycler"/>
 
+                    </RelativeLayout>
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,29 +90,16 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:id="@+id/add_land_btn"
+                        android:id="@+id/add_species_btn"
                         android:src="@drawable/ic_add_icon"
                         android:tint="@color/white"/>
-                    </RelativeLayout>
-                    <TextView
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:id="@+id/textView1"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_below="@+id/content_layout"
-                        android:layout_centerHorizontal="true"
-                        android:padding="@dimen/_13sdp"
-                        android:text="@string/software_designed_amp_developed_by_nic"
-                        android:textAlignment="center"
-                        android:textColor="@color/d_grey1"
-                        android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold" />
+
 
                 </RelativeLayout>
 
             </androidx.core.widget.NestedScrollView>
 
-        </RelativeLayout>
+
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

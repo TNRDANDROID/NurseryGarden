@@ -394,6 +394,51 @@ public class NurserySurvey {
     private int land_type_id;
     private String land_type_name_en;
     private String land_type_name_ta;
+    private byte[] imageInByte;
+    private int nursery_land_id;
+    private int land_primary_id;
+    private String server_flag;
+    private String land_address;
+
+    public String getLand_address() {
+        return land_address;
+    }
+
+    public void setLand_address(String land_address) {
+        this.land_address = land_address;
+    }
+
+    public String getServer_flag() {
+        return server_flag;
+    }
+
+    public void setServer_flag(String server_flag) {
+        this.server_flag = server_flag;
+    }
+
+    public int getLand_primary_id() {
+        return land_primary_id;
+    }
+
+    public void setLand_primary_id(int land_primary_id) {
+        this.land_primary_id = land_primary_id;
+    }
+
+    public int getNursery_land_id() {
+        return nursery_land_id;
+    }
+
+    public void setNursery_land_id(int nursery_land_id) {
+        this.nursery_land_id = nursery_land_id;
+    }
+
+    public byte[] getImageInByte() {
+        return imageInByte;
+    }
+
+    public void setImageInByte(byte[] imageInByte) {
+        this.imageInByte = imageInByte;
+    }
 
     public int getNursery_id() {
         return nursery_id;
@@ -481,5 +526,88 @@ public class NurserySurvey {
 
     public void setLand_type_name_ta(String land_type_name_ta) {
         this.land_type_name_ta = land_type_name_ta;
+    }
+
+    ///Table For Batches And Species Getter Setter
+    private int batch_primary_id;
+    private int batch_id;
+    private int batch_number;
+    private String created_date;
+    private String species_name_en;
+    private String species_name_ta;
+    private int species_type_id;
+    private int batch_species_id;
+    private int no_of_count;
+
+    public int getBatch_species_id() {
+        return batch_species_id;
+    }
+
+    public void setBatch_species_id(int batch_species_id) {
+        this.batch_species_id = batch_species_id;
+    }
+
+    public String getSpecies_name_en() {
+        return species_name_en;
+    }
+
+    public void setSpecies_name_en(String species_name_en) {
+        this.species_name_en = species_name_en;
+    }
+
+    public String getSpecies_name_ta() {
+        return species_name_ta;
+    }
+
+    public void setSpecies_name_ta(String species_name_ta) {
+        this.species_name_ta = species_name_ta;
+    }
+
+    public int getBatch_primary_id() {
+        return batch_primary_id;
+    }
+
+    public void setBatch_primary_id(int batch_primary_id) {
+        this.batch_primary_id = batch_primary_id;
+    }
+
+    public int getBatch_id() {
+        return batch_id;
+    }
+
+    public void setBatch_id(int batch_id) {
+        this.batch_id = batch_id;
+    }
+
+    public int getBatch_number() {
+        return batch_number;
+    }
+
+    public void setBatch_number(int batch_number) {
+        this.batch_number = batch_number;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public int getSpecies_type_id() {
+        return species_type_id;
+    }
+
+    public void setSpecies_type_id(int species_type_id) {
+        this.species_type_id = species_type_id;
+    }
+
+    public int getNo_of_count() {
+        return no_of_count;
+    }
+
+    public void setNo_of_count(int no_of_count) {
+        this.no_of_count = no_of_count;
     }
 }

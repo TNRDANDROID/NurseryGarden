@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.nic.nurserygarden.adapter.NurseryBatchesAdapter" />
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_7sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/batch_image_layout"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_150sdp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_tree__leaves"
+                        android:id="@+id/tree_image"
+                        android:padding="@dimen/_5sdp"
+                        android:tint="@color/account_status_green_color"
+                        android:scaleType="fitXY"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="@dimen/_2sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:id="@+id/line_2_view"
+                    android:background="@color/grey_4"
+                    android:layout_toEndOf="@+id/batch_image_layout"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_toEndOf="@id/line_2_view"
+                    android:id="@+id/species_details_layout">
+                    <LinearLayout
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/species_name_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/species_type_id"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_5sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/species_type_name"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_5sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/species_count"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_5sdp"/>
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_below="@id/species_name_layout"
+                        android:id="@+id/batch_view"
+                        android:background="@color/grey_4"/>
+                    <LinearLayout
+                        android:layout_alignParentBottom="true"
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/land_delete_layout"
+                        android:layout_below="@id/batch_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:padding="@dimen/_5sdp"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/red_button_bg"
+                            android:id="@+id/delete">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Delete"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:padding="@dimen/_5sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:padding="@dimen/_5sdp"
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_background"
+                            android:id="@+id/edit">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Edit"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:padding="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>

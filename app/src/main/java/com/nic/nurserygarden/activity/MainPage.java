@@ -54,12 +54,13 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             //getNutri_garden_master_form_list();
             get_nursery_user_details();
             get_nursery_land_type();
+            get_nursery_species_type();
         }
 
         mainPageBinding.goWorks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showHomeScreen();
+                //showHomeScreen();
             }
         });
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +111,13 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             e.printStackTrace();
         }
     }
+    public void get_nursery_species_type() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("nursery_species_type", Api.Method.POST, UrlGenerator.getNurseryGardenService(), nursery_species_type_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public JSONObject nutri_garden_master_form_listJsonParams() throws JSONException {
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.nutri_garden_master_form_listJsonParams(this).toString());
@@ -133,6 +141,14 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
         Log.d("nursery_land_type", "" + authKey);
+        return dataSet;
+    }
+    public JSONObject nursery_species_type_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.nursery_species_type_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("nursery_species_type", "" + authKey);
         return dataSet;
     }
 
@@ -169,6 +185,15 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                     new Insert_nursery_land_type().execute(jsonObject);
                 }
                 Log.d("nursery_land_type", "" + responseDecryptedBlockKey);
+            }
+            if ("nursery_species_type".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_nursery_species_type().execute(jsonObject);
+                }
+                Log.d("nursery_species_type", "" + responseDecryptedBlockKey);
             }
 
 
@@ -319,6 +344,48 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                         nurserySurvey.setLand_type_name_en(jsonArray.getJSONObject(i).getString("land_type_name_en"));
                         nurserySurvey.setLand_type_name_ta(jsonArray.getJSONObject(i).getString("land_type_name_ta"));
                         dbData.insert_nursery_land_type(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+    public class Insert_nursery_species_type extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            //dbData.delete_nursery_user_details();
+            dbData.delete_nursery_species_type() ;
+
+            if (params.length > 0) {
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setSpecies_type_id(jsonArray.getJSONObject(i).getInt("species_type_id"));
+                        nurserySurvey.setSpecies_name_en(jsonArray.getJSONObject(i).getString("species_name_en"));
+                        nurserySurvey.setSpecies_name_ta(jsonArray.getJSONObject(i).getString("species_name_ta"));
+                        dbData.insert_nursery_species_type(nurserySurvey);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

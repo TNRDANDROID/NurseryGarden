@@ -28,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     ///Nursery Tables
     public static final String NURSERY_USER_DETAILS = "nursery_user_details";
     public static final String NURSERY_LAND_TYPE = "nursery_land_type";
+    public static final String NURSERY_SPECIES_TYPE = "nursery_species_types";
     public static final String NURSERY_LAND_SAVE_DETAILS = "nursery_land_save_details";
     public static final String BATCH_DETAILS = "batch_details";
     public static final String BATCH_IMAGES_DETAILS = "batch_images_details";
@@ -165,11 +166,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 "land_type_name_en TEXT,"+
                 "land_type_name_ta TEXT)");
 
+        db.execSQL("CREATE TABLE " + NURSERY_SPECIES_TYPE + " ("
+                +"species_type_id INTEGER,"+
+                "species_name_en TEXT,"+
+                "species_name_ta TEXT)");
+
         db.execSQL("CREATE TABLE " + NURSERY_LAND_SAVE_DETAILS + " ("
                 +"land_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "land_type_id INTEGER,"+
+                "nursery_land_id INTEGER,"+
+                "nursery_id INTEGER,"+
                 "image BLOB,"+
                 "server_flag TEXT,"+
+                "land_address TEXT,"+
+                "land_type_name_en TEXT,"+
+                "land_type_name_ta TEXT,"+
                 "latitude TEXT,"+
                 "longtitude TEXT)");
 
@@ -185,6 +196,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "batch_primary_id INTEGER,"+
                 "batch_id INTEGER,"+
                 "image BLOB,"+
+                "server_flag TEXT,"+
                 "lattitude TEXT,"+
                 "longtitude TEXT)");
 
@@ -192,8 +204,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 +"batch_species_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "batch_primary_id INTEGER,"+
                 "batch_id INTEGER,"+
-                "species_id TEXT,"+
-                "no_of_count TEXT)");
+                "batch_species_id INTEGER,"+
+                "species_type_id INTEGER,"+
+                "server_flag TEXT,"+
+                "species_type_name_en TEXT,"+
+                "species_type_name_ta TEXT,"+
+                "no_of_count INTEGER)");
 
 
     }

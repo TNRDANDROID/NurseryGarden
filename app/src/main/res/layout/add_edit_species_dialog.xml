@@ -43,7 +43,7 @@
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_11sdp"
-                        android:text="Add Batch Details"
+                        android:text="Add/Edit Species Details"
                         android:textStyle="bold"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:id="@+id/tittle_text"/>
@@ -57,71 +57,28 @@
                         android:layout_centerVertical="true"/>
                 </RelativeLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/species_layout"
                     android:orientation="vertical"
-                    android:id="@+id/batch_layout">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:id="@+id/others_name_layout">
-
+                    android:layout_marginBottom="@dimen/_10sdp">
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Created Date"
-                        android:textSize="@dimen/_11sdp"
-                        android:textColor="@color/black"
-                        android:layout_centerHorizontal="true"
-                        android:textAlignment="center"
-                        android:id="@+id/others_tv"/>
-                </RelativeLayout>
-                <LinearLayout
-                    android:id="@+id/type_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:id="@+id/is_functional_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="Batch"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_12sdp"
-                        style="@string/font_circular_bold" />
-
-
-                </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/land_layout"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/select_land_type_tv"
+                        android:id="@+id/select_species_type_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Select Land Type"
+                        android:text="Select Species Type"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11sdp"
                         style="@string/font_circular_bold" />
-
                     <RelativeLayout
-                        android:id="@+id/village_layout"
+                        android:id="@+id/species_spinner_layout"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/header"
-                        android:layout_below="@+id/select_village_tv"
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
@@ -129,20 +86,18 @@
                         android:orientation="vertical">
 
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginLeft="15dp"
-
+                            android:layout_marginStart="15dp"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/_15sdp"
                             android:visibility="visible"
                             style="@string/font_normal" />
 
                         <Spinner
-                            android:id="@+id/land_type_spinner"
+                            android:id="@+id/species_type_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -152,23 +107,22 @@
                             android:gravity="center" />
 
                     </RelativeLayout>
+
                     <TextView
-                        android:id="@+id/select_village_tv"
+                        android:id="@+id/count_text_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Land Address"
+                        android:text="Number of Species Count"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_11sdp"
                         style="@string/font_circular_bold" />
-
                     <RelativeLayout
-                        android:id="@+id/land_address_layout"
+                        android:id="@+id/species_count_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_below="@+id/select_village_tv"
+                        android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
@@ -180,57 +134,41 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/full_transparent"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:hint="Enter Address"
-                            android:id="@+id/land_address"/>
+                            android:paddingStart="@dimen/_10sdp"
+                            android:hint="Enter Species Count"
+                            android:id="@+id/species_count"/>
 
 
                     </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="@dimen/_40sdp"
+                        android:id="@+id/save_btn_layout"
+                        android:background="@drawable/button_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="Save"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            style="@string/font_circular_bold" />
+
+                    </RelativeLayout>
+
+
                 </LinearLayout>
 
 
 
-                <RelativeLayout
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:id="@+id/capture_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RelativeLayout
-                        android:background="@drawable/add_batch_dialog_camera_bg"
-                        android:layout_marginTop="50dp"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/camera_activity"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        >
-
-
-
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:layout_centerHorizontal="true"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="15dp"
-                        android:id="@+id/img"
-                        android:layout_marginTop="25dp"
-                        android:src="@drawable/camera_icon"
-                        android:background="@drawable/circle_drawable_grey"/>
-
-                    <TextView
-                        android:id="@+id/takePhoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:layout_below="@+id/img"
-                        android:text="Take Photo"
-                        android:textColor="@android:color/holo_red_light"
-                        android:textSize="@dimen/_11sdp"
-                        />
-
-
-                </RelativeLayout>
 
 
             </LinearLayout>

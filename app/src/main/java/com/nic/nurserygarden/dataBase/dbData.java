@@ -424,6 +424,53 @@ public class dbData {
         long id = db.insert(DBHelper.NURSERY_LAND_TYPE,null,values);
         Log.d("Insert_nursery_land", String.valueOf(id));
     }
+    public void insert_nursery_land_details(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("nursery_land_id", pmgsySurvey.getNursery_land_id());
+        values.put("nursery_id", pmgsySurvey.getNursery_id());
+        values.put("land_type_id", pmgsySurvey.getLand_type_id());
+        values.put("land_type_name_en", pmgsySurvey.getLand_type_name_en());
+        values.put("land_type_name_ta", pmgsySurvey.getLand_type_name_ta());
+        values.put("image", pmgsySurvey.getImageInByte());
+        values.put("server_flag", pmgsySurvey.getServer_flag());
+        values.put("land_address", pmgsySurvey.getLand_address());
+        values.put("latitude", pmgsySurvey.getLatitude());
+        values.put("longtitude", pmgsySurvey.getLongitude());
+        long id = db.insert(DBHelper.NURSERY_LAND_SAVE_DETAILS,null,values);
+        Log.d("Insert_NURSERY_land", String.valueOf(id));
+    }
+    public void insert_nursery_species_type(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("species_type_id", pmgsySurvey.getSpecies_type_id());
+        values.put("species_name_en", pmgsySurvey.getSpecies_name_en());
+        values.put("species_name_ta", pmgsySurvey.getSpecies_name_ta());
+        long id = db.insert(DBHelper.NURSERY_SPECIES_TYPE,null,values);
+        Log.d("Insert_nursery_species", String.valueOf(id));
+    }
+    public long insert_nursery_batch_details(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("batch_id", pmgsySurvey.getBatch_id());
+        values.put("batch_number", pmgsySurvey.getBatch_number());
+        values.put("created_date", pmgsySurvey.getCreated_date());
+        values.put("server_flag", pmgsySurvey.getServer_flag());
+        long id = db.insert(DBHelper.BATCH_DETAILS,null,values);
+        Log.d("Insert_NURSERY_batch", String.valueOf(id));
+        return id;
+    }
+    public void insert_nursery_batch_species_details(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("batch_primary_id", pmgsySurvey.getBatch_primary_id());
+        values.put("batch_id", pmgsySurvey.getBatch_id());
+        values.put("batch_species_id", pmgsySurvey.getBatch_species_id());
+        values.put("species_type_id", pmgsySurvey.getSpecies_type_id());
+        values.put("server_flag", pmgsySurvey.getServer_flag());
+        values.put("species_type_name_en", pmgsySurvey.getSpecies_name_en());
+        values.put("species_type_name_ta", pmgsySurvey.getSpecies_name_ta());
+        values.put("no_of_count", pmgsySurvey.getNo_of_count());
+        long id = db.insert(DBHelper.BATCH_SPECIES_DETAILS,null,values);
+        Log.d("Insert_batch_SPECIES", String.valueOf(id));
+    }
+
 
     public ArrayList<NurserySurvey> getAll_Master_Fin_Year() {
         ArrayList<NurserySurvey> cards = new ArrayList<>();
@@ -743,6 +790,224 @@ public class dbData {
         }
         return cards;
     }
+    public ArrayList<NurserySurvey> get_nursery_species_type() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_SPECIES_TYPE,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setSpecies_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("species_type_id")));
+                    card.setSpecies_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("species_name_en")));
+                    card.setSpecies_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("species_name_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_nursery_land_details(String type,String server_flag,String value) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        try {
+            selection = "server_flag = ? and land_primary_id = ? ";
+            selectionArgs = new String[]{server_flag,value};
+
+            if(type.equals("All")){
+                cursor = db.rawQuery("select * from "+DBHelper.NURSERY_LAND_SAVE_DETAILS,null);
+
+            }
+            else {
+                cursor = db.query(DBHelper.NURSERY_LAND_SAVE_DETAILS,new String[]{"*"},
+                        selection, selectionArgs, null, null, null);
+            }
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setLand_primary_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("land_primary_id")));
+                    card.setLand_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("land_type_id")));
+                    card.setNursery_land_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("nursery_land_id")));
+                    card.setNursery_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("nursery_id")));
+                    card.setServer_flag(cursor.getString(cursor
+                            .getColumnIndexOrThrow("server_flag")));
+                    card.setLand_address(cursor.getString(cursor
+                            .getColumnIndexOrThrow("land_address")));
+                    card.setLand_type_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("land_type_name_en")));
+                    card.setLand_type_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("land_type_name_ta")));
+                    card.setLatitude(cursor.getString(cursor
+                            .getColumnIndexOrThrow("latitude")));
+                    card.setLongitude(cursor.getString(cursor
+                            .getColumnIndexOrThrow("longtitude")));
+                    byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options);
+                    card.setImage((bitmap));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_nursery_batch_details(String type,String server_flag,String value) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        try {
+            selection = "server_flag = ? and batch_primary_id = ? ";
+            selectionArgs = new String[]{server_flag,value};
+
+            if(type.equals("All")){
+                cursor = db.rawQuery("select * from "+DBHelper.BATCH_DETAILS,null);
+
+            }
+            else {
+                cursor = db.query(DBHelper.BATCH_DETAILS,new String[]{"*"},
+                        selection, selectionArgs, null, null, null);
+            }
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setBatch_primary_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_primary_id")));
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    card.setBatch_number(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_number")));
+                    card.setServer_flag(cursor.getString(cursor
+                            .getColumnIndexOrThrow("server_flag")));
+                    card.setCreated_date(cursor.getString(cursor
+                            .getColumnIndexOrThrow("created_date")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_nursery_batch_photos_details(String value) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        try {
+            selection = "batch_primary_id = ? ";
+            selectionArgs = new String[]{value};
+
+                cursor = db.query(DBHelper.BATCH_IMAGES_DETAILS,new String[]{"*"},
+                        selection, selectionArgs, null, null, null);
+
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setBatch_primary_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_primary_id")));
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    byte[] photo = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length, options);
+                    card.setImage(bitmap);
+                    card.setLatitude(cursor.getString(cursor
+                            .getColumnIndexOrThrow("lattitude")));
+                    card.setLongitude(cursor.getString(cursor
+                            .getColumnIndexOrThrow("longtitude")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_nursery_batch_species_details(String value,String type,String server_flag) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        try {
+            if(type.equals("All")){
+                selection = "batch_primary_id = ? ";
+                selectionArgs = new String[]{value};
+            }
+            else {
+                selection = " batch_primary_id = ? and server_flag = ? ";
+                selectionArgs = new String[]{value,server_flag};
+            }
+
+
+                cursor = db.query(DBHelper.BATCH_SPECIES_DETAILS,new String[]{"*"},
+                        selection, selectionArgs, null, null, null);
+
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setBatch_primary_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_primary_id")));
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    card.setBatch_species_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_species_id")));
+                    card.setSpecies_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("species_type_id")));
+                    card.setNo_of_count(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("no_of_count")));
+                    card.setServer_flag(cursor.getString(cursor
+                            .getColumnIndexOrThrow("server_flag")));
+                    card.setSpecies_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("species_type_name_en")));
+                    card.setSpecies_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("species_type_name_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
 
     //////////////////////*****************/////////////
 
@@ -769,6 +1034,7 @@ public class dbData {
     /////Delete Nursery Tables
     public void delete_nursery_user_details() { db.execSQL("delete from " + DBHelper.NURSERY_USER_DETAILS);}
     public void delete_nursery_land_type() { db.execSQL("delete from " + DBHelper.NURSERY_LAND_TYPE);}
+    public void delete_nursery_species_type() { db.execSQL("delete from " + DBHelper.NURSERY_SPECIES_TYPE);}
 
 
 
@@ -792,6 +1058,7 @@ public class dbData {
         //////Nursery Tables
         delete_nursery_user_details();
         delete_nursery_land_type();
+        delete_nursery_species_type();
     }
 
 
