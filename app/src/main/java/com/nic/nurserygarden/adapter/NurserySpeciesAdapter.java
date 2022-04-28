@@ -62,6 +62,19 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
         holder.nurserySpeciesItemViewBinding.speciesTypeName.setText("Species Type Name "+speciesList.get(position).getSpecies_name_en());
         holder.nurserySpeciesItemViewBinding.speciesCount.setText("Species Count "+speciesList.get(position).getNo_of_count());
 
+        if(speciesList.get(position).getServer_flag().equals("0")){
+            holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
+        }
+
+        holder.nurserySpeciesItemViewBinding.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save_and_delete_alert(position,"delete");
+            }
+        });
 
     }
 
@@ -126,14 +139,11 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
     }
     public void deletePending(int position) {
         String batch_primary_id = String.valueOf(speciesList.get(position).getBatch_primary_id());
-        int bpd = db.delete(DBHelper.BATCH_DETAILS, "batch_primary_id = ? ", new String[]{batch_primary_id});
-        int bid = db.delete(DBHelper.BATCH_IMAGES_DETAILS, "batch_primary_id = ? ", new String[]{batch_primary_id});
-        int dsd = db.delete(DBHelper.BATCH_SPECIES_DETAILS, "batch_primary_id = ? ", new String[]{batch_primary_id});
+        String species_type_id = String.valueOf(speciesList.get(position).getSpecies_type_id());
+        int dsd = db.delete(DBHelper.BATCH_SPECIES_DETAILS, "batch_primary_id = ? and species_type_id = ?", new String[]{batch_primary_id,species_type_id});
         speciesList.remove(position);
         notifyItemRemoved(position);
         notifyItemChanged(position, speciesList.size());
-        Log.d("batch_details", String.valueOf(bpd));
-        Log.d("batch_image", String.valueOf(bid));
         Log.d("batch_species", String.valueOf(dsd));
     }
 

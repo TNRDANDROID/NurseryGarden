@@ -880,8 +880,15 @@ public class dbData {
         String selection;
         String[] selectionArgs;
         try {
-            selection = "server_flag = ? and batch_primary_id = ? ";
-            selectionArgs = new String[]{server_flag,value};
+            if(type.equals("")){
+                selection = "server_flag = ? and batch_primary_id = ? ";
+                selectionArgs = new String[]{server_flag,value};
+            }
+            else {
+                selection = "batch_primary_id = ? ";
+                selectionArgs = new String[]{value};
+            }
+
 
             if(type.equals("All")){
                 cursor = db.rawQuery("select * from "+DBHelper.BATCH_DETAILS,null);
@@ -967,9 +974,13 @@ public class dbData {
                 selection = "batch_primary_id = ? ";
                 selectionArgs = new String[]{value};
             }
-            else {
+            else if(type.equals("")){
                 selection = " batch_primary_id = ? and server_flag = ? ";
                 selectionArgs = new String[]{value,server_flag};
+            }
+            else {
+                selection = "server_flag = ? ";
+                selectionArgs = new String[]{server_flag};
             }
 
 

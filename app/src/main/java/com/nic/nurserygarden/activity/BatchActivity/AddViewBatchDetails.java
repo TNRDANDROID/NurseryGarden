@@ -71,7 +71,15 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
         initialiseRecyclerView();
 
         if(Utils.isOnline()){
-            get_nursery_batch_list();
+            ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
+            getSpeciesCount = dbData.get_nursery_batch_species_details("","local","0");
+            if(getSpeciesCount.size()>0) {
+                new fetchNurseryBatchDetails().execute();
+            }
+            else {
+                get_nursery_batch_list();
+            }
+
         }
         else {
             new fetchNurseryBatchDetails().execute();
@@ -256,12 +264,12 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                         for(int j=0;j<jsonArray1.length();j++){
                             NurserySurvey nurserySurvey1 = new NurserySurvey();
                             nurserySurvey1.setBatch_primary_id((int) batch_primary_id);
-                            nurserySurvey1.setBatch_species_id(jsonArray.getJSONObject(i).getInt("batch_species_id"));
-                            nurserySurvey1.setBatch_id(jsonArray.getJSONObject(i).getInt("batch_id"));
-                            nurserySurvey1.setSpecies_type_id(jsonArray.getJSONObject(i).getInt("species_type_id"));
-                            nurserySurvey1.setNo_of_count(jsonArray.getJSONObject(i).getInt("number_of_seedlings_raised"));
-                            nurserySurvey1.setSpecies_name_en(jsonArray.getJSONObject(i).getString("species_name_en"));
-                            nurserySurvey1.setSpecies_name_ta(jsonArray.getJSONObject(i).getString("species_name_en"));
+                            nurserySurvey1.setBatch_species_id(jsonArray1.getJSONObject(j).getInt("batch_species_id"));
+                            nurserySurvey1.setBatch_id(jsonArray1.getJSONObject(j).getInt("batch_id"));
+                            nurserySurvey1.setSpecies_type_id(jsonArray1.getJSONObject(j).getInt("species_type_id"));
+                            nurserySurvey1.setNo_of_count(jsonArray1.getJSONObject(j).getInt("number_of_seedlings_raised"));
+                            nurserySurvey1.setSpecies_name_en(jsonArray1.getJSONObject(j).getString("species_name_en"));
+                            nurserySurvey1.setSpecies_name_ta(jsonArray1.getJSONObject(j).getString("species_name_en"));
                             nurserySurvey1.setServer_flag("1");
 
                             dbData.insert_nursery_batch_species_details(nurserySurvey1);

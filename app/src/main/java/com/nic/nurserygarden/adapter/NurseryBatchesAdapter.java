@@ -74,7 +74,19 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
     @Override
     public void onBindViewHolder(@NonNull NurseryBatchesAdapter.MyViewHolder holder, int position) {
 
-        holder.nurseryBatchItemViewBinding.createdDate.setText(batchList.get(position).getCreated_date());
+        holder.nurseryBatchItemViewBinding.createdDate.setText("Date "+batchList.get(position).getCreated_date());
+        if(batchList.get(position).getBatch_id()==0){
+            holder.nurseryBatchItemViewBinding.batchId.setVisibility(View.GONE);
+            holder.nurseryBatchItemViewBinding.batchNumber.setVisibility(View.GONE);
+            holder.nurseryBatchItemViewBinding.batchId.setText("");
+            holder.nurseryBatchItemViewBinding.batchId.setText("");
+        }
+        else {
+            holder.nurseryBatchItemViewBinding.batchId.setVisibility(View.VISIBLE);
+            holder.nurseryBatchItemViewBinding.batchNumber.setVisibility(View.VISIBLE);
+            holder.nurseryBatchItemViewBinding.batchId.setText("Batch ID "+ batchList.get(position).getBatch_id());
+            holder.nurseryBatchItemViewBinding.batchNumber.setText("Batch Number "+ batchList.get(position).getBatch_number());
+        }
 
         if(batchList.get(position).getServer_flag().equals("0")){
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
@@ -85,15 +97,30 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
             else {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
             }
+            holder.nurseryBatchItemViewBinding.delete.setVisibility(View.VISIBLE);
         }
         else {
-            holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
+            ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
+            getSpeciesCount = dbData.get_nursery_batch_species_details(String.valueOf(batchList.get(position).getBatch_primary_id()),"","0");
+            if(getSpeciesCount.size()>0) {
+                holder.nurseryBatchItemViewBinding.upload.setVisibility(View.VISIBLE);
+            }
+            else {
+                holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
+            }
+            holder.nurseryBatchItemViewBinding.delete.setVisibility(View.GONE);
         }
 
         holder.nurseryBatchItemViewBinding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 save_and_delete_alert(position,"save");
+            }
+        });
+        holder.nurseryBatchItemViewBinding.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save_and_delete_alert(position,"delete");
             }
         });
         holder.nurseryBatchItemViewBinding.addSpecies.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +219,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         ArrayList<NurserySurvey> batchDetails = new ArrayList<>();
         ArrayList<NurserySurvey> batchPhotosDetails = new ArrayList<>();
         ArrayList<NurserySurvey> batchSpeciesDetails = new ArrayList<>();
-        batchDetails = dbData.get_nursery_batch_details("","0",batch_primary_id);
+        batchDetails = dbData.get_nursery_batch_details("Particular","0",batch_primary_id);
         batchPhotosDetails = dbData.get_nursery_batch_photos_details(batch_primary_id);
         batchSpeciesDetails = dbData.get_nursery_batch_species_details(batch_primary_id,"","0");
         try {
