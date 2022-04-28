@@ -58,9 +58,9 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
     @Override
     public void onBindViewHolder(@NonNull NurserySpeciesAdapter.MyViewHolder holder, int position) {
 
-        holder.nurserySpeciesItemViewBinding.speciesTypeId.setText("Species Type Id "+speciesList.get(position).getSpecies_type_id());
-        holder.nurserySpeciesItemViewBinding.speciesTypeName.setText("Species Type Name "+speciesList.get(position).getSpecies_name_en());
-        holder.nurserySpeciesItemViewBinding.speciesCount.setText("Species Count "+speciesList.get(position).getNo_of_count());
+        holder.nurserySpeciesItemViewBinding.speciesTypeId.setText("Species Type Id   : "+speciesList.get(position).getSpecies_type_id());
+        holder.nurserySpeciesItemViewBinding.speciesTypeName.setText("Species Type Name : "+speciesList.get(position).getSpecies_name_en());
+        holder.nurserySpeciesItemViewBinding.speciesCount.setText("Species Count     :"+speciesList.get(position).getNo_of_count());
 
         if(speciesList.get(position).getServer_flag().equals("0")){
             holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.VISIBLE);

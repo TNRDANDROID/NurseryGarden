@@ -57,12 +57,6 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             get_nursery_species_type();
         }
 
-        mainPageBinding.goWorks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //showHomeScreen();
-            }
-        });
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

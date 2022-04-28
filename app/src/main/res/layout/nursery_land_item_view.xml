@@ -62,11 +62,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/cardview_shadow_start_color"
+                        android:textColor="@color/grey_7"
                         android:id="@+id/land_number"
                         android:textSize="@dimen/_11sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp"/>
+                        android:padding="@dimen/_2sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                         android:id="@+id/land_name_ta"
                         android:textSize="@dimen/_11sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp"/>
+                        android:padding="@dimen/_2sdp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                         android:id="@+id/land_name_en"
                         android:textSize="@dimen/_11sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp"/>
+                        android:padding="@dimen/_2sdp"/>
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_2sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/red_button_bg"
@@ -112,12 +112,16 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="@dimen/_11sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp"/>
+                        android:paddingTop="0dp"
+                        android:paddingBottom="@dimen/_1sdp"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
+                        />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_marginLeft="@dimen/_15sdp"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_2sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_background"
@@ -131,7 +135,11 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="@dimen/_11sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp"/>
+                        android:paddingTop="0dp"
+                        android:paddingBottom="@dimen/_1sdp"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
+                        />
                     </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>

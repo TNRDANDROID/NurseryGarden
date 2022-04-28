@@ -10,7 +10,7 @@
             type="com.nic.nurserygarden.activity.LandActivity.AddViewLand" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.nic.ODF_Thittam.activity.HomePage"
@@ -19,6 +19,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/appbar"
             android:background="?attr/colorPrimary">
 
             <androidx.appcompat.widget.Toolbar
@@ -65,11 +66,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/scroll_view">
+            android:layout_below="@+id/appbar"
+         >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -79,6 +77,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_above="@+id/textView1"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:id="@+id/content_layout">
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
@@ -91,19 +91,18 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
                         android:id="@+id/add_land_btn"
                         android:src="@drawable/ic_add_icon"
                         android:tint="@color/white"/>
                     </RelativeLayout>
                     <TextView
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:id="@+id/textView1"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_below="@+id/content_layout"
-                        android:layout_centerHorizontal="true"
-                        android:padding="@dimen/_13sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_alignParentBottom="true"
+                       android:gravity="center"
+                        android:padding="@dimen/_5sdp"
                         android:text="@string/software_designed_amp_developed_by_nic"
                         android:textAlignment="center"
                         android:textColor="@color/d_grey1"
@@ -112,10 +111,9 @@
 
                 </RelativeLayout>
 
-            </androidx.core.widget.NestedScrollView>
 
         </RelativeLayout>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+   </RelativeLayout>
 </layout>

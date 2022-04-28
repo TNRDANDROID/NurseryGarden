@@ -29,7 +29,7 @@
                 <RelativeLayout
                     android:id="@+id/batch_image_layout"
                     android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_170sdp">
+                    android:layout_height="@dimen/_140sdp">
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -41,7 +41,7 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_170sdp"
+                    android:layout_height="@dimen/_140sdp"
                     android:layout_toEndOf="@id/batch_image_layout"
                     android:id="@+id/land_details_layout">
                     <LinearLayout
@@ -58,7 +58,7 @@
                             android:id="@+id/batch_number"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="@dimen/_5sdp"/>
+                            android:padding="@dimen/_2sdp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                             android:id="@+id/created_date"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="@dimen/_5sdp"/>
+                            android:padding="@dimen/_2sdp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                             android:id="@+id/batch_id"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="@dimen/_5sdp"/>
+                            android:padding="@dimen/_2sdp"/>
 
                         <RelativeLayout
                             android:layout_gravity="end"
@@ -93,7 +93,10 @@
                                 android:layout_centerHorizontal="true"
                                 android:textSize="@dimen/_11sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:padding="@dimen/_5sdp"/>
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -127,7 +130,10 @@
                                 android:layout_centerHorizontal="true"
                                 android:textSize="@dimen/_11sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:padding="@dimen/_5sdp"/>
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -147,7 +153,10 @@
                                 android:layout_centerHorizontal="true"
                                 android:textSize="@dimen/_11sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:padding="@dimen/_5sdp"/>
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>

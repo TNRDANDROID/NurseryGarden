@@ -80,7 +80,7 @@
                     android:layout_height="match_parent"
                     >
 
-                    <RelativeLayout
+                   <!-- <RelativeLayout
                         android:id="@+id/rellay1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -190,6 +190,56 @@
                         </RelativeLayout>
 
 
+                    </RelativeLayout>-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/quater_circle_shape_let"
+                        android:id="@+id/rellay1">
+                        <RelativeLayout
+                            android:layout_width="120dp"
+                            android:layout_height="100dp"
+                            android:id="@+id/profile"
+                            android:visibility="visible"
+                            android:layout_marginBottom="1dp"
+                            android:background="@drawable/quater_circle_shape"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="end"
+                            tools:ignore="UselessParent">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="100dp"
+                                android:layout_height="80dp"
+                                android:layout_alignParentRight="true"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_tree__leaves_green"
+                                />
+                        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="15sp"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:text="Name"
+                            tools:ignore="TooDeepLayout" />
+                        <TextView
+                            android:id="@+id/designation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_name"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="sans-serif"
+                            android:textAllCaps="true"
+                            android:text="Designation"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -205,6 +255,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginRight="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="@dimen/_20sdp"
                             app:cardElevation="@dimen/_7sdp"
