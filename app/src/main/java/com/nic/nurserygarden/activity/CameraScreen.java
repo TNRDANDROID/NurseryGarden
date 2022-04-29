@@ -63,9 +63,12 @@ import org.json.JSONArray;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 
@@ -588,7 +591,12 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     public void saveImageButtonClick() {
         long batch_primary_id = 0;
         try {
-            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+            Date c = Calendar.getInstance().getTime();
+            System.out.println("Current time => " + c);
+
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+            String currentDateTimeString = df.format(c);
+//            String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
             ContentValues values = new ContentValues();
 

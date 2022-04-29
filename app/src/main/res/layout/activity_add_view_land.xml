@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/textView1"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
                         android:id="@+id/content_layout">
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"

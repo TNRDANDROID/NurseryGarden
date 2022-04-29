@@ -28,26 +28,25 @@
 
                 <RelativeLayout
                     android:id="@+id/batch_image_layout"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_100sdp">
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_70sdp">
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_tree__leaves"
+                        android:src="@drawable/leafe"
                         android:id="@+id/tree_image"
-                        android:padding="@dimen/_5sdp"
-                        android:tint="@color/account_status_green_color"
+                        android:padding="@dimen/_3sdp"
                         android:scaleType="fitXY"/>
                 </RelativeLayout>
                 <View
                     android:layout_width="@dimen/_2sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:id="@+id/line_2_view"
                     android:background="@color/grey_4"
                     android:layout_toEndOf="@+id/batch_image_layout"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:layout_toEndOf="@id/line_2_view"
                     android:id="@+id/species_details_layout">
                     <LinearLayout
@@ -56,22 +55,46 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_background"
+                                android:id="@+id/species_type_id"
+                                android:textSize="@dimen/_11sdp"
+                                android:padding="@dimen/_2sdp"/>
+                            <RelativeLayout
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/add_species">
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:src="@drawable/ic_edit"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@id/delete"
+                                    android:id="@+id/edit"/>
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_alignParentEnd="true"
+                                    android:src="@drawable/ic_trash"
+                                    android:id="@+id/delete"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/blue_background"
-                            android:id="@+id/species_type_id"
-                            android:textSize="@dimen/_11sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:padding="@dimen/_2sdp"/>
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/blue_background"
                             android:id="@+id/species_type_name"
                             android:textSize="@dimen/_11sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
                             android:padding="@dimen/_2sdp"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -79,12 +102,11 @@
                             android:textColor="@color/blue_background"
                             android:id="@+id/species_count"
                             android:textSize="@dimen/_11sdp"
-                            android:layout_marginStart="@dimen/_10sdp"
                             android:padding="@dimen/_2sdp"/>
 
 
                     </LinearLayout>
-                    <View
+                   <!-- <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_below="@id/species_name_layout"
@@ -142,7 +164,7 @@
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
-                    </LinearLayout>
+                    </LinearLayout>-->
                 </RelativeLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

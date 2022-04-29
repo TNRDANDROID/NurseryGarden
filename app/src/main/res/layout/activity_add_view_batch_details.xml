@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/textView1"
-                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
                     android:id="@+id/batch_recycler_layout">
 
                     <androidx.recyclerview.widget.RecyclerView
