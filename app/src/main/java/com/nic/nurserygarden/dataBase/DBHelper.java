@@ -29,10 +29,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NURSERY_USER_DETAILS = "nursery_user_details";
     public static final String NURSERY_LAND_TYPE = "nursery_land_type";
     public static final String NURSERY_SPECIES_TYPE = "nursery_species_types";
+
     public static final String NURSERY_LAND_SAVE_DETAILS = "nursery_land_save_details";
+
     public static final String BATCH_DETAILS = "batch_details";
     public static final String BATCH_IMAGES_DETAILS = "batch_images_details";
     public static final String BATCH_SPECIES_DETAILS = "batch_species_details";
+
+    public static final String BATCH_GROWTH_TRACKING_DETAILS = "batch_growth_tracking_details";
+    public static final String BATCH_GROWTH_TRACKING_DATES = "batch_growth_tracking_dates";
+    public static final String BATCH_GROWTH_TRACKING_PHOTOS_DETAILS = "batch_growth_tracking_photos_details";
+    public static final String BATCH_GROWTH_TRACKING_SPECIES_DETAILS = "batch_growth_tracking_species_details";
 
     private Context context;
 
@@ -210,6 +217,39 @@ public class DBHelper extends SQLiteOpenHelper {
                 "species_type_name_en TEXT,"+
                 "species_type_name_ta TEXT,"+
                 "no_of_count INTEGER)");
+
+        db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_DATES + " ("
+                +"growth_tracking_date_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_id INTEGER,"+
+                "entry_date TEXT)");
+
+        db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_DETAILS + " ("
+                +"batch_growth_tracking_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "nursery_id INTEGER,"+
+                "batch_id INTEGER,"+
+                "entry_date TEXT,"+
+                "server_flag TEXT)");
+
+        db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_PHOTOS_DETAILS + " ("
+                +"batch_growth_tracking_images_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_growth_tracking_primary_id INTEGER,"+
+                "image BLOB,"+
+                "server_flag TEXT,"+
+                "lattitude TEXT,"+
+                "longtitude TEXT)");
+
+        db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_SPECIES_DETAILS + " ("
+                +"batch_growth_tracking_species_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_growth_tracking_primary_id INTEGER,"+
+                "batch_id INTEGER,"+
+                "batch_species_id INTEGER,"+
+                "species_type_id INTEGER,"+
+                "server_flag TEXT,"+
+                "no_of_sapplings INTEGER,"+
+                "hight_in_cm TEXT,"+
+                "age_in_days INTEGER)");
+
+
 
 
     }

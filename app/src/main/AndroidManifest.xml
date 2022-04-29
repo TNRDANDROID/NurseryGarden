@@ -40,7 +40,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.BatchActivity.AddViewBatchSpeciesDetails"></activity>
+        <activity android:name=".activity.GrowthTrackingActivity.GrowthTracking"></activity>
+        <activity android:name=".activity.BatchActivity.AddViewBatchSpeciesDetails" />
         <activity android:name=".activity.LandActivity.AddViewLand" />
         <activity android:name=".activity.BatchActivity.AddViewBatchDetails" />
         <activity

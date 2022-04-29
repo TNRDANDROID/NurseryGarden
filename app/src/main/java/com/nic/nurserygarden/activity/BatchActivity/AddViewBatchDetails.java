@@ -63,6 +63,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
+            dbData.open();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -214,6 +215,10 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                 }
                 else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
                     Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
+                    int dsd = db.delete(DBHelper.BATCH_SPECIES_DETAILS, "batch_primary_id = ? ", new String[]{batch_primary_id});
+
+                    get_nursery_batch_list();
+                    nurseryBatchesAdapter.notifyDataSetChanged();
                 }
                 Log.d("saveBatch", "" + responseDecryptedBlockKey);
             }
@@ -269,7 +274,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                             nurserySurvey1.setSpecies_type_id(jsonArray1.getJSONObject(j).getInt("species_type_id"));
                             nurserySurvey1.setNo_of_count(jsonArray1.getJSONObject(j).getInt("number_of_seedlings_raised"));
                             nurserySurvey1.setSpecies_name_en(jsonArray1.getJSONObject(j).getString("species_name_en"));
-                            nurserySurvey1.setSpecies_name_ta(jsonArray1.getJSONObject(j).getString("species_name_en"));
+                            nurserySurvey1.setSpecies_name_ta(jsonArray1.getJSONObject(j).getString("species_name_ta"));
                             nurserySurvey1.setServer_flag("1");
 
                             dbData.insert_nursery_batch_species_details(nurserySurvey1);

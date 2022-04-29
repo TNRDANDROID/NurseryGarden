@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
+import com.nic.nurserygarden.activity.GrowthTrackingActivity.GrowthTracking;
 import com.nic.nurserygarden.activity.LandActivity.AddViewLand;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.DBHelper;
@@ -104,9 +105,11 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
             getSpeciesCount = dbData.get_nursery_batch_species_details(String.valueOf(batchList.get(position).getBatch_primary_id()),"","0");
             if(getSpeciesCount.size()>0) {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
             }
             else {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.VISIBLE);
             }
             holder.nurseryBatchItemViewBinding.delete.setVisibility(View.GONE);
         }
@@ -131,6 +134,16 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 gotoAddSpeciesClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
                 gotoAddSpeciesClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
                 context.startActivity(gotoAddSpeciesClass);
+            }
+        });
+        holder.nurseryBatchItemViewBinding.trackGrowth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoGrowthTrackingClass = new Intent(context, GrowthTracking.class);
+                gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
+                gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
+                gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                context.startActivity(gotoGrowthTrackingClass);
             }
         });
     }

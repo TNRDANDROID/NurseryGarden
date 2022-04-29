@@ -243,4 +243,89 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
         super.onResume();
         new fetchNurserySpeciesDetails().execute();
     }
+
+    public void editItemView(String batch_primary_id,String species_type_id_ ,String batch_id, String batch_species_id,String server_flag,
+            String species_type_name_en_,String species_type_name_ta_,String no_of_count){
+
+        try {
+            dbData.open();
+            final Dialog dialog = new Dialog(this,R.style.AppTheme);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.add_edit_species_dialog);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setCancelable(false);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+            lp.dimAmount = 0.7f;
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            dialog.show();
+
+            ImageView close_icon = dialog.findViewById(R.id.close_icon);
+            RelativeLayout save_btn_layout = dialog.findViewById(R.id.save_btn_layout);
+
+            TextView tittle_text = dialog.findViewById(R.id.tittle_text);
+            TextView species_name_text = dialog.findViewById(R.id.species_name_text);
+            Spinner species_type_spinner = dialog.findViewById(R.id.species_type_spinner);
+            EditText species_count = dialog.findViewById(R.id.species_count);
+            tittle_text.setText("Add/Edit Species Details");
+            species_name_text.setText(species_type_name_en_);
+            species_count.setText(no_of_count);
+            species_type_spinner.setVisibility(View.GONE);
+            close_icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            save_btn_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        if(!species_count.getText().toString().equals("")){
+                            try {
+                                String whereClause = "";String[] whereArgs = null;
+                                whereClause = "batch_primary_id = ? and batch_id = ? and batch_species_id = ? and species_type_id = ?";
+                                whereArgs = new String[]{batch_primary_id,batch_id,batch_species_id,species_type_id_};
+                                ContentValues contentValues = new ContentValues();
+
+                                contentValues.put("batch_primary_id",batch_primary_id);
+                                contentValues.put("batch_id",batch_id);
+                                contentValues.put("batch_species_id",batch_species_id);
+                                contentValues.put("species_type_id",species_type_id_);
+                                contentValues.put("server_flag","0");
+                                contentValues.put("species_type_name_ta",species_type_name_ta_);
+                                contentValues.put("species_type_name_en",species_type_name_en_);
+                                contentValues.put("no_of_count",species_count.getText().toString());
+
+                                long inserted_id = db.update(DBHelper.BATCH_SPECIES_DETAILS,contentValues,whereClause,whereArgs);
+                                if(inserted_id>0){
+                                    Toasty.success(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.updated_success),Toasty.LENGTH_SHORT);
+                                    new fetchNurserySpeciesDetails().execute();
+                                    dialog.dismiss();
+                                }
+                                else {
+                                    Toasty.error(AddViewBatchSpeciesDetails.this,"Something Wrong",Toasty.LENGTH_SHORT);
+                                    dialog.dismiss();
+                                }
+
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            Utils.showAlert(AddViewBatchSpeciesDetails.this,"Please Enter Species Count");
+                        }
+
+                }
+            });
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

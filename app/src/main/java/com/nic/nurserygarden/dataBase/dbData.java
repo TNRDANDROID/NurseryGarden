@@ -470,6 +470,13 @@ public class dbData {
         long id = db.insert(DBHelper.BATCH_SPECIES_DETAILS,null,values);
         Log.d("Insert_batch_SPECIES", String.valueOf(id));
     }
+    public void insert_nursery_batch_growth_tracking_dates(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("entry_date", pmgsySurvey.getCreated_date());
+        values.put("batch_id", pmgsySurvey.getBatch_id());
+        long id = db.insert(DBHelper.BATCH_GROWTH_TRACKING_DATES,null,values);
+        Log.d("Insert_dates", String.valueOf(id));
+    }
 
 
     public ArrayList<NurserySurvey> getAll_Master_Fin_Year() {
@@ -1007,6 +1014,35 @@ public class dbData {
                             .getColumnIndexOrThrow("species_type_name_en")));
                     card.setSpecies_name_ta(cursor.getString(cursor
                             .getColumnIndexOrThrow("species_type_name_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+               Log.d("DEBUG_TAG", "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+
+    public ArrayList<NurserySurvey> get_batch_growth_tracking_dates(String batch_id) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        try {
+            selection = "batch_id = ? ";
+            selectionArgs = new String[]{batch_id};
+            cursor = db.rawQuery("select * from "+DBHelper.BATCH_GROWTH_TRACKING_DATES,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    card.setCreated_date(cursor.getString(cursor
+                            .getColumnIndexOrThrow("entry_date")));
                     cards.add(card);
                 }
             }

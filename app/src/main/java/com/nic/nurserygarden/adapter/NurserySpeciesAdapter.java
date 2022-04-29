@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nic.nurserygarden.R;
+import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
 import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.databinding.NurserySpeciesItemViewBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
@@ -63,7 +64,7 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
         holder.nurserySpeciesItemViewBinding.speciesCount.setText("Species Count     :"+speciesList.get(position).getNo_of_count());
 
         if(speciesList.get(position).getServer_flag().equals("0")){
-            holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.VISIBLE);
+            holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
         }
         else {
             holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
@@ -73,6 +74,12 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
             @Override
             public void onClick(View v) {
                 save_and_delete_alert(position,"delete");
+            }
+        });
+        holder.nurserySpeciesItemViewBinding.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save_and_delete_alert(position,"edit");
             }
         });
 
@@ -101,8 +108,8 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
             dialog.setContentView(R.layout.alert_dialog);
 
             TextView text = (TextView) dialog.findViewById(R.id.tv_message);
-            if(save_delete.equals("save")) {
-                text.setText(context.getResources().getString(R.string.do_u_want_to_upload));
+            if(save_delete.equals("edit")) {
+                text.setText(context.getResources().getString(R.string.do_u_want_to_edit));
             }
             else if(save_delete.equals("delete")){
                 text.setText(context.getResources().getString(R.string.do_u_want_to_delete));
@@ -120,8 +127,8 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
             yesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(save_delete.equals("save")) {
-                        //uploadPending(position);
+                    if(save_delete.equals("edit")) {
+                        editPending(position);
                         dialog.dismiss();
                     }
                     else if(save_delete.equals("delete")) {
@@ -147,6 +154,19 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
         Log.d("batch_species", String.valueOf(dsd));
     }
 
+    public void editPending(int position){
+        String batch_primary_id = String.valueOf(speciesList.get(position).getBatch_primary_id());
+        String species_type_id = String.valueOf(speciesList.get(position).getSpecies_type_id());
+        String batch_id = String.valueOf(speciesList.get(position).getBatch_id());
+        String batch_species_id = String.valueOf(speciesList.get(position).getBatch_species_id());
+        String server_flag = speciesList.get(position).getServer_flag();
+        String species_type_name_en = speciesList.get(position).getSpecies_name_en();
+        String species_type_name_ta = speciesList.get(position).getSpecies_name_ta();
+        String no_of_count = String.valueOf(speciesList.get(position).getNo_of_count());
+
+        ((AddViewBatchSpeciesDetails)context).editItemView(batch_primary_id,species_type_id,batch_id,batch_species_id,server_flag,
+                species_type_name_en,species_type_name_ta,no_of_count);
+    }
 
 
 }
