@@ -47,6 +47,7 @@ public class AppConstant {
     public static String KEY_nursery_species_types = "nursery_species_types";
     public static String KEY_details_of_nursery_land_view = "details_of_nursery_land_view";
     public static String KEY_details_of_nursery_seeding_batch_view = "details_of_nursery_seeding_batch_view";
+    public static String KEY_details_of_sapling_growth_tracking_view = "details_of_sapling_growth_tracking_view";
     public static String KEY_tracking_date_list = "tracking_date_list";
 
     public static String BENEFICIARY_NAME = "beneficiary_name";

@@ -73,7 +73,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
 
         if(Utils.isOnline()){
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
-            getSpeciesCount = dbData.get_nursery_batch_species_details("","local","0");
+            getSpeciesCount = dbData.get_nursery_batch_species_details("","local","0","");
             if(getSpeciesCount.size()>0) {
                 new fetchNurseryBatchDetails().execute();
             }
@@ -262,6 +262,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                         nurserySurvey.setBatch_id(jsonArray.getJSONObject(i).getInt("batch_id"));
                         nurserySurvey.setBatch_number(jsonArray.getJSONObject(i).getInt("batch_no"));
                         nurserySurvey.setCreated_date(jsonArray.getJSONObject(i).getString("batch_date"));
+                        nurserySurvey.setIs_batch_closed(jsonArray.getJSONObject(i).getString("is_batch_closed"));
                         nurserySurvey.setServer_flag("1");
 
                         long batch_primary_id = dbData.insert_nursery_batch_details(nurserySurvey);
@@ -275,6 +276,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                             nurserySurvey1.setNo_of_count(jsonArray1.getJSONObject(j).getInt("number_of_seedlings_raised"));
                             nurserySurvey1.setSpecies_name_en(jsonArray1.getJSONObject(j).getString("species_name_en"));
                             nurserySurvey1.setSpecies_name_ta(jsonArray1.getJSONObject(j).getString("species_name_ta"));
+                            nurserySurvey1.setIs_harvest_closed(jsonArray1.getJSONObject(j).getString("is_harvest_closed"));
                             nurserySurvey1.setServer_flag("1");
 
                             dbData.insert_nursery_batch_species_details(nurserySurvey1);

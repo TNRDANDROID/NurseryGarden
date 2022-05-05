@@ -112,6 +112,9 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     int land_type_id =0;
     int nursery_id =0;
     String land_address="";
+    String entry_date="";
+    int batch_id=0;
+    int batch_primary_id=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,6 +153,13 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             cameraScreenBinding.singleCaptureLayout.setVisibility(View.GONE);
             cameraScreenBinding.multiCaptureLayout.setVisibility(View.VISIBLE);
         }
+        else if(activity_type.equals("GrowthTracking")){
+            batch_id = getIntent().getIntExtra("batch_id",0);
+            batch_primary_id = getIntent().getIntExtra("batch_primary_id",0);
+            entry_date = getIntent().getStringExtra("entry_date");
+            cameraScreenBinding.singleCaptureLayout.setVisibility(View.GONE);
+            cameraScreenBinding.multiCaptureLayout.setVisibility(View.VISIBLE);
+        }
         viewArrayList.clear();
         updateView(CameraScreen.this,cameraScreenBinding.cameraLayout,"","");
         prefManager = new PrefManager(this);
@@ -175,6 +185,9 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_save_local:
                 if(activity_type.equals("Batch")) {
                     saveImageButtonClick();
+                }
+                else if(activity_type.equals("GrowthTracking")){
+                    saveGrowthTrackImage();
                 }
         }
     }
@@ -604,6 +617,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             values.put("batch_number", 0);
             values.put("created_date", currentDateTimeString);
             values.put("server_flag", "0");
+            values.put("is_batch_closed", "");
 
             batch_primary_id = db.insert(DBHelper.BATCH_DETAILS, null, values);
 
@@ -750,6 +764,90 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         Toasty.success(CameraScreen.this,getResources().getString(R.string.inserted_success),Toasty.LENGTH_SHORT);
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+    }
+
+    public void saveGrowthTrackImage() {
+        long batch_growth_tracking_primary_id = 0;
+        try {
+
+
+            ContentValues values = new ContentValues();
+
+            values.put("growth_tracking_id", 0);
+            values.put("batch_primary_id", batch_primary_id);
+            values.put("batch_id", batch_id);
+            values.put("entry_date", entry_date);
+            values.put("server_flag", "0");
+
+            batch_growth_tracking_primary_id = db.insert(DBHelper.BATCH_GROWTH_TRACKING_DETAILS, null, values);
+
+        } catch (Exception e) {
+
+        }
+        if (batch_growth_tracking_primary_id>0){
+            JSONArray imageJson = new JSONArray();
+            long rowInserted = 0;
+            int childCount = cameraScreenBinding.cameraLayout.getChildCount();
+            int count = 0;
+            if (childCount > 0) {
+                for (int i = 0; i < childCount; i++) {
+                    JSONArray imageArray = new JSONArray();
+
+                    View vv = cameraScreenBinding.cameraLayout.getChildAt(i);
+                    imageView = vv.findViewById(R.id.image_view);
+                    myEditTextView = vv.findViewById(R.id.description);
+                    latitude_text = vv.findViewById(R.id.latitude);
+                    longtitude_text = vv.findViewById(R.id.longtitude);
+
+
+                    if (imageView.getDrawable() != null) {
+                        //if(!myEditTextView.getText().toString().equals("")){
+                        count = count + 1;
+                        byte[] imageInByte = new byte[0];
+                        String image_str = "";
+                        String description = "";
+                        try {
+                            description = myEditTextView.getText().toString();
+                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            imageInByte = baos.toByteArray();
+
+
+                        } catch (Exception e) {
+                            Utils.showAlert(CameraScreen.this, getResources().getString(R.string.at_least_capture_one_photo));
+                        }
+
+
+                        ContentValues imageValue = new ContentValues();
+                        imageValue.put("batch_growth_tracking_primary_id", batch_growth_tracking_primary_id);
+                        imageValue.put("batch_primary_id", batch_primary_id);
+                        imageValue.put("batch_id", batch_id);
+                        imageValue.put("server_flag", "0");
+                        imageValue.put("entry_date", entry_date);
+                        imageValue.put("image", imageInByte);
+                        imageValue.put("lattitude", latitude_text.getText().toString());
+                        imageValue.put("longtitude", longtitude_text.getText().toString());
+
+
+                        rowInserted = db.insert(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, null, imageValue);
+
+                        if (count == childCount) {
+                            if (rowInserted > 0) {
+
+                                showToast();
+                            }
+
+                        }
+
+
+                    } else {
+                        Utils.showAlert(CameraScreen.this, getResources().getString(R.string.please_capture_image));
+                    }
+                }
+            }
+        }
+        focusOnView(cameraScreenBinding.scrollView);
     }
 
 }

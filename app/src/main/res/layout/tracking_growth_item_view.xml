@@ -6,7 +6,7 @@
 
         <variable
             name="adapter"
-            type="com.nic.nurserygarden.adapter.NurseryBatchesAdapter" />
+            type="com.nic.nurserygarden.adapter.TrackingGrowthAdapter" />
     </data>
 
     <RelativeLayout android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/blue_background"
+                                android:textColor="@color/grey_7"
                                 android:id="@+id/created_date"
                                 android:layout_marginTop="@dimen/_3sdp"
                                 android:textSize="@dimen/_11sdp"
@@ -68,12 +68,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/text_bg"
-                                android:id="@+id/add_species">
+                                android:id="@+id/sapling_details_btn">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/white"
-                                    android:text="Add species"
+                                    android:text="Saplings Details"
                                     android:textStyle="bold"
                                     android:layout_centerHorizontal="true"
                                     android:textSize="@dimen/_11sdp"
@@ -90,7 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/grey_7"
-                            android:id="@+id/batch_id"
+                            android:id="@+id/batch_number"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:padding="@dimen/_2sdp"/>
@@ -98,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/blue_background"
-                            android:id="@+id/batch_number"
+                            android:id="@+id/batch_id"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:padding="@dimen/_2sdp"/>
@@ -160,27 +160,7 @@
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:padding="@dimen/_2sdp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/cornered_image_bg"
-                            android:id="@+id/track_growth">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-                                android:text="Track Growth"
-                                android:textStyle="bold"
-                                android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
-                                android:paddingTop="@dimen/_1sdp"
-                                android:paddingBottom="@dimen/_1sdp"
-                                android:paddingLeft="@dimen/_5sdp"
-                                android:paddingRight="@dimen/_5sdp"/>
-                        </RelativeLayout>
+
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>

@@ -399,6 +399,15 @@ public class NurserySurvey {
     private int land_primary_id;
     private String server_flag;
     private String land_address;
+    private String is_batch_closed;
+
+    public String getIs_batch_closed() {
+        return is_batch_closed;
+    }
+
+    public void setIs_batch_closed(String is_batch_closed) {
+        this.is_batch_closed = is_batch_closed;
+    }
 
     public String getLand_address() {
         return land_address;
@@ -538,6 +547,24 @@ public class NurserySurvey {
     private int species_type_id;
     private int batch_species_id;
     private int no_of_count;
+    private String is_harvest_closed;
+    private int growth_tracking_details_id;
+
+    public int getGrowth_tracking_details_id() {
+        return growth_tracking_details_id;
+    }
+
+    public void setGrowth_tracking_details_id(int growth_tracking_details_id) {
+        this.growth_tracking_details_id = growth_tracking_details_id;
+    }
+
+    public String getIs_harvest_closed() {
+        return is_harvest_closed;
+    }
+
+    public void setIs_harvest_closed(String is_harvest_closed) {
+        this.is_harvest_closed = is_harvest_closed;
+    }
 
     public int getBatch_species_id() {
         return batch_species_id;
@@ -609,5 +636,52 @@ public class NurserySurvey {
 
     public void setNo_of_count(int no_of_count) {
         this.no_of_count = no_of_count;
+    }
+
+    ////Tracking Growth Getter Setter
+    private int growth_tracking_id;
+    private int batch_growth_tracking_primary_id;
+    private int no_of_saplings;
+    private String height_in_cm;
+    private int age_in_days;
+
+    public int getGrowth_tracking_id() {
+        return growth_tracking_id;
+    }
+
+    public void setGrowth_tracking_id(int growth_tracking_id) {
+        this.growth_tracking_id = growth_tracking_id;
+    }
+
+    public int getBatch_growth_tracking_primary_id() {
+        return batch_growth_tracking_primary_id;
+    }
+
+    public void setBatch_growth_tracking_primary_id(int batch_growth_tracking_primary_id) {
+        this.batch_growth_tracking_primary_id = batch_growth_tracking_primary_id;
+    }
+
+    public int getNo_of_saplings() {
+        return no_of_saplings;
+    }
+
+    public void setNo_of_saplings(int no_of_saplings) {
+        this.no_of_saplings = no_of_saplings;
+    }
+
+    public String getHeight_in_cm() {
+        return height_in_cm;
+    }
+
+    public void setHeight_in_cm(String height_in_cm) {
+        this.height_in_cm = height_in_cm;
+    }
+
+    public int getAge_in_days() {
+        return age_in_days;
+    }
+
+    public void setAge_in_days(int age_in_days) {
+        this.age_in_days = age_in_days;
     }
 }

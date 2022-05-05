@@ -125,7 +125,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
             EditText species_count = dialog.findViewById(R.id.species_count);
             tittle_text.setText("Add/Edit Species Details");
             ArrayList<NurserySurvey> speciesList = new ArrayList<>();
-            speciesList = dbData.get_nursery_batch_species_details(String.valueOf(batch_primary_id),"All","");
+            speciesList = dbData.get_nursery_batch_species_details(String.valueOf(batch_primary_id),"All","","");
             if(speciesList.size()>0){
                 for (int i=0;i<speciesList.size();i++){
                     for(int j=0 ;j<speciesTypeList.size();j++){
@@ -173,6 +173,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
                                 contentValues.put("batch_species_id",0);
                                 contentValues.put("species_type_id",species_type_id);
                                 contentValues.put("server_flag","0");
+                                contentValues.put("is_harvest_closed","");
                                 contentValues.put("species_type_name_ta",species_type_name_ta);
                                 contentValues.put("species_type_name_en",species_type_name_en);
                                 contentValues.put("no_of_count",species_count.getText().toString());
@@ -223,7 +224,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
         protected ArrayList<NurserySurvey> doInBackground(Void... params) {
             dbData.open();
             ArrayList<NurserySurvey> nurserySpeciesDetails = new ArrayList<>();
-            nurserySpeciesDetails = dbData.get_nursery_batch_species_details(String.valueOf(batch_primary_id),"All","");
+            nurserySpeciesDetails = dbData.get_nursery_batch_species_details(String.valueOf(batch_primary_id),"All","","");
             Log.d("nursery_species_details", String.valueOf(nurserySpeciesDetails.size()));
             return nurserySpeciesDetails;
         }
@@ -232,7 +233,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
         protected void onPostExecute(ArrayList<NurserySurvey> nurserySpeciesDetails) {
             super.onPostExecute(nurserySpeciesDetails);
             if(nurserySpeciesDetails.size()>0){
-                nurserySpeciesAdapter = new NurserySpeciesAdapter(nurserySpeciesDetails,AddViewBatchSpeciesDetails.this,dbData);
+                nurserySpeciesAdapter = new NurserySpeciesAdapter(nurserySpeciesDetails,AddViewBatchSpeciesDetails.this,dbData,"");
                 batchSpeciesDetailsBinding.speciesRecycler.setAdapter(nurserySpeciesAdapter);
             }
         }
@@ -294,6 +295,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
                                 contentValues.put("batch_species_id",batch_species_id);
                                 contentValues.put("species_type_id",species_type_id_);
                                 contentValues.put("server_flag","0");
+                                contentValues.put("is_harvest_closed","");
                                 contentValues.put("species_type_name_ta",species_type_name_ta_);
                                 contentValues.put("species_type_name_en",species_type_name_en_);
                                 contentValues.put("no_of_count",species_count.getText().toString());

@@ -18,12 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
 import com.nic.nurserygarden.dataBase.DBHelper;
-import com.nic.nurserygarden.databinding.NurserySpeciesItemViewBinding;
+import com.nic.nurserygarden.databinding.BatchGrowthTrackingSpeciesItemViewBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
 
 import java.util.List;
 
-public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAdapter.MyViewHolder> {
+public class GrowthTrackingSpeciesSaplingAdapter extends RecyclerView.Adapter<GrowthTrackingSpeciesSaplingAdapter.MyViewHolder> {
 
     private List<NurserySurvey> speciesList;
     private Context context;
@@ -33,7 +33,7 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
     public SQLiteDatabase db;
     String type;
 
-    public NurserySpeciesAdapter(List<NurserySurvey> speciesList, Context context, com.nic.nurserygarden.dataBase.dbData dbData,String type) {
+    public GrowthTrackingSpeciesSaplingAdapter(List<NurserySurvey> speciesList, Context context, com.nic.nurserygarden.dataBase.dbData dbData,String type) {
         this.speciesList = speciesList;
         this.context = context;
         this.dbData=dbData;
@@ -49,37 +49,39 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
 
     @NonNull
     @Override
-    public NurserySpeciesAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GrowthTrackingSpeciesSaplingAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        NurserySpeciesItemViewBinding nurserySpeciesItemViewBinding =
-                DataBindingUtil.inflate(layoutInflater, R.layout.nursery_species_item_view, parent, false);
-        return new MyViewHolder(nurserySpeciesItemViewBinding);
+        BatchGrowthTrackingSpeciesItemViewBinding growthTrackingSpeciesItemViewBinding =
+                DataBindingUtil.inflate(layoutInflater, R.layout.batch_growth_tracking_species_item_view, parent, false);
+        return new MyViewHolder(growthTrackingSpeciesItemViewBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NurserySpeciesAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GrowthTrackingSpeciesSaplingAdapter.MyViewHolder holder, int position) {
 
-        holder.nurserySpeciesItemViewBinding.speciesTypeId.setText("Species Type Id   : "+speciesList.get(position).getSpecies_type_id());
-        holder.nurserySpeciesItemViewBinding.speciesTypeName.setText("Species Type Name : "+speciesList.get(position).getSpecies_name_en());
-        holder.nurserySpeciesItemViewBinding.speciesCount.setText("Species Count     :"+speciesList.get(position).getNo_of_count());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.speciesTypeId.setText("Species Type Id   : "+speciesList.get(position).getSpecies_type_id());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.noOfSaplings.setText("Saplings Count     : "+speciesList.get(position).getNo_of_saplings());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.heightInCm.setText("Height               :"+speciesList.get(position).getHeight_in_cm());
 
         if(type.equals("")){
             if(speciesList.get(position).getServer_flag().equals("0")){
-                holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
+                holder.batchGrowthTrackingSpeciesItemViewBinding.delete.setVisibility(View.GONE);
+                holder.batchGrowthTrackingSpeciesItemViewBinding.edit.setVisibility(View.GONE);
             }
             else {
-                holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
+                holder.batchGrowthTrackingSpeciesItemViewBinding.delete.setVisibility(View.GONE);
+                holder.batchGrowthTrackingSpeciesItemViewBinding.edit.setVisibility(View.GONE);
             }
 
-            holder.nurserySpeciesItemViewBinding.delete.setOnClickListener(new View.OnClickListener() {
+            holder.batchGrowthTrackingSpeciesItemViewBinding.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     save_and_delete_alert(position,"delete");
                 }
             });
-            holder.nurserySpeciesItemViewBinding.edit.setOnClickListener(new View.OnClickListener() {
+            holder.batchGrowthTrackingSpeciesItemViewBinding.edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     save_and_delete_alert(position,"edit");
@@ -87,8 +89,8 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
             });
         }
         else {
-            holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
-            holder.nurserySpeciesItemViewBinding.edit.setVisibility(View.GONE);
+            holder.batchGrowthTrackingSpeciesItemViewBinding.delete.setVisibility(View.GONE);
+            holder.batchGrowthTrackingSpeciesItemViewBinding.edit.setVisibility(View.GONE);
 
         }
 
@@ -102,11 +104,11 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public NurserySpeciesItemViewBinding nurserySpeciesItemViewBinding;
+        public BatchGrowthTrackingSpeciesItemViewBinding batchGrowthTrackingSpeciesItemViewBinding;
 
-        public MyViewHolder(NurserySpeciesItemViewBinding Binding) {
+        public MyViewHolder(BatchGrowthTrackingSpeciesItemViewBinding Binding) {
             super(Binding.getRoot());
-            nurserySpeciesItemViewBinding = Binding;
+            batchGrowthTrackingSpeciesItemViewBinding = Binding;
         }
     }
 

@@ -91,7 +91,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
 
         if(batchList.get(position).getServer_flag().equals("0")){
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
-            getSpeciesCount = dbData.get_nursery_batch_species_details(String.valueOf(batchList.get(position).getBatch_primary_id()),"","0");
+            getSpeciesCount = dbData.get_nursery_batch_species_details(String.valueOf(batchList.get(position).getBatch_primary_id()),"","0","");
             if(getSpeciesCount.size()>0) {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.VISIBLE);
             }
@@ -99,10 +99,11 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
             }
             holder.nurseryBatchItemViewBinding.delete.setVisibility(View.VISIBLE);
+            holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
         }
         else {
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
-            getSpeciesCount = dbData.get_nursery_batch_species_details(String.valueOf(batchList.get(position).getBatch_primary_id()),"","0");
+            getSpeciesCount = dbData.get_nursery_batch_species_details(String.valueOf(batchList.get(position).getBatch_primary_id()),"","0","");
             if(getSpeciesCount.size()>0) {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.VISIBLE);
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
@@ -234,7 +235,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         ArrayList<NurserySurvey> batchSpeciesDetails = new ArrayList<>();
         batchDetails = dbData.get_nursery_batch_details("Particular","0",batch_primary_id);
         batchPhotosDetails = dbData.get_nursery_batch_photos_details(batch_primary_id);
-        batchSpeciesDetails = dbData.get_nursery_batch_species_details(batch_primary_id,"","0");
+        batchSpeciesDetails = dbData.get_nursery_batch_species_details(batch_primary_id,"","0","");
         try {
             for (int i=0;i<batchDetails.size();i++){
                 if(batchDetails.get(i).getBatch_id()==0){

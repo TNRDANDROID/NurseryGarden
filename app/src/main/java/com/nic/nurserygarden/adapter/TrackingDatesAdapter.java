@@ -3,6 +3,7 @@ package com.nic.nurserygarden.adapter;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nic.nurserygarden.R;
+import com.nic.nurserygarden.activity.GrowthTrackingActivity.GrowthTracking;
 import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.databinding.TrackingDatesItemViewBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
@@ -24,6 +26,7 @@ public class TrackingDatesAdapter extends RecyclerView.Adapter<TrackingDatesAdap
     private com.nic.nurserygarden.dataBase.dbData dbData;
     public DBHelper dbHelper;
     public SQLiteDatabase db;
+    int pos=-1;
 
     public TrackingDatesAdapter(List<NurserySurvey> dateList, Context context, com.nic.nurserygarden.dataBase.dbData dbData) {
         this.dateList = dateList;
@@ -53,6 +56,23 @@ public class TrackingDatesAdapter extends RecyclerView.Adapter<TrackingDatesAdap
     public void onBindViewHolder(@NonNull TrackingDatesAdapter.MyViewHolder holder, int position) {
 
         holder.trackingDatesItemViewBinding.entryDate.setText("Date "+ dateList.get(position).getCreated_date());
+        if(position==pos){
+            holder.trackingDatesItemViewBinding.dateView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+
+        }
+        else {
+            holder.trackingDatesItemViewBinding.dateView.setCardBackgroundColor(context.getResources().getColor(R.color.grey_2));
+
+        }
+
+        holder.trackingDatesItemViewBinding.dateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos=position;
+                notifyDataSetChanged();
+                ((GrowthTracking)context).chooseDateAction(dateList.get(position).getCreated_date());
+            }
+        });
 
     }
 

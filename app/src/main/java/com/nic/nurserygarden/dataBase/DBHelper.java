@@ -196,6 +196,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "batch_id INTEGER,"+
                 "batch_number INTEGER,"+
                 "created_date TEXT,"+
+                "is_batch_closed TEXT,"+
                 "server_flag TEXT)");
 
         db.execSQL("CREATE TABLE " + BATCH_IMAGES_DETAILS + " ("
@@ -214,6 +215,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "batch_species_id INTEGER,"+
                 "species_type_id INTEGER,"+
                 "server_flag TEXT,"+
+                "is_harvest_closed TEXT,"+
                 "species_type_name_en TEXT,"+
                 "species_type_name_ta TEXT,"+
                 "no_of_count INTEGER)");
@@ -225,6 +227,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_DETAILS + " ("
                 +"batch_growth_tracking_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "growth_tracking_id INTEGER,"+
+                "batch_primary_id INTEGER,"+
                 "nursery_id INTEGER,"+
                 "batch_id INTEGER,"+
                 "entry_date TEXT,"+
@@ -233,23 +237,27 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_PHOTOS_DETAILS + " ("
                 +"batch_growth_tracking_images_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "batch_growth_tracking_primary_id INTEGER,"+
+                "batch_primary_id INTEGER,"+
+                "batch_id INTEGER,"+
                 "image BLOB,"+
                 "server_flag TEXT,"+
+                "entry_date TEXT,"+
                 "lattitude TEXT,"+
                 "longtitude TEXT)");
 
         db.execSQL("CREATE TABLE " + BATCH_GROWTH_TRACKING_SPECIES_DETAILS + " ("
                 +"batch_growth_tracking_species_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "batch_growth_tracking_primary_id INTEGER,"+
+                "batch_primary_id INTEGER,"+
                 "batch_id INTEGER,"+
+                "growth_tracking_details_id INTEGER,"+
                 "batch_species_id INTEGER,"+
                 "species_type_id INTEGER,"+
                 "server_flag TEXT,"+
-                "no_of_sapplings INTEGER,"+
-                "hight_in_cm TEXT,"+
+                "entry_date TEXT,"+
+                "no_of_saplings INTEGER,"+
+                "height_in_cm TEXT,"+
                 "age_in_days INTEGER)");
-
-
 
 
     }
@@ -272,6 +280,19 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + SAVE_TREE_IMAGE_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + SAVE_BEFORE_TREE_IMAGE_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + SAVE_AFTER_TREE_IMAGE_TABLE);
+
+
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_USER_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_LAND_TYPE);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_SPECIES_TYPE);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_LAND_SAVE_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_IMAGES_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_SPECIES_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_DATES);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_PHOTOS_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_SPECIES_DETAILS);
             onCreate(db);
         }
     }
