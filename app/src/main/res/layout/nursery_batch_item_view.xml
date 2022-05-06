@@ -73,7 +73,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/white"
-                                    android:text="Add species"
+                                    android:text="Add/View species"
                                     android:textStyle="bold"
                                     android:layout_centerHorizontal="true"
                                     android:textSize="@dimen/_11sdp"
@@ -181,7 +181,43 @@
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cornered_image_bg"
+                            android:id="@+id/dead_sapling">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Dead"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
                     </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_below="@+id/land_details_layout"
+                    android:id="@+id/dead_sapling_upload"
+                    android:background="@drawable/bottm_curved_bg_corenr">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:text="Upload Dead Sapling"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
                 </RelativeLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

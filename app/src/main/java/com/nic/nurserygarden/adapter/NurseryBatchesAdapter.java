@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
+import com.nic.nurserygarden.activity.DeadSaplingActivty.DeadSaplingEntry;
 import com.nic.nurserygarden.activity.GrowthTrackingActivity.GrowthTracking;
 import com.nic.nurserygarden.activity.LandActivity.AddViewLand;
 import com.nic.nurserygarden.constant.AppConstant;
@@ -100,6 +101,8 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
             }
             holder.nurseryBatchItemViewBinding.delete.setVisibility(View.VISIBLE);
             holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
+            holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
+            holder.nurseryBatchItemViewBinding.deadSaplingUpload.setVisibility(View.GONE);
         }
         else {
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
@@ -107,13 +110,26 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
             if(getSpeciesCount.size()>0) {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.VISIBLE);
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.deadSaplingUpload.setVisibility(View.GONE);
             }
             else {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.VISIBLE);
+                ArrayList<NurserySurvey> deadSaplingCount = new ArrayList<>();
+                deadSaplingCount = dbData.get_particular_dead_sapling_details(String.valueOf(batchList.get(position).getBatch_id()),"","0","");
+
+                if(deadSaplingCount.size()>0){
+                    holder.nurseryBatchItemViewBinding.deadSaplingUpload.setVisibility(View.VISIBLE);
+                }
+                else {
+                    holder.nurseryBatchItemViewBinding.deadSaplingUpload.setVisibility(View.GONE);
+                }
             }
             holder.nurseryBatchItemViewBinding.delete.setVisibility(View.GONE);
         }
+
 
         holder.nurseryBatchItemViewBinding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +163,22 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 context.startActivity(gotoGrowthTrackingClass);
             }
         });
+        holder.nurseryBatchItemViewBinding.deadSapling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoGrowthTrackingClass = new Intent(context, DeadSaplingEntry.class);
+                gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
+                gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
+                gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                context.startActivity(gotoGrowthTrackingClass);
+            }
+        });
+        holder.nurseryBatchItemViewBinding.deadSaplingUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save_and_delete_alert(position,"dead_sapling_save");
+            }
+        });
     }
 
     @Override
@@ -178,6 +210,9 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
             else if(save_delete.equals("delete")){
                 text.setText(context.getResources().getString(R.string.do_u_want_to_delete));
             }
+            else if(save_delete.equals("dead_sapling_save")){
+                text.setText(context.getResources().getString(R.string.do_u_want_to_upload));
+            }
 
             Button yesButton = (Button) dialog.findViewById(R.id.btn_ok);
             Button noButton = (Button) dialog.findViewById(R.id.btn_cancel);
@@ -197,6 +232,10 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                     }
                     else if(save_delete.equals("delete")) {
                         deletePending(position);
+                        dialog.dismiss();
+                    }
+                    else if(save_delete.equals("dead_sapling_save")){
+                        uploadDeadSaplingPending(position);
                         dialog.dismiss();
                     }
                 }
@@ -287,5 +326,39 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
+    }
+    public void uploadDeadSaplingPending(int position) {
+        JSONObject dataset = new JSONObject();
+        JSONObject dataset1 = new JSONObject();
+        JSONArray dead_sapling_details = new JSONArray();
+
+        String batch_primary_id = String.valueOf(batchList.get(position).getBatch_primary_id());
+        String batch_id = String.valueOf(batchList.get(position).getBatch_id());
+        ArrayList<NurserySurvey> deadSaplingList = new ArrayList<>();
+        deadSaplingList = dbData.get_particular_dead_sapling_details(batch_id,"","0","");
+
+        try {
+            for (int i=0;i<deadSaplingList.size();i++) {
+                dataset.put("batch_id", batchList.get(i).getBatch_id());
+                dataset.put("batch_species_id", batchList.get(i).getBatch_species_id());
+                dataset.put("species_type_id", batchList.get(i).getSpecies_type_id());
+                dataset.put("no_of_dead_sapling", batchList.get(i).getNo_of_dead_sapling());
+                dataset.put("dead_stage", batchList.get(i).getDead_stage_id());
+                dataset.put("dead_reason", batchList.get(i).getDead_reason());
+                dead_sapling_details.put(dataset);
+            }
+            dataset1.put(AppConstant.KEY_SERVICE_ID, "dead_sapling_details_save");
+            dataset1.put("dead_sapling_details", dead_sapling_details);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (Utils.isOnline()) {
+            ((AddViewBatchDetails)context).UploadDeadSapling(dataset1,batch_primary_id);
+        } else {
+            Utils.showAlert((Activity) context, "Turn On Mobile Data To Upload");
+        }
+
     }
 }

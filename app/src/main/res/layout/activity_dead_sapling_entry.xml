@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.nic.nurserygarden.activity.DeadSaplingActivty.DeadSaplingEntry" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/d_grey">
+
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/margin"
+                android:text="Dead Sapling Entry/View"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                style="@style/font_circular_bold"
+                tools:ignore="RelativeOverlap" />
+
+            <ImageView
+                android:id="@+id/back_img"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:onClick="@{()-> activity.onBackPress()}"
+                android:src="@mipmap/back_arrow" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_layout"
+            android:layout_above="@+id/textView1">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/species_list_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:textSize="@dimen/_13sdp"
+                            android:text="Choose Your Species"
+                            android:id="@+id/choose_species_text_view"
+                            android:padding="@dimen/_10sdp"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/choose_species_recycler"
+                            android:layout_below="@+id/choose_species_text_view"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/species_details_layout"
+                        android:layout_below="@+id/species_list_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:textSize="@dimen/_13sdp"
+                            android:text="Your Species  Details"
+                            android:id="@+id/growth_details_text_view"
+                            android:padding="@dimen/_10sdp"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/species_details_recycler"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_below="@id/growth_details_text_view"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dead_saplings_count_layout"
+                        android:layout_below="@+id/species_details_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:textSize="@dimen/_13sdp"
+                            android:text="No of Dead Saplings"
+                            android:id="@+id/dead_saplings_details_text_view"
+                            android:padding="@dimen/_10sdp"/>
+
+                        <RelativeLayout
+                            android:layout_below="@+id/dead_saplings_details_text_view"
+                            android:id="@+id/species_count_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:background="@drawable/rectangle_box"
+                            android:orientation="vertical">
+
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/full_transparent"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:inputType="number"
+                                android:hint="Enter Dead Sapling Count"
+                                android:id="@+id/dead_sapling_count"
+                                tools:ignore="RtlSymmetry" />
+
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dead_stages_details_layout"
+                        android:layout_below="@+id/dead_saplings_count_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:textSize="@dimen/_13sdp"
+                            android:text="Select Dead Stage"
+                            android:id="@+id/dead_stage_text_view"
+                            android:padding="@dimen/_10sdp"/>
+
+                        <RelativeLayout
+                            android:layout_below="@+id/dead_stage_text_view"
+                            android:id="@+id/stages_spinner_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/header"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:background="@drawable/rectangle_box"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/stages_name_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="15dp"
+                                android:textColor="@color/blue_background"
+                                android:textSize="@dimen/_15sdp"
+                                android:visibility="visible"
+                                style="@string/font_normal" />
+
+                            <Spinner
+                                android:id="@+id/stages_type_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dead_reason_layout"
+                        android:layout_below="@+id/dead_stages_details_layout">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:textSize="@dimen/_13sdp"
+                            android:text="Dead Reason"
+                            android:id="@+id/dead_reason_details_text_view"
+                            android:padding="@dimen/_10sdp"/>
+
+                        <RelativeLayout
+                            android:layout_below="@+id/dead_reason_details_text_view"
+                            android:id="@+id/dead_reason_value_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:background="@drawable/rectangle_box"
+                            android:orientation="vertical">
+
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/full_transparent"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:inputType="text"
+                                android:hint="Enter Dead Reason"
+                                android:id="@+id/dead_reaon"
+                                tools:ignore="RtlSymmetry" />
+
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/dead_reason_layout"
+                        android:layout_height="@dimen/_40sdp"
+                        android:id="@+id/save_btn_layout"
+                        android:background="@drawable/button_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="Save"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            style="@string/font_circular_bold" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </ScrollView>
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/software_designed_amp_developed_by_nic"
+            android:textAlignment="center"
+            android:textColor="@color/d_grey1"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+</layout>

@@ -41,6 +41,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String BATCH_GROWTH_TRACKING_PHOTOS_DETAILS = "batch_growth_tracking_photos_details";
     public static final String BATCH_GROWTH_TRACKING_SPECIES_DETAILS = "batch_growth_tracking_species_details";
 
+    public static final String DEAD_STAGE = "dead_stage";
+    public static final String DEAD_SAPLING_DETAILS_SAVE = "dead_sapling_details_save";
+
     private Context context;
 
     public DBHelper(Context context) {
@@ -178,6 +181,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "species_name_en TEXT,"+
                 "species_name_ta TEXT)");
 
+        db.execSQL("CREATE TABLE " + DEAD_STAGE + " ("
+                +"dead_stage_id INTEGER,"+
+                "dead_stage_name_en TEXT,"+
+                "dead_stage_name_ta TEXT)");
+
         db.execSQL("CREATE TABLE " + NURSERY_LAND_SAVE_DETAILS + " ("
                 +"land_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "land_type_id INTEGER,"+
@@ -259,6 +267,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "height_in_cm TEXT,"+
                 "age_in_days INTEGER)");
 
+        db.execSQL("CREATE TABLE " + DEAD_SAPLING_DETAILS_SAVE + " ("
+                +"dead_saplings_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_primary_id INTEGER,"+
+                "batch_id INTEGER,"+
+                "batch_species_id INTEGER,"+
+                "species_type_id INTEGER,"+
+                "server_flag TEXT,"+
+                "dead_stage TEXT,"+
+                "no_of_dead_sapling INTEGER,"+
+                "dead_reason TEXT)");
+
 
     }
 
@@ -293,6 +312,8 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_DATES);
             db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_PHOTOS_DETAILS);
             db.execSQL("DROP TABLE IF EXISTS " + BATCH_GROWTH_TRACKING_SPECIES_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + DEAD_STAGE);
+            db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS_SAVE);
             onCreate(db);
         }
     }

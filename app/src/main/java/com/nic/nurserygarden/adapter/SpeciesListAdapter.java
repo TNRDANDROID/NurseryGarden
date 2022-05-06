@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nic.nurserygarden.R;
+import com.nic.nurserygarden.activity.DeadSaplingActivty.DeadSaplingEntry;
 import com.nic.nurserygarden.activity.GrowthTrackingActivity.SaplingEntryView;
 import com.nic.nurserygarden.databinding.SpeciesListItemViewBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
@@ -60,7 +61,12 @@ public class SpeciesListAdapter extends RecyclerView.Adapter<SpeciesListAdapter.
             public void onClick(View view) {
                 pos=position;
                 notifyDataSetChanged();
-                ((SaplingEntryView) context).speciesdapterItemClicked(pos);
+                if(type.equals("")) {
+                    ((SaplingEntryView) context).speciesdapterItemClicked(pos);
+                }
+                else {
+                    ((DeadSaplingEntry) context).speciesdapterItemClicked(pos);
+                }
 
             }
         });

@@ -550,6 +550,52 @@ public class NurserySurvey {
     private String is_harvest_closed;
     private int growth_tracking_details_id;
 
+    private int dead_stage_id;
+    private String dead_stage_name_en;
+    private String dead_stage_name_ta;
+    private String dead_reason;
+    private int no_of_dead_sapling;
+
+    public String getDead_reason() {
+        return dead_reason;
+    }
+
+    public void setDead_reason(String dead_reason) {
+        this.dead_reason = dead_reason;
+    }
+
+    public int getNo_of_dead_sapling() {
+        return no_of_dead_sapling;
+    }
+
+    public void setNo_of_dead_sapling(int no_of_dead_sapling) {
+        this.no_of_dead_sapling = no_of_dead_sapling;
+    }
+
+    public int getDead_stage_id() {
+        return dead_stage_id;
+    }
+
+    public void setDead_stage_id(int dead_stage_id) {
+        this.dead_stage_id = dead_stage_id;
+    }
+
+    public String getDead_stage_name_en() {
+        return dead_stage_name_en;
+    }
+
+    public void setDead_stage_name_en(String dead_stage_name_en) {
+        this.dead_stage_name_en = dead_stage_name_en;
+    }
+
+    public String getDead_stage_name_ta() {
+        return dead_stage_name_ta;
+    }
+
+    public void setDead_stage_name_ta(String dead_stage_name_ta) {
+        this.dead_stage_name_ta = dead_stage_name_ta;
+    }
+
     public int getGrowth_tracking_details_id() {
         return growth_tracking_details_id;
     }

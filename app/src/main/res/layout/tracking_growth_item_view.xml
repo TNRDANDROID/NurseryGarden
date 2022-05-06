@@ -73,7 +73,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/white"
-                                    android:text="Saplings Details"
+                                    android:text="Add/View Saplings Details"
                                     android:textStyle="bold"
                                     android:layout_centerHorizontal="true"
                                     android:textSize="@dimen/_11sdp"

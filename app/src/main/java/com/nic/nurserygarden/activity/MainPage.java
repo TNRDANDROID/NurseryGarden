@@ -55,6 +55,7 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             get_nursery_user_details();
             get_nursery_land_type();
             get_nursery_species_type();
+            get_dead_stage();
         }
 
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +113,13 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             e.printStackTrace();
         }
     }
+    public void get_dead_stage() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("dead_stage", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dead_stage_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public JSONObject nutri_garden_master_form_listJsonParams() throws JSONException {
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.nutri_garden_master_form_listJsonParams(this).toString());
@@ -143,6 +151,14 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
         Log.d("nursery_species_type", "" + authKey);
+        return dataSet;
+    }
+    public JSONObject dead_stage_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.dead_stage_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("dead_stage", "" + authKey);
         return dataSet;
     }
 
@@ -188,6 +204,15 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                     new Insert_nursery_species_type().execute(jsonObject);
                 }
                 Log.d("nursery_species_type", "" + responseDecryptedBlockKey);
+            }
+            if ("dead_stage".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_dead_stage().execute(jsonObject);
+                }
+                Log.d("dead_stage", "" + responseDecryptedBlockKey);
             }
 
 
@@ -380,6 +405,48 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                         nurserySurvey.setSpecies_name_en(jsonArray.getJSONObject(i).getString("species_name_en"));
                         nurserySurvey.setSpecies_name_ta(jsonArray.getJSONObject(i).getString("species_name_ta"));
                         dbData.insert_nursery_species_type(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+    public class Insert_dead_stage extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            //dbData.delete_nursery_user_details();
+            dbData.delete_dead_stage() ;
+
+            if (params.length > 0) {
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setDead_stage_id(jsonArray.getJSONObject(i).getInt("dead_stage_id"));
+                        nurserySurvey.setDead_stage_name_en(jsonArray.getJSONObject(i).getString("dead_stage_name_en"));
+                        nurserySurvey.setDead_stage_name_ta(jsonArray.getJSONObject(i).getString("dead_stage_name_ta"));
+                        dbData.insert_dead_stage(nurserySurvey);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

@@ -222,6 +222,28 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                 }
                 Log.d("saveBatch", "" + responseDecryptedBlockKey);
             }
+            if ("saveDeadSapling".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    Utils.showAlert(this, jsonObject.getString("MESSAGE"));
+                    String whereClause = "batch_primary_id = ? ";
+                    String[] whereArgs = new String[]{batch_primary_id};
+                    int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_SAVE, whereClause, whereArgs);
+
+                    get_nursery_batch_list();
+                    nurseryBatchesAdapter.notifyDataSetChanged();
+                }
+                else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
+                    Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
+                    int dsd = db.delete(DBHelper.DEAD_SAPLING_DETAILS_SAVE, "batch_primary_id = ? ", new String[]{batch_primary_id});
+
+                    get_nursery_batch_list();
+                    nurseryBatchesAdapter.notifyDataSetChanged();
+                }
+                Log.d("saveDeadSapling", "" + responseDecryptedBlockKey);
+            }
 
 
         } catch (JSONException e) {
@@ -273,7 +295,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
                             nurserySurvey1.setBatch_species_id(jsonArray1.getJSONObject(j).getInt("batch_species_id"));
                             nurserySurvey1.setBatch_id(jsonArray1.getJSONObject(j).getInt("batch_id"));
                             nurserySurvey1.setSpecies_type_id(jsonArray1.getJSONObject(j).getInt("species_type_id"));
-                            nurserySurvey1.setNo_of_count(jsonArray1.getJSONObject(j).getInt("number_of_seedlings_raised"));
+                            nurserySurvey1.setNo_of_count(jsonArray1.getJSONObject(j).getInt("number_of_balance_active_saplings"));
                             nurserySurvey1.setSpecies_name_en(jsonArray1.getJSONObject(j).getString("species_name_en"));
                             nurserySurvey1.setSpecies_name_ta(jsonArray1.getJSONObject(j).getString("species_name_ta"));
                             nurserySurvey1.setIs_harvest_closed(jsonArray1.getJSONObject(j).getString("is_harvest_closed"));
@@ -331,6 +353,23 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
             dataSet.put(AppConstant.DATA_CONTENT, authKey);
 
             new ApiService(this).makeJSONObjectRequest("saveBatch", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("saveBatch", "" + dataSet);
+        return dataSet;
+    }
+    public JSONObject UploadDeadSapling(JSONObject savePMAYDataSet, String batch_primary_id_) {
+        batch_primary_id=batch_primary_id_;
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), savePMAYDataSet.toString());
+        JSONObject dataSet = new JSONObject();
+        try {
+            dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+            dataSet.put(AppConstant.DATA_CONTENT, authKey);
+
+            new ApiService(this).makeJSONObjectRequest("saveDeadSapling", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
 
         } catch (JSONException e) {
             e.printStackTrace();
