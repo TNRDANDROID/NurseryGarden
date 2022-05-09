@@ -339,12 +339,12 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
 
         try {
             for (int i=0;i<deadSaplingList.size();i++) {
-                dataset.put("batch_id", batchList.get(i).getBatch_id());
-                dataset.put("batch_species_id", batchList.get(i).getBatch_species_id());
-                dataset.put("species_type_id", batchList.get(i).getSpecies_type_id());
-                dataset.put("no_of_dead_sapling", batchList.get(i).getNo_of_dead_sapling());
-                dataset.put("dead_stage", batchList.get(i).getDead_stage_id());
-                dataset.put("dead_reason", batchList.get(i).getDead_reason());
+                dataset.put("batch_id", deadSaplingList.get(i).getBatch_id());
+                dataset.put("batch_species_id", deadSaplingList.get(i).getBatch_species_id());
+                dataset.put("species_type_id", deadSaplingList.get(i).getSpecies_type_id());
+                dataset.put("no_of_dead_sapling", deadSaplingList.get(i).getNo_of_dead_sapling());
+                dataset.put("dead_stage", deadSaplingList.get(i).getDead_stage_id());
+                dataset.put("dead_reason", deadSaplingList.get(i).getDead_reason());
                 dead_sapling_details.put(dataset);
             }
             dataset1.put(AppConstant.KEY_SERVICE_ID, "dead_sapling_details_save");

@@ -375,7 +375,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
             e.printStackTrace();
         }
 
-        Log.d("saveBatch", "" + dataSet);
+        Log.d("saveDeadSapling", "" + dataSet);
         return dataSet;
     }
 

@@ -1109,7 +1109,9 @@ public class dbData {
         try {
             selection = "batch_id = ? ";
             selectionArgs = new String[]{batch_id};
-            cursor = db.rawQuery("select * from "+DBHelper.BATCH_GROWTH_TRACKING_DATES,null);
+            //cursor = db.rawQuery("select * from "+DBHelper.BATCH_GROWTH_TRACKING_DATES,null);
+            cursor = db.query(DBHelper.BATCH_GROWTH_TRACKING_DATES,new String[]{"*"},
+                    selection, selectionArgs, null, null, null);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     NurserySurvey card = new NurserySurvey();

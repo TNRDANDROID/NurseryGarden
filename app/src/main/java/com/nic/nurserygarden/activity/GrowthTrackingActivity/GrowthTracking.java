@@ -302,7 +302,12 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                 new fetchNurseryBatchDetails().execute();
             }
             else {
-                growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                if(!choose_date.equals("")){
+                    growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                }
+                else {
+                    growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                }
             }
         }
         else {
@@ -311,7 +316,12 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
                 }
                 else {
-                    growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    if(!choose_date.equals("")){
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                    }
                 }
                 get_nursery_batch_growth_track_details_list();
             }
@@ -321,7 +331,12 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     new fetchNurseryBatchDetails().execute();
                 }
                 else {
-                    growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    if(!choose_date.equals("")){
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                    }
                 }
             }
         }
@@ -371,7 +386,12 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                 new fetchNurseryBatchDetails().execute();
             }
             else {
-                growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                if(!choose_date.equals("")){
+                    growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                }
+                else {
+                    growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                }
             }
         }
         else {
@@ -380,7 +400,12 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
                 }
                 else {
-                    growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    if(!choose_date.equals("")){
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                    }
                 }
                 get_nursery_batch_growth_track_details_list();
             }
@@ -390,7 +415,12 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     new fetchNurseryBatchDetails().execute();
                 }
                 else {
-                    growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    if(!choose_date.equals("")){
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                    }
                 }
             }
         }

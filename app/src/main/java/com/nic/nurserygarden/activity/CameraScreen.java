@@ -526,6 +526,10 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                     imageView.setVisibility(View.VISIBLE);
                     latitude_text.setText(""+offlatTextValue);
                     longtitude_text.setText(""+offlongTextValue);
+
+                    cameraScreenBinding.imageViewPreview.setVisibility(View.GONE);
+                    cameraScreenBinding.imageView.setVisibility(View.VISIBLE);
+                    cameraScreenBinding.imageView.setImageBitmap(photo);
                 }
                 else {
                     // Refreshing the gallery
