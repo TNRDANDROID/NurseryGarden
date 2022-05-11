@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -324,11 +324,12 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class fetchNurseryBatchDetails extends AsyncTask<Void, Void, ArrayList<NurserySurvey>> {
         @Override
         protected ArrayList<NurserySurvey> doInBackground(Void... params) {
             dbData.open();
-            ArrayList<NurserySurvey> nurseryBatchDetails = new ArrayList<>();
+            ArrayList<NurserySurvey> nurseryBatchDetails;
             nurseryBatchDetails = dbData.get_nursery_batch_details("All","1","");
             Log.d("nursery_batch_details", String.valueOf(nurseryBatchDetails.size()));
             return nurseryBatchDetails;
@@ -344,7 +345,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
         }
     }
 
-    public JSONObject UploadData(JSONObject savePMAYDataSet, String batch_primary_id_) {
+    public void UploadData(JSONObject savePMAYDataSet, String batch_primary_id_) {
         batch_primary_id=batch_primary_id_;
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), savePMAYDataSet.toString());
         JSONObject dataSet = new JSONObject();
@@ -359,9 +360,8 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
         }
 
         Log.d("saveBatch", "" + dataSet);
-        return dataSet;
     }
-    public JSONObject UploadDeadSapling(JSONObject savePMAYDataSet, String batch_primary_id_) {
+    public void UploadDeadSapling(JSONObject savePMAYDataSet, String batch_primary_id_) {
         batch_primary_id=batch_primary_id_;
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), savePMAYDataSet.toString());
         JSONObject dataSet = new JSONObject();
@@ -376,7 +376,6 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
         }
 
         Log.d("saveDeadSapling", "" + dataSet);
-        return dataSet;
     }
 
     public void onBackPress() {

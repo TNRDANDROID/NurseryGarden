@@ -149,19 +149,30 @@ public class DeadSaplingEntry extends AppCompatActivity {
     public void checkValidation(){
         String no_of_dead_sapling = deadSaplingEntryBinding.deadSaplingCount.getText().toString();
         String dead_reason = deadSaplingEntryBinding.deadReaon.getText().toString();
+        boolean count_check=false;
+        int typed_count = Integer.parseInt(no_of_dead_sapling);
+        if(particular_species_count>= typed_count){
+            count_check =true;
+        }
         if(species_type_id>0){
             if(!no_of_dead_sapling.equals("")){
-                if(dead_stage_id>0){
-                    if(!dead_reason.equals("")){
-                        saveDataLocally(no_of_dead_sapling,dead_reason);
+                if(count_check){
+                    if(dead_stage_id>0){
+                        if(!dead_reason.equals("")){
+                            saveDataLocally(no_of_dead_sapling,dead_reason);
+                        }
+                        else {
+                            Utils.showAlert(DeadSaplingEntry.this,"Please Enter Dead Reason");
+                        }
                     }
                     else {
-                        Utils.showAlert(DeadSaplingEntry.this,"Please Enter Dead Reason");
+                        Utils.showAlert(DeadSaplingEntry.this,"Choose Dead Stage Type");
                     }
                 }
                 else {
-                    Utils.showAlert(DeadSaplingEntry.this,"Choose Dead Stage Type");
+                    Utils.showAlert(DeadSaplingEntry.this,"Counting Mismatched");
                 }
+
             }
             else {
                 Utils.showAlert(DeadSaplingEntry.this,"Please Enter Dead Sapling Count");
@@ -211,7 +222,7 @@ public class DeadSaplingEntry extends AppCompatActivity {
 
         }
         catch (Exception e){
-
+                e.printStackTrace();
         }
     }
 
