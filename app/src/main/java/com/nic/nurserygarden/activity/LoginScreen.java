@@ -302,7 +302,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         prefManager.setName(String.valueOf(jsonObject.get(AppConstant.DESIG_NAME)));
                         Log.d("userdata", "" + prefManager.getDistrictCode() + prefManager.getBlockCode() + prefManager.getPvCode() + prefManager.getDistrictName() + prefManager.getBlockName() + prefManager.getName());
                         prefManager.setUserPassKey(decryptedKey);
-                        //getVillageList();
+                        getVillageList();
                         //getHabList();
                         new Handler().postDelayed(new Runnable() {
                             @Override

@@ -301,7 +301,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         ArrayList<NurserySurvey> growthTrackingDetailsList = new ArrayList<>();
         ArrayList<NurserySurvey> get_batch_growth_species_details = new ArrayList<>();
         growthTrackingDetailsList = dbData.get_nursery_batch_growth_tacking_details(String.valueOf(batch_id),choose_date,"");
-        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_growth_tracking_primary_id),"","0","");
+        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"","0","");
         if(get_batch_growth_species_details.size()>0){
                 new fetchNurseryBatchDetails().execute();
         }
@@ -351,7 +351,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         ArrayList<NurserySurvey> growthTrackingDetailsList = new ArrayList<>();
         ArrayList<NurserySurvey> get_batch_growth_species_details = new ArrayList<>();
         growthTrackingDetailsList = dbData.get_nursery_batch_growth_tacking_details(String.valueOf(batch_id),choose_date,"");
-        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_growth_tracking_primary_id),"","0","");
+        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"","0","");
         if(get_batch_growth_species_details.size()>0){
             new fetchNurseryBatchDetails().execute();
         }

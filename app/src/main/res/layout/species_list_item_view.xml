@@ -6,6 +6,55 @@
 
         <variable
             name="adapter"
+            type="com.nic.nurserygarden.adapter.SpeciesListAdapter" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="@dimen/_25sdp"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:id="@+id/card_view"
+        app:cardBackgroundColor="@color/grey_2"
+        app:cardCornerRadius="@dimen/_10sdp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerInParent="true"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/species_name"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
             type="com.nic.nurserygarden.adapter.TrackingGrowthAdapter" />
     </data>
 
@@ -45,4 +94,4 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-</layout>
+</layout>-->

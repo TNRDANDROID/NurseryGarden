@@ -15,7 +15,9 @@ import androidx.databinding.DataBindingUtil;
 import com.android.volley.VolleyError;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
+import com.nic.nurserygarden.activity.DeadSaplingActivty.NewDeadSaplingEntry;
 import com.nic.nurserygarden.activity.LandActivity.AddViewLand;
+import com.nic.nurserygarden.activity.SellAndBuyActivity.SellSpecies;
 import com.nic.nurserygarden.api.Api;
 import com.nic.nurserygarden.api.ApiService;
 import com.nic.nurserygarden.api.ServerResponse;
@@ -74,6 +76,18 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             @Override
             public void onClick(View v) {
                 gotoAddBatchOrLandScreen("Land");
+            }
+        });
+        mainPageBinding.saplingSale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoAddBatchOrLandScreen("Sell");
+            }
+        });
+        mainPageBinding.saplingDead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoAddBatchOrLandScreen("Dead");
             }
         });
         syncButtonVisibility();
@@ -570,8 +584,16 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         if(type.equals("Batch")){
             intent = new Intent(MainPage.this, AddViewBatchDetails.class);
         }
-        else {
+        else if(type.equals("Land")){
             intent = new Intent(MainPage.this, AddViewLand.class);
+        }
+        else if(type.equals("Dead")){
+            intent = new Intent(MainPage.this, NewDeadSaplingEntry.class);
+            intent.putExtra("nursery_level_id",mainPageBinding.nurseryLevelId.getText().toString());
+        }
+        else {
+            intent = new Intent(MainPage.this, SellSpecies.class);
+            intent.putExtra("nursery_level_id",mainPageBinding.nurseryLevelId.getText().toString());
         }
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

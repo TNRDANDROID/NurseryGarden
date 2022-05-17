@@ -92,7 +92,7 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         }
         else {
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
-            getSpeciesCount = dbData.get_batch_growth_species_details(String.valueOf(growthList.get(position).getBatch_growth_tracking_primary_id()),"","0","");
+            getSpeciesCount = dbData.get_batch_growth_species_details(String.valueOf(growthList.get(position).getBatch_id()),"","0","");
             if(getSpeciesCount.size()>0) {
                 holder.trackingGrowthItemViewBinding.upload.setVisibility(View.VISIBLE);
             }
@@ -205,8 +205,8 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         ArrayList<NurserySurvey> batchGrowthPhotosDetails = new ArrayList<>();
         ArrayList<NurserySurvey> batchSpeciesGrowthDetails = new ArrayList<>();
         batchGrowthDetails = dbData.get_nursery_batch_growth_tacking_details(batch_id,"0","All");
-        batchGrowthPhotosDetails = dbData.get_batch_growth_tracking_photos_details(batch_growth_tracking_primary_id,entry_date);
-        batchSpeciesGrowthDetails = dbData.get_batch_growth_species_details(batch_growth_tracking_primary_id,"","0","");
+        batchGrowthPhotosDetails = dbData.get_batch_growth_tracking_photos_details(batch_id,entry_date);
+        batchSpeciesGrowthDetails = dbData.get_batch_growth_species_details(batch_id,"","0","");
         try {
             for (int i=0;i<batchGrowthDetails.size();i++){
                 if(batchGrowthDetails.get(i).getGrowth_tracking_id()==0){

@@ -1,5 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.nic.nurserygarden.adapter.NurserySpeciesAdapter" />
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_7sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/batch_image_layout"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_70sdp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/plant2"
+                        android:id="@+id/tree_image"
+                        android:padding="@dimen/_8sdp"
+                        android:scaleType="fitXY"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="@dimen/_2sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:id="@+id/line_2_view"
+                    android:background="@color/grey_4"
+                    android:layout_toEndOf="@+id/batch_image_layout"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:background="@color/colorPrimaryDark2"
+                    android:layout_toEndOf="@id/line_2_view"
+                    android:id="@+id/species_details_layout">
+                    <LinearLayout
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/species_name_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:id="@+id/species_type_id"
+                                android:textSize="@dimen/_11sdp"
+                                android:padding="@dimen/_2sdp"/>
+                            <RelativeLayout
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/add_species">
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:src="@drawable/ic_edit"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@id/delete"
+                                    android:tint="@color/white"
+                                    android:id="@+id/edit"/>
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:tint="@color/white"
+                                    android:layout_alignParentEnd="true"
+                                    android:src="@drawable/ic_trash"
+                                    android:id="@+id/delete"/>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:id="@+id/species_type_name"
+                            android:textSize="@dimen/_11sdp"
+                            android:padding="@dimen/_2sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:id="@+id/species_count"
+                            android:textSize="@dimen/_11sdp"
+                            android:padding="@dimen/_2sdp"/>
+
+
+                    </LinearLayout>
+                    <!-- <View
+                         android:layout_width="match_parent"
+                         android:layout_height="@dimen/_1sdp"
+                         android:layout_below="@id/species_name_layout"
+                         android:id="@+id/batch_view"
+                         android:background="@color/grey_4"/>
+                     <LinearLayout
+                         android:layout_alignParentBottom="true"
+                         android:padding="@dimen/_5sdp"
+                         android:id="@+id/land_delete_layout"
+                         android:layout_below="@id/batch_view"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal">
+
+                         <RelativeLayout
+                             android:layout_gravity="center_vertical"
+                             android:padding="@dimen/_2sdp"
+                             android:layout_width="@dimen/_70sdp"
+                             android:layout_height="wrap_content"
+                             android:background="@drawable/red_button_bg"
+                             android:id="@+id/delete">
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:textColor="@color/white"
+                                 android:text="Delete"
+                                 android:layout_centerHorizontal="true"
+                                 android:textSize="@dimen/_11sdp"
+                                 android:layout_marginStart="@dimen/_10sdp"
+                                 android:paddingTop="0dp"
+                                 android:paddingBottom="@dimen/_1sdp"
+                                 android:paddingLeft="@dimen/_5sdp"
+                                 android:paddingRight="@dimen/_5sdp"/>
+                         </RelativeLayout>
+
+                         <RelativeLayout
+                             android:layout_gravity="center_vertical"
+                             android:layout_marginStart="@dimen/_15sdp"
+                             android:padding="@dimen/_2sdp"
+                             android:layout_width="@dimen/_70sdp"
+                             android:layout_height="wrap_content"
+                             android:background="@drawable/button_background"
+                             android:id="@+id/edit">
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:textColor="@color/white"
+                                 android:text="Edit"
+                                 android:textStyle="bold"
+                                 android:layout_centerHorizontal="true"
+                                 android:textSize="@dimen/_11sdp"
+                                 android:layout_marginStart="@dimen/_10sdp"
+                                 android:paddingTop="0dp"
+                                 android:paddingBottom="@dimen/_1sdp"
+                                 android:paddingLeft="@dimen/_5sdp"
+                                 android:paddingRight="@dimen/_5sdp"/>
+                         </RelativeLayout>
+                     </LinearLayout>-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:id="@+id/check"
+                    android:visibility="gone"
+                    android:layout_marginBottom="1dp"
+                    android:background="@drawable/quater_circle_shape"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    tools:ignore="UselessParent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@drawable/check3"
+                        />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -106,7 +305,7 @@
 
 
                     </LinearLayout>
-                   <!-- <View
+                   &lt;!&ndash; <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_below="@id/species_name_layout"
@@ -164,10 +363,10 @@
                                 android:paddingLeft="@dimen/_5sdp"
                                 android:paddingRight="@dimen/_5sdp"/>
                         </RelativeLayout>
-                    </LinearLayout>-->
+                    </LinearLayout>&ndash;&gt;
                 </RelativeLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
-</layout>
+</layout>-->

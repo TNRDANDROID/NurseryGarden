@@ -1184,7 +1184,7 @@ public class dbData {
         String selection;
         String[] selectionArgs;
         try {
-            selection = "batch_growth_tracking_primary_id = ? and entry_date = ?";
+            selection = "batch_id = ? and entry_date = ?";
             selectionArgs = new String[]{value,entry_date};
 
             cursor = db.query(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS,new String[]{"*"},
@@ -1229,11 +1229,11 @@ public class dbData {
         String[] selectionArgs;
         try {
             if(type.equals("All")){
-                selection = "batch_growth_tracking_primary_id = ? ";
+                selection = "batch_id = ? ";
                 selectionArgs = new String[]{value};
             }
             else if(type.equals("")){
-                selection = " batch_growth_tracking_primary_id = ? and server_flag = ? ";
+                selection = " batch_id = ? and server_flag = ? ";
                 selectionArgs = new String[]{value,server_flag};
             }
             else if(type.equals("local")){
@@ -1241,7 +1241,7 @@ public class dbData {
                 selectionArgs = new String[]{server_flag};
             }
             else {
-                selection = "batch_growth_tracking_primary_id = ? and species_type_id = ? ";
+                selection = "batch_id = ? and species_type_id = ? ";
                 selectionArgs = new String[]{value,species_type_id};
             }
 

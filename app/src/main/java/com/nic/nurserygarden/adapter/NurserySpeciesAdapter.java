@@ -73,6 +73,19 @@ public class NurserySpeciesAdapter extends RecyclerView.Adapter<NurserySpeciesAd
                 holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
             }
 
+            if(speciesList.get(position).getIs_harvest_closed().equals("Y")){
+                holder.nurserySpeciesItemViewBinding.check.setVisibility(View.VISIBLE);
+                holder.nurserySpeciesItemViewBinding.speciesDetailsLayout.setBackgroundColor(context.getResources().getColor(R.color.infoColor));
+                holder.nurserySpeciesItemViewBinding.edit.setVisibility(View.GONE);
+                holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
+            }
+            else {
+                holder.nurserySpeciesItemViewBinding.check.setVisibility(View.GONE);
+                holder.nurserySpeciesItemViewBinding.speciesDetailsLayout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark2));
+
+                holder.nurserySpeciesItemViewBinding.edit.setVisibility(View.VISIBLE);
+                holder.nurserySpeciesItemViewBinding.delete.setVisibility(View.GONE);
+            }
             holder.nurserySpeciesItemViewBinding.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

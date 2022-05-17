@@ -165,16 +165,17 @@ public class SaplingEntryView extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int total_count = getSaplingCountLimitationNumber()+Integer.parseInt(saplings_count.getText().toString());
+                    String sapling_height_= getSaplingHeight();
                     if(particular_species_count>=total_count){
                         if(getSaplingCountLimitation()){
                             if(!saplings_count.getText().toString().equals("")){
-                                if(!height_in_cm.getText().toString().equals("")){
+                                if(!height_in_cm.getText().toString().equals("")&&(!sapling_height_.equals(height_in_cm.getText().toString()))){
 
                                     saveSaplingDetails(saplings_count.getText().toString(),height_in_cm.getText().toString());
                                     dialog.dismiss();
                                 }
                                 else {
-                                    Utils.showAlert(SaplingEntryView.this,"Please Enter Height");
+                                    Utils.showAlert(SaplingEntryView.this,"Please Enter Height/Valid Height");
                                 }
                             }
                             else {
@@ -237,7 +238,7 @@ public class SaplingEntryView extends AppCompatActivity {
     public void loadSaplingDetailsList(){
         dbData.open();
         growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_growth_tracking_primary_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
         if(growthSpeciesDetailsList.size()>0){
             saplingEntryViewBinding.saplingsDetailsLayout.setVisibility(View.VISIBLE);
             growthTrackingSpeciesSaplingAdapter = new GrowthTrackingSpeciesSaplingAdapter(growthSpeciesDetailsList, SaplingEntryView.this,dbData,"");
@@ -252,7 +253,7 @@ public class SaplingEntryView extends AppCompatActivity {
         dbData.open();
         int saplings_count=0;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_growth_tracking_primary_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
         if(growthSpeciesDetailsList.size()>0){
             for(int i=0;i<growthSpeciesDetailsList.size();i++){
                 saplings_count = saplings_count+growthSpeciesDetailsList.get(i).getNo_of_saplings();
@@ -274,7 +275,7 @@ public class SaplingEntryView extends AppCompatActivity {
         dbData.open();
         int saplings_count=0;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_growth_tracking_primary_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
         if(growthSpeciesDetailsList.size()>0) {
             for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
                 saplings_count = saplings_count + growthSpeciesDetailsList.get(i).getNo_of_saplings();
@@ -282,6 +283,19 @@ public class SaplingEntryView extends AppCompatActivity {
         }
 
         return saplings_count;
+    }
+    public String getSaplingHeight(){
+        dbData.open();
+        String sapling_height="";
+        ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
+        if(growthSpeciesDetailsList.size()>0) {
+            for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
+                sapling_height = growthSpeciesDetailsList.get(i).getHeight_in_cm();
+            }
+        }
+
+        return sapling_height;
     }
 
 

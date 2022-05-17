@@ -40,7 +40,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.DeadSaplingActivty.DeadSaplingEntry"></activity>
+        <activity android:name=".activity.DeadSaplingActivty.NewDeadSaplingEntry"></activity>
+        <activity android:name=".activity.SellAndBuyActivity.OrderItemActivity" />
+        <activity android:name=".activity.SellAndBuyActivity.SellSpecies" />
+        <activity android:name=".activity.DeadSaplingActivty.DeadSaplingEntry" />
         <activity android:name=".activity.GrowthTrackingActivity.SaplingEntryView" />
         <activity android:name=".activity.GrowthTrackingActivity.GrowthTracking" />
         <activity android:name=".activity.BatchActivity.AddViewBatchSpeciesDetails" />

@@ -730,4 +730,70 @@ public class NurserySurvey {
     public void setAge_in_days(int age_in_days) {
         this.age_in_days = age_in_days;
     }
+
+    private int buyer_type_id;
+    private String buyer_type_name_en;
+    private String buyer_type_name_ta;
+    private String buyer_name;
+    private String buyer_mobile_no;
+    private String buyer_address;
+    int no_of_required_saplings;
+
+    public String getBuyer_mobile_no() {
+        return buyer_mobile_no;
+    }
+
+    public void setBuyer_mobile_no(String buyer_mobile_no) {
+        this.buyer_mobile_no = buyer_mobile_no;
+    }
+
+    public String getBuyer_address() {
+        return buyer_address;
+    }
+
+    public void setBuyer_address(String buyer_address) {
+        this.buyer_address = buyer_address;
+    }
+
+    public int getNo_of_required_saplings() {
+        return no_of_required_saplings;
+    }
+
+    public void setNo_of_required_saplings(int no_of_required_saplings) {
+        this.no_of_required_saplings = no_of_required_saplings;
+    }
+
+    public String getBuyer_name() {
+        return buyer_name;
+    }
+
+    public void setBuyer_name(String buyer_name) {
+        this.buyer_name = buyer_name;
+    }
+
+
+
+    public int getBuyer_type_id() {
+        return buyer_type_id;
+    }
+
+    public void setBuyer_type_id(int buyer_type_id) {
+        this.buyer_type_id = buyer_type_id;
+    }
+
+    public String getBuyer_type_name_en() {
+        return buyer_type_name_en;
+    }
+
+    public void setBuyer_type_name_en(String buyer_type_name_en) {
+        this.buyer_type_name_en = buyer_type_name_en;
+    }
+
+    public String getBuyer_type_name_ta() {
+        return buyer_type_name_ta;
+    }
+
+    public void setBuyer_type_name_ta(String buyer_type_name_ta) {
+        this.buyer_type_name_ta = buyer_type_name_ta;
+    }
 }

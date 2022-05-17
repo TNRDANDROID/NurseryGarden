@@ -55,7 +55,7 @@ public class TrackingDatesAdapter extends RecyclerView.Adapter<TrackingDatesAdap
     @Override
     public void onBindViewHolder(@NonNull TrackingDatesAdapter.MyViewHolder holder, int position) {
 
-        holder.trackingDatesItemViewBinding.entryDate.setText("Date "+ dateList.get(position).getCreated_date());
+       /* holder.trackingDatesItemViewBinding.entryDate.setText("Date "+ dateList.get(position).getCreated_date());
         if(position==pos){
             holder.trackingDatesItemViewBinding.dateView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
 
@@ -63,7 +63,27 @@ public class TrackingDatesAdapter extends RecyclerView.Adapter<TrackingDatesAdap
         else {
             holder.trackingDatesItemViewBinding.dateView.setCardBackgroundColor(context.getResources().getColor(R.color.grey_2));
 
+        }*/
+        holder.trackingDatesItemViewBinding.entryDate.setText(dateList.get(position).getCreated_date());
+        if(position==pos){
+            holder.trackingDatesItemViewBinding.dateView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+
+            holder.trackingDatesItemViewBinding.layoutOuter.setBackground(context.getResources().getDrawable(R.drawable.button_bg_grey_green));
+            holder.trackingDatesItemViewBinding.innerLayout.setBackground(context.getResources().getDrawable(R.drawable.button_bg_white_green));
+            holder.trackingDatesItemViewBinding.text.setBackground(context.getResources().getDrawable(R.drawable.button_bg_green));
+            holder.trackingDatesItemViewBinding.header.setTextColor(context.getResources().getColor(R.color.blue_background));
+            holder.trackingDatesItemViewBinding.entryDate.setTextColor(context.getResources().getColor(R.color.white));
         }
+        else {
+            holder.trackingDatesItemViewBinding.dateView.setCardBackgroundColor(context.getResources().getColor(R.color.grey_2));
+
+            holder.trackingDatesItemViewBinding.layoutOuter.setBackground(context.getResources().getDrawable(R.drawable.button_bg_grey));
+            holder.trackingDatesItemViewBinding.innerLayout.setBackground(context.getResources().getDrawable(R.drawable.button_bg_white));
+            holder.trackingDatesItemViewBinding.text.setBackground(context.getResources().getDrawable(R.drawable.button_bg));
+            holder.trackingDatesItemViewBinding.header.setTextColor(context.getResources().getColor(R.color.white));
+            holder.trackingDatesItemViewBinding.entryDate.setTextColor(context.getResources().getColor(R.color.blue_background));
+        }
+
 
         holder.trackingDatesItemViewBinding.dateView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -103,6 +103,19 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
             holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
             holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
             holder.nurseryBatchItemViewBinding.deadSaplingUpload.setVisibility(View.GONE);
+            if (batchList.get(position).getIs_batch_closed().equals("Y")){
+                holder.nurseryBatchItemViewBinding.check.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+
+
+            }
+            else {
+                holder.nurseryBatchItemViewBinding.check.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+
+            }
         }
         else {
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
@@ -128,6 +141,20 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 }
             }
             holder.nurseryBatchItemViewBinding.delete.setVisibility(View.GONE);
+            if (batchList.get(position).getIs_batch_closed().equals("Y")){
+                holder.nurseryBatchItemViewBinding.check.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+                holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
+            }
+            else {
+                holder.nurseryBatchItemViewBinding.check.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+                holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.VISIBLE);
+                holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.VISIBLE);
+            }
         }
 
 
@@ -179,6 +206,17 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 save_and_delete_alert(position,"dead_sapling_save");
             }
         });
+        holder.nurseryBatchItemViewBinding.check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAddSpeciesClass = new Intent(context, AddViewBatchSpeciesDetails.class);
+                gotoAddSpeciesClass.putExtra("batch_id",batchList.get(position).getBatch_id());
+                gotoAddSpeciesClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
+                gotoAddSpeciesClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                context.startActivity(gotoAddSpeciesClass);
+            }
+        });
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.nic.nurserygarden.utils;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,9 +11,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -23,6 +26,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -1196,6 +1200,13 @@ public class Utils {
         Log.d("nursery_species_type", "" + dataSet);
         return dataSet;
     }
+    public static JSONObject nursery_buyer_type_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_buyer_type);
+        Log.d("nursery_buyer_type", "" + dataSet);
+        return dataSet;
+    }
     public static JSONObject dead_stage_JsonParams(Activity activity) throws JSONException {
         prefManager = new PrefManager(activity);
         JSONObject dataSet = new JSONObject();
@@ -1214,6 +1225,58 @@ public class Utils {
         return dataSet;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.gradient_bg_new);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
 
+    public static boolean isValidMobile1(String phone2) {
+        boolean check= false;
+        boolean startDigitCheck = false;
+        boolean sameDigitCheck= false;
+        String[] startDigit=new String[] {"0","1","2","3","4","5"};
+        String[] sameDigit=new String[] {"6666666666","7777777777","8888888888","9999999999"};
+        for(int i=0;i<startDigit.length;i++){
+            if(phone2.startsWith(startDigit[i])){
+                startDigitCheck=false;
+                return false;
+            }else {
+                startDigitCheck=true;
+            }
+        }
+
+        if(startDigitCheck){
+            for(int i=0;i<sameDigit.length;i++){
+                if(phone2.equals(sameDigit[i])){
+                    sameDigitCheck=false;
+                    return false;
+                }else {
+                    sameDigitCheck=true;
+                }
+            }
+
+        }else {
+            return  false;
+        }
+        if(sameDigitCheck){
+            check = phone2.length() == 10;
+        }
+        else {
+            return  false;
+        }
+        if(check){
+            return check;
+        }else {
+            return  false;
+        }
+
+    }
 }

@@ -77,6 +77,9 @@ public class CommonAdapter extends BaseAdapter {
         else if (type.equalsIgnoreCase("deadStageList")) {
             tv_type.setText(pmgsySurvey.getDead_stage_name_en());
         }
+        else if (type.equalsIgnoreCase("nurseryBuyerTypeList")) {
+            tv_type.setText(pmgsySurvey.getBuyer_type_name_en());
+        }
         return view;
     }
 

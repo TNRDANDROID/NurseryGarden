@@ -578,7 +578,61 @@
 
                                 </LinearLayout>
 
+                                <LinearLayout
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
 
+                                    <RelativeLayout
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        >
+                                        <Button
+                                            android:id="@+id/sapling_sale"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_45sdp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_gravity="center_horizontal"
+                                            android:background="@drawable/grad_curve"
+                                            android:text="Sapling Sale"
+                                            android:clickable="true"
+                                            android:textAlignment="center"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:focusable="true" />
+
+
+                                    </RelativeLayout>
+                                    <RelativeLayout
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        >
+                                        <Button
+                                            android:id="@+id/sapling_dead"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_45sdp"
+                                            android:layout_centerInParent="true"
+                                            android:layout_gravity="center_horizontal"
+                                            android:background="@drawable/grad_curve"
+                                            android:text="Sapling Dead"
+                                            android:clickable="true"
+                                            android:textAlignment="center"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:focusable="true" />
+
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
 
                             </LinearLayout>
 

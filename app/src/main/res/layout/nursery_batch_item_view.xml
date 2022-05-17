@@ -1,5 +1,467 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.nic.nurserygarden.adapter.NurseryBatchesAdapter" />
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    app:cardCornerRadius="@dimen/_7sdp"
+                    app:cardElevation="@dimen/_7sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/batch_image_layout"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_100sdp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_tree__leaves"
+                                android:id="@+id/tree_image"
+                                android:padding="@dimen/_5sdp"
+                                android:tint="@color/account_status_green_color"
+                                android:scaleType="fitXY"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_toEndOf="@id/batch_image_layout"
+                            android:id="@+id/land_details_layout">
+                            <LinearLayout
+                                android:id="@+id/batch_name_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/blue_background"
+                                        android:id="@+id/created_date"
+                                        android:layout_marginTop="@dimen/_3sdp"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:padding="@dimen/_2sdp"/>
+                                    <RelativeLayout
+                                        android:layout_gravity="end"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginLeft="@dimen/_15sdp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/text_bg"
+                                        android:id="@+id/add_species">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/white"
+                                            android:text="Add/View species"
+                                            android:textStyle="bold"
+                                            android:layout_centerHorizontal="true"
+                                            android:textSize="@dimen/_11sdp"
+                                            android:layout_marginStart="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_1sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:paddingLeft="@dimen/_5sdp"
+                                            android:paddingRight="@dimen/_5sdp"/>
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/grey_7"
+                                    android:id="@+id/batch_id"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:padding="@dimen/_2sdp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/blue_background"
+                                    android:id="@+id/batch_number"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:padding="@dimen/_2sdp"/>
+
+
+                            </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_above="@id/land_delete_layout"
+                                android:id="@+id/batch_view"
+                                android:background="@color/grey_4"/>
+                            <LinearLayout
+                                android:layout_alignParentBottom="true"
+                                android:padding="@dimen/_5sdp"
+                                android:id="@+id/land_delete_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/red_button_bg"
+                                    android:id="@+id/delete">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Delete"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/button_background"
+                                    android:id="@+id/upload">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Upload"
+                                        android:textStyle="bold"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/cornered_image_bg"
+                                    android:id="@+id/track_growth">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Track Growth"
+                                        android:textStyle="bold"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/cornered_image_bg"
+                                    android:id="@+id/dead_sapling">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Dead"
+                                        android:textStyle="bold"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_below="@+id/land_details_layout"
+                            android:id="@+id/dead_sapling_upload"
+                            android:background="@drawable/bottm_curved_bg_corenr">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:textAlignment="center"
+                                android:text="Upload Dead Sapling"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"/>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+        -->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:id="@+id/card_view"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_7sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:id="@+id/land_details_layout"
+                    >
+                    <RelativeLayout
+                        android:id="@+id/batch_image_layout"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/plant5"
+                            android:id="@+id/tree_image"
+                            android:padding="@dimen/_5sdp"
+                            android:scaleType="fitXY"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/batch_name_layout"
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@+id/batch_image_layout"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_background"
+                                android:id="@+id/created_date"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:textSize="@dimen/_11sdp"
+                                android:text="date 25-05-2022"
+                                android:padding="@dimen/_2sdp"/>
+                            <RelativeLayout
+                                android:layout_gravity="end"
+                                android:layout_alignParentEnd="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/text_bg"
+                                android:id="@+id/add_species">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/white"
+                                    android:text="Add/View species"
+                                    android:textStyle="bold"
+                                    android:layout_centerHorizontal="true"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:paddingTop="@dimen/_1sdp"
+                                    android:paddingBottom="@dimen/_2sdp"
+                                    android:paddingLeft="@dimen/_5sdp"
+                                    android:paddingRight="@dimen/_5sdp"/>
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/grey_7"
+                            android:id="@+id/batch_id"
+                            android:text="batch id 3"
+                            android:textSize="@dimen/_11sdp"
+                            android:padding="@dimen/_2sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="batch number 34"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/batch_number"
+                            android:textSize="@dimen/_11sdp"
+                            android:padding="@dimen/_2sdp"/>
+
+
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:id="@+id/check"
+                        android:visibility="gone"
+                        android:layout_marginBottom="1dp"
+                        android:background="@drawable/quater_circle_shape"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="end"
+                        tools:ignore="UselessParent">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:src="@drawable/check3"
+                            />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_above="@id/land_delete_layout"
+                        android:id="@+id/batch_view"
+                        android:background="@color/grey_4"/>
+                    <LinearLayout
+                        android:layout_alignParentBottom="true"
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/land_delete_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/red_button_bg"
+                            android:id="@+id/delete">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Delete"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_background"
+                            android:id="@+id/upload">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Upload"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cornered_image_bg"
+                            android:id="@+id/track_growth">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Track Growth"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cornered_image_bg"
+                            android:id="@+id/dead_sapling">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Dead sapling"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_below="@+id/land_details_layout"
+                    android:id="@+id/dead_sapling_upload"
+                    android:background="@drawable/bottm_curved_bg_corenr">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:text="Upload Dead Sapling"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>
+<!--<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -12,7 +474,437 @@
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        &lt;!&ndash;
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    app:cardCornerRadius="@dimen/_7sdp"
+                    app:cardElevation="@dimen/_7sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/batch_image_layout"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_100sdp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_tree__leaves"
+                                android:id="@+id/tree_image"
+                                android:padding="@dimen/_5sdp"
+                                android:tint="@color/account_status_green_color"
+                                android:scaleType="fitXY"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_toEndOf="@id/batch_image_layout"
+                            android:id="@+id/land_details_layout">
+                            <LinearLayout
+                                android:id="@+id/batch_name_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/blue_background"
+                                        android:id="@+id/created_date"
+                                        android:layout_marginTop="@dimen/_3sdp"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:padding="@dimen/_2sdp"/>
+                                    <RelativeLayout
+                                        android:layout_gravity="end"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginLeft="@dimen/_15sdp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/text_bg"
+                                        android:id="@+id/add_species">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/white"
+                                            android:text="Add/View species"
+                                            android:textStyle="bold"
+                                            android:layout_centerHorizontal="true"
+                                            android:textSize="@dimen/_11sdp"
+                                            android:layout_marginStart="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_1sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:paddingLeft="@dimen/_5sdp"
+                                            android:paddingRight="@dimen/_5sdp"/>
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/grey_7"
+                                    android:id="@+id/batch_id"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:padding="@dimen/_2sdp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/blue_background"
+                                    android:id="@+id/batch_number"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:padding="@dimen/_2sdp"/>
+
+
+                            </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_above="@id/land_delete_layout"
+                                android:id="@+id/batch_view"
+                                android:background="@color/grey_4"/>
+                            <LinearLayout
+                                android:layout_alignParentBottom="true"
+                                android:padding="@dimen/_5sdp"
+                                android:id="@+id/land_delete_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/red_button_bg"
+                                    android:id="@+id/delete">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Delete"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/button_background"
+                                    android:id="@+id/upload">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Upload"
+                                        android:textStyle="bold"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/cornered_image_bg"
+                                    android:id="@+id/track_growth">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Track Growth"
+                                        android:textStyle="bold"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+                                <RelativeLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:padding="@dimen/_2sdp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/cornered_image_bg"
+                                    android:id="@+id/dead_sapling">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="Dead"
+                                        android:textStyle="bold"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_1sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_below="@+id/land_details_layout"
+                            android:id="@+id/dead_sapling_upload"
+                            android:background="@drawable/bottm_curved_bg_corenr">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:textAlignment="center"
+                                android:text="Upload Dead Sapling"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"/>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+        &ndash;&gt;
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_7sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:background="@drawable/bg4"
+                    android:padding="@dimen/_5sdp"
+                    android:id="@+id/land_details_layout">
+                    <LinearLayout
+                        android:id="@+id/batch_name_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_background"
+                                android:id="@+id/created_date"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:textSize="@dimen/_11sdp"
+                                android:text="date 25-05-2022"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:padding="@dimen/_2sdp"/>
+                            <RelativeLayout
+                                android:layout_gravity="end"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/text_bg"
+                                android:id="@+id/add_species">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/white"
+                                    android:text="Add/View species"
+                                    android:textStyle="bold"
+                                    android:layout_centerHorizontal="true"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:paddingTop="@dimen/_1sdp"
+                                    android:paddingBottom="@dimen/_2sdp"
+                                    android:paddingLeft="@dimen/_5sdp"
+                                    android:paddingRight="@dimen/_5sdp"/>
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/grey_7"
+                            android:id="@+id/batch_id"
+                            android:text="batch id 3"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_2sdp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="batch number 34"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/batch_number"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:padding="@dimen/_2sdp"/>
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_above="@id/land_delete_layout"
+                        android:id="@+id/batch_view"
+                        android:background="@color/grey_4"/>
+                    <LinearLayout
+                        android:layout_alignParentBottom="true"
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/land_delete_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/red_button_bg"
+                            android:id="@+id/delete">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Delete"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_background"
+                            android:id="@+id/upload">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Upload"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cornered_image_bg"
+                            android:id="@+id/track_growth">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Track Growth"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:padding="@dimen/_2sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cornered_image_bg"
+                            android:id="@+id/dead_sapling">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Dead sapling"
+                                android:textStyle="bold"
+                                android:layout_centerHorizontal="true"
+                                android:textSize="@dimen/_11sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_5sdp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_below="@+id/land_details_layout"
+                    android:id="@+id/dead_sapling_upload"
+                    android:background="@drawable/bottm_curved_bg_corenr">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:text="Upload Dead Sapling"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>-->
 <!--
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.nic.nurserygarden.adapter.NurseryBatchesAdapter" />
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+&lt;!&ndash;
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -222,7 +1114,7 @@
                 </RelativeLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
--->
+&ndash;&gt;
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -425,4 +1317,4 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
-</layout>
+</layout>-->
