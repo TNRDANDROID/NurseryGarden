@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.bumptech.glide.util.Util;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.DeadSaplingActivty.DeadSaplingEntry;
 import com.nic.nurserygarden.activity.LoginScreen;
@@ -97,6 +98,14 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position>0){
                     buyer_type_id = nurseryBuyerTypeList.get(position).getBuyer_type_id();
+                    if(buyer_type_id==3){
+                        activitySellSpeciesBinding.buyerDetailsLayout.setVisibility(View.GONE);
+                        activitySellSpeciesBinding.mgnregsIdLayout.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        activitySellSpeciesBinding.buyerDetailsLayout.setVisibility(View.VISIBLE);
+                        activitySellSpeciesBinding.mgnregsIdLayout.setVisibility(View.GONE);
+                    }
                 }
                 else {
                     buyer_type_id=0;
@@ -287,6 +296,57 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
         if(village_layout_visible){
             if(!pv_code.equals("")){
                 if(buyer_type_id>0){
+                    if(buyer_type_id==3){
+                        if(!activitySellSpeciesBinding.mgnregsId.getText().toString().equals("")){
+                            gotoOrderItemActivity();
+                        }
+                        else {
+                            Utils.showAlert(SellSpecies.this,getResources().getString(R.string.enter_mgnregs_id));
+                        }
+
+                    }
+                    else {
+                        if(!activitySellSpeciesBinding.buyerName.getText().toString().equals("")){
+                            if(mobile_number_valid){
+                                if(Utils.isValidMobile1(activitySellSpeciesBinding.mobileNumber.getText().toString())){
+                                    gotoOrderItemActivity();
+                                }
+                                else {
+                                    Utils.showAlert(SellSpecies.this,"Please Enter Valid Mobile Number");
+                                }
+                            }
+                            else {
+                                gotoOrderItemActivity();
+                            }
+
+                        }
+                        else {
+                            Utils.showAlert(SellSpecies.this,"Please Enter Name");
+                        }
+                    }
+
+                }
+                else {
+                    Utils.showAlert(SellSpecies.this,"Please Choose Buyer Type");
+                }
+            }
+            else {
+                Utils.showAlert(SellSpecies.this,"Please Select Village");
+            }
+
+        }
+        else {
+            if(buyer_type_id>0){
+                if(buyer_type_id==3){
+                    if(!activitySellSpeciesBinding.mgnregsId.getText().toString().equals("")){
+                        gotoOrderItemActivity();
+                    }
+                    else {
+                        Utils.showAlert(SellSpecies.this,getResources().getString(R.string.enter_mgnregs_id));
+                    }
+
+                }
+                else {
                     if(!activitySellSpeciesBinding.buyerName.getText().toString().equals("")){
                         if(mobile_number_valid){
                             if(Utils.isValidMobile1(activitySellSpeciesBinding.mobileNumber.getText().toString())){
@@ -305,23 +365,7 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
                         Utils.showAlert(SellSpecies.this,"Please Enter Name");
                     }
                 }
-                else {
-                    Utils.showAlert(SellSpecies.this,"Please Choose Buyer Type");
-                }
-            }
-            else {
-                Utils.showAlert(SellSpecies.this,"Please Select Village");
-            }
 
-        }
-        else {
-            if(buyer_type_id>0){
-                if(!activitySellSpeciesBinding.buyerName.getText().toString().equals("")){
-                    gotoOrderItemActivity();
-                }
-                else {
-                    Utils.showAlert(SellSpecies.this,"Please Enter Name");
-                }
             }
             else {
                 Utils.showAlert(SellSpecies.this,"Please Choose Buyer Type");
@@ -334,9 +378,19 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
         Intent orderItemActivity = new Intent(SellSpecies.this,OrderItemActivity.class);
         orderItemActivity.putExtra("pv_code",pv_code);
         orderItemActivity.putExtra("buyer_type_id",buyer_type_id);
-        orderItemActivity.putExtra("buyer_name",activitySellSpeciesBinding.buyerName.getText().toString());
-        orderItemActivity.putExtra("buyer_mobile",activitySellSpeciesBinding.mobileNumber.getText().toString());
-        orderItemActivity.putExtra("buyer_address",activitySellSpeciesBinding.address.getText().toString());
+        if(buyer_type_id==3){
+            orderItemActivity.putExtra("buyer_name","");
+            orderItemActivity.putExtra("buyer_mobile","");
+            orderItemActivity.putExtra("buyer_address","");
+            orderItemActivity.putExtra("mgnregs_id",activitySellSpeciesBinding.mgnregsId.getText().toString());
+        }
+        else {
+            orderItemActivity.putExtra("buyer_name",activitySellSpeciesBinding.buyerName.getText().toString());
+            orderItemActivity.putExtra("buyer_mobile",activitySellSpeciesBinding.mobileNumber.getText().toString());
+            orderItemActivity.putExtra("buyer_address",activitySellSpeciesBinding.address.getText().toString());
+            orderItemActivity.putExtra("mgnregs_id","");
+        }
+
         startActivity(orderItemActivity);
         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
     }

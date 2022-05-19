@@ -1,6 +1,8 @@
 package com.nic.nurserygarden.adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,6 +15,7 @@ import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.databinding.NurserySaplingsOrderItemsBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SellSpeciesAdapter extends RecyclerView.Adapter<SellSpeciesAdapter.MyViewHolder> {
@@ -45,8 +48,29 @@ public class SellSpeciesAdapter extends RecyclerView.Adapter<SellSpeciesAdapter.
         holder.nurserySaplingsOrderItemsBinding.days.setText(""+orderItemList.get(position).getAge_in_days());
         holder.nurserySaplingsOrderItemsBinding.height.setText(orderItemList.get(position).getHeight_in_cm());
         holder.nurserySaplingsOrderItemsBinding.availableCount.setText(""+orderItemList.get(position).getNo_of_saplings());
-    }
+        holder.nurserySaplingsOrderItemsBinding.quantity.setText(orderItemList.get(position).getSell_sapling_typed_count_text());
+        holder.nurserySaplingsOrderItemsBinding.quantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                orderItemList.get(position).setSell_sapling_typed_count_text(holder.nurserySaplingsOrderItemsBinding.quantity.getText().toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+    }
+    public ArrayList<NurserySurvey> getTheDeadArrayList(){
+        return (ArrayList<NurserySurvey>) orderItemList;
+    }
     @Override
     public int getItemCount() {
         return orderItemList.size();

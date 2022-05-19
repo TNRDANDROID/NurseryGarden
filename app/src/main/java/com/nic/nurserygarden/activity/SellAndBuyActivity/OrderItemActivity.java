@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.bumptech.glide.util.Util;
 import com.nic.nurserygarden.R;
+import com.nic.nurserygarden.activity.HistoryActivity.OrderHistory;
 import com.nic.nurserygarden.adapter.CommonAdapter;
 import com.nic.nurserygarden.adapter.FilterItemsAdapter;
 import com.nic.nurserygarden.adapter.SellSpeciesAdapter;
@@ -51,6 +56,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
     String buyer_mobile="";
     String buyer_address="";
     String pv_code="";
+    String mgnregs_id="";
 
     SellSpeciesAdapter sellSpeciesAdapter;
     ArrayList<NurserySurvey> nurseryOrderItemList;
@@ -70,7 +76,9 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
     int species_type_id=0;
     int age = 0;
     String height = "";
-
+    EditText no_of_required_saplings_text;
+    TextView available_count_text;
+    LinearLayoutManager linearLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +118,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             @Override
             public void onClick(View v) {
                 if(Utils.isOnline()){
-                    saveAndDelivery();
+                    save_and_delete_alert("save");
                 }
                 else {
                     Utils.showAlert(OrderItemActivity.this,getResources().getString(R.string.no_internet));
@@ -121,7 +129,8 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
     }
 
     private void getIntentData(){
-        orderItemBinding.orderItemRecycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        orderItemBinding.orderItemRecycler.setLayoutManager(linearLayoutManager);
         orderItemBinding.batchNameRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, true));
         orderItemBinding.speciesNameRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, true));
         orderItemBinding.daysNameRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, true));
@@ -132,6 +141,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
         buyer_name = getIntent().getStringExtra("buyer_name");
         buyer_mobile = getIntent().getStringExtra("buyer_mobile");
         buyer_address = getIntent().getStringExtra("buyer_address");
+        mgnregs_id = getIntent().getStringExtra("mgnregs_id");
 
         if(Utils.isOnline()){
             sendJsonObjectForSearch();
@@ -154,7 +164,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             }
         }
         if(batchNumberItemList.size()>0){
-            batchNumberAdapter = new FilterItemsAdapter(batchNumberItemList,OrderItemActivity.this,"Batch_Number");
+            batchNumberAdapter = new FilterItemsAdapter(batchNumberItemList,OrderItemActivity.this,"Batch_Number","Sale");
             orderItemBinding.batchNameRecycler.setAdapter(batchNumberAdapter);
         }
     }
@@ -171,7 +181,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             }
         }
         if(speciesNameItemList.size()>0){
-            speciesNameAdapter = new FilterItemsAdapter(speciesNameItemList,OrderItemActivity.this,"Species_Name");
+            speciesNameAdapter = new FilterItemsAdapter(speciesNameItemList,OrderItemActivity.this,"Species_Name","Sale");
             orderItemBinding.speciesNameRecycler.setAdapter(speciesNameAdapter);
         }
     }
@@ -188,7 +198,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             }
         }
         if(daysItemList.size()>0){
-            daysNameAdapter = new FilterItemsAdapter(daysItemList,OrderItemActivity.this,"Days");
+            daysNameAdapter = new FilterItemsAdapter(daysItemList,OrderItemActivity.this,"Days","Sale");
             orderItemBinding.daysNameRecycler.setAdapter(daysNameAdapter);
         }
     }
@@ -205,7 +215,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             }
         }
         if(heightItemList.size()>0){
-            heightAdapter = new FilterItemsAdapter(heightItemList,OrderItemActivity.this,"Height");
+            heightAdapter = new FilterItemsAdapter(heightItemList,OrderItemActivity.this,"Height","Sale");
             orderItemBinding.heightNameRecycler.setAdapter(heightAdapter);
         }
     }
@@ -306,6 +316,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                         nurseryOrderItem.setHeight_in_cm(jsonArray.getJSONObject(i).getString("sapling_height_in_cm"));
                         nurseryOrderItem.setAge_in_days(jsonArray.getJSONObject(i).getInt("sapling_age_in_days"));
                         nurseryOrderItem.setNo_of_saplings(jsonArray.getJSONObject(i).getInt("no_of_saplings"));
+                        nurseryOrderItem.setSell_sapling_typed_count_text("");
 
                         nurseryOrderItemList.add(nurseryOrderItem);
                     }
@@ -391,8 +402,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
     public void saveAndDelivery() {
         boolean validation_check = false;
         syncOrderItemList  = new ArrayList<>();
-        EditText no_of_required_saplings_text;
-        TextView available_count_text;
+
 
         String pvcode=pv_code;
         int buyer_type_id_=buyer_type_id;
@@ -402,21 +412,14 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
 
         String no_of_required_saplings="";
         int no_of_available_saplings=0;
-        int childCount = sellSpeciesAdapter.getItemCount();
+        ArrayList<NurserySurvey> sellOrderArrayList = new ArrayList<>(sellSpeciesAdapter.getTheDeadArrayList());
+        //int childCount = orderItemBinding.orderItemRecycler.getChildCount();
         try {
-            if (childCount > 0) {
-               for (int i = 0; i < nurseryOrderItemFilterList.size(); i++) {
-                   RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) orderItemBinding.orderItemRecycler.findViewHolderForAdapterPosition(i);
-                        if(null!=holder){
-                            no_of_required_saplings_text = (EditText) holder.itemView.findViewById(R.id.quantity);
-                            available_count_text = (TextView)holder.itemView.findViewById(R.id.available_count);
-                            no_of_available_saplings = Integer.parseInt(available_count_text.getText().toString());
-                            if(!no_of_required_saplings_text.getText().toString().equals("")){
-                                no_of_required_saplings = no_of_required_saplings_text.getText().toString();
-                            }
-                            else {
-                                no_of_required_saplings="";
-                            }
+            if (sellOrderArrayList.size() > 0) {
+               for (int i = 0; i < sellOrderArrayList.size(); i++) {
+
+                            no_of_available_saplings = (sellOrderArrayList.get(i).getNo_of_saplings());
+                            no_of_required_saplings = sellOrderArrayList.get(i).getSell_sapling_typed_count_text();
 
                                 if(!no_of_required_saplings.equals("")){
                                     if(no_of_available_saplings>=Integer.parseInt(no_of_required_saplings)){
@@ -426,13 +429,13 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                                         sync_order_item.setBuyer_name(buyer_name_);
                                         sync_order_item.setBuyer_mobile_no(buyer_mobile_no);
                                         sync_order_item.setBuyer_address(buyer_address_);
-                                        sync_order_item.setBatch_id(nurseryOrderItemFilterList.get(i).getBatch_id());
-                                        sync_order_item.setGrowth_tracking_id(nurseryOrderItemFilterList.get(i).getGrowth_tracking_id());
-                                        sync_order_item.setGrowth_tracking_details_id(nurseryOrderItemFilterList.get(i).getGrowth_tracking_details_id());
-                                        sync_order_item.setSpecies_type_id(nurseryOrderItemFilterList.get(i).getSpecies_type_id());
-                                        sync_order_item.setHeight_in_cm(nurseryOrderItemFilterList.get(i).getHeight_in_cm());
-                                        sync_order_item.setAge_in_days(nurseryOrderItemFilterList.get(i).getAge_in_days());
-                                        sync_order_item.setNo_of_saplings(nurseryOrderItemFilterList.get(i).getNo_of_saplings());
+                                        sync_order_item.setBatch_id(sellOrderArrayList.get(i).getBatch_id());
+                                        sync_order_item.setGrowth_tracking_id(sellOrderArrayList.get(i).getGrowth_tracking_id());
+                                        sync_order_item.setGrowth_tracking_details_id(sellOrderArrayList.get(i).getGrowth_tracking_details_id());
+                                        sync_order_item.setSpecies_type_id(sellOrderArrayList.get(i).getSpecies_type_id());
+                                        sync_order_item.setHeight_in_cm(sellOrderArrayList.get(i).getHeight_in_cm());
+                                        sync_order_item.setAge_in_days(sellOrderArrayList.get(i).getAge_in_days());
+                                        sync_order_item.setNo_of_saplings(sellOrderArrayList.get(i).getNo_of_saplings());
                                         sync_order_item.setNo_of_required_saplings(Integer.parseInt(no_of_required_saplings));
 
                                         syncOrderItemList.add(sync_order_item);
@@ -441,16 +444,20 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                                     }
                                     else {
                                         validation_check = false;
-                                        no_of_required_saplings_text.requestFocus();
+                                        /*RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(this) {
+                                            @Override protected int getVerticalSnapPreference() {
+                                                return LinearSmoothScroller.SNAP_TO_START;
+                                            }
+                                        };
+                                        smoothScroller.setTargetPosition(i);
+                                        linearLayoutManager.startSmoothScroll(smoothScroller);
+                                        linearLayoutManager.smoothScrollToPosition(orderItemBinding.orderItemRecycler,null,i);*/
+                                        //no_of_required_saplings_text.requestFocus();
                                         Utils.showAlert(OrderItemActivity.this,"Count MisMatched");
-
 
                                     }
 
                                 }
-
-                        }
-
 
                     }
                if(validation_check){
@@ -462,9 +469,9 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                    }
 
                }
-               else {
+              /* else {
                    Utils.showAlert(OrderItemActivity.this,"Count MisMatched");
-               }
+               }*/
 
             }
 
@@ -484,6 +491,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             data_set.put("buyer_name",buyer_name);
             data_set.put("buyer_mobile_no",buyer_mobile);
             data_set.put("buyer_address",buyer_address);
+            data_set.put("mgnregs_id",mgnregs_id);
             for(int i=0; i<syncOrderItemList.size();i++){
                 JSONObject data_set1= new JSONObject();
                 data_set1.put("batch_id",syncOrderItemList.get(i).getBatch_id());
@@ -512,6 +520,50 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
             Log.d("order_save", "" + dataSet);
         }
         catch (JSONException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void save_and_delete_alert(String save_delete){
+        try {
+            final Dialog dialog = new Dialog(OrderItemActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.alert_dialog);
+
+            TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+            if(save_delete.equals("save")) {
+                text.setText(getResources().getString(R.string.do_u_want_to_upload));
+            }
+            else if(save_delete.equals("delete")){
+                text.setText(getResources().getString(R.string.do_u_want_to_delete));
+            }
+
+            Button yesButton = (Button) dialog.findViewById(R.id.btn_ok);
+            Button noButton = (Button) dialog.findViewById(R.id.btn_cancel);
+            noButton.setVisibility(View.VISIBLE);
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(save_delete.equals("save")) {
+                        saveAndDelivery();
+                        dialog.dismiss();
+                    }
+                    else if(save_delete.equals("delete")) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+
+            dialog.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

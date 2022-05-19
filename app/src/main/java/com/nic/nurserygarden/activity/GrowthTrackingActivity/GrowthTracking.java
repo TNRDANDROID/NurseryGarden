@@ -69,6 +69,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         batch_id = getIntent().getIntExtra("batch_id",0);
         batch_primary_id = getIntent().getIntExtra("batch_primary_id",0);
         growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+        growthTrackingBinding.scrollView.setVisibility(View.GONE);
         initialiseRecyclerView();
         if(Utils.isOnline()){
             ArrayList<NurserySurvey> growthTrackingDateList = dbData.get_batch_growth_tracking_dates(String.valueOf(batch_id));
@@ -147,7 +148,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     new Insert_batch_tracking_date_list().execute(jsonObject);
                 }
                 else {
-
+                    Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
                     new fetchBatchGrowthTrackingDates().execute();
                 }
                 Log.d("batch_tracking_date", "" + responseDecryptedBlockKey);
@@ -158,8 +159,8 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     Utils.showAlert(this, jsonObject.getString("MESSAGE"));
-                    String whereClause = "batch_growth_tracking_primary_id = ? and batch_id = ?";
-                    String[] whereArgs = new String[]{batch_growth_tracking_primary_id,String.valueOf(batch_id)};
+                    String whereClause = "batch_id = ?";
+                    String[] whereArgs = new String[]{String.valueOf(batch_id)};
                     int sdsm = db.delete(DBHelper.BATCH_GROWTH_TRACKING_DETAILS, whereClause, whereArgs);
                     int sdsm1 = db.delete(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, whereClause, whereArgs);
                     int sdsm2 = db.delete(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, whereClause, whereArgs);
@@ -169,7 +170,8 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                 }
                 else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
                     Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
-                    int dsd = db.delete(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, "batch_growth_tracking_primary_id = ? and batch_id = ?", new String[]{batch_growth_tracking_primary_id,String.valueOf(batch_id)});
+                    int dsd = db.delete(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, "batch_id = ?", new String[]{String.valueOf(batch_id)});
+                    int dsd1 = db.delete(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, "batch_id = ?", new String[]{String.valueOf(batch_id)});
 
                     //get_nursery_batch_list();
                     //nurseryBatchesAdapter.notifyDataSetChanged();
@@ -262,8 +264,14 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         protected void onPostExecute(ArrayList<NurserySurvey> nurseryBatchDetails) {
             super.onPostExecute(nurseryBatchDetails);
             if(nurseryBatchDetails.size()>0){
+                growthTrackingBinding.scrollView.setVisibility(View.VISIBLE);
+                growthTrackingBinding.chooseDateRecycler.setVisibility(View.VISIBLE);
                 trackingDatesAdapter = new TrackingDatesAdapter(nurseryBatchDetails, GrowthTracking.this,dbData);
                 growthTrackingBinding.chooseDateRecycler.setAdapter(trackingDatesAdapter);
+            }
+            else {
+                growthTrackingBinding.scrollView.setVisibility(View.GONE);
+                growthTrackingBinding.chooseDateRecycler.setVisibility(View.GONE);
             }
         }
     }

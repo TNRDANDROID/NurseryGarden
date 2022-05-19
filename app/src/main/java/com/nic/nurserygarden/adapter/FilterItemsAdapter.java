@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.DeadSaplingActivty.DeadSaplingEntry;
+import com.nic.nurserygarden.activity.DeadSaplingActivty.NewDeadSaplingEntry;
 import com.nic.nurserygarden.activity.GrowthTrackingActivity.SaplingEntryView;
 import com.nic.nurserygarden.activity.SellAndBuyActivity.OrderItemActivity;
 import com.nic.nurserygarden.databinding.FilterItemNameBinding;
@@ -25,11 +26,13 @@ public class FilterItemsAdapter extends RecyclerView.Adapter<FilterItemsAdapter.
     Context context;
     int pos=-1;
     String type;
+    String which_class;
 
-    public FilterItemsAdapter(List<NurserySurvey> capacityList, Context context,String type) {
+    public FilterItemsAdapter(List<NurserySurvey> capacityList, Context context,String type,String which_class) {
         this.capacityList = capacityList;
         this.context = context;
         this.type=type;
+        this.which_class=which_class;
     }
 
     @NonNull
@@ -46,17 +49,19 @@ public class FilterItemsAdapter extends RecyclerView.Adapter<FilterItemsAdapter.
     @Override
     public void onBindViewHolder(@NonNull final FilterItemsAdapter.MyViewHolder holder, final int position) {
 
-        if(type.equals("Batch_Number")){
-            holder.filterItemNameBinding.filterItemName.setText("Batch "+capacityList.get(position).getBatch_number());
-        }
-        else if(type.equals("Species_Name")){
-            holder.filterItemNameBinding.filterItemName.setText(""+capacityList.get(position).getSpecies_name_en());
-        }
-        else if(type.equals("Days")){
-            holder.filterItemNameBinding.filterItemName.setText(""+capacityList.get(position).getAge_in_days());
-        }
-        else {
-            holder.filterItemNameBinding.filterItemName.setText(""+capacityList.get(position).getHeight_in_cm());
+        switch (type) {
+            case "Batch_Number":
+                holder.filterItemNameBinding.filterItemName.setText("Batch " + capacityList.get(position).getBatch_number());
+                break;
+            case "Species_Name":
+                holder.filterItemNameBinding.filterItemName.setText("" + capacityList.get(position).getSpecies_name_en());
+                break;
+            case "Days":
+                holder.filterItemNameBinding.filterItemName.setText("" + capacityList.get(position).getAge_in_days());
+                break;
+            default:
+                holder.filterItemNameBinding.filterItemName.setText("" + capacityList.get(position).getHeight_in_cm());
+                break;
         }
 
 
@@ -75,18 +80,39 @@ public class FilterItemsAdapter extends RecyclerView.Adapter<FilterItemsAdapter.
             public void onClick(View view) {
                 pos=position;
                 notifyDataSetChanged();
-                if(type.equals("Batch_Number")){
-                    ((OrderItemActivity)context).getBathNumberClickedItem(position);
-                }
-                else if(type.equals("Species_Name")){
-                    ((OrderItemActivity)context).getSpeciesClickedItem(position);
-                }
-                else if(type.equals("Days")){
-                    ((OrderItemActivity)context).getAgesClickedItem(position);
+                if(which_class.equals("Sale")){
+                    switch (type) {
+                        case "Batch_Number":
+                            ((OrderItemActivity) context).getBathNumberClickedItem(position);
+                            break;
+                        case "Species_Name":
+                            ((OrderItemActivity) context).getSpeciesClickedItem(position);
+                            break;
+                        case "Days":
+                            ((OrderItemActivity) context).getAgesClickedItem(position);
+                            break;
+                        default:
+                            ((OrderItemActivity) context).getHeightClickedItem(position);
+                            break;
+                    }
                 }
                 else {
-                    ((OrderItemActivity)context).getHeightClickedItem(position);
+                    switch (type) {
+                        case "Batch_Number":
+                            ((NewDeadSaplingEntry) context).getBathNumberClickedItem(position);
+                            break;
+                        case "Species_Name":
+                            ((NewDeadSaplingEntry) context).getSpeciesClickedItem(position);
+                            break;
+                        case "Days":
+                            ((NewDeadSaplingEntry) context).getAgesClickedItem(position);
+                            break;
+                        default:
+                            ((NewDeadSaplingEntry) context).getHeightClickedItem(position);
+                            break;
+                    }
                 }
+
             }
         });
     }

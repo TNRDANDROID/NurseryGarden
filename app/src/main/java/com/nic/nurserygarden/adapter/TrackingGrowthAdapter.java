@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
+import com.nic.nurserygarden.activity.FullImageActivity;
 import com.nic.nurserygarden.activity.GrowthTrackingActivity.GrowthTracking;
 import com.nic.nurserygarden.constant.AppConstant;
 import com.nic.nurserygarden.dataBase.DBHelper;
@@ -113,6 +114,19 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
             @Override
             public void onClick(View v) {
                 save_and_delete_alert(position,"save");
+            }
+        });
+
+        holder.trackingGrowthItemViewBinding.batchImageLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAddSpeciesClass = new Intent(context, FullImageActivity.class);
+                gotoAddSpeciesClass.putExtra("ImageType","Growth");
+                gotoAddSpeciesClass.putExtra("On_Off_Type","Online");
+                gotoAddSpeciesClass.putExtra("batch_id",growthList.get(position).getBatch_id());
+                gotoAddSpeciesClass.putExtra("growth_tracking_id",growthList.get(position).getGrowth_tracking_id());
+
+                context.startActivity(gotoAddSpeciesClass);
             }
         });
 

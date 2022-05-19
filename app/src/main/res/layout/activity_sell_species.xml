@@ -187,6 +187,51 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/mgnregs_id_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:background="@drawable/cornered_border_bg_white"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:id="@+id/mgnregs_id_icon"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/profile_new"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:padding="@dimen/_5sdp"/>
+                        <EditText
+                            android:layout_toEndOf="@+id/mgnregs_id_icon"
+                            android:id="@+id/mgnregs_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/enter_mgnregs_id"
+                            android:inputType="textPersonName"
+                            android:singleLine="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_15sdp"
+                            style="@string/font_circular_book" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buyer_details_layout"
+                    android:orientation="vertical">
+                <LinearLayout
                     android:id="@+id/buyer_name_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -226,7 +271,6 @@
 
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/mobile_number_layout"
                     android:layout_width="match_parent"
@@ -269,7 +313,6 @@
 
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/address_layout"
                     android:layout_width="match_parent"
@@ -311,7 +354,7 @@
 
 
                 </LinearLayout>
-
+                </LinearLayout>
                 <!--<LinearLayout
                     android:id="@+id/species_count_recycler_layout"
                     android:layout_width="match_parent"
@@ -353,7 +396,7 @@
                         android:layout_gravity="left"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:text="@string/search"
+                        android:text="Next"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="normal"

@@ -71,14 +71,10 @@ public class NutriGardernDetailsServerAdapter extends RecyclerView.Adapter<Nutri
 
     @Override
     public void onBindViewHolder(@NonNull final NutriGardernDetailsServerAdapter.MyViewHolder holder, final int position) {
-        holder.pendingAdapterBinding.finYear.setText(pendingListValues.get(position).getFin_year());
-        holder.pendingAdapterBinding.selfHelpGroup.setText(pendingListValues.get(position).getShg_name());
-        holder.pendingAdapterBinding.memberName.setText(pendingListValues.get(position).getMember_name());
-        holder.pendingAdapterBinding.typeOfTree.setText(pendingListValues.get(position).getWork_name());
 
 
         holder.pendingAdapterBinding.upload.setVisibility(View.GONE);
-        holder.pendingAdapterBinding.viewImageText.setText("View Online Image");
+        //holder.pendingAdapterBinding.viewImageText.setText("View Online Image");
 
 
 

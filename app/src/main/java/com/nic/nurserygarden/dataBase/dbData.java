@@ -516,6 +516,28 @@ public class dbData {
         Log.d("Insert_growth_SPECIES", String.valueOf(id));
     }
 
+    public void insert_dead_sapling_details(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("nursery_id", pmgsySurvey.getNursery_id());
+        values.put("batch_id", pmgsySurvey.getBatch_id());
+        values.put("batch_species_id", pmgsySurvey.getBatch_species_id());
+        values.put("growth_tracking_id", pmgsySurvey.getGrowth_tracking_id());
+        values.put("growth_tracking_details_id", pmgsySurvey.getGrowth_tracking_details_id());
+        values.put("batch_no", pmgsySurvey.getBatch_number());
+        values.put("species_type_id", pmgsySurvey.getSpecies_type_id());
+        values.put("species_name_en", pmgsySurvey.getSpecies_name_en());
+        values.put("species_name_ta", pmgsySurvey.getSpecies_name_ta());
+        values.put("sapling_height_in_cm", pmgsySurvey.getHeight_in_cm());
+        values.put("sapling_age_in_days", pmgsySurvey.getAge_in_days());
+        values.put("no_of_saplings", pmgsySurvey.getNo_of_saplings());
+        values.put("dead_stage_position", pmgsySurvey.getDead_stage_position());
+        values.put("dead_reason_text", pmgsySurvey.getDead_reason_text());
+        values.put("dead_typed_count_text", pmgsySurvey.getDead_typed_count_text());
+
+        long id = db.insert(DBHelper.DEAD_SAPLING_DETAILS,null,values);
+        Log.d("Insert_dead_sapling", String.valueOf(id));
+    }
+
 
     public ArrayList<NurserySurvey> getAll_Master_Fin_Year() {
         ArrayList<NurserySurvey> cards = new ArrayList<>();
@@ -1335,6 +1357,150 @@ public class dbData {
         }
         return cards;
     }
+
+    public ArrayList<NurserySurvey> get_dead_sapling_details() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        try {
+
+            cursor = db.rawQuery("select * from "+DBHelper.DEAD_SAPLING_DETAILS,null);
+            //cursor = db.rawQuery(DBHelper.DEAD_SAPLING_DETAILS,null);
+
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setNursery_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("nursery_id")));
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    card.setBatch_species_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_species_id")));
+                    card.setGrowth_tracking_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("growth_tracking_id")));
+                    card.setGrowth_tracking_details_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("growth_tracking_details_id")));
+                    card.setBatch_number(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_no")));
+                    card.setSpecies_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("species_type_id")));
+                    card.setSpecies_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("species_name_en")));
+                    card.setSpecies_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("species_name_ta")));
+                    card.setHeight_in_cm(cursor.getString(cursor
+                            .getColumnIndexOrThrow("sapling_height_in_cm")));
+                    card.setAge_in_days(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("sapling_age_in_days")));
+                    card.setNo_of_saplings(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("no_of_saplings")));
+                    card.setDead_stage_position(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("dead_stage_position")));
+                    card.setDead_reason_text(cursor.getString(cursor
+                            .getColumnIndexOrThrow("dead_reason_text")));
+                    card.setDead_typed_count_text(cursor.getString(cursor
+                            .getColumnIndexOrThrow("dead_typed_count_text")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            Log.d("DEBUG_TAG", "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_dead_sapling_details_for_upload(String type,String batch_id) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        if(type.equals("Particular")){
+            selection = "batch_id = ? ";
+            selectionArgs = new String[]{batch_id};
+            cursor = db.query(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE,new String[]{"*"},
+                    selection, selectionArgs, null, null, null);
+        }
+        else {
+            cursor = db.rawQuery("select * from "+DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE,null);
+        }
+        try {
+
+            //cursor = db.rawQuery("select * from "+DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE,null);
+            //cursor = db.rawQuery(DBHelper.DEAD_SAPLING_DETAILS,null);
+
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_no")));
+                    card.setBatch_species_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_species_id")));
+                    card.setGrowth_tracking_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("growth_tracking_id")));
+                    card.setGrowth_tracking_details_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("growth_tracking_details_id")));
+                    card.setSpecies_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("species_type_id")));
+                    card.setHeight_in_cm(cursor.getString(cursor
+                            .getColumnIndexOrThrow("sapling_height_in_cm")));
+                    card.setAge_in_days(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("sapling_age_in_days")));
+                    card.setNo_of_dead_sapling(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("no_of_dead_sapling")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            Log.d("DEBUG_TAG", "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+
+    public ArrayList<NurserySurvey> get_dead_sapling_batch_details() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+
+        try {
+
+            cursor = db.rawQuery("select distinct batch_id,batch_no from "+DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE,null);
+            //cursor = db.rawQuery(DBHelper.DEAD_SAPLING_DETAILS,null);
+
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_id")));
+                    card.setBatch_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("batch_no")));
+
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            Log.d("DEBUG_TAG", "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+
     //////////////////////*****************/////////////
 
 
@@ -1371,7 +1537,9 @@ public class dbData {
     public void delete_batch_growth_tracking_photos_details() { db.execSQL("delete from " + DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS);}
     public void delete_batch_growth_tracking_species_details() { db.execSQL("delete from " + DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS);}
     public void delete_dead_stage() { db.execSQL("delete from " + DBHelper.DEAD_STAGE);}
+    public void delete_DEAD_SAPLING_DETAILS() { db.execSQL("delete from " + DBHelper.DEAD_SAPLING_DETAILS);}
     public void delete_dead_sapling_details_save() { db.execSQL("delete from " + DBHelper.DEAD_SAPLING_DETAILS_SAVE);}
+    public void delete_dead_sapling_details_new_save() { db.execSQL("delete from " + DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE);}
 
 
 
@@ -1407,7 +1575,9 @@ public class dbData {
         delete_batch_growth_tracking_photos_details();
         delete_batch_growth_tracking_species_details();
         delete_dead_stage();
+        delete_DEAD_SAPLING_DETAILS();
         delete_dead_sapling_details_save();
+        delete_dead_sapling_details_new_save();
     }
 
 

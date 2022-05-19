@@ -48,9 +48,11 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
     ArrayList<NurserySurvey> imageListTree;
 
     String fin_year="";
+    String ImageType="";
     int shg_code=0;
     int shg_member_code=0;
     int work_type_id=0;
+    int batch_id=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,18 +69,20 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
         fullImageRecyclerBinding.imagePreviewRecyclerview.setFocusable(false);
         fullImageRecyclerBinding.imagePreviewRecyclerview.setAdapter(fullImageAdapter);
         if(getIntent().getStringExtra("On_Off_Type").equals("Online")){
-            fin_year = getIntent().getStringExtra("fin_year");
+            /*fin_year = getIntent().getStringExtra("fin_year");
             shg_code = getIntent().getIntExtra("shg_code",0);
             shg_member_code = getIntent().getIntExtra("shg_member_code",0);
-            work_type_id = getIntent().getIntExtra("work_type_id",0);
+            work_type_id = getIntent().getIntExtra("work_type_id",0);*/
+            ImageType = getIntent().getStringExtra("ImageType");
+            batch_id = getIntent().getIntExtra("batch_id",0);
             if(Utils.isOnline()){
                  getOnlineImage();
             }
         }
         else {
-            shg_code = getIntent().getIntExtra("shg_code",0);
+           /* shg_code = getIntent().getIntExtra("shg_code",0);
             shg_member_code = getIntent().getIntExtra("shg_member_code",0);
-            new fetchImagetask().execute();
+            new fetchImagetask().execute();*/
         }
 
 
@@ -157,11 +161,20 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
 
     public JSONObject ImagesListJsonParams() throws JSONException {
         JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, "details_of_nutri_garden_photos_view");
-        dataSet.put("fin_year", fin_year);
+        if(ImageType.equals("Batch")){
+            dataSet.put(AppConstant.KEY_SERVICE_ID, "nursery_seeding_batch_photos");
+            dataSet.put("batch_id", batch_id);
+        }
+        else {
+            dataSet.put(AppConstant.KEY_SERVICE_ID, "nursery_growth_tracking_photos");
+            dataSet.put("batch_id", batch_id);
+            dataSet.put("growth_tracking_id", getIntent().getIntExtra("growth_tracking_id",0));
+        }
+
+        /*dataSet.put("fin_year", fin_year);
         dataSet.put("self_help_group_code", shg_code);
         dataSet.put("self_help_group_member_code", shg_member_code);
-        dataSet.put("work_type_id", work_type_id);
+        dataSet.put("work_type_id", work_type_id);*/
         Log.d("utils_imageDataset", "" + dataSet);
         return dataSet;
     }
@@ -194,14 +207,14 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
                     NurserySurvey imageOnline = new NurserySurvey();
                     NurserySurvey imageOnline1 = new NurserySurvey();
 
-                    byte[] before_decodedString = Base64.decode(jsonArray.getJSONObject(i).getString("before_plant_image"), Base64.DEFAULT);
+                    byte[] before_decodedString = Base64.decode(jsonArray.getJSONObject(i).getString("image"), Base64.DEFAULT);
                     Bitmap before_decodedByte = BitmapFactory.decodeByteArray(before_decodedString, 0, before_decodedString.length);
                     imageOnline.setImage(before_decodedByte);
-                    byte[] after_decodedString = Base64.decode(jsonArray.getJSONObject(i).getString("after_plant_image"), Base64.DEFAULT);
+                    /*byte[] after_decodedString = Base64.decode(jsonArray.getJSONObject(i).getString("after_plant_image"), Base64.DEFAULT);
                     Bitmap after_decodedByte = BitmapFactory.decodeByteArray(after_decodedString, 0, after_decodedString.length);
-                    imageOnline1.setImage(after_decodedByte);
+                    imageOnline1.setImage(after_decodedByte);*/
                     imageListTree.add(imageOnline);
-                    imageListTree.add(imageOnline1);
+                    //imageListTree.add(imageOnline1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

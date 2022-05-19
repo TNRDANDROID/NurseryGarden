@@ -50,6 +50,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
 
     String shg_code="";
     String shg_member_code="";
+    String batch_id="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,39 +80,43 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         @Override
         protected ArrayList<NurserySurvey> doInBackground(Void... params) {
             dbData.open();
-            ArrayList<NurserySurvey> nurserySurveys = new ArrayList<>();
-            nurserySurveys = dbData.getAllTreeImages();
-            Log.d("Tree_COUNT", String.valueOf(nurserySurveys.size()));
-            return nurserySurveys;
+            ArrayList<NurserySurvey> nurseryDeadList = new ArrayList<>();
+            nurseryDeadList = dbData.get_dead_sapling_batch_details();
+            Log.d("COUNT", String.valueOf(nurseryDeadList.size()));
+            return nurseryDeadList;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<NurserySurvey> treeList) {
-            super.onPostExecute(treeList);
-            recyclerView.setVisibility(View.VISIBLE);
-            pendingAdapter = new NewPendingAdapter(NewPendingScreen.this, treeList,dbData);
-            recyclerView.setAdapter(pendingAdapter);
+        protected void onPostExecute(ArrayList<NurserySurvey> nurseryDeadList) {
+            super.onPostExecute(nurseryDeadList);
+            if(nurseryDeadList.size()>0) {
+                recyclerView.setVisibility(View.VISIBLE);
+                pendingAdapter = new NewPendingAdapter(NewPendingScreen.this, nurseryDeadList, dbData);
+                recyclerView.setAdapter(pendingAdapter);
+            }
+            else {
+                recyclerView.setVisibility(View.GONE);
+            }
         }
     }
 
 
 
-    public JSONObject saveTreeJson(JSONObject savePMAYDataSet, String shg_code_, String shg_member_code_) {
-        shg_code = shg_code_;
-        shg_member_code=shg_member_code_;
-        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), savePMAYDataSet.toString());
+    public JSONObject uploadDeadOrder(JSONObject deadOrderJson,String batch_id_) {
+        batch_id = batch_id_;
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), deadOrderJson.toString());
         JSONObject dataSet = new JSONObject();
         try {
             dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
             dataSet.put(AppConstant.DATA_CONTENT, authKey);
 
-            new ApiService(this).makeJSONObjectRequest("saveTreeImages", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
+            new ApiService(this).makeJSONObjectRequest("uploadDead", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Log.d("saveTreeImages", "" + authKey);
+        Log.d("uploadDead", "" + dataSet);
         return dataSet;
     }
     @Override
@@ -120,26 +125,20 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
             String urlType = serverResponse.getApi();
             JSONObject responseObj = serverResponse.getJsonResponse();
 
-            if ("saveTreeImages".equals(urlType) && responseObj != null) {
+            if ("uploadDead".equals(urlType) && responseObj != null) {
                 String key = responseObj.getString(AppConstant.ENCODE_DATA);
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     Utils.showAlert(this, "Uploaded");
-                    String whereClause = "shg_code = ? and shg_member_code = ?";
-                    String[] whereArgs = new String[]{shg_code, shg_member_code};
-                    int sdsm = db.delete(DBHelper.SAVE_BEFORE_TREE_IMAGE_TABLE, whereClause, whereArgs);
-                    int sdsm1 = db.delete(DBHelper.SAVE_AFTER_TREE_IMAGE_TABLE, whereClause, whereArgs);
-
+                    //int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, null,null);
+                    int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, "batch_id = ? ", new String[]{batch_id});
                     new fetchPendingtask().execute();
                     pendingAdapter.notifyDataSetChanged();
                 }
                 else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
                     Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
-                   /* db.delete(DBHelper.SAVE_PMAY_DETAILS,"id = ?",new String[] {prefManager.getKeyDeleteId()});
-                    db.delete(DBHelper.SAVE_PMAY_IMAGES, "pmay_id = ? ", new String[]{prefManager.getKeyDeleteId()});
-                    new fetchPendingtask().execute();
-                    pendingAdapter.notifyDataSetChanged();*/
+
                 }
                 Log.d("saved_response", "" + responseDecryptedBlockKey);
             }

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "NurseryGardenNew";
+    private static final String DATABASE_NAME = "Nursery";
     private static final int DATABASE_VERSION = 1;
 
 
@@ -42,8 +42,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String BATCH_GROWTH_TRACKING_SPECIES_DETAILS = "batch_growth_tracking_species_details";
 
     public static final String DEAD_STAGE = "dead_stage";
-    public static final String DEAD_SAPLING_DETAILS = "dead_sapling_details";
+    public static final String DEAD_SAPLING_DETAILS = " dead_sapling_details";
     public static final String DEAD_SAPLING_DETAILS_SAVE = "dead_sapling_details_save";
+    public static final String DEAD_SAPLING_DETAILS_NEW_SAVE = "dead_sapling_details_new_save";
 
     private Context context;
 
@@ -279,10 +280,24 @@ public class DBHelper extends SQLiteOpenHelper {
                 "no_of_dead_sapling INTEGER,"+
                 "dead_reason TEXT)");
 
+
+        db.execSQL("CREATE TABLE " + DEAD_SAPLING_DETAILS_NEW_SAVE + " ("
+                +"dead_saplings_new_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "batch_id INTEGER,"+
+                "batch_no INTEGER,"+
+                "species_type_id INTEGER,"+
+                "batch_species_id INTEGER,"+
+                "growth_tracking_id INTEGER,"+
+                "growth_tracking_details_id INTEGER,"+
+                "sapling_height_in_cm TEXT,"+
+                "sapling_age_in_days INTEGER,"+
+                "no_of_dead_sapling INTEGER)");
+
         db.execSQL("CREATE TABLE " + DEAD_SAPLING_DETAILS + " ("
-                +"dead_saplings_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                +"dead_saplings_details_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "nursery_id INTEGER,"+
                 "batch_id INTEGER,"+
+                "batch_species_id INTEGER,"+
                 "growth_tracking_id INTEGER,"+
                 "growth_tracking_details_id INTEGER,"+
                 "batch_no INTEGER,"+
@@ -290,7 +305,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "species_name_en TEXT,"+
                 "species_name_ta TEXT,"+
                 "sapling_height_in_cm TEXT,"+
+                "dead_reason_text TEXT,"+
+                "dead_typed_count_text TEXT,"+
                 "sapling_age_in_days INTEGER,"+
+                "dead_stage_position INTEGER,"+
                 "no_of_saplings INTEGER)");
 
 
@@ -330,6 +348,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + DEAD_STAGE);
             db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS_SAVE);
             db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS_NEW_SAVE);
             onCreate(db);
         }
     }

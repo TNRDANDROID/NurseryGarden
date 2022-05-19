@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.nic.nurserygarden.adapter.HistoryViewAdapter" />
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_7sdp">
+
+            <RelativeLayout
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TableRow>
+                        <TextView
+                            android:gravity="center"
+                            android:padding="6dp"
+                            android:layout_marginEnd="15dp"
+                            android:textColor="@color/blue_background"
+                            android:text="Order Date"
+                            />
+                        <TextView
+                            android:textColor="@color/blue_background"
+                            android:padding="6dp"
+                            android:gravity="center"
+                            android:layout_marginEnd="15dp"
+                            android:text="Order ID"
+                            />
+                        <TextView
+                            android:id="@+id/buyre_or_mgnregs_id"
+                            android:textColor="@color/blue_background"
+                            android:padding="6dp"
+                            android:gravity="center"
+                            android:text="Buyer Name"
+                            />
+                    </TableRow>
+                </TableLayout>
+                <TableLayout
+                    android:id="@+id/details_layout"
+                    android:layout_below="@+id/title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1,2,3,4">
+                    <TableRow>
+                        <TextView
+                            android:gravity="center"
+                            android:padding="6dp"
+                            android:id="@+id/date"
+                            android:layout_marginEnd="15dp"
+                            android:textColor="@color/blue_background"
+                            android:text="Order Date"
+                            />
+                        <TextView
+                            android:textColor="@color/blue_background"
+                            android:padding="6dp"
+                            android:gravity="center"
+                            android:id="@+id/order_id"
+                            android:layout_marginEnd="15dp"
+                            android:text="Order ID"
+                            />
+                        <TextView
+                            android:id="@+id/buyre_or_mgnregs_id_value"
+                            android:textColor="@color/blue_background"
+                            android:padding="6dp"
+                            android:gravity="center"
+                            android:text="Buyer Name"
+                            />
+
+                        <Button
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/button_background"
+                            android:text="View"
+                            android:textColor="@color/white"
+                            android:id="@+id/view_details_btn"/>
+                    </TableRow>
+                </TableLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/history_details_layout"
+                    android:layout_below="@id/details_layout"
+                    android:layout_marginTop="@dimen/_7sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/details_title_text"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue_background"
+                        android:text="Details"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/details_title_text"
+                        android:id="@+id/details_recycler"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>

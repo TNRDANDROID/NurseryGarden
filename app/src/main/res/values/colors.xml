@@ -62,7 +62,7 @@
     <color name="dot_dark_screen4">#a854d4</color>
 
     <color name="background_image_tint">#77002237</color>
-
+    <color name="unselect">#a0a0a0</color>
     <!-- dots active colors -->
     <color name="dot_light_screen1">#f98da5</color>
     <color name="dot_light_screen2">#8cf9eb</color>

@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.DeadSaplingActivty.NewDeadSaplingEntry;
+import com.nic.nurserygarden.activity.HistoryActivity.OrderHistory;
 import com.nic.nurserygarden.activity.LandActivity.AddViewLand;
 import com.nic.nurserygarden.activity.SellAndBuyActivity.SellSpecies;
 import com.nic.nurserygarden.api.Api;
@@ -81,13 +82,32 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         mainPageBinding.saplingSale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoAddBatchOrLandScreen("Sell");
+                ArrayList<NurserySurvey> workCount = dbData.get_dead_sapling_details_for_upload("","");
+                if(workCount.size()>0){
+                    Utils.showAlert(MainPage.this,"Please Upload Your Dead Saplings");
+                }
+                else {
+                    gotoAddBatchOrLandScreen("Sell");
+                }
+
             }
         });
-        mainPageBinding.saplingDead.setOnClickListener(new View.OnClickListener() {
+       /* mainPageBinding.saplingDead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoAddBatchOrLandScreen("Dead");
+            }
+        });*/
+        mainPageBinding.orderHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoOrderAndDeliveryHistory("Order");
+            }
+        });
+        mainPageBinding.deliveryHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoOrderAndDeliveryHistory("Delivery");
             }
         });
         syncButtonVisibility();
@@ -487,11 +507,11 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void syncButtonVisibility() {
         dbData.open();
-        ArrayList<NurserySurvey> workImageCount = dbData.getAllTreeImages();
+        ArrayList<NurserySurvey> workCount = dbData.get_dead_sapling_details_for_upload("","");
 
-        if (workImageCount.size() > 0) {
+        if (workCount.size() > 0) {
             mainPageBinding.syncLayout.setVisibility(View.VISIBLE);
-            mainPageBinding.pendingCount.setText(""+workImageCount.size());
+            mainPageBinding.pendingCount.setText(""+workCount.size());
         }else {
             mainPageBinding.syncLayout.setVisibility(View.GONE);
             mainPageBinding.pendingCount.setText("0");
@@ -576,6 +596,12 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                 }
 
             }
+            if(mainPageBinding.nurseryLevelId.getText().toString().equals("1")){
+                mainPageBinding.pvNameLayout.setVisibility(View.GONE);
+            }
+            else {
+                mainPageBinding.pvNameLayout.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -595,6 +621,20 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             intent = new Intent(MainPage.this, SellSpecies.class);
             intent.putExtra("nursery_level_id",mainPageBinding.nurseryLevelId.getText().toString());
         }
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+    private void gotoOrderAndDeliveryHistory(String type) {
+        Intent intent;
+        if(type.equals("Order")){
+            intent = new Intent(MainPage.this, OrderHistory.class);
+            intent.putExtra("Activity","Order");
+        }
+        else {
+            intent = new Intent(MainPage.this, OrderHistory.class);
+            intent.putExtra("Activity","Delivery");
+        }
+
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

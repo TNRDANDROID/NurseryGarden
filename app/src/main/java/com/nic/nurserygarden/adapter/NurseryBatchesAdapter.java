@@ -23,6 +23,8 @@ import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
 import com.nic.nurserygarden.activity.DeadSaplingActivty.DeadSaplingEntry;
+import com.nic.nurserygarden.activity.DeadSaplingActivty.NewDeadSaplingEntry;
+import com.nic.nurserygarden.activity.FullImageActivity;
 import com.nic.nurserygarden.activity.GrowthTrackingActivity.GrowthTracking;
 import com.nic.nurserygarden.activity.LandActivity.AddViewLand;
 import com.nic.nurserygarden.constant.AppConstant;
@@ -148,13 +150,13 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
             }
-            else {
+         /*   else {
                 holder.nurseryBatchItemViewBinding.check.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.VISIBLE);
                 holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.VISIBLE);
-                holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.VISIBLE);
-            }
+                //holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.VISIBLE);
+            }*/
         }
 
 
@@ -193,10 +195,10 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         holder.nurseryBatchItemViewBinding.deadSapling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoGrowthTrackingClass = new Intent(context, DeadSaplingEntry.class);
+                Intent gotoGrowthTrackingClass = new Intent(context, NewDeadSaplingEntry.class);
                 gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
-                gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
-                gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                //gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
+                //gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
                 context.startActivity(gotoGrowthTrackingClass);
             }
         });
@@ -213,6 +215,17 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 gotoAddSpeciesClass.putExtra("batch_id",batchList.get(position).getBatch_id());
                 gotoAddSpeciesClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
                 gotoAddSpeciesClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                context.startActivity(gotoAddSpeciesClass);
+            }
+        });
+        holder.nurseryBatchItemViewBinding.batchImageLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gotoAddSpeciesClass = new Intent(context, FullImageActivity.class);
+                gotoAddSpeciesClass.putExtra("ImageType","Batch");
+                gotoAddSpeciesClass.putExtra("batch_id",batchList.get(position).getBatch_id());
+                gotoAddSpeciesClass.putExtra("On_Off_Type","Online");
+
                 context.startActivity(gotoAddSpeciesClass);
             }
         });

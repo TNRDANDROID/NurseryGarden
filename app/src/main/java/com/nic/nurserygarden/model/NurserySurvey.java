@@ -796,4 +796,97 @@ public class NurserySurvey {
     public void setBuyer_type_name_ta(String buyer_type_name_ta) {
         this.buyer_type_name_ta = buyer_type_name_ta;
     }
+
+    private int dead_stage_position;
+    private String dead_reason_text;
+    private String dead_typed_count_text;
+    private String sell_sapling_typed_count_text;
+
+    public String getSell_sapling_typed_count_text() {
+        return sell_sapling_typed_count_text;
+    }
+
+    public void setSell_sapling_typed_count_text(String sell_sapling_typed_count_text) {
+        this.sell_sapling_typed_count_text = sell_sapling_typed_count_text;
+    }
+
+    public String getDead_reason_text() {
+        return dead_reason_text;
+    }
+
+    public void setDead_reason_text(String dead_reason_text) {
+        this.dead_reason_text = dead_reason_text;
+    }
+
+    public String getDead_typed_count_text() {
+        return dead_typed_count_text;
+    }
+
+    public void setDead_typed_count_text(String dead_typed_count_text) {
+        this.dead_typed_count_text = dead_typed_count_text;
+    }
+
+    public int getDead_stage_position() {
+        return dead_stage_position;
+    }
+
+    public void setDead_stage_position(int dead_stage_position) {
+        this.dead_stage_position = dead_stage_position;
+    }
+
+    /////Order History
+    private int sapling_order_id;
+    private int sapling_order_item_id;
+    private int buyer_id;
+    private String order_date;
+    private String mgnregs_id;
+    private int sapling_item_delivery_id;
+
+    public int getSapling_item_delivery_id() {
+        return sapling_item_delivery_id;
+    }
+
+    public void setSapling_item_delivery_id(int sapling_item_delivery_id) {
+        this.sapling_item_delivery_id = sapling_item_delivery_id;
+    }
+
+    public int getBuyer_id() {
+        return buyer_id;
+    }
+
+    public void setBuyer_id(int buyer_id) {
+        this.buyer_id = buyer_id;
+    }
+
+    public int getSapling_order_id() {
+        return sapling_order_id;
+    }
+
+    public void setSapling_order_id(int sapling_order_id) {
+        this.sapling_order_id = sapling_order_id;
+    }
+
+    public int getSapling_order_item_id() {
+        return sapling_order_item_id;
+    }
+
+    public void setSapling_order_item_id(int sapling_order_item_id) {
+        this.sapling_order_item_id = sapling_order_item_id;
+    }
+
+    public String getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(String order_date) {
+        this.order_date = order_date;
+    }
+
+    public String getMgnregs_id() {
+        return mgnregs_id;
+    }
+
+    public void setMgnregs_id(String mgnregs_id) {
+        this.mgnregs_id = mgnregs_id;
+    }
 }
