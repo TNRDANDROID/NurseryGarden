@@ -364,5 +364,9 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new fetchNurseryLandDetails().execute();
+    }
 }

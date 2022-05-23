@@ -53,12 +53,12 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull final HistoryViewAdapter.MyViewHolder holder, final int position) {
 
-        if(position ==0){
+       /* if(position ==0){
             holder.historyItemViewBinding.titleLayout.setVisibility(View.VISIBLE);
         }
         else {
             holder.historyItemViewBinding.titleLayout.setVisibility(View.GONE);
-        }
+        }*/
         if(pos==position){
             holder.historyItemViewBinding.historyDetailsLayout.setVisibility(View.VISIBLE);
         }

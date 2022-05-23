@@ -18,26 +18,161 @@
             app:cardElevation="@dimen/_7sdp">
 
             <RelativeLayout
-                android:layout_margin="@dimen/_10sdp"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:gravity="center"
+                    android:background="@color/gradStart">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                <TableLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold"
+                            android:text="Order Date"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            android:text="Order ID"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/buyre_or_mgnregs_id"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            android:text="Byer Name"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp"
+                            android:text="View"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_below="@+id/title_layout"
+                    android:id="@+id/value_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:gravity="center">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:textSize="@dimen/_11sdp"
+                            android:id="@+id/date"
+                            android:text="Order Date"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/order_id"
+                            android:textSize="@dimen/_11sdp"
+                            android:text="Order ID"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blue_background"
+                            android:id="@+id/buyre_or_mgnregs_id_value"
+                            android:textSize="@dimen/_11sdp"
+                            android:text="Byer Name"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:padding="@dimen/_4sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:src="@drawable/ic_baseline_visibility_24px"
+                            android:id="@+id/view_details_btn"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<TableLayout
                     android:id="@+id/title_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:background="@color/gradStart"
+                    android:stretchColumns="1,2,3">
                     <TableRow>
                         <TextView
                             android:gravity="center"
                             android:padding="6dp"
                             android:layout_marginEnd="15dp"
-                            android:textColor="@color/blue_background"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
                             android:text="Order Date"
                             />
                         <TextView
-                            android:textColor="@color/blue_background"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
                             android:padding="6dp"
                             android:gravity="center"
                             android:layout_marginEnd="15dp"
@@ -45,14 +180,17 @@
                             />
                         <TextView
                             android:id="@+id/buyre_or_mgnregs_id"
-                            android:textColor="@color/blue_background"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
                             android:padding="6dp"
                             android:gravity="center"
                             android:text="Buyer Name"
                             />
                     </TableRow>
-                </TableLayout>
-                <TableLayout
+                </TableLayout>-->
+               <!-- <TableLayout
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:id="@+id/details_layout"
                     android:layout_below="@+id/title_layout"
                     android:layout_width="match_parent"
@@ -83,37 +221,27 @@
                             android:text="Buyer Name"
                             />
 
-                        <Button
-                            android:layout_marginStart="@dimen/_10sdp"
+                        <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/button_background"
-                            android:text="View"
-                            android:textColor="@color/white"
+                            android:padding="@dimen/_4sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:src="@drawable/ic_baseline_visibility_24px"
                             android:id="@+id/view_details_btn"/>
                     </TableRow>
-                </TableLayout>
+                </TableLayout>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/history_details_layout"
-                    android:layout_below="@id/details_layout"
+                    android:layout_below="@id/value_layout"
                     android:layout_marginTop="@dimen/_7sdp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/details_title_text"
-                        android:textAlignment="center"
-                        android:textColor="@color/blue_background"
-                        android:text="Details"/>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/details_title_text"
                         android:id="@+id/details_recycler"/>
                 </RelativeLayout>
 

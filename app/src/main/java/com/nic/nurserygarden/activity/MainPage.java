@@ -526,11 +526,16 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
 
     public void logout() {
         dbData.open();
-        ArrayList<NurserySurvey> ImageCount = dbData.getAllTreeImages();
+        //ArrayList<NurserySurvey> ImageCount = dbData.getAllTreeImages();
+        ArrayList<NurserySurvey> deadworkCount = dbData.get_dead_sapling_details_for_upload("","");
+        ArrayList<NurserySurvey> getSpeciesCount = dbData.get_nursery_batch_species_details("","local","0","");
+        ArrayList<NurserySurvey> getGrowthSpeciesCount = dbData.get_batch_growth_species_details("","local","0","");
+
+
         if (!Utils.isOnline()) {
             Utils.showAlert(this, "Logging out while offline may leads to loss of data!");
         } else {
-            if (!(ImageCount.size() > 0)) {
+            if (!(deadworkCount.size() > 0 && getSpeciesCount.size() > 0 && getGrowthSpeciesCount.size() > 0)) {
                 closeApplication();
             } else {
                 Utils.showAlert(this, "Sync all the data before logout!");

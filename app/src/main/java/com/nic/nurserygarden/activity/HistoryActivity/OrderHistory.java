@@ -66,11 +66,11 @@ public class OrderHistory extends AppCompatActivity implements Api.ServerRespons
 
         activity_type = getIntent().getStringExtra("Activity");
         if(activity_type.equals("Order")){
-            orderHistoryBinding.title.setText("History Order Items");
+            orderHistoryBinding.title.setText("Order History");
 
         }
         else {
-            orderHistoryBinding.title.setText("History Delivery Items");
+            orderHistoryBinding.title.setText("Delivery History");
         }
         if(Utils.isOnline()){
             get_details_of_order_history_view("Today");

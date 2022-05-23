@@ -534,7 +534,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
 
             TextView text = (TextView) dialog.findViewById(R.id.tv_message);
             if(save_delete.equals("save")) {
-                text.setText(getResources().getString(R.string.do_u_want_to_upload));
+                text.setText(getResources().getString(R.string.do_u_want_to_delivered));
             }
             else if(save_delete.equals("delete")){
                 text.setText(getResources().getString(R.string.do_u_want_to_delete));

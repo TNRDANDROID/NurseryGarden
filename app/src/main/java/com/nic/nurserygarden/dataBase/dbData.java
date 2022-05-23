@@ -1485,7 +1485,7 @@ public class dbData {
                     NurserySurvey card = new NurserySurvey();
                     card.setBatch_id(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_id")));
-                    card.setBatch_id(cursor.getInt(cursor
+                    card.setBatch_number(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_no")));
 
                     cards.add(card);

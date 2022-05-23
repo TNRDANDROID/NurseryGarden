@@ -645,6 +645,7 @@
                                     android:weightSum="2">
 
                                     <RelativeLayout
+                                        android:layout_gravity="center_vertical"
                                         android:layout_margin="@dimen/_5sdp"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -668,6 +669,7 @@
 
                                     </RelativeLayout>
                                     <RelativeLayout
+                                        android:layout_gravity="center_vertical"
                                         android:layout_margin="@dimen/_5sdp"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"

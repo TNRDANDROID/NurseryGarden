@@ -281,7 +281,7 @@
                                 android:layout_gravity="end"
                                 android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_30sdp"
                                 android:background="@drawable/text_bg"
                                 android:id="@+id/add_species">
                                 <TextView
@@ -290,6 +290,7 @@
                                     android:textColor="@color/white"
                                     android:text="Add/View species"
                                     android:textStyle="bold"
+                                    android:layout_centerVertical="true"
                                     android:layout_centerHorizontal="true"
                                     android:textSize="@dimen/_12sdp"
                                     android:layout_marginStart="@dimen/_10sdp"
