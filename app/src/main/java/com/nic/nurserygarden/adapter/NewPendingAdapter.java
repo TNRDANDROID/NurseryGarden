@@ -85,7 +85,7 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final NewPendingAdapter.MyViewHolder holder, final int position) {
 
-        holder.pendingAdapterBinding.batchNumberText.setText("Batch Number "+ pendingListValues.get(position).getBatch_number());
+        holder.pendingAdapterBinding.batchNumberText.setText("Batch Number : "+ pendingListValues.get(position).getBatch_number());
 
         holder.pendingAdapterBinding.upload.setOnClickListener(new View.OnClickListener() {
             @Override

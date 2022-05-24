@@ -210,7 +210,7 @@
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:layout_width="100dp"
                                 android:layout_height="90dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:padding="8dp"
                                 android:src="@drawable/ic_tree__leaves_green"
                                 />
@@ -224,19 +224,17 @@
                             android:fontFamily="sans-serif-light"
                             android:textColor="@color/white"
                             android:textSize="20sp"
-                            android:layout_marginLeft="@dimen/_20sdp"
-                            android:text="Name"
-                            tools:ignore="TooDeepLayout" />
+                            android:layout_marginStart="@dimen/_20sdp"
+                            tools:ignore="RelativeOverlap,TooDeepLayout" />
                         <TextView
                             android:id="@+id/designation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_name"
-                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_20sdp"
                             android:layout_alignParentStart="true"
                             android:fontFamily="sans-serif"
                             android:textAllCaps="true"
-                            android:text="Designation"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -279,7 +277,8 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Nursery Id"/>
+                                        android:text="@string/nursery_id"
+                                        tools:ignore="TooDeepLayout" />
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -287,13 +286,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_id"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -311,7 +310,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Nursery Level Id"/>
+                                        android:text="@string/nursery_level_id"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -319,13 +318,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_level_id"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -343,7 +342,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Nursery Name En"/>
+                                        android:text="@string/nursery_name_en"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -351,13 +350,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_name_en"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -375,7 +374,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Nursery Name Ta"/>
+                                        android:text="@string/nursery_name_ta"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -383,13 +382,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_name_ta"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -407,7 +406,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Nursery Address"/>
+                                        android:text="@string/nursery_address"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -415,13 +414,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_address"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -439,7 +438,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="District Name"/>
+                                        android:text="@string/district_name"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -447,13 +446,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_dname"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -471,7 +470,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Block Name"/>
+                                        android:text="@string/block_name"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -479,13 +478,13 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_bname"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
@@ -504,7 +503,7 @@
                                         android:layout_weight="1.2"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text="Village Name"/>
+                                        android:text="@string/village_name"/>
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -512,23 +511,25 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/d_grey1"
                                         android:textSize="@dimen/_12sdp"
-                                        android:text=":"/>
+                                        android:text="@string/semi_colan"/>
                                     <TextView
                                         android:id="@+id/nursery_pvname"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1.5"
-                                        android:textAlignment="center"
+                                        android:textAlignment="viewStart"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         />
                                 </LinearLayout>
                                 <LinearLayout
+                                    android:gravity="center"
                                     android:padding="@dimen/_10sdp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:weightSum="2">
+                                    android:weightSum="2"
+                                    android:baselineAligned="false">
 
                                     <RelativeLayout
                                         android:layout_margin="@dimen/_5sdp"
@@ -543,7 +544,7 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="center_horizontal"
                                             android:background="@drawable/grad_curve"
-                                            android:text="Add/View Land"
+                                            android:text="@string/add_view_land"
                                             android:clickable="true"
                                             android:textAlignment="center"
                                             android:textAllCaps="true"
@@ -566,7 +567,7 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="center_horizontal"
                                             android:background="@drawable/grad_curve"
-                                            android:text="Add/View Batch"
+                                            android:text="@string/add_view_batch"
                                             android:clickable="true"
                                             android:textAlignment="center"
                                             android:textAllCaps="true"
@@ -580,11 +581,13 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:gravity="center"
                                     android:padding="@dimen/_10sdp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:weightSum="1">
+                                    android:weightSum="1"
+                                    android:baselineAligned="false">
 
                                     <RelativeLayout
                                         android:layout_gravity="center_horizontal"
@@ -600,7 +603,7 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="center_horizontal"
                                             android:background="@drawable/grad_curve"
-                                            android:text="Sapling Sale"
+                                            android:text="@string/sapling_sale"
                                             android:clickable="true"
                                             android:textAlignment="center"
                                             android:textAllCaps="true"
@@ -624,7 +627,7 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="center_horizontal"
                                             android:background="@drawable/grad_curve"
-                                            android:text="Sapling Dead"
+                                            android:text="@string/sapling_dead"
                                             android:clickable="true"
                                             android:textAlignment="center"
                                             android:textAllCaps="true"
@@ -638,14 +641,15 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:gravity="center"
                                     android:padding="@dimen/_10sdp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
-                                    android:weightSum="2">
+                                    android:weightSum="2"
+                                    android:baselineAligned="false">
 
                                     <RelativeLayout
-                                        android:layout_gravity="center_vertical"
                                         android:layout_margin="@dimen/_5sdp"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -658,7 +662,7 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="center_horizontal"
                                             android:background="@drawable/grad_curve"
-                                            android:text="View Order History"
+                                            android:text="@string/view_order_history"
                                             android:clickable="true"
                                             android:textAlignment="center"
                                             android:textAllCaps="true"
@@ -669,7 +673,6 @@
 
                                     </RelativeLayout>
                                     <RelativeLayout
-                                        android:layout_gravity="center_vertical"
                                         android:layout_margin="@dimen/_5sdp"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -682,7 +685,7 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="center_horizontal"
                                             android:background="@drawable/grad_curve"
-                                            android:text="View Delivery History"
+                                            android:text="@string/view_delivery_history"
                                             android:clickable="true"
                                             android:textAlignment="center"
                                             android:textAllCaps="true"
@@ -696,7 +699,6 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:layout_below="@+id/linlay1"
                                     android:layout_width="match_parent"
                                     android:id="@+id/sync_layout"
                                     android:layout_height="wrap_content"
@@ -791,7 +793,8 @@
                             android:orientation="horizontal"
                             android:layout_margin="@dimen/_13sdp"
                             android:background="@drawable/new_bg_stroke_line"
-                            android:baselineAligned="false">
+                            android:baselineAligned="false"
+                            tools:ignore="UselessParent">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -823,7 +826,8 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:paddingTop="5dp"
-                                android:paddingBottom="5dp">
+                                android:paddingBottom="5dp"
+                                tools:ignore="TooManyViews">
 
 
 

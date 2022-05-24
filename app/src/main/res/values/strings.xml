@@ -64,4 +64,19 @@
     <string name="sell_species">Sell Species</string>
     <string name="enter_count">Enter count</string>
     <string name="enter_mgnregs_id">Enter MGNREGS ID</string>
+    <string name="village_name">Village Name</string>
+    <string name="semi_colan">:</string>
+    <string name="nursery_id">Nursery Id</string>
+    <string name="nursery_level_id">Nursery Level Id</string>
+    <string name="nursery_name_en">Nursery Name En</string>
+    <string name="nursery_name_ta">Nursery Name Ta</string>
+    <string name="nursery_address">Nursery Address</string>
+    <string name="district_name">District Name</string>
+    <string name="block_name">Block Name</string>
+    <string name="add_view_land">Add/View Land</string>
+    <string name="add_view_batch">Add/View Batch</string>
+    <string name="sapling_sale">Sapling Sale</string>
+    <string name="sapling_dead">Sapling Dead</string>
+    <string name="view_order_history">View Order History</string>
+    <string name="view_delivery_history">View Delivery History</string>
 </resources>
