@@ -179,6 +179,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 gotoAddSpeciesClass.putExtra("batch_id",batchList.get(position).getBatch_id());
                 gotoAddSpeciesClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
                 gotoAddSpeciesClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                gotoAddSpeciesClass.putExtra("is_batch_closed",batchList.get(position).getIs_batch_closed());
                 context.startActivity(gotoAddSpeciesClass);
             }
         });
@@ -215,6 +216,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 gotoAddSpeciesClass.putExtra("batch_id",batchList.get(position).getBatch_id());
                 gotoAddSpeciesClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
                 gotoAddSpeciesClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                gotoAddSpeciesClass.putExtra("is_batch_closed",batchList.get(position).getIs_batch_closed());
                 context.startActivity(gotoAddSpeciesClass);
             }
         });

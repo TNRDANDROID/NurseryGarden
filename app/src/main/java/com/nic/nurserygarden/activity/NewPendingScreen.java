@@ -58,6 +58,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         pendingScreenBinding.setActivity(this);
         context = this;
         prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();

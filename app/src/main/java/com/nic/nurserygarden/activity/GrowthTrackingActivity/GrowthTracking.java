@@ -58,6 +58,8 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
 
         growthTrackingBinding = DataBindingUtil.setContentView(this, R.layout.activity_growth_tracking);
         growthTrackingBinding.setActivity(this);
+        prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
@@ -65,7 +67,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         } catch (Exception e) {
             e.printStackTrace();
         }
-        prefManager = new PrefManager(this);
+
         batch_id = getIntent().getIntExtra("batch_id",0);
         batch_primary_id = getIntent().getIntExtra("batch_primary_id",0);
         growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
@@ -164,7 +166,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     int sdsm = db.delete(DBHelper.BATCH_GROWTH_TRACKING_DETAILS, whereClause, whereArgs);
                     int sdsm1 = db.delete(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, whereClause, whereArgs);
                     int sdsm2 = db.delete(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, whereClause, whereArgs);
-
+                    new fetchNurseryBatchDetails().execute();
                     //get_nursery_batch_list();
                     //nurseryBatchesAdapter.notifyDataSetChanged();
                 }
@@ -172,7 +174,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                     Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
                     int dsd = db.delete(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, "batch_id = ?", new String[]{String.valueOf(batch_id)});
                     int dsd1 = db.delete(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, "batch_id = ?", new String[]{String.valueOf(batch_id)});
-
+                    new fetchNurseryBatchDetails().execute();
                     //get_nursery_batch_list();
                     //nurseryBatchesAdapter.notifyDataSetChanged();
                 }

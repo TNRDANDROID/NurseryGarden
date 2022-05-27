@@ -68,13 +68,15 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
         super.onCreate(savedInstanceState);
         landBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_view_land);
         landBinding.setActivity(this);
+        prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        prefManager = new PrefManager(this);
+
         loadLandTypeList();
         landBinding.addLandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +122,7 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
             TextView tittle_text = dialog.findViewById(R.id.tittle_text);
             Spinner land_type_spinner = dialog.findViewById(R.id.land_type_spinner);
             EditText land_address = dialog.findViewById(R.id.land_address);
-            tittle_text.setText("Add Land Details");
+            tittle_text.setText(getResources().getString(R.string.add_land_details));
             batch_layout.setVisibility(View.GONE);
             land_type_spinner.setAdapter(new CommonAdapter(AddViewLand.this,landTypeList,"landTypeList"));
             land_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -163,12 +165,12 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                             dialog.dismiss();
                         }
                         else {
-                            Utils.showAlert(AddViewLand.this,"Please Enter Land Address!");
+                            Utils.showAlert(AddViewLand.this,getResources().getString(R.string.land_address));
                         }
 
                     }
                     else {
-                        Utils.showAlert(AddViewLand.this,"Please Select Land Type");
+                        Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_land_type));
                     }
 
                 }
@@ -185,8 +187,8 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
         dbData.open();
         NurserySurvey landTypeList_item = new NurserySurvey();
         landTypeList_item.setLand_type_id(0);
-        landTypeList_item.setLand_type_name_en("Select Land Type");
-        landTypeList_item.setLand_type_name_ta("Select Land Type");
+        landTypeList_item.setLand_type_name_en(getResources().getString(R.string.select_land_type));
+        landTypeList_item.setLand_type_name_ta(getResources().getString(R.string.select_land_type));
         landTypeList.add(landTypeList_item);
         landTypeList.addAll(dbData.get_nursery_land_type());
         Log.d("Size",""+landTypeList.size());

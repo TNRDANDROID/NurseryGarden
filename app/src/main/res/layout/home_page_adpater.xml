@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:card_view="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -35,7 +36,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:baselineAligned="false"
+                    card_view:ignore="UselessParent">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -51,7 +54,6 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/card_shadow"
                             android:padding="10dp"
-                            android:text="Durai"
                             android:textAlignment="gravity"
                             android:textColor="#000080"
                             android:textSize="18sp" />
@@ -61,7 +63,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:baselineAligned="false">
 
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -76,7 +79,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="Hab Name"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
@@ -98,7 +100,6 @@
 
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text=":"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
 
@@ -118,7 +119,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="Hab name"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
@@ -139,7 +139,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:baselineAligned="false">
 
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -154,7 +155,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="5dp"
-                                    android:text="SecId"
                                     android:textAlignment="viewEnd"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
@@ -175,7 +175,6 @@
 
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text=":"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
 
@@ -195,7 +194,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="Id"
                                     android:textAlignment="inherit"
                                     android:textColor="#000"
                                     android:textSize="18sp" />
@@ -214,14 +212,14 @@
                         <RelativeLayout
                             android:id="@+id/start_activity"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/activity_name_layout">
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:baselineAligned="false">
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -233,7 +231,8 @@
                                     <RelativeLayout
                                         android:id="@+id/start_layout"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content">
+                                        android:layout_height="wrap_content"
+                                        card_view:ignore="TooDeepLayout">
 
                                         <TextView
                                             android:id="@+id/newsTitle"
@@ -241,7 +240,6 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:padding="@dimen/_12sdp"
-                                            android:text="Start"
                                             android:textSize="16sp"
 
                                             android:textColor="#000080"
@@ -253,9 +251,10 @@
                                             android:layout_height="20dp"
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="end"
-                                            android:layout_toRightOf="@+id/newsTitle"
+                                            android:layout_toEndOf="@+id/newsTitle"
                                             android:gravity="end"
-                                            android:text="Take Photo" />
+                                            android:text="@string/take_photo"
+                                            card_view:ignore="ContentDescription" />
 
                                         <ImageView
                                             android:layout_width="20dp"
@@ -263,10 +262,11 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="end"
 
-                                            android:layout_toRightOf="@+id/dummy1"
+                                            android:layout_toEndOf="@+id/dummy1"
                                             android:gravity="end"
                                             android:src="@drawable/camera_icon"
-                                            android:text="Take Photo" />
+                                            android:text="@string/take_photo"
+                                            card_view:ignore="ContentDescription" />
 
                                     </RelativeLayout>
 
@@ -292,7 +292,6 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:padding="@dimen/_12sdp"
-                                            android:text="Multiple"
                                             android:textSize="16sp"
 
                                             android:textColor="#000080"
@@ -306,10 +305,10 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="end"
 
-                                            android:layout_toRightOf="@+id/mulTitle"
+                                            android:layout_toEndOf="@+id/mulTitle"
                                             android:gravity="end"
                                             android:src="@drawable/camera_icon"
-                                            android:text="Take Photo" />
+                                            card_view:ignore="ContentDescription" />
 
                                     </RelativeLayout>
                                 </LinearLayout>
@@ -333,7 +332,6 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:padding="@dimen/_12sdp"
-                                            android:text="End"
                                             android:textSize="16sp"
 
                                             android:textColor="#000080"
@@ -345,9 +343,9 @@
                                             android:layout_height="20dp"
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="end"
-                                            android:layout_toRightOf="@+id/end"
+                                            android:layout_toEndOf="@+id/end"
                                             android:gravity="end"
-                                            android:text="Take Photo" />
+                                            card_view:ignore="ContentDescription" />
 
                                         <ImageView
                                             android:layout_width="20dp"
@@ -355,10 +353,10 @@
                                             android:layout_centerInParent="true"
                                             android:layout_gravity="end"
 
-                                            android:layout_toRightOf="@+id/dummy2"
+                                            android:layout_toEndOf="@+id/dummy2"
                                             android:gravity="end"
                                             android:src="@drawable/camera_icon"
-                                            android:text="Take Photo" />
+                                            card_view:ignore="ContentDescription" />
 
                                     </RelativeLayout>
                                 </LinearLayout>
@@ -377,8 +375,7 @@
                         <RelativeLayout
                             android:id="@+id/end_activity"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/start_activity">
+                            android:layout_height="wrap_content">
 
 
                             <TextView
@@ -389,7 +386,6 @@
                                 android:layout_centerInParent="true"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/_12sdp"
-                                android:text="View Offline Images"
                                 android:textColor="#000080"
                                 android:textSize="16sp"
                                 android:visibility="gone"
@@ -403,7 +399,6 @@
                                 android:layout_centerInParent="true"
                                 android:layout_gravity="center"
                                 android:padding="@dimen/_12sdp"
-                                android:text="View Images"
                                 android:textColor="#000080"
                                 android:textSize="16sp"
                                 style="@string/font_circular_bold" />

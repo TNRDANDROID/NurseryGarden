@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -15,10 +16,10 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_marginRight="-50dp"
+            android:layout_marginEnd="-50dp"
             app:cardCornerRadius="@dimen/_30sdp"
             app:cardElevation="@dimen/_7sdp">
 
@@ -37,12 +38,13 @@
                         android:src="@drawable/plant"
                         android:id="@+id/tree_image"
                         android:padding="@dimen/_5sdp"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY"
+                        tools:ignore="ContentDescription" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_100sdp"
-                    android:layout_marginRight="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_50sdp"
                     android:layout_toEndOf="@id/batch_image_layout"
                     android:id="@+id/land_details_layout">
                     <LinearLayout
@@ -56,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:id="@+id/created_date"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/content_text_size"
                             android:padding="@dimen/_5sdp"/>
 
 
@@ -86,9 +88,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Delete"
+                                android:text="@string/delete"
+                                android:textStyle="bold"
                                 android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/content_text_size"
                                 android:paddingTop="@dimen/_1sdp"
                                 android:paddingBottom="@dimen/_1sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -97,7 +100,7 @@
 
                         <RelativeLayout
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:padding="@dimen/_2sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -107,10 +110,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Upload"
+                                android:text="@string/upload"
                                 android:textStyle="bold"
                                 android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/content_text_size"
                                 android:paddingTop="@dimen/_1sdp"
                                 android:paddingBottom="@dimen/_1sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -129,15 +132,16 @@
                             android:layout_alignParentStart="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/sapling_details_btn">
+                            android:id="@+id/sapling_details_btn"
+                            tools:ignore="UselessParent">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Add/View Saplings Details"
+                                android:text="@string/add_view_saplings_details"
                                 android:textStyle="bold"
                                 android:id="@+id/txt"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/large_content_text_size"
                                 android:paddingTop="@dimen/_5sdp"
                                 android:paddingBottom="@dimen/_5sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -147,7 +151,8 @@
                                 android:layout_height="@dimen/_20sdp"
                                 android:layout_centerVertical="true"
                                 android:src="@drawable/ic_arrow_forward_black_24dp"
-                                android:layout_toRightOf="@+id/txt"/>
+                                android:layout_toEndOf="@+id/txt"
+                                tools:ignore="ContentDescription" />
 
                         </RelativeLayout>
 

@@ -65,6 +65,7 @@ public class DeadSaplingEntry extends AppCompatActivity {
             e.printStackTrace();
         }
         prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         initializeUI();
 
         deadSaplingEntryBinding.stagesTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -41,10 +41,10 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="@dimen/margin"
-                        android:text="Batch Details"
+                        android:text="@string/batch_details"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
-                        style="@style/font_circular_bold"
+                        android:textSize="@dimen/title_text_size"
+                        android:textStyle="bold"
                         tools:ignore="RelativeOverlap" />
 
                     <ImageView
@@ -53,9 +53,10 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentStart="true"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_marginStart="@dimen/_12sdp"
                         android:onClick="@{()-> activity.onBackPress()}"
-                        android:src="@mipmap/back_arrow" />
+                        android:src="@mipmap/back_arrow"
+                        tools:ignore="ContentDescription" />
 
 
                 </RelativeLayout>
@@ -67,28 +68,29 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/appbar">
 
-                <RelativeLayout
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/textView1"
+                android:paddingBottom="@dimen/_10sdp"
+                android:id="@+id/batch_recycler_layout">
+
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@+id/textView1"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:id="@+id/batch_recycler_layout">
+                    android:id="@+id/batch_recycler"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/batch_recycler"/>
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:id="@+id/add_batch_btn"
-                        android:src="@drawable/ic_add_icon"
-                        android:tint="@color/white"/>
-                </RelativeLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:id="@+id/add_batch_btn"
+                    android:src="@drawable/ic_add_icon"
+                    android:tint="@color/white"/>
+            </RelativeLayout>
 
 
             <TextView
@@ -102,7 +104,7 @@
                 android:text="@string/software_designed_amp_developed_by_nic"
                 android:textAlignment="center"
                 android:textColor="@color/d_grey1"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
         </RelativeLayout>
 

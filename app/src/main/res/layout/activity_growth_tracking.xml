@@ -28,10 +28,10 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="@dimen/margin"
-                        android:text="Growth Tracking Entry"
+                        android:text="@string/growth_tracking_entry"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
-                        style="@style/font_circular_bold"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/title_text_size"
                         tools:ignore="RelativeOverlap" />
 
                     <ImageView
@@ -42,7 +42,8 @@
                         android:layout_centerInParent="true"
                         android:layout_marginStart="@dimen/_12sdp"
                         android:onClick="@{()-> activity.onBackPress()}"
-                        android:src="@mipmap/back_arrow" />
+                        android:src="@mipmap/back_arrow"
+                        tools:ignore="ContentDescription" />
 
 
                 </RelativeLayout>
@@ -59,7 +60,7 @@
                 android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                tools:ignore="UselessParent">
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -71,8 +72,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/blue_background"
-                        android:textSize="@dimen/_13sdp"
-                        android:text="Choose Date"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/content_title_text_size"
+                        android:text="@string/choose_date"
                         android:id="@+id/choose_date_text_view"
                         android:padding="@dimen/_10sdp"/>
 
@@ -80,15 +82,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/choose_date_recycler"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_below="@id/choose_date_text_view"/>
+                        android:layout_marginTop="@dimen/_10sdp" />
 
                         <RelativeLayout
                             android:id="@+id/take_view_images_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_below="@+id/choose_date_recycler">
+                            android:layout_marginTop="@dimen/_10sdp">
 
                             <androidx.cardview.widget.CardView
                                 android:clickable="true"
@@ -112,10 +112,12 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="@color/blue_background"
-                                        android:text="Take Photo"
-                                        android:textSize="@dimen/_11sdp"
+                                        android:text="@string/take_photo"
+                                        android:textStyle="bold"
+                                        android:textSize="@dimen/content_text_size"
                                         android:layout_centerInParent="true"
-                                        android:padding="@dimen/_10sdp"/>
+                                        android:padding="@dimen/_10sdp"
+                                        tools:ignore="RelativeOverlap" />
 
                                     <ImageView
                                         android:layout_width="@dimen/_35sdp"
@@ -123,7 +125,8 @@
                                         android:padding="@dimen/_5sdp"
                                         android:layout_centerVertical="true"
                                         android:src="@drawable/ic_phone_camera"
-                                        android:layout_alignParentEnd="true"/>
+                                        android:layout_alignParentEnd="true"
+                                        tools:ignore="ContentDescription" />
 
 
                                 </RelativeLayout>
@@ -136,8 +139,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/blue_background"
-                            android:textSize="@dimen/_13sdp"
-                            android:text="Growth Details"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/content_title_text_size"
+                            android:text="@string/growth_details"
                             android:id="@+id/growth_details_text_view"
                             android:padding="@dimen/_10sdp"/>
 
@@ -145,8 +149,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/growth_details_recycler"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_below="@id/choose_date_text_view"/>
+                            android:layout_marginTop="@dimen/_10sdp" />
 
                     </LinearLayout>
 
@@ -164,7 +167,7 @@
             android:text="@string/software_designed_amp_developed_by_nic"
             android:textAlignment="center"
             android:textColor="@color/d_grey1"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
 
     </RelativeLayout>

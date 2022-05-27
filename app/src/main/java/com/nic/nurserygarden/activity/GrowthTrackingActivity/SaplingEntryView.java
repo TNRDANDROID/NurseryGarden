@@ -86,7 +86,7 @@ public class SaplingEntryView extends AppCompatActivity {
                     addBatchView();
                 }
                 else {
-                    Utils.showAlert(SaplingEntryView.this,"Maximum Count Reached");
+                    Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.maximum_count_reached));
                 }
             }
         });
@@ -164,37 +164,50 @@ public class SaplingEntryView extends AppCompatActivity {
             save_btn_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int total_count = getSaplingCountLimitationNumber()+Integer.parseInt(saplings_count.getText().toString());
-                    String sapling_height_= getSaplingHeight();
+                    int total_count =0;
+                    boolean sapling_height_ = false;
+                    if(!saplings_count.getText().toString().equals("")){
+                        total_count = getSaplingCountLimitationNumber()+Integer.parseInt(saplings_count.getText().toString());
+                    }
+                    if(!height_in_cm.getText().toString().equals("")){
+                        sapling_height_= getSaplingHeight(height_in_cm.getText().toString());
+                    }
+
                     if(particular_species_count>=total_count){
                         if(getSaplingCountLimitation()){
                             if(!saplings_count.getText().toString().equals("")){
-                                if(!height_in_cm.getText().toString().equals("")&&(!sapling_height_.equals(height_in_cm.getText().toString()))){
+                                if(!height_in_cm.getText().toString().equals("")&&(!height_in_cm.getText().toString().equals("0"))){
+                                    if(!sapling_height_){
+                                        saveSaplingDetails(saplings_count.getText().toString(),height_in_cm.getText().toString());
+                                        dialog.dismiss();
+                                    }
+                                    else {
+                                        Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.please_enter_valid_height));
+                                    }
 
-                                    saveSaplingDetails(saplings_count.getText().toString(),height_in_cm.getText().toString());
-                                    dialog.dismiss();
+
                                 }
                                 else {
-                                    Utils.showAlert(SaplingEntryView.this,"Please Enter Height/Valid Height");
+                                    Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.please_enter_valid_height));
                                 }
                             }
                             else {
-                                Utils.showAlert(SaplingEntryView.this,"Please Enter Sapling Count");
+                                Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.please_enter_sapling_count));
                             }
                         }
                         else {
-                            Utils.showAlert(SaplingEntryView.this,"Maximum Count Reached");
+                            Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.maximum_count_reached));
                         }
                     }
                     else {
-                        Utils.showAlert(SaplingEntryView.this,"Maximum Count Reached");
+                        Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.maximum_count_reached));
                     }
                 }
             });
 
         }
         catch (Exception e) {
-            Utils.showAlert(SaplingEntryView.this,"Something Wrong");
+            Utils.showAlert(SaplingEntryView.this,getResources().getString(R.string.something_wrong));
             e.printStackTrace();
         }
 
@@ -223,7 +236,7 @@ public class SaplingEntryView extends AppCompatActivity {
             id = db.insert(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, null, values);
 
             if (id > 0) {
-                Toasty.success(this, "Success!", Toast.LENGTH_SHORT, true).show();
+                Toasty.success(this, getResources().getString(R.string.success), Toast.LENGTH_SHORT, true).show();
                 loadSaplingDetailsList();
 
             }
@@ -256,7 +269,10 @@ public class SaplingEntryView extends AppCompatActivity {
         growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
         if(growthSpeciesDetailsList.size()>0){
             for(int i=0;i<growthSpeciesDetailsList.size();i++){
-                saplings_count = saplings_count+growthSpeciesDetailsList.get(i).getNo_of_saplings();
+                if(growthSpeciesDetailsList.get(i).getAge_in_days()!=0 || !growthSpeciesDetailsList.get(i).getHeight_in_cm().equals("0")){
+                    saplings_count = saplings_count+growthSpeciesDetailsList.get(i).getNo_of_saplings();
+                }
+
             }
             if(particular_species_count==saplings_count){
                 return false;
@@ -278,24 +294,36 @@ public class SaplingEntryView extends AppCompatActivity {
         growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
         if(growthSpeciesDetailsList.size()>0) {
             for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
-                saplings_count = saplings_count + growthSpeciesDetailsList.get(i).getNo_of_saplings();
+                if(growthSpeciesDetailsList.get(i).getAge_in_days()!=0 && !growthSpeciesDetailsList.get(i).getHeight_in_cm().equals("0")){
+                    saplings_count = saplings_count+growthSpeciesDetailsList.get(i).getNo_of_saplings();
+                }
+                //saplings_count = saplings_count + growthSpeciesDetailsList.get(i).getNo_of_saplings();
             }
         }
 
         return saplings_count;
     }
-    public String getSaplingHeight(){
+    public boolean getSaplingHeight(String height_entered_text){
         dbData.open();
         String sapling_height="";
+        boolean height_flag = true;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
         growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
         if(growthSpeciesDetailsList.size()>0) {
             for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
                 sapling_height = growthSpeciesDetailsList.get(i).getHeight_in_cm();
+                if(height_entered_text.equals(sapling_height)){
+                    height_flag = true;
+                    break;
+                }
+                else {
+                    height_flag = false;
+                    continue;
+                }
             }
         }
 
-        return sapling_height;
+        return height_flag;
     }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="adapter"
@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:padding="@dimen/_1sdp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 </com.nic.nurserygarden.support.SquareLayout>
 </layout>

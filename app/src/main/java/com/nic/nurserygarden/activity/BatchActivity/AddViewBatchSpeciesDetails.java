@@ -36,6 +36,7 @@ import com.nic.nurserygarden.dataBase.dbData;
 import com.nic.nurserygarden.databinding.ActivityAddViewBatchDetailsBinding;
 import com.nic.nurserygarden.databinding.ActivityAddViewBatchSpeciesDetailsBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
+import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.utils.Utils;
 
 import java.util.ArrayList;
@@ -52,10 +53,11 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
     int batch_id;
     int batch_primary_id;
     int batch_species_id;
+    String is_batch_closed;
     String species_type_name_ta;
     String species_type_name_en;
     ArrayList<NurserySurvey> speciesTypeList;
-
+    PrefManager prefManager;
     NurserySpeciesAdapter nurserySpeciesAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
 
         batchSpeciesDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_view_batch_species_details);
         batchSpeciesDetailsBinding.setActivity(this);
+        prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
@@ -86,16 +90,23 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
         batch_id = getIntent().getIntExtra("batch_id",0);
         batch_primary_id = getIntent().getIntExtra("batch_primary_id",0);
         batch_species_id = getIntent().getIntExtra("batch_species_id",0);
+        is_batch_closed = getIntent().getStringExtra("is_batch_closed");
         batchSpeciesDetailsBinding.speciesRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+        if(is_batch_closed.equals("Y")){
+            batchSpeciesDetailsBinding.addSpeciesBtn.setVisibility(View.GONE);
+        }
+        else {
+            batchSpeciesDetailsBinding.addSpeciesBtn.setVisibility(View.VISIBLE);
+        }
     }
     public void loadSpeciesTypeList(){
         speciesTypeList = new ArrayList<>();
         dbData.open();
         NurserySurvey landTypeList_item = new NurserySurvey();
         landTypeList_item.setSpecies_type_id(0);
-        landTypeList_item.setSpecies_name_ta("Select Species Type");
-        landTypeList_item.setSpecies_name_en("Select Species Type");
+        landTypeList_item.setSpecies_name_ta(getResources().getString(R.string.select_species_type));
+        landTypeList_item.setSpecies_name_en(getResources().getString(R.string.select_species_type));
         speciesTypeList.add(landTypeList_item);
         speciesTypeList.addAll(dbData.get_nursery_species_type());
         Log.d("Size",""+speciesTypeList.size());
@@ -123,7 +134,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
             TextView tittle_text = dialog.findViewById(R.id.tittle_text);
             Spinner species_type_spinner = dialog.findViewById(R.id.species_type_spinner);
             EditText species_count = dialog.findViewById(R.id.species_count);
-            tittle_text.setText("Add/Edit Species Details");
+            tittle_text.setText(getResources().getString(R.string.add_or_edit_species_details));
             ArrayList<NurserySurvey> speciesList = new ArrayList<>();
             speciesList = dbData.get_nursery_batch_species_details(String.valueOf(batch_primary_id),"All","","");
             if(speciesList.size()>0){
@@ -185,7 +196,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
                                     dialog.dismiss();
                                 }
                                 else {
-                                    Toasty.error(AddViewBatchSpeciesDetails.this,"Something Wrong",Toasty.LENGTH_SHORT);
+                                    Toasty.error(AddViewBatchSpeciesDetails.this, getResources().getString(R.string.something_wrong),Toasty.LENGTH_SHORT);
                                     dialog.dismiss();
                                 }
 
@@ -195,11 +206,11 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
                             }
                         }
                         else {
-                            Utils.showAlert(AddViewBatchSpeciesDetails.this,"Please Enter Species Count");
+                            Utils.showAlert(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.please_enter_species_count));
                         }
                     }
                     else {
-                        Utils.showAlert(AddViewBatchSpeciesDetails.this,"Please Choose Species Type");
+                        Utils.showAlert(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.select_species_type));
                     }
 
                 }
@@ -270,7 +281,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
             TextView species_name_text = dialog.findViewById(R.id.species_name_text);
             Spinner species_type_spinner = dialog.findViewById(R.id.species_type_spinner);
             EditText species_count = dialog.findViewById(R.id.species_count);
-            tittle_text.setText("Add/Edit Species Details");
+            tittle_text.setText(getResources().getString(R.string.add_edit_species_details));
             species_name_text.setText(species_type_name_en_);
             species_count.setText(no_of_count);
             species_type_spinner.setVisibility(View.GONE);
@@ -307,7 +318,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
                                     dialog.dismiss();
                                 }
                                 else {
-                                    Toasty.error(AddViewBatchSpeciesDetails.this,"Something Wrong",Toasty.LENGTH_SHORT);
+                                    Toasty.error(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.something_wrong),Toasty.LENGTH_SHORT);
                                     dialog.dismiss();
                                 }
 
@@ -317,7 +328,7 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
                             }
                         }
                         else {
-                            Utils.showAlert(AddViewBatchSpeciesDetails.this,"Please Enter Species Count");
+                            Utils.showAlert(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.please_enter_species_count));
                         }
 
                 }

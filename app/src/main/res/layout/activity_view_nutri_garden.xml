@@ -192,7 +192,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/pending_list"
-                        android:text="No Projects Found!"
+                        android:text="@string/no_projects_found"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_16sdp"

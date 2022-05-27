@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,7 +28,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -42,8 +44,8 @@
                         android:layout_centerVertical="true"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_11sdp"
-                        android:text="Add Saplings Details"
+                        android:textSize="@dimen/title_text_size"
+                        android:text="@string/add_saplings_details"
                         android:textStyle="bold"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:id="@+id/tittle_text"/>
@@ -54,7 +56,8 @@
                         android:src="@mipmap/close_icon"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
+                        android:layout_centerVertical="true"
+                        tools:ignore="ContentDescription" />
                 </RelativeLayout>
 
 
@@ -71,10 +74,11 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Number of Saplings"
+                        android:text="@string/number_of_saplings"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_11sdp"
-                        style="@string/font_circular_bold" />
+                        android:textStyle="bold"
+                        android:textSize="@dimen/content_title_text_size"
+                        />
                     <RelativeLayout
                         android:id="@+id/species_spinner_layout"
                         android:layout_width="match_parent"
@@ -94,11 +98,12 @@
                             android:layout_centerInParent="true"
                             android:textColor="@color/blue_background"
                             android:background="@color/full_transparent"
-                            android:paddingLeft="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_10sdp"
                             android:inputType="number"
                             android:singleLine="true"
-                            android:hint="No of Saplings"
-                            />
+                            android:textSize="@dimen/content_text_size"
+                            android:hint="@string/no_of_saplings"
+                            tools:ignore="Autofill,RtlSymmetry" />
 
                     </RelativeLayout>
 
@@ -109,10 +114,11 @@
                         android:layout_marginLeft="@dimen/margin_left_20dp"
                         android:layout_marginTop="@dimen/padding"
                         android:layout_marginRight="@dimen/margin_left_20dp"
-                        android:text="Height in Centimeter"
+                        android:text="@string/height_in_centimeter"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/_11sdp"
-                        style="@string/font_circular_bold" />
+                        android:textStyle="bold"
+                        android:textSize="@dimen/content_title_text_size"
+                        />
                     <RelativeLayout
                         android:id="@+id/species_count_layout"
                         android:layout_width="match_parent"
@@ -130,9 +136,11 @@
                             android:background="@color/full_transparent"
                             android:paddingStart="@dimen/_10sdp"
                             android:singleLine="true"
+                            android:textSize="@dimen/content_text_size"
                             android:inputType="numberDecimal"
-                            android:hint="Enter Height ( in cm )"
-                            android:id="@+id/height_in_cm"/>
+                            android:hint="@string/enter_height_in_cm"
+                            android:id="@+id/height_in_cm"
+                            tools:ignore="Autofill,RtlSymmetry" />
 
 
                     </RelativeLayout>
@@ -152,11 +160,11 @@
                             android:layout_marginLeft="@dimen/margin_left_20dp"
                             android:layout_marginTop="@dimen/padding"
                             android:layout_marginRight="@dimen/margin_left_20dp"
-                            android:text="Save"
+                            android:text="@string/save"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            style="@string/font_circular_bold" />
+                            android:textSize="@dimen/content_text_size"
+                            />
 
                     </RelativeLayout>
 

@@ -42,7 +42,7 @@
                         android:layout_height="@dimen/_100sdp"
                         android:scaleType="fitXY"
                         android:background="@drawable/ic_phone_camera"
-                        />
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
                         android:id="@+id/image_view"
@@ -50,7 +50,7 @@
                         android:layout_height="@dimen/_100sdp"
                         android:scaleType="fitXY"
                         android:visibility="gone"
-                        />
+                        tools:ignore="ContentDescription" />
 
 
 
@@ -71,7 +71,7 @@
                             android:textSize="15sp"
                             android:textColor="@android:color/black"
                             android:background="@color/full_transparent"
-                            android:hint="Remark"
+                            android:hint="@string/remark"
                             android:importantForAutofill="no"
                             android:inputType="text" />
                     </LinearLayout>
@@ -110,6 +110,7 @@
         android:layout_margin="5dp"
         android:clickable="true"
         android:src="@mipmap/close_icon"
-         />
+        android:focusable="true"
+        tools:ignore="ContentDescription" />
 
 </RelativeLayout>

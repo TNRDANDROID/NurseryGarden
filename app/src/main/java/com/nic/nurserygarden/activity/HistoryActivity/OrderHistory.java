@@ -62,15 +62,16 @@ public class OrderHistory extends AppCompatActivity implements Api.ServerRespons
         orderHistoryBinding = DataBindingUtil.setContentView(this, R.layout.activity_order_history);
         orderHistoryBinding.setActivity(this);
         prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         orderHistoryBinding.dateOfSave.setText(getCurrentDate()+" to "+getCurrentDate());
 
         activity_type = getIntent().getStringExtra("Activity");
         if(activity_type.equals("Order")){
-            orderHistoryBinding.title.setText("Order History");
+            orderHistoryBinding.title.setText(getResources().getString(R.string.order_history));
 
         }
         else {
-            orderHistoryBinding.title.setText("Delivery History");
+            orderHistoryBinding.title.setText(getResources().getString(R.string.delivery_history));
         }
         if(Utils.isOnline()){
             get_details_of_order_history_view("Today");

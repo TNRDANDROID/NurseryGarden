@@ -60,6 +60,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
 
         batchDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_view_batch_details);
         batchDetailsBinding.setActivity(this);
+
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
@@ -68,6 +69,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
             e.printStackTrace();
         }
         prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         batchDetailsBinding.addBatchBtn.setOnClickListener(this::onClick);
         initialiseRecyclerView();
 
@@ -129,7 +131,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
             LinearLayout land_layout = dialog.findViewById(R.id.land_layout);
             LinearLayout batch_layout = dialog.findViewById(R.id.batch_layout);
             TextView tittle_text = dialog.findViewById(R.id.tittle_text);
-            tittle_text.setText("Add Batch Details");
+            tittle_text.setText(getResources().getString(R.string.add_batch_details));
             land_layout.setVisibility(View.GONE);
             close_icon.setOnClickListener(new View.OnClickListener() {
                 @Override

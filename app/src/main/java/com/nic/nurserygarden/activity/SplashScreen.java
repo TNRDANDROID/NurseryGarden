@@ -49,10 +49,15 @@ public class SplashScreen extends AppCompatActivity implements
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(prefManager.getKEY_Language()!=null&&!prefManager.getKEY_Language().equals("")){
+                    Intent i = new Intent(SplashScreen.this, LoginScreen.class);
+                    startActivity(i);
+                }
+                else {
+                    Intent i = new Intent(SplashScreen.this, ChooseLanguageActivity.class);
+                    startActivity(i);
+                }
 
-                Intent i = new Intent(SplashScreen.this, LoginScreen.class);
-
-                startActivity(i);
                 finish();
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="activity"
             type="com.nic.nurserygarden.activity.AppUpdateDialog" />
     </data>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:customfontdemo="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,18 +22,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/margin"
-            android:text="PMAY Survey"
+            android:text="@string/nursery_garden"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/menu_title_size"
-            style="@string/font_circular_medium" />
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
@@ -43,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:src="@drawable/warning" />
+            android:src="@drawable/warning"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="match_parent"
@@ -53,7 +54,7 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:padding="@dimen/padding"
-            android:text="You need to update NutriGarden"
+            android:text="@string/you_need_to_update_nursery_garden"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             style="@string/font_circular_medium" />
 
@@ -65,7 +66,7 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:padding="@dimen/padding"
-            android:text="This version of NutriGarden is no longer supported. Please go to Official Site and install new version"
+            android:text="@string/this_version_of_nursery_garden_is_no_longer_supported_please_go_to_official_site_and_install_new_version"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             style="@string/font_normal" />
 
@@ -82,7 +83,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="@dimen/padding"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="@android:color/black"
                 android:visibility="gone"
                 style="@string/font_normal" />
@@ -97,11 +98,12 @@
                 android:background="@drawable/button_background"
                 android:gravity="center"
                 android:padding="@dimen/padding"
-                android:text="UPDATE"
+                android:text="@string/update"
                 android:onClick="@{()->activity.showGooglePlay()}"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/menu_title_size"
-                style="@string/font_circular_medium" />
+                android:textSize="@dimen/content_text_size"
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
         </LinearLayout>
 
     </LinearLayout>

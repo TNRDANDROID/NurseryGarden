@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
 <data>
     <variable
         name="activity"
         type="com.nic.nurserygarden.activity.CameraScreen" />
 </data>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="@color/d_grey"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -20,14 +21,14 @@
         android:background="@drawable/background">
 
         <TextView
-            style="@style/font_circular_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/margin"
-            android:text="Take Photo"
+            android:text="@string/take_photo"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/back_img"
@@ -35,9 +36,10 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:onClick="@{()-> activity.onBackPress()}"
-            android:src="@mipmap/back_arrow" />
+            android:src="@mipmap/back_arrow"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:visibility="gone"
@@ -46,9 +48,10 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:onClick="@{()-> activity.homePage()}"
-            android:src="@mipmap/home_img" />
+            android:src="@mipmap/home_img"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 
@@ -66,13 +69,12 @@
         android:background="#CCC"
         android:gravity="center"
         android:padding="15dp"
-        android:text="You Can Capture up to 3 photos"
-        android:textSize="@dimen/menu_title_size"
+        android:text="@string/you_can_capture_up_to_3_photos"
+        android:textSize="@dimen/content_title_text_size"
         android:visibility="visible"
-        />
+        tools:ignore="SpUsage" />
     <ScrollView
         android:id="@+id/scroll_view"
-        android:layout_below="@+id/tv_create_asset_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
@@ -97,10 +99,12 @@
                 android:layout_gravity="right"
                 android:layout_margin="@dimen/margin"
                 android:background="@drawable/button_background"
-                android:text="Add Photo"
+                android:text="@string/add_photo"
+                android:textStyle="bold"
+                android:textSize="@dimen/content_text_size"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                />
+                tools:ignore="RtlHardcoded" />
 
 
             <RelativeLayout
@@ -112,12 +116,14 @@
                 <Button
                     android:id="@+id/btn_save_local"
                     android:layout_width="150dp"
+                    android:textSize="@dimen/content_text_size"
+                    android:textStyle="bold"
                     android:layout_height="40dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerInParent="true"
                     android:layout_margin="5dp"
                     android:background="@drawable/button_background"
-                    android:text="Save Image Local"
+                    android:text="@string/save_image_local"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     />
@@ -145,7 +151,8 @@
             <RelativeLayout
                 android:id="@+id/image_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
 
                 <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/district_card"
@@ -157,14 +164,16 @@
                     android:layout_margin="15dp"
                     android:layout_marginTop="15dp"
                     card_view:cardCornerRadius="5dp"
-                    card_view:cardElevation="5dp">
+                    card_view:cardElevation="5dp"
+                    tools:ignore="UnknownIdInLayout">
 
 
                     <LinearLayout
                         android:id="@+id/header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -178,7 +187,8 @@
                                 android:layout_height="190dp"
                                 android:background="@drawable/capture_image"
                                 android:onClick="@{()-> activity.getLatLong()}"
-                                android:scaleType="fitXY" />
+                                android:scaleType="fitXY"
+                                tools:ignore="ContentDescription" />
 
                             <ImageView
                                 android:id="@+id/image_view"
@@ -186,7 +196,8 @@
                                 android:layout_height="190dp"
                                 android:scaleType="fitXY"
                                 android:onClick="@{()-> activity.getLatLong()}"
-                                android:visibility="gone" />
+                                android:visibility="gone"
+                                tools:ignore="ContentDescription" />
 
 
                             <!--<View-->
@@ -214,10 +225,13 @@
                                     android:layout_marginRight="10dip"
                                     android:background="@android:color/transparent"
                                     android:gravity="top"
-                                    android:hint="Enter Description"
+                                    android:hint="@string/enter_description"
                                     android:lines="6"
                                     android:textColor="@android:color/black"
-                                    android:textSize="15sp" />
+                                    android:textSize="@dimen/content_text_size"
+                                    android:inputType="text"
+                                    android:importantForAutofill="no"
+                                    tools:ignore="TooDeepLayout" />
                             </LinearLayout>
 
 
@@ -245,7 +259,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_background"
-                android:text="SAVE IMAGE"
+                android:text="@string/save_image"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
@@ -256,15 +270,13 @@
         android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_below="@+id/empty"
         android:layout_alignParentBottom="true"
         android:padding="15dp"
-        android:text="Sofware Designed &amp; Developed by NIC"
+        android:text="@string/software_designed_amp_developed_by_nic"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_14sdp"
-        android:background="@drawable/background"
-        style="@string/font_circular_medium" />
+        android:textColor="@color/d_grey1"
+        android:textSize="@dimen/title_text_size"
+        />
 
 
 </RelativeLayout>

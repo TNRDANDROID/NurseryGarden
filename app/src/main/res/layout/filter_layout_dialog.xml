@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +27,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@mipmap/close_icon"
                 android:backgroundTint="@color/white"
-                />
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 
@@ -42,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_10sdp"
-                android:text="Filter"
+                android:text="@string/filter"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 
                 android:textColor="@color/white" />
@@ -64,20 +63,19 @@
             android:orientation="vertical">
 
             <RelativeLayout
-            android:id="@+id/select_batch_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/header"
-            android:background="#f5f9fb"
-            android:padding="@dimen/_10sdp">
+                android:id="@+id/select_batch_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f5f9fb"
+                android:padding="@dimen/_10sdp">
 
             <TextView
                 android:id="@+id/select_batch_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_13sdp"
-                android:text="Select Batch"
-                android:textSize="@dimen/_11sdp"
+                android:text="@string/select_batch"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
                 android:textColor="@color/blue_background" />
 
@@ -91,21 +89,20 @@
         </RelativeLayout>
 
             <RelativeLayout
-            android:id="@+id/select_species_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/select_batch_layout"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/padding"
-            android:background="#f5f9fb">
+                android:id="@+id/select_species_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/padding"
+                android:background="#f5f9fb">
 
             <TextView
                 android:id="@+id/select_species_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_13sdp"
-                android:text="Select Species"
-                android:textSize="@dimen/_11sdp"
+                android:text="@string/select_species"
+                android:textSize="@dimen/_13sdp"
                 android:textStyle="bold"
                 android:textColor="@color/blue_background" />
 
@@ -121,7 +118,6 @@
                 android:id="@+id/select_days_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/select_batch_layout"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/padding"
                 android:background="#f5f9fb">
@@ -131,8 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_13sdp"
-                    android:text="Select Days"
-                    android:textSize="@dimen/_11sdp"
+                    android:text="@string/select_days"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/blue_background" />
 
@@ -148,7 +144,6 @@
                 android:id="@+id/select_height_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/select_batch_layout"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/padding"
                 android:background="#f5f9fb">
@@ -158,8 +153,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_13sdp"
-                    android:text="Select Height"
-                    android:textSize="@dimen/_11sdp"
+                    android:text="@string/select_height"
+                    android:textSize="@dimen/_13sdp"
                     android:textStyle="bold"
                     android:textColor="@color/blue_background" />
 
@@ -190,8 +185,8 @@
             android:layout_marginEnd="@dimen/_13sdp"
             android:background="@drawable/button_background"
             android:gravity="center"
-            android:text="Submit"
-            android:textSize="@dimen/_11sdp"
+            android:text="@string/submit"
+            android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/white" />

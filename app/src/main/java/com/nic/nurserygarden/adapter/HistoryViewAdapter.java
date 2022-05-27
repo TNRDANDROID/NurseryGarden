@@ -1,6 +1,7 @@
 package com.nic.nurserygarden.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -95,6 +98,15 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
         }
         if (filterList.size() > 0) {
             holder.historyItemViewBinding.detailsRecycler.setLayoutManager(new LinearLayoutManager(context));
+            //RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(context.getApplicationContext(),DividerItemDecoration.VERTICAL);
+            // Get drawable object
+           /* Drawable mDivider = ContextCompat.getDrawable(context, R.drawable.line_draw);
+            // Create a DividerItemDecoration whose orientation is Horizontal
+            DividerItemDecoration hItemDecoration = new DividerItemDecoration(context,
+                    DividerItemDecoration.HORIZONTAL);
+            // Set the drawable on it
+            hItemDecoration.setDrawable(mDivider);*/
+            //holder.historyItemViewBinding.detailsRecycler.addItemDecoration(itemDecoration);
             historyDetailsViewAdapter = new HistoryDetailsViewAdapter(filterList, context, "", which_class);
             holder.historyItemViewBinding.detailsRecycler.setAdapter(historyDetailsViewAdapter);
         }
@@ -105,9 +117,17 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
         holder.historyItemViewBinding.viewDetailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos = position;
-                SlideToDown(holder.historyItemViewBinding.historyDetailsLayout);
-                notifyDataSetChanged();
+                if(pos==position){
+                    pos=-1;
+                    notifyDataSetChanged();
+                }
+                else {
+                    pos = position;
+                    //SlideToDown(holder.historyItemViewBinding.historyDetailsLayout);
+                    notifyDataSetChanged();
+                }
+
+
             }
         });
 

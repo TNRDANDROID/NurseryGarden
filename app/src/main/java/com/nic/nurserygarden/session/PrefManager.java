@@ -59,6 +59,7 @@ public class PrefManager {
     private static final String SCHEDULE_MASTER_ID = "schedule_master_id";
     private static final String KEY_DELETE_ID = "deleteId";
     private static final String KEY_DELETE_POSITION = "deletePosition";
+    private static final String KEY_Language = "language";
 
 
     public PrefManager(Context context) {
@@ -234,6 +235,15 @@ public class PrefManager {
 
     public String getBlockName() {
         return pref.getString(KEY_BLOCK_NAME, null);
+
+    } public Object setKEY_Language(Object key) {
+        editor.putString(KEY_Language, String.valueOf(key));
+        editor.commit();
+        return key;
+    }
+
+    public String getKEY_Language() {
+        return pref.getString(KEY_Language, null);
     }
 
 

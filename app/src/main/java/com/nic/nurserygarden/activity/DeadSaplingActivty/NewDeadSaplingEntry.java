@@ -85,6 +85,7 @@ public class NewDeadSaplingEntry extends AppCompatActivity implements Api.Server
         deadSaplingEntryBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_dead_sapling_entry);
         deadSaplingEntryBinding.setActivity(this);
         prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
@@ -465,7 +466,7 @@ public class NewDeadSaplingEntry extends AppCompatActivity implements Api.Server
                             else {
                                 validation_check = false;
                                 //no_of_dead_saplings_text.requestFocus();
-                                Utils.showAlert(NewDeadSaplingEntry.this,"Count MisMatched");
+                                Utils.showAlert(NewDeadSaplingEntry.this,getResources().getString(R.string.count_mismatched));
                             }
 
                         }
@@ -479,12 +480,12 @@ public class NewDeadSaplingEntry extends AppCompatActivity implements Api.Server
                         saveDeadSaplingDetailsLocally(deadOrderList);
                     }
                     else {
-                        Utils.showAlert(NewDeadSaplingEntry.this,"Enter the Dead Saplings");
+                        Utils.showAlert(NewDeadSaplingEntry.this,getResources().getString(R.string.enter_the_dead_saplings));
                     }
 
                 }
                 else {
-                    Utils.showAlert(NewDeadSaplingEntry.this,"Count MisMatched");
+                    Utils.showAlert(NewDeadSaplingEntry.this,getResources().getString(R.string.count_mismatched));
                 }
 
             }
@@ -521,11 +522,11 @@ public class NewDeadSaplingEntry extends AppCompatActivity implements Api.Server
                 insert_id = db.insert(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE,null,values);
                 if(deadOrderList.size()==count){
                     if(insert_id>0){
-                        Toasty.success(NewDeadSaplingEntry.this,"Success",Toasty.LENGTH_SHORT);
+                        Toasty.success(NewDeadSaplingEntry.this, getResources().getString(R.string.success),Toasty.LENGTH_SHORT);
                         onBackPress();
                     }
                     else {
-                        Toasty.error(NewDeadSaplingEntry.this,"Failed",Toasty.LENGTH_SHORT);
+                        Toasty.error(NewDeadSaplingEntry.this, getResources().getString(R.string.faild),Toasty.LENGTH_SHORT);
                     }
                 }
 

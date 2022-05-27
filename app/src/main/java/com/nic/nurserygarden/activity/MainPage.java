@@ -49,6 +49,7 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         mainPageBinding.setActivity(this);
 
         prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
 
         mainPageBinding.tvName.setText(prefManager.getDistrictName());
         mainPageBinding.designation.setText(prefManager.getBlockName());
@@ -84,7 +85,7 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             public void onClick(View v) {
                 ArrayList<NurserySurvey> workCount = dbData.get_dead_sapling_details_for_upload("","");
                 if(workCount.size()>0){
-                    Utils.showAlert(MainPage.this,"Please Upload Your Dead Saplings");
+                    Utils.showAlert(MainPage.this,getResources().getString(R.string.please_upload_your_dead_saplings));
                 }
                 else {
                     gotoAddBatchOrLandScreen("Sell");
@@ -533,25 +534,25 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
 
 
         if (!Utils.isOnline()) {
-            Utils.showAlert(this, "Logging out while offline may leads to loss of data!");
+            Utils.showAlert(this, getResources().getString(R.string.logging_out_while_offline_may_leads_to_loss_data));
         } else {
-            if (!(deadworkCount.size() > 0 && getSpeciesCount.size() > 0 && getGrowthSpeciesCount.size() > 0)) {
+            if (!(deadworkCount.size() > 0) &&(! (getSpeciesCount.size() > 0) && (!(getGrowthSpeciesCount.size() > 0)))) {
                 closeApplication();
             } else {
-                Utils.showAlert(this, "Sync all the data before logout!");
+                Utils.showAlert(this, getResources().getString(R.string.sync_all_the_data_before_logout));
             }
         }
     }
 
     public void closeApplication() {
-        new MyDialog(this).exitDialog(this, "Are you sure you want to Logout?", "Logout");
+        new MyDialog(this).exitDialog(this, getResources().getString(R.string.are_you_sure_you_want_to_logout), "Logout");
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                new MyDialog(this).exitDialog(this, "Are you sure you want to exit ?", "Exit");
+                new MyDialog(this).exitDialog(this, getResources().getString(R.string.are_you_sure_you_want_to_exit), "Exit");
                 return false;
             }
         }

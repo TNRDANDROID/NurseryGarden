@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil;
 
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.databinding.AppUpdateDialogBinding;
+import com.nic.nurserygarden.session.PrefManager;
 import com.nic.nurserygarden.support.MyCustomTextView;
+import com.nic.nurserygarden.utils.Utils;
 
 
 public class AppUpdateDialog extends AppCompatActivity implements View.OnClickListener {
@@ -18,12 +20,15 @@ public class AppUpdateDialog extends AppCompatActivity implements View.OnClickLi
 
     private MyCustomTextView btnSave;
     private AppUpdateDialogBinding appUpdateDialogBinding;
+    PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appUpdateDialogBinding = DataBindingUtil.setContentView(this, R.layout.app_update_dialog);
         appUpdateDialogBinding.setActivity(this);
+        prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         intializeUI();
 
     }

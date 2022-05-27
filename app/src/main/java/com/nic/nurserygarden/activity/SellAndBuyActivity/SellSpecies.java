@@ -74,8 +74,8 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
         Utils.setStatusBarGradiant(SellSpecies.this);
         activitySellSpeciesBinding = DataBindingUtil.setContentView(this, R.layout.activity_sell_species);
         activitySellSpeciesBinding.setActivity(this);
-
-
+        prefManager = new PrefManager(this);
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         try {
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
@@ -84,7 +84,7 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
             e.printStackTrace();
         }
         nursery_level_id = getIntent().getStringExtra("nursery_level_id");
-        prefManager = new PrefManager(this);
+
 
         if(Utils.isOnline()){
             get_nursery_buyer_type();
@@ -312,7 +312,7 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
                                     gotoOrderItemActivity();
                                 }
                                 else {
-                                    Utils.showAlert(SellSpecies.this,"Please Enter Valid Mobile Number");
+                                    Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please_enter_valid_mobile_number));
                                 }
                             }
                             else {
@@ -321,17 +321,17 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
 
                         }
                         else {
-                            Utils.showAlert(SellSpecies.this,"Please Enter Name");
+                            Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please_enter_name));
                         }
                     }
 
                 }
                 else {
-                    Utils.showAlert(SellSpecies.this,"Please Choose Buyer Type");
+                    Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please_choose_byer_type));
                 }
             }
             else {
-                Utils.showAlert(SellSpecies.this,"Please Select Village");
+                Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please__select_village));
             }
 
         }
@@ -353,7 +353,7 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
                                 gotoOrderItemActivity();
                             }
                             else {
-                                Utils.showAlert(SellSpecies.this,"Please Enter Valid Mobile Number");
+                                Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please_enter_valid_mobile_number));
                             }
                         }
                         else {
@@ -362,13 +362,13 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
 
                     }
                     else {
-                        Utils.showAlert(SellSpecies.this,"Please Enter Name");
+                        Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please_enter_name));
                     }
                 }
 
             }
             else {
-                Utils.showAlert(SellSpecies.this,"Please Choose Buyer Type");
+                Utils.showAlert(SellSpecies.this,getResources().getString(R.string.please_choose_byer_type));
             }
         }
 

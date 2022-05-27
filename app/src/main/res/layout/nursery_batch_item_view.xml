@@ -243,7 +243,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/land_details_layout"
                     >
                     <RelativeLayout
@@ -256,50 +256,52 @@
                             android:src="@drawable/plant5"
                             android:id="@+id/tree_image"
                             android:padding="@dimen/_5sdp"
-                            android:scaleType="fitXY"/>
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription" />
                     </RelativeLayout>
 
                     <LinearLayout
                         android:id="@+id/batch_name_layout"
                         android:layout_width="match_parent"
-                        android:layout_toRightOf="@+id/batch_image_layout"
+                        android:layout_toEndOf="@+id/batch_image_layout"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/blue_background"
-                                android:id="@+id/created_date"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:textSize="@dimen/_11sdp"
-                                android:text="date 25-05-2022"
-                                android:padding="@dimen/_2sdp"/>
+
                             <RelativeLayout
                                 android:layout_gravity="end"
                                 android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_30sdp"
+                                android:padding="@dimen/_4sdp"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/text_bg"
-                                android:id="@+id/add_species">
+                                android:id="@+id/add_species"
+                                tools:ignore="RelativeOverlap">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/white"
-                                    android:text="Add/View species"
+                                    android:text="@string/add_view_species"
                                     android:textStyle="bold"
                                     android:layout_centerVertical="true"
                                     android:layout_centerHorizontal="true"
-                                    android:textSize="@dimen/_12sdp"
+                                    android:textSize="@dimen/large_content_text_size"
                                     android:layout_marginStart="@dimen/_10sdp"
                                     android:paddingTop="@dimen/_1sdp"
                                     android:paddingBottom="@dimen/_2sdp"
                                     android:paddingLeft="@dimen/_5sdp"
                                     android:paddingRight="@dimen/_5sdp"/>
                             </RelativeLayout>
-
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blue_background"
+                                android:id="@+id/created_date"
+                                android:layout_below="@+id/add_species"
+                                android:textSize="@dimen/content_text_size"
+                                android:padding="@dimen/_2sdp"/>
                         </RelativeLayout>
 
                         <TextView
@@ -307,16 +309,14 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/grey_7"
                             android:id="@+id/batch_id"
-                            android:text="batch id 3"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/content_text_size"
                             android:padding="@dimen/_2sdp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="batch number 34"
                             android:textColor="@color/blue_background"
                             android:id="@+id/batch_number"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/content_text_size"
                             android:padding="@dimen/_2sdp"/>
 
 
@@ -336,7 +336,7 @@
                             android:layout_width="@dimen/_35sdp"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:src="@drawable/check3"
                             />
@@ -345,11 +345,11 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
-                        android:layout_above="@id/land_delete_layout"
+                        android:layout_below="@id/batch_name_layout"
                         android:id="@+id/batch_view"
                         android:background="@color/grey_4"/>
                     <LinearLayout
-                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/batch_view"
                         android:padding="@dimen/_5sdp"
                         android:id="@+id/land_delete_layout"
                         android:layout_width="match_parent"
@@ -364,12 +364,15 @@
                             android:background="@drawable/red_button_bg"
                             android:id="@+id/delete">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_width="@dimen/_80sdp"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Delete"
+                                android:text="@string/delete"
+                                android:textAlignment="center"
                                 android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/content_text_size"
+                                android:textStyle="bold"
                                 android:paddingTop="@dimen/_1sdp"
                                 android:paddingBottom="@dimen/_1sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -378,9 +381,9 @@
 
                         <RelativeLayout
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:padding="@dimen/_2sdp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/_80sdp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_background"
                             android:id="@+id/upload">
@@ -388,10 +391,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Upload"
+                                android:text="@string/upload"
                                 android:textStyle="bold"
                                 android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/content_text_size"
                                 android:paddingTop="@dimen/_1sdp"
                                 android:paddingBottom="@dimen/_1sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -399,9 +402,9 @@
                         </RelativeLayout>
                         <RelativeLayout
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:padding="@dimen/_2sdp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/_120sdp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cornered_image_bg"
                             android:id="@+id/track_growth">
@@ -409,10 +412,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Track Growth"
+                                android:text="@string/track_growth"
                                 android:textStyle="bold"
                                 android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/content_text_size"
                                 android:paddingTop="@dimen/_1sdp"
                                 android:paddingBottom="@dimen/_1sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -420,9 +423,9 @@
                         </RelativeLayout>
                         <RelativeLayout
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:padding="@dimen/_2sdp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/_120sdp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cornered_image_bg"
                             android:id="@+id/dead_sapling">
@@ -430,10 +433,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:text="Dead sapling"
+                                android:text="@string/dead_sapling"
                                 android:textStyle="bold"
                                 android:layout_centerHorizontal="true"
-                                android:textSize="@dimen/_11sdp"
+                                android:textSize="@dimen/content_text_size"
                                 android:paddingTop="@dimen/_1sdp"
                                 android:paddingBottom="@dimen/_1sdp"
                                 android:paddingLeft="@dimen/_5sdp"
@@ -452,8 +455,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:textAlignment="center"
-                        android:text="Upload Dead Sapling"
+                        android:text="@string/upload_dead_sapling"
                         android:textStyle="bold"
+                        android:textSize="@dimen/content_text_size"
                         android:textColor="@color/white"/>
                 </RelativeLayout>
             </RelativeLayout>

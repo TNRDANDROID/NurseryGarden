@@ -37,7 +37,8 @@
                         android:src="@drawable/plant2"
                         android:id="@+id/tree_image"
                         android:padding="@dimen/_8sdp"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY"
+                        tools:ignore="ContentDescription" />
                 </RelativeLayout>
                 <View
                     android:layout_width="@dimen/_2sdp"
@@ -65,11 +66,12 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
                                 android:id="@+id/species_type_id"
-                                android:textSize="@dimen/_11sdp"
-                                android:padding="@dimen/_2sdp"/>
+                                android:textSize="@dimen/content_text_size"
+                                android:padding="@dimen/_2sdp"
+                                tools:ignore="RelativeOverlap" />
                             <RelativeLayout
                                 android:layout_alignParentEnd="true"
-                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/add_species">
@@ -77,17 +79,19 @@
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
                                     android:src="@drawable/ic_edit"
-                                    android:layout_marginRight="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@id/delete"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:layout_toStartOf="@id/delete"
                                     android:tint="@color/white"
-                                    android:id="@+id/edit"/>
+                                    android:id="@+id/edit"
+                                    tools:ignore="ContentDescription" />
                                 <ImageView
                                     android:layout_width="@dimen/_15sdp"
                                     android:layout_height="@dimen/_15sdp"
                                     android:tint="@color/white"
                                     android:layout_alignParentEnd="true"
                                     android:src="@drawable/ic_trash"
-                                    android:id="@+id/delete"/>
+                                    android:id="@+id/delete"
+                                    tools:ignore="ContentDescription" />
 
                             </RelativeLayout>
 
@@ -98,14 +102,14 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:id="@+id/species_type_name"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/content_text_size"
                             android:padding="@dimen/_2sdp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:id="@+id/species_count"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/content_text_size"
                             android:padding="@dimen/_2sdp"/>
 
 
@@ -185,7 +189,7 @@
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:src="@drawable/check3"
                         />

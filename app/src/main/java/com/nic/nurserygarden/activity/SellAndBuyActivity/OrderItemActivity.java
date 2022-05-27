@@ -5,7 +5,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -79,6 +81,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
     EditText no_of_required_saplings_text;
     TextView available_count_text;
     LinearLayoutManager linearLayoutManager;
+    final SnapHelper snapHelper = new LinearSnapHelper();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +90,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
         orderItemBinding = DataBindingUtil.setContentView(this, R.layout.activity_order_item);
         orderItemBinding.setActivity(this);
         prefManager = new PrefManager(this);
-
+        Utils.setLocale(prefManager.getKEY_Language(),this);
         getIntentData();
         orderItemBinding.mainLayout.setVisibility(View.VISIBLE);
         orderItemBinding.filterLayout.setVisibility(View.GONE);
@@ -453,7 +456,8 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                                         linearLayoutManager.startSmoothScroll(smoothScroller);
                                         linearLayoutManager.smoothScrollToPosition(orderItemBinding.orderItemRecycler,null,i);*/
                                         //no_of_required_saplings_text.requestFocus();
-                                        Utils.showAlert(OrderItemActivity.this,"Count MisMatched");
+                                        //orderItemBinding.orderItemRecycler.scrollToPosition(i);
+                                        Utils.showAlert(OrderItemActivity.this,getResources().getString(R.string.count_mismatched));
 
                                     }
 
@@ -465,7 +469,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                        getJsonObjectForDelivery(syncOrderItemList);
                    }
                    else {
-                       Utils.showAlert(OrderItemActivity.this,"Enter the Required Saplings");
+                       Utils.showAlert(OrderItemActivity.this,getResources().getString(R.string.enter_the_required_saplings));
                    }
 
                }

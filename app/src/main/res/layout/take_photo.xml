@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="activity"
             type="com.nic.nurserygarden.activity.TakePhotoScreen" />
     </data>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -21,9 +22,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/margin"
-            android:text="Take Photo"
+            android:text="@string/take_photo"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="RelativeOverlap" />
 
         <ImageView
             android:id="@+id/back_img"
@@ -31,9 +33,10 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:onClick="@{()-> activity.onBackPress()}"
-            android:src="@mipmap/back_arrow" />
+            android:src="@mipmap/back_arrow"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/home_img"
@@ -41,20 +44,21 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:onClick="@{()-> activity.homePage()}"
-            android:src="@mipmap/home_img" />
+            android:src="@mipmap/home_img"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
     <TextView
         android:id="@+id/take_pic_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/padding"
-        android:layout_marginRight="@dimen/margin_left_20dp"
+        android:layout_marginEnd="@dimen/margin_left_20dp"
         android:layout_below="@+id/header_layout"
-        android:text="Beneficiary Details"
+        android:text="@string/beneficiary_details"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_15sdp"
         android:visibility="visible"
@@ -74,8 +78,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-android:padding="@dimen/_4sdp"
-            android:orientation="horizontal">
+            android:padding="@dimen/_4sdp"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -87,14 +92,14 @@ android:padding="@dimen/_4sdp"
                 <RelativeLayout
                     android:id="@+id/start_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:ignore="UselessParent">
 
                     <TextView
                         android:id="@+id/newsTitle"
                         style="@style/TextAppearance.AppCompat.Subhead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Beneficiary \n Image"
                         android:textColor="#000080"
                         android:textAlignment="center"
                         android:textSize="16sp" />
@@ -105,9 +110,10 @@ android:padding="@dimen/_4sdp"
                         android:layout_height="20dp"
                         android:layout_centerInParent="true"
                         android:layout_gravity="end"
-                        android:layout_toRightOf="@+id/newsTitle"
+                        android:layout_toEndOf="@+id/newsTitle"
                         android:gravity="end"
-                        android:text="Take Photo" />
+                        android:text="@string/take_photo"
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -115,10 +121,11 @@ android:padding="@dimen/_4sdp"
                         android:layout_centerInParent="true"
                         android:layout_gravity="end"
 
-                        android:layout_toRightOf="@+id/dummy1"
+                        android:layout_toEndOf="@+id/dummy1"
                         android:gravity="end"
                         android:src="@drawable/camera_icon"
-                        android:text="Take Photo" />
+                        android:text="@string/take_photo"
+                        tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
 
@@ -175,14 +182,14 @@ android:padding="@dimen/_4sdp"
                 <RelativeLayout
                     android:id="@+id/end_layout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:ignore="UselessParent">
 
                     <TextView
                         android:id="@+id/end"
                         style="@style/TextAppearance.AppCompat.Subhead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Existing House\n With Beneficiary  "
                         android:textAlignment="center"
                         android:textColor="#000080"
 
@@ -194,9 +201,10 @@ android:padding="@dimen/_4sdp"
                         android:layout_height="20dp"
                         android:layout_centerInParent="true"
                         android:layout_gravity="end"
-                        android:layout_toRightOf="@+id/end"
+                        android:layout_toEndOf="@+id/end"
                         android:gravity="end"
-                        android:text="Take Photo" />
+                        android:text="@string/take_photo"
+                        tools:ignore="ContentDescription" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -204,10 +212,11 @@ android:padding="@dimen/_4sdp"
                         android:layout_centerInParent="true"
                         android:layout_gravity="end"
 
-                        android:layout_toRightOf="@+id/dummy2"
+                        android:layout_toEndOf="@+id/dummy2"
                         android:gravity="end"
                         android:src="@drawable/camera_icon"
-                        android:text="Take Photo" />
+                        android:text="@string/take_photo"
+                        tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -226,7 +235,8 @@ android:padding="@dimen/_4sdp"
         android:background="@drawable/rectangle_box"
         android:onClick="@{()-> activity.viewCamera(1)}"
         android:tooltipText="Show tooltip"
-        android:padding="10dp">
+        android:padding="10dp"
+        tools:ignore="UnusedAttribute">
 
         <ImageView
             android:id="@+id/lock"
@@ -237,7 +247,8 @@ android:padding="@dimen/_4sdp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="start"
 
-            android:background="@mipmap/avatar" />
+            android:background="@mipmap/avatar"
+            tools:ignore="ContentDescription" />
 
 
         <TextView
@@ -245,9 +256,9 @@ android:padding="@dimen/_4sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/_12sdp"
-            android:layout_toRightOf="@+id/lock"
-            android:text="Beneficiary  Image"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_toEndOf="@+id/lock"
+            android:text="@string/beneficiary_image"
             android:textAlignment="center"
             android:textColor="#000080"
             android:textSize="16sp" />
@@ -276,7 +287,8 @@ android:padding="@dimen/_4sdp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="start"
 
-            android:background="@mipmap/home" />
+            android:background="@mipmap/home"
+            tools:ignore="ContentDescription" />
 
 
         <TextView
@@ -284,9 +296,9 @@ android:padding="@dimen/_4sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/_12sdp"
-            android:layout_toRightOf="@+id/house"
-            android:text="Existing House With Beneficiary"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_toEndOf="@+id/house"
+            android:text="@string/existing_house_with_beneficiary"
 
             android:textAlignment="center"
             android:textColor="#000080"
@@ -300,7 +312,7 @@ android:padding="@dimen/_4sdp"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
         android:padding="15dp"
-        android:text="Sofware Designed &amp; Developed by NIC"
+        android:text="@string/software_designed_amp_developed_by_nic"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_14sdp"
