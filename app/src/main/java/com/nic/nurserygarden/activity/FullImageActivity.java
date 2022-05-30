@@ -39,6 +39,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
+
 public class FullImageActivity extends AppCompatActivity implements View.OnClickListener, Api.ServerResponseListener {
     private FullImageRecyclerBinding fullImageRecyclerBinding;
     private FullImageAdapter fullImageAdapter;
@@ -191,6 +193,10 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     generateImageArrayList(jsonObject.getJSONArray(AppConstant.JSON_DATA));
+                }
+                else if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD")) {
+
+                    Toasty.error(FullImageActivity.this,jsonObject.getString("MESSAGE"),Toasty.LENGTH_SHORT,true).show();
                 }
                 Log.d("resp_OnlineImage", "" + responseDecryptedBlockKey);
             }

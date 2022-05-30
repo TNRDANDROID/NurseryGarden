@@ -189,7 +189,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                     saveImageButtonClick();
                 }
                 else if(activity_type.equals("GrowthTracking")){
-                    saveGrowthTrackImage();
+                    //saveGrowthTrackImage();
+                    saveGrowthTrackImageNew();
                 }
         }
     }
@@ -791,6 +792,96 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
         }
         if (batch_growth_tracking_primary_id>0){
+            JSONArray imageJson = new JSONArray();
+            long rowInserted = 0;
+            int childCount = cameraScreenBinding.cameraLayout.getChildCount();
+            int count = 0;
+            if (childCount > 0) {
+                for (int i = 0; i < childCount; i++) {
+                    JSONArray imageArray = new JSONArray();
+
+                    View vv = cameraScreenBinding.cameraLayout.getChildAt(i);
+                    imageView = vv.findViewById(R.id.image_view);
+                    myEditTextView = vv.findViewById(R.id.description);
+                    latitude_text = vv.findViewById(R.id.latitude);
+                    longtitude_text = vv.findViewById(R.id.longtitude);
+
+
+                    if (imageView.getDrawable() != null) {
+                        //if(!myEditTextView.getText().toString().equals("")){
+                        count = count + 1;
+                        byte[] imageInByte = new byte[0];
+                        String image_str = "";
+                        String description = "";
+                        try {
+                            description = myEditTextView.getText().toString();
+                            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            imageInByte = baos.toByteArray();
+
+
+                        } catch (Exception e) {
+                            Utils.showAlert(CameraScreen.this, getResources().getString(R.string.at_least_capture_one_photo));
+                        }
+
+
+                        ContentValues imageValue = new ContentValues();
+                        imageValue.put("batch_growth_tracking_primary_id", batch_growth_tracking_primary_id);
+                        imageValue.put("batch_primary_id", batch_primary_id);
+                        imageValue.put("batch_id", batch_id);
+                        imageValue.put("server_flag", "0");
+                        imageValue.put("entry_date", entry_date);
+                        imageValue.put("image", imageInByte);
+                        imageValue.put("lattitude", latitude_text.getText().toString());
+                        imageValue.put("longtitude", longtitude_text.getText().toString());
+
+
+                        rowInserted = db.insert(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, null, imageValue);
+
+                        if (count == childCount) {
+                            if (rowInserted > 0) {
+
+                                showToast();
+                            }
+
+                        }
+
+
+                    } else {
+                        Utils.showAlert(CameraScreen.this, getResources().getString(R.string.please_capture_image));
+                    }
+                }
+            }
+        }
+        focusOnView(cameraScreenBinding.scrollView);
+    }
+    public void saveGrowthTrackImageNew() {
+        long batch_growth_tracking_primary_id = getIntent().getIntExtra("batch_growth_tracking_primary_id",0);
+       /* try {
+
+
+            ContentValues values = new ContentValues();
+
+            values.put("growth_tracking_id", 0);
+            values.put("batch_primary_id", batch_primary_id);
+            values.put("batch_id", batch_id);
+            values.put("entry_date", entry_date);
+            values.put("server_flag", "0");
+
+            batch_growth_tracking_primary_id = db.insert(DBHelper.BATCH_GROWTH_TRACKING_DETAILS, null, values);
+
+        }
+        catch (Exception e) {
+
+        }*/
+        if (batch_growth_tracking_primary_id>0){
+            dbData.open();
+            ArrayList<NurserySurvey> getImageListSize = new ArrayList<>();
+            getImageListSize.addAll(dbData.get_batch_growth_tracking_photos_details(String.valueOf(batch_id),entry_date));
+            if(getImageListSize.size()>0){
+                int sdsm = db.delete(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, "batch_id = ? and entry_date = ? ", new String[]{String.valueOf(batch_id),entry_date});
+            }
             JSONArray imageJson = new JSONArray();
             long rowInserted = 0;
             int childCount = cameraScreenBinding.cameraLayout.getChildCount();

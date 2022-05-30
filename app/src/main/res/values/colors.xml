@@ -51,6 +51,7 @@
     <color name="subscription_type_red_color">#fc4b5f</color>
     <color name="background_light_gray">#f1f1f1</color>
     <color name="sky_blue">#61BEE1</color>
+    <color name="green_combo">#e1dd72</color>
 
     <color name="dashboard_line_dark">#818080</color>
     <color name="dashboard_line_light">#EBEBEB</color>

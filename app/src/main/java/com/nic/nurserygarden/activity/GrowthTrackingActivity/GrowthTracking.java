@@ -86,7 +86,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
             Utils.showAlert(GrowthTracking.this,getResources().getString(R.string.no_internet));
         }
 
-        growthTrackingBinding.takePhotoBtn.setOnClickListener(new View.OnClickListener() {
+       /* growthTrackingBinding.takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent camera_screen = new Intent(GrowthTracking.this, CameraScreen.class);
@@ -96,7 +96,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                 camera_screen.putExtra("entry_date",choose_date);
                 startActivity(camera_screen);
             }
-        });
+        });*/
     }
     private void initialiseRecyclerView() {
         growthTrackingBinding.chooseDateRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -294,13 +294,13 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
             super.onPostExecute(BatchTrackingDetails);
             if(BatchTrackingDetails.size()>0){
                 growthTrackingBinding.growthDetailsRecycler.setVisibility(View.VISIBLE);
-                growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                //growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
                 trackingGrowthAdapter = new TrackingGrowthAdapter(BatchTrackingDetails, GrowthTracking.this,dbData);
                 growthTrackingBinding.growthDetailsRecycler.setAdapter(trackingGrowthAdapter);
             }
             else {
                 growthTrackingBinding.growthDetailsRecycler.setVisibility(View.GONE);
-                growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                //growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
             }
         }
     }

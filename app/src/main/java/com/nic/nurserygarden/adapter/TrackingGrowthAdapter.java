@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchSpeciesDetails;
+import com.nic.nurserygarden.activity.CameraScreen;
 import com.nic.nurserygarden.activity.FullImageActivity;
 import com.nic.nurserygarden.activity.GrowthTrackingActivity.GrowthTracking;
 import com.nic.nurserygarden.constant.AppConstant;
@@ -81,8 +82,10 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
 
         if(growthList.get(position).getServer_flag().equals("0")){
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
-            getSpeciesCount = dbData.get_batch_growth_species_details(String.valueOf(growthList.get(position).getBatch_growth_tracking_primary_id()),"","0","");
-            if(getSpeciesCount.size()>0) {
+            ArrayList<NurserySurvey> getImageCount = new ArrayList<>();
+            getSpeciesCount.addAll(dbData.get_batch_growth_species_details(String.valueOf(growthList.get(position).getBatch_growth_tracking_primary_id()),"","0",""));
+            getImageCount.addAll(dbData.get_batch_growth_tracking_photos_details(String.valueOf(growthList.get(position).getBatch_id()),growthList.get(position).getCreated_date()));
+            if(getSpeciesCount.size()>0||getImageCount.size()>0) {
                 holder.trackingGrowthItemViewBinding.upload.setVisibility(View.VISIBLE);
             }
             else {
@@ -93,8 +96,11 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         }
         else {
             ArrayList<NurserySurvey> getSpeciesCount = new ArrayList<>();
+            ArrayList<NurserySurvey> getImageCount = new ArrayList<>();
             getSpeciesCount = dbData.get_batch_growth_species_details(String.valueOf(growthList.get(position).getBatch_id()),"","0","");
-            if(getSpeciesCount.size()>0) {
+            getImageCount.addAll(dbData.get_batch_growth_tracking_photos_details(String.valueOf(growthList.get(position).getBatch_id()),growthList.get(position).getCreated_date()));
+
+            if(getSpeciesCount.size()>0||getImageCount.size()>0) {
                 holder.trackingGrowthItemViewBinding.upload.setVisibility(View.VISIBLE);
             }
             else {
@@ -127,6 +133,19 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
                 gotoAddSpeciesClass.putExtra("growth_tracking_id",growthList.get(position).getGrowth_tracking_id());
 
                 context.startActivity(gotoAddSpeciesClass);
+            }
+        });
+        holder.trackingGrowthItemViewBinding.takePhotoIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent camera_screen = new Intent(context, CameraScreen.class);
+                camera_screen.putExtra("activity_type","GrowthTracking");
+                camera_screen.putExtra("batch_id",growthList.get(position).getBatch_id());
+                camera_screen.putExtra("batch_primary_id",growthList.get(position).getBatch_primary_id());
+                camera_screen.putExtra("entry_date",growthList.get(position).getCreated_date());
+                camera_screen.putExtra("batch_growth_tracking_primary_id",growthList.get(position).getBatch_growth_tracking_primary_id());
+
+                context.startActivity(camera_screen);
             }
         });
 

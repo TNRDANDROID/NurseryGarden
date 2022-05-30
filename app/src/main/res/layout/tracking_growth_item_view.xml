@@ -61,6 +61,14 @@
                             android:textSize="@dimen/content_text_size"
                             android:padding="@dimen/_5sdp"/>
 
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:id="@+id/take_photo_icon"
+                            android:src="@drawable/camera_icon"
+                            android:tint="@color/white"
+                            android:layout_gravity="end"
+                            android:padding="@dimen/_5sdp"/>
 
                     </LinearLayout>
                     <View

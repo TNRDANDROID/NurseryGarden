@@ -1,11 +1,17 @@
 package com.nic.nurserygarden.adapter;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 
@@ -71,10 +77,12 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
         holder.historyItemViewBinding.date.setText(""+historyItemList.get(position).getOrder_date());
         holder.historyItemViewBinding.orderId.setText(""+historyItemList.get(position).getSapling_order_id());
         if(historyItemList.get(position).getBuyer_type_id()==3){
+            holder.historyItemViewBinding.mgOrBuyerLayout.setBackgroundColor(context.getResources().getColor(R.color.green_combo));
             holder.historyItemViewBinding.buyreOrMgnregsId.setText("MGNREGS");
             holder.historyItemViewBinding.buyreOrMgnregsIdValue.setText(""+historyItemList.get(position).getMgnregs_id());
         }
         else {
+            holder.historyItemViewBinding.mgOrBuyerLayout.setBackgroundColor(context.getResources().getColor(R.color.gradStart));
             holder.historyItemViewBinding.buyreOrMgnregsId.setText("Buyer Name");
             holder.historyItemViewBinding.buyreOrMgnregsIdValue.setText(""+historyItemList.get(position).getBuyer_name());
         }
@@ -119,9 +127,11 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
             public void onClick(View v) {
                 if(pos==position){
                     pos=-1;
+                    fadeInAnimation(holder.historyItemViewBinding.historyDetailsLayout,500);
                     notifyDataSetChanged();
                 }
                 else {
+                    fadeOutAnimation(holder.historyItemViewBinding.historyDetailsLayout,500);
                     pos = position;
                     //SlideToDown(holder.historyItemViewBinding.historyDetailsLayout);
                     notifyDataSetChanged();
@@ -185,6 +195,61 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
 
         });
 
+    }
+    /*public void fadeOutAnimation(View viewToFadeOut) {
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(viewToFadeOut, "alpha", 1f, 0f);
+
+        fadeOut.setDuration(500);
+        fadeOut.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // We wanna set the view to GONE, after it's fade out. so it actually disappear from the layout & don't take up space.
+                viewToFadeOut.setVisibility(View.GONE);
+            }
+        });
+
+        fadeOut.start();
+    }
+    */
+
+    public static void fadeInAnimation(final View view, long animationDuration) {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(animationDuration);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        view.startAnimation(fadeIn);
+    }
+    public static void fadeOutAnimation(final View view, long animationDuration) {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setStartOffset(animationDuration);
+        fadeOut.setDuration(animationDuration);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.INVISIBLE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+        view.startAnimation(fadeOut);
     }
 }
 
