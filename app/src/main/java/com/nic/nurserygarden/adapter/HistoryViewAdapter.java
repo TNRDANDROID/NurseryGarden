@@ -1,10 +1,6 @@
 package com.nic.nurserygarden.adapter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +8,16 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nic.nurserygarden.R;
-import com.nic.nurserygarden.activity.HistoryActivity.OrderHistory;
 import com.nic.nurserygarden.databinding.OrderBasicHistoryItemViewBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
 
@@ -34,18 +28,21 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
     private LayoutInflater layoutInflater;
     private List<NurserySurvey> historyItemList;
     private List<NurserySurvey> historyItemDetailsList;
-    Context context;
-    int pos=-1;
-    String type;
-    String which_class;
+    private Context context;
+    private int pos=-1;
+    private String type;
+    private String which_class;
+    private Animation fadeIn_out;
 
-    HistoryDetailsViewAdapter historyDetailsViewAdapter;
+    private HistoryDetailsViewAdapter historyDetailsViewAdapter;
     public HistoryViewAdapter(List<NurserySurvey> historyItemList,List<NurserySurvey> historyItemDetailsList, Context context, String type, String which_class) {
         this.historyItemList = historyItemList;
         this.historyItemDetailsList = historyItemDetailsList;
         this.context = context;
         this.type=type;
         this.which_class=which_class;
+        fadeIn_out = new AlphaAnimation(1,0);
+        fadeIn_out.reset();
     }
 
     @NonNull
@@ -83,7 +80,7 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
         }
         else {
             holder.historyItemViewBinding.mgOrBuyerLayout.setBackgroundColor(context.getResources().getColor(R.color.gradStart));
-            holder.historyItemViewBinding.buyreOrMgnregsId.setText("Buyer Name");
+            holder.historyItemViewBinding.buyreOrMgnregsId.setText(context.getResources().getString(R.string.buyer_name));
             holder.historyItemViewBinding.buyreOrMgnregsIdValue.setText(""+historyItemList.get(position).getBuyer_name());
         }
         int sapling_order_id = historyItemList.get(position).getSapling_order_id();
@@ -127,11 +124,11 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
             public void onClick(View v) {
                 if(pos==position){
                     pos=-1;
-                    fadeInAnimation(holder.historyItemViewBinding.historyDetailsLayout,500);
+                    fadeInAnimation(holder.historyItemViewBinding.historyDetailsLayout);
                     notifyDataSetChanged();
                 }
                 else {
-                    fadeOutAnimation(holder.historyItemViewBinding.historyDetailsLayout,500);
+                    fadeOutAnimation(holder.historyItemViewBinding.historyDetailsLayout);
                     pos = position;
                     //SlideToDown(holder.historyItemViewBinding.historyDetailsLayout);
                     notifyDataSetChanged();
@@ -212,11 +209,12 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
     }
     */
 
-    public static void fadeInAnimation(final View view, long animationDuration) {
-        Animation fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new DecelerateInterpolator());
-        fadeIn.setDuration(animationDuration);
-        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+    private void fadeInAnimation(final View view) {
+        fadeIn_out.reset();
+        fadeIn_out = new AlphaAnimation(0, 1);
+        fadeIn_out.setInterpolator(new DecelerateInterpolator());
+        fadeIn_out.setDuration(500);
+        fadeIn_out.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
             }
@@ -229,14 +227,16 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
             }
         });
 
-        view.startAnimation(fadeIn);
+        view.startAnimation(fadeIn_out);
+
     }
-    public static void fadeOutAnimation(final View view, long animationDuration) {
-        Animation fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setInterpolator(new AccelerateInterpolator());
-        fadeOut.setStartOffset(animationDuration);
-        fadeOut.setDuration(animationDuration);
-        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+     private void fadeOutAnimation(final View view) {
+         fadeIn_out.reset();
+         fadeIn_out = new AlphaAnimation(1, 0);
+         fadeIn_out.setInterpolator(new AccelerateInterpolator());
+         fadeIn_out.setStartOffset(500);
+         fadeIn_out.setDuration(500);
+         fadeIn_out.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
             }
@@ -249,7 +249,63 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
             }
         });
 
-        view.startAnimation(fadeOut);
+        view.startAnimation(fadeIn_out);
+
+    }
+    private void expand(final View v) {
+        int matchParentMeasureSpec = View.MeasureSpec.makeMeasureSpec(((View) v.getParent()).getWidth(), View.MeasureSpec.EXACTLY);
+        int wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        v.measure(matchParentMeasureSpec, wrapContentMeasureSpec);
+        final int targetHeight = v.getMeasuredHeight();
+
+        // Older versions of android (pre API 21) cancel animations for views with a height of 0.
+        v.getLayoutParams().height = 1;
+        v.setVisibility(View.VISIBLE);
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                v.getLayoutParams().height = interpolatedTime == 1
+                        ? RelativeLayout.LayoutParams.WRAP_CONTENT
+                        : (int)(targetHeight * interpolatedTime);
+                v.requestLayout();
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // Expansion speed of 1dp/ms
+        a.setDuration((int)(targetHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
+
+    private   void collapse(final View v) {
+        final int initialHeight = v.getMeasuredHeight();
+
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                if(interpolatedTime == 1){
+                    v.setVisibility(View.GONE);
+                }else{
+                    v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
+
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
+
+        // Collapse speed of 1dp/ms
+        a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+        v.startAnimation(a);
     }
 }
 

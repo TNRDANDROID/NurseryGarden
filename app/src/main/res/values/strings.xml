@@ -230,6 +230,7 @@
     <string name="existing_house_with_beneficiary">Existing House With Beneficiary</string>
     <string name="view_server_images">View Server Images</string>
     <string name="view_server_data">View Server Data</string>
+    <string name="buyer_name">Buyer Name</string>
 
 
 </resources>
