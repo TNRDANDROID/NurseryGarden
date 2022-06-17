@@ -69,6 +69,7 @@
     <string name="nursery_id">Nursery Id</string>
     <string name="nursery_level_id">Nursery Level Id</string>
     <string name="nursery_name_en">Nursery Name En</string>
+    <string name="nursery_name">Nursery Name</string>
     <string name="nursery_name_ta">Nursery Name Ta</string>
     <string name="nursery_address">Nursery Address</string>
     <string name="district_name">District Name</string>
@@ -231,6 +232,15 @@
     <string name="view_server_images">View Server Images</string>
     <string name="view_server_data">View Server Data</string>
     <string name="buyer_name">Buyer Name</string>
-
+    <string name="capital_expenditure">Capital Expenditure</string>
+    <string name="recurring_expenditure">Recurring Expenditure</string>
+    <string name="select_expenditure">Select Expenditure</string>
+    <string name="select_expenditure_unit">Select Expenditure Unit</string>
+    <string name="select_expenditure_found_src">Select Expenditure Found Src</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="please_specify">Please Specify</string>
+    <string name="dead_saplings">Dead Saplings</string>
+    <string name="expenditure">Expenditure</string>
+    <string name="expenditure_view">Expenditure View</string>
 
 </resources>

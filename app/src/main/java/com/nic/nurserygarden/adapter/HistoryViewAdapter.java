@@ -145,7 +145,7 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewAdapter.
         return historyItemList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         private OrderBasicHistoryItemViewBinding historyItemViewBinding;
 
         public MyViewHolder(OrderBasicHistoryItemViewBinding Binding) {

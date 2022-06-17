@@ -538,6 +538,36 @@ public class dbData {
         Log.d("Insert_dead_sapling", String.valueOf(id));
     }
 
+    public void insert_nursery_expenditure_type(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("expenditure_type_id", pmgsySurvey.getExpenditure_type_id());
+        values.put("expense_category_id", pmgsySurvey.getExpense_category_id());
+        values.put("expense_category_en", pmgsySurvey.getExpense_category_en());
+        values.put("expense_category_ta", pmgsySurvey.getExpense_category_ta());
+        values.put("is_others", pmgsySurvey.getIs_others());
+        long id = db.insert(DBHelper.NURSERY_EXPENDITURE_TYPE,null,values);
+        Log.d("Insert_expen_type", String.valueOf(id));
+    }
+
+    public void insert_nursery_expenditure_unit(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("expense_category_id", pmgsySurvey.getExpense_category_id());
+        values.put("expenditure_unit_id", pmgsySurvey.getExpenditure_unit_id());
+        values.put("expenditure_unit_en", pmgsySurvey.getExpenditure_unit_en());
+        values.put("expenditure_unit_ta", pmgsySurvey.getExpenditure_unit_ta());
+        long id = db.insert(DBHelper.NURSERY_EXPENDITURE_UNIT,null,values);
+        Log.d("Insert_expen_unit", String.valueOf(id));
+    }
+    public void insert_nursery_expenditure_found_src(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("expense_category_id", pmgsySurvey.getExpense_category_id());
+        values.put("expenditure_fund_src_id", pmgsySurvey.getExpenditure_fund_src_id());
+        values.put("expenditure_fund_src_en", pmgsySurvey.getExpenditure_fund_src_en());
+        values.put("expenditure_fund_src_ta", pmgsySurvey.getExpenditure_fund_src_ta());
+        long id = db.insert(DBHelper.NURSERY_EXPENDITURE_FOUND_SRC,null,values);
+        Log.d("Insert_expen_found", String.valueOf(id));
+    }
+
 
     public ArrayList<NurserySurvey> getAll_Master_Fin_Year() {
         ArrayList<NurserySurvey> cards = new ArrayList<>();
@@ -912,6 +942,96 @@ public class dbData {
         return cards;
     }
 
+    public ArrayList<NurserySurvey> get_all_expenditure_type() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_EXPENDITURE_TYPE,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setExpenditure_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_type_id")));
+                    card.setExpense_category_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expense_category_id")));
+                    card.setExpense_category_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expense_category_en")));
+                    card.setExpense_category_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expense_category_ta")));
+                    card.setIs_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("is_others")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_all_expenditure_unit() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_EXPENDITURE_UNIT,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setExpenditure_unit_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_unit_id")));
+                    card.setExpense_category_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expense_category_id")));
+                    card.setExpenditure_unit_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expenditure_unit_en")));
+                    card.setExpenditure_unit_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expenditure_unit_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_all_expenditure_found_src() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_EXPENDITURE_FOUND_SRC,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setExpenditure_fund_src_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_fund_src_id")));
+                    card.setExpense_category_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expense_category_id")));
+                    card.setExpenditure_fund_src_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expenditure_fund_src_en")));
+                    card.setExpenditure_fund_src_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expenditure_fund_src_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+
     public ArrayList<NurserySurvey> get_nursery_land_details(String type,String server_flag,String value) {
         ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
@@ -1161,8 +1281,8 @@ public class dbData {
         try {
 
             if(type.equals("All")){
-                selection = "batch_id = ? ";
-                selectionArgs = new String[]{batch_id};
+                selection = "batch_id = ? and entry_date = ?";
+                selectionArgs = new String[]{batch_id,entry_date};
             }
             else {
                 selection = "batch_id = ? and entry_date = ?";
@@ -1244,27 +1364,29 @@ public class dbData {
         }
         return cards;
     }
-    public ArrayList<NurserySurvey> get_batch_growth_species_details(String value,String type,String server_flag,String species_type_id) {
+    public ArrayList<NurserySurvey> get_batch_growth_species_details(String value,String type,String server_flag,String species_type_id,String entry_date) {
         ArrayList<NurserySurvey> cards = new ArrayList<>();
         Cursor cursor = null;
         String selection;
         String[] selectionArgs;
         try {
-            if(type.equals("All")){
-                selection = "batch_id = ? ";
-                selectionArgs = new String[]{value};
-            }
-            else if(type.equals("")){
-                selection = " batch_id = ? and server_flag = ? ";
-                selectionArgs = new String[]{value,server_flag};
-            }
-            else if(type.equals("local")){
-                selection = "server_flag = ? ";
-                selectionArgs = new String[]{server_flag};
-            }
-            else {
-                selection = "batch_id = ? and species_type_id = ? ";
-                selectionArgs = new String[]{value,species_type_id};
+            switch (type) {
+                case "All":
+                    selection = "batch_id = ? and entry_date = ? ";
+                    selectionArgs = new String[]{value, entry_date};
+                    break;
+                case "":
+                    selection = " batch_id = ? and server_flag = ?  and entry_date = ? ";
+                    selectionArgs = new String[]{value, server_flag, entry_date};
+                    break;
+                case "local":
+                    selection = "server_flag = ? ";
+                    selectionArgs = new String[]{server_flag};
+                    break;
+                default:
+                    selection = "batch_id = ? and species_type_id = ?  and entry_date = ? ";
+                    selectionArgs = new String[]{value, species_type_id, entry_date};
+                    break;
             }
 
 
@@ -1439,7 +1561,7 @@ public class dbData {
                     NurserySurvey card = new NurserySurvey();
                     card.setBatch_id(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_id")));
-                    card.setBatch_id(cursor.getInt(cursor
+                    card.setBatch_number(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_no")));
                     card.setBatch_species_id(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_species_id")));
@@ -1501,6 +1623,70 @@ public class dbData {
         return cards;
     }
 
+    public ArrayList<NurserySurvey> get_All_Or_Particular_Expenditure(String type,String date) {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+        String selection;
+        String[] selectionArgs;
+        if(type.equals("Particular")){
+            selection = " entry_date = ? ";
+            selectionArgs = new String[]{date};
+            cursor = db.query(DBHelper.NURSERY_EXPENDITURE_SAVE,new String[]{"*"},
+                    selection, selectionArgs, null, null, null);
+        }
+        else {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_EXPENDITURE_SAVE,null);
+        }
+        try {
+            //cursor = db.rawQuery("select * from "+DBHelper.DEAD_SAPLING_DETAILS_SAVE,null);
+
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setExpenditure_primary_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_primary_id")));
+                    card.setFin_year(cursor.getString(cursor
+                            .getColumnIndexOrThrow("fin_year")));
+                    card.setEntry_date(cursor.getString(cursor
+                            .getColumnIndexOrThrow("entry_date")));
+                    card.setExpenditure_type_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_type_id")));
+                    card.setExpense_category_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expense_category_id")));
+                    card.setExpenditure_unit_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_unit_id")));
+                    card.setExpenditure_fund_src_id(cursor.getInt(cursor
+                            .getColumnIndexOrThrow("expenditure_fund_src_id")));
+                    card.setExpense_category_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expense_category_name")));
+                    card.setExpense_unit_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expense_unit_name")));
+                    card.setExpense_found_src_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expense_found_src_name")));
+                    card.setExpense_category_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expense_category_others")));
+                    card.setExpenditure_unit_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expenditure_unit_others")));
+                    card.setExpenditure_fund_src_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("expenditure_fund_src_others")));
+                    card.setQuantity(cursor.getString(cursor
+                            .getColumnIndexOrThrow("quantity")));
+                    card.setAmount(cursor.getString(cursor
+                            .getColumnIndexOrThrow("amount")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+
+
     //////////////////////*****************/////////////
 
 
@@ -1541,6 +1727,10 @@ public class dbData {
     public void delete_dead_sapling_details_save() { db.execSQL("delete from " + DBHelper.DEAD_SAPLING_DETAILS_SAVE);}
     public void delete_dead_sapling_details_new_save() { db.execSQL("delete from " + DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE);}
 
+    public void delete_nursery_expenditure_type() { db.execSQL("delete from " + DBHelper.NURSERY_EXPENDITURE_TYPE);}
+    public void delete_nursery_expenditure_unit() { db.execSQL("delete from " + DBHelper.NURSERY_EXPENDITURE_UNIT);}
+    public void delete_nursery_expenditure_found_src() { db.execSQL("delete from " + DBHelper.NURSERY_EXPENDITURE_FOUND_SRC);}
+    public void delete_nursery_expenditure_save() { db.execSQL("delete from " + DBHelper.NURSERY_EXPENDITURE_SAVE);}
 
 
 
@@ -1578,6 +1768,11 @@ public class dbData {
         delete_DEAD_SAPLING_DETAILS();
         delete_dead_sapling_details_save();
         delete_dead_sapling_details_new_save();
+
+        delete_nursery_expenditure_type();
+        delete_nursery_expenditure_unit();
+        delete_nursery_expenditure_found_src();
+        delete_nursery_expenditure_save();
     }
 
 

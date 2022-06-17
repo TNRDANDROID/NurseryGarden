@@ -45,6 +45,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DEAD_SAPLING_DETAILS = " dead_sapling_details";
     public static final String DEAD_SAPLING_DETAILS_SAVE = "dead_sapling_details_save";
     public static final String DEAD_SAPLING_DETAILS_NEW_SAVE = "dead_sapling_details_new_save";
+    public static final String NURSERY_EXPENDITURE_TYPE = "nursery_expenditure_type";
+    public static final String NURSERY_EXPENDITURE_UNIT = "nursery_expenditure_unit";
+    public static final String NURSERY_EXPENDITURE_FOUND_SRC = "nursery_expenditure_found_src";
+    public static final String NURSERY_EXPENDITURE_SAVE = "nursery_expenditure_save";
 
     private Context context;
 
@@ -310,6 +314,39 @@ public class DBHelper extends SQLiteOpenHelper {
                 "sapling_age_in_days INTEGER,"+
                 "dead_stage_position INTEGER,"+
                 "no_of_saplings INTEGER)");
+        db.execSQL("CREATE TABLE " + NURSERY_EXPENDITURE_TYPE + " ("
+                +"expenditure_type_id INTEGER,"+
+                "expense_category_id INTEGER,"+
+                "expense_category_en TEXT,"+
+                "expense_category_ta TEXT,"+
+                "is_others TEXT)");
+        db.execSQL("CREATE TABLE " + NURSERY_EXPENDITURE_FOUND_SRC + " ("
+                +"expenditure_fund_src_id INTEGER,"+
+                "expense_category_id INTEGER,"+
+                "expenditure_fund_src_en TEXT,"+
+                "expenditure_fund_src_ta TEXT)");
+        db.execSQL("CREATE TABLE " + NURSERY_EXPENDITURE_UNIT + " ("
+                +"expenditure_unit_id INTEGER,"+
+                "expense_category_id INTEGER,"+
+                "expenditure_unit_en TEXT,"+
+                "expenditure_unit_ta TEXT)");
+
+        db.execSQL("CREATE TABLE " + NURSERY_EXPENDITURE_SAVE + " ("
+                +"expenditure_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "fin_year TEXT,"+
+                "entry_date TEXT,"+
+                "expenditure_type_id INTEGER,"+
+                "expense_category_id INTEGER,"+
+                "expenditure_unit_id INTEGER,"+
+                "expenditure_fund_src_id INTEGER,"+
+                "expense_category_name TEXT,"+
+                "expense_unit_name TEXT,"+
+                "expense_found_src_name TEXT,"+
+                "expense_category_others TEXT,"+
+                "expenditure_unit_others TEXT,"+
+                "expenditure_fund_src_others TEXT,"+
+                "quantity TEXT,"+
+                "amount TEXT)");
 
 
     }
@@ -349,6 +386,11 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS_SAVE);
             db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS);
             db.execSQL("DROP TABLE IF EXISTS " + DEAD_SAPLING_DETAILS_NEW_SAVE);
+
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_TYPE);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_UNIT);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_FOUND_SRC);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_SAVE);
             onCreate(db);
         }
     }

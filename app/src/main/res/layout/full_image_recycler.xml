@@ -17,6 +17,11 @@
             android:background="@drawable/background">
 
             <TextView
+                android:layout_toEndOf="@+id/back_img"
+                android:layout_toStartOf="@+id/home_img"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:textAlignment="center"
                 style="@string/font_circular_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,7 +29,7 @@
                 android:layout_marginTop="@dimen/margin"
                 android:text="@string/view_image"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/title_text_size" />
 
             <ImageView
                 android:id="@+id/back_img"

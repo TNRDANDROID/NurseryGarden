@@ -189,8 +189,8 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                     saveImageButtonClick();
                 }
                 else if(activity_type.equals("GrowthTracking")){
-                    //saveGrowthTrackImage();
-                    saveGrowthTrackImageNew();
+                    saveGrowthTrackImage();
+                    //saveGrowthTrackImageNew();
                 }
         }
     }

@@ -80,6 +80,15 @@ public class CommonAdapter extends BaseAdapter {
         else if (type.equalsIgnoreCase("nurseryBuyerTypeList")) {
             tv_type.setText(pmgsySurvey.getBuyer_type_name_en());
         }
+        else if (type.equalsIgnoreCase("expenditureTypeList")) {
+            tv_type.setText(pmgsySurvey.getExpense_category_en());
+        }
+        else if (type.equalsIgnoreCase("expenditureUnitList")) {
+            tv_type.setText(pmgsySurvey.getExpenditure_unit_en());
+        }
+        else if (type.equalsIgnoreCase("expenditureFoundSrcList")) {
+            tv_type.setText(pmgsySurvey.getExpenditure_fund_src_en());
+        }
         return view;
     }
 

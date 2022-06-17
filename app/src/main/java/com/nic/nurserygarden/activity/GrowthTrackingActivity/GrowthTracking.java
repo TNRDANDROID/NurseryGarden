@@ -86,7 +86,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
             Utils.showAlert(GrowthTracking.this,getResources().getString(R.string.no_internet));
         }
 
-       /* growthTrackingBinding.takePhotoBtn.setOnClickListener(new View.OnClickListener() {
+        growthTrackingBinding.takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent camera_screen = new Intent(GrowthTracking.this, CameraScreen.class);
@@ -96,7 +96,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
                 camera_screen.putExtra("entry_date",choose_date);
                 startActivity(camera_screen);
             }
-        });*/
+        });
     }
     private void initialiseRecyclerView() {
         growthTrackingBinding.chooseDateRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -294,13 +294,13 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
             super.onPostExecute(BatchTrackingDetails);
             if(BatchTrackingDetails.size()>0){
                 growthTrackingBinding.growthDetailsRecycler.setVisibility(View.VISIBLE);
-                //growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
+                growthTrackingBinding.takePhotoBtn.setVisibility(View.GONE);
                 trackingGrowthAdapter = new TrackingGrowthAdapter(BatchTrackingDetails, GrowthTracking.this,dbData);
                 growthTrackingBinding.growthDetailsRecycler.setAdapter(trackingGrowthAdapter);
             }
             else {
                 growthTrackingBinding.growthDetailsRecycler.setVisibility(View.GONE);
-                //growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
+                growthTrackingBinding.takePhotoBtn.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -311,7 +311,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         ArrayList<NurserySurvey> growthTrackingDetailsList = new ArrayList<>();
         ArrayList<NurserySurvey> get_batch_growth_species_details = new ArrayList<>();
         growthTrackingDetailsList = dbData.get_nursery_batch_growth_tacking_details(String.valueOf(batch_id),choose_date,"");
-        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"","0","");
+        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"","0","",choose_date);
         if(get_batch_growth_species_details.size()>0){
                 new fetchNurseryBatchDetails().execute();
         }
@@ -361,7 +361,7 @@ public class GrowthTracking extends AppCompatActivity implements Api.ServerRespo
         ArrayList<NurserySurvey> growthTrackingDetailsList = new ArrayList<>();
         ArrayList<NurserySurvey> get_batch_growth_species_details = new ArrayList<>();
         growthTrackingDetailsList = dbData.get_nursery_batch_growth_tacking_details(String.valueOf(batch_id),choose_date,"");
-        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"","0","");
+        get_batch_growth_species_details = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"","0","",choose_date);
         if(get_batch_growth_species_details.size()>0){
             new fetchNurseryBatchDetails().execute();
         }

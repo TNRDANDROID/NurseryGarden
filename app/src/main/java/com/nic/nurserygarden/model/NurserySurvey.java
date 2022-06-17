@@ -889,4 +889,206 @@ public class NurserySurvey {
     public void setMgnregs_id(String mgnregs_id) {
         this.mgnregs_id = mgnregs_id;
     }
+
+    private int expenditure_primary_id;
+    private int expenditure_type_id;
+    private int expense_category_id;
+    private int expenditure_fund_src_id;
+    private int expenditure_unit_id;
+    private String expense_category_en;
+    private String expense_category_ta;
+    private String is_others;
+    private String expenditure_fund_src_en;
+    private String expenditure_fund_src_ta;
+    private String expenditure_unit_en;
+    private String expense_category_others;
+    private String expenditure_unit_others;
+    private String expenditure_fund_src_others;
+    private String quantity;
+    private String amount;
+    private String expense_category_name="";
+    private String expense_unit_name="";
+    private String expense_found_src_name="";
+    private String expenditure_type="";
+
+    public String getExpenditure_type() {
+        return expenditure_type;
+    }
+
+    public void setExpenditure_type(String expenditure_type) {
+        this.expenditure_type = expenditure_type;
+    }
+
+    public String getExpense_category_name() {
+        return expense_category_name;
+    }
+
+    public void setExpense_category_name(String expense_category_name) {
+        this.expense_category_name = expense_category_name;
+    }
+
+    public String getExpense_unit_name() {
+        return expense_unit_name;
+    }
+
+    public void setExpense_unit_name(String expense_unit_name) {
+        this.expense_unit_name = expense_unit_name;
+    }
+
+    public String getExpense_found_src_name() {
+        return expense_found_src_name;
+    }
+
+    public void setExpense_found_src_name(String expense_found_src_name) {
+        this.expense_found_src_name = expense_found_src_name;
+    }
+
+    public String getExpense_category_others() {
+        return expense_category_others;
+    }
+
+    public void setExpense_category_others(String expense_category_others) {
+        this.expense_category_others = expense_category_others;
+    }
+
+    public String getExpenditure_unit_others() {
+        return expenditure_unit_others;
+    }
+
+    public void setExpenditure_unit_others(String expenditure_unit_others) {
+        this.expenditure_unit_others = expenditure_unit_others;
+    }
+
+    public String getExpenditure_fund_src_others() {
+        return expenditure_fund_src_others;
+    }
+
+    public void setExpenditure_fund_src_others(String expenditure_fund_src_others) {
+        this.expenditure_fund_src_others = expenditure_fund_src_others;
+    }
+
+    public String getEntry_date() {
+        return entry_date;
+    }
+
+    public void setEntry_date(String entry_date) {
+        this.entry_date = entry_date;
+    }
+
+    private String entry_date;
+
+    public int getExpenditure_primary_id() {
+        return expenditure_primary_id;
+    }
+
+    public void setExpenditure_primary_id(int expenditure_primary_id) {
+        this.expenditure_primary_id = expenditure_primary_id;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public int getExpenditure_type_id() {
+        return expenditure_type_id;
+    }
+
+    public void setExpenditure_type_id(int expenditure_type_id) {
+        this.expenditure_type_id = expenditure_type_id;
+    }
+
+    public int getExpense_category_id() {
+        return expense_category_id;
+    }
+
+    public void setExpense_category_id(int expense_category_id) {
+        this.expense_category_id = expense_category_id;
+    }
+
+    public int getExpenditure_fund_src_id() {
+        return expenditure_fund_src_id;
+    }
+
+    public void setExpenditure_fund_src_id(int expenditure_fund_src_id) {
+        this.expenditure_fund_src_id = expenditure_fund_src_id;
+    }
+
+    public int getExpenditure_unit_id() {
+        return expenditure_unit_id;
+    }
+
+    public void setExpenditure_unit_id(int expenditure_unit_id) {
+        this.expenditure_unit_id = expenditure_unit_id;
+    }
+
+    public String getExpense_category_en() {
+        return expense_category_en;
+    }
+
+    public void setExpense_category_en(String expense_category_en) {
+        this.expense_category_en = expense_category_en;
+    }
+
+    public String getExpense_category_ta() {
+        return expense_category_ta;
+    }
+
+    public void setExpense_category_ta(String expense_category_ta) {
+        this.expense_category_ta = expense_category_ta;
+    }
+
+    public String getIs_others() {
+        return is_others;
+    }
+
+    public void setIs_others(String is_others) {
+        this.is_others = is_others;
+    }
+
+    public String getExpenditure_fund_src_en() {
+        return expenditure_fund_src_en;
+    }
+
+    public void setExpenditure_fund_src_en(String expenditure_fund_src_en) {
+        this.expenditure_fund_src_en = expenditure_fund_src_en;
+    }
+
+    public String getExpenditure_fund_src_ta() {
+        return expenditure_fund_src_ta;
+    }
+
+    public void setExpenditure_fund_src_ta(String expenditure_fund_src_ta) {
+        this.expenditure_fund_src_ta = expenditure_fund_src_ta;
+    }
+
+    public String getExpenditure_unit_en() {
+        return expenditure_unit_en;
+    }
+
+    public void setExpenditure_unit_en(String expenditure_unit_en) {
+        this.expenditure_unit_en = expenditure_unit_en;
+    }
+
+    public String getExpenditure_unit_ta() {
+        return expenditure_unit_ta;
+    }
+
+    public void setExpenditure_unit_ta(String expenditure_unit_ta) {
+        this.expenditure_unit_ta = expenditure_unit_ta;
+    }
+
+    private String expenditure_unit_ta;
+
 }

@@ -139,8 +139,8 @@
                                         android:layout_marginTop="@dimen/_30sdp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/_40sdp"
-                                        android:layout_marginRight="@dimen/_40sdp"
+                                        android:layout_marginLeft="@dimen/_50sdp"
+                                        android:layout_marginRight="@dimen/_50sdp"
                                         android:orientation="vertical"
                                         >
                                         <Button
@@ -248,6 +248,7 @@
                         android:layout_below="@+id/rellay1">
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/card_view1"
                             android:layout_width="match_parent"
                             android:layout_marginLeft="@dimen/_15sdp"
                             android:layout_centerHorizontal="true"
@@ -265,523 +266,657 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
-                                    android:padding="@dimen/_10sdp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/nursery_id"
-                                        tools:ignore="TooDeepLayout" />
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_id"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/nursery_level_id"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_level_id"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/nursery_name_en"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_name_en"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/_13sdp"
-                                        android:text="@string/nursery_name_ta"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_name_ta"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/nursery_address"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_address"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/district_name"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_dname"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/block_name"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_bname"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:id="@+id/pv_name_layout"
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="3">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.2"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/village_name"/>
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/d_grey1"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        android:text="@string/semi_colan"/>
-                                    <TextView
-                                        android:id="@+id/nursery_pvname"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1.5"
-                                        android:textAlignment="viewStart"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/large_content_text_size"
-                                        />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="2"
-                                    android:baselineAligned="false">
-
-                                    <RelativeLayout
-                                        android:layout_margin="@dimen/_5sdp"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        >
-                                        <Button
-                                            android:id="@+id/add_land"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center_horizontal"
-                                            android:background="@drawable/grad_curve"
-                                            android:text="@string/add_view_land"
-                                            android:clickable="true"
-                                            android:textAlignment="center"
-                                            android:textAllCaps="true"
-                                            android:textColor="@color/white"
-                                            android:textSize="@dimen/content_text_size"
-                                            android:textStyle="bold"
-                                            android:focusable="true" />
-
-
-                                    </RelativeLayout>
-                                    <RelativeLayout
-                                        android:layout_margin="@dimen/_5sdp"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        >
-                                        <Button
-                                            android:id="@+id/add_batch"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center_horizontal"
-                                            android:background="@drawable/grad_curve"
-                                            android:text="@string/add_view_batch"
-                                            android:clickable="true"
-                                            android:textAlignment="center"
-                                            android:textAllCaps="true"
-                                            android:textColor="@color/white"
-                                            android:textSize="@dimen/content_text_size"
-                                            android:textStyle="bold"
-                                            android:focusable="true" />
-
-
-                                    </RelativeLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="1"
-                                    android:baselineAligned="false">
-
-                                    <RelativeLayout
-                                        android:layout_gravity="center_horizontal"
-                                        android:layout_margin="@dimen/_5sdp"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        >
-                                        <Button
-                                            android:id="@+id/sapling_sale"
-                                            android:layout_width="@dimen/_130sdp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center_horizontal"
-                                            android:background="@drawable/grad_curve"
-                                            android:text="@string/sapling_sale"
-                                            android:clickable="true"
-                                            android:textAlignment="center"
-                                            android:textAllCaps="true"
-                                            android:textColor="@color/white"
-                                            android:textSize="@dimen/content_text_size"
-                                            android:textStyle="bold"
-                                            android:focusable="true" />
-
-
-                                    </RelativeLayout>
-                                    <RelativeLayout
-                                        android:visibility="gone"
-                                        android:layout_margin="@dimen/_5sdp"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        >
-                                        <Button
-                                            android:id="@+id/sapling_dead"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center_horizontal"
-                                            android:background="@drawable/grad_curve"
-                                            android:text="@string/sapling_dead"
-                                            android:clickable="true"
-                                            android:textAlignment="center"
-                                            android:textAllCaps="true"
-                                            android:textColor="@color/white"
-                                            android:textSize="@dimen/content_text_size"
-                                            android:textStyle="bold"
-                                            android:focusable="true" />
-
-
-                                    </RelativeLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:padding="@dimen/_10sdp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:weightSum="2"
-                                    android:baselineAligned="false">
-
-                                    <RelativeLayout
-                                        android:layout_margin="@dimen/_5sdp"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        >
-                                        <Button
-                                            android:id="@+id/order_history"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center_horizontal"
-                                            android:background="@drawable/grad_curve"
-                                            android:text="@string/view_order_history"
-                                            android:clickable="true"
-                                            android:textAlignment="center"
-                                            android:textAllCaps="true"
-                                            android:textColor="@color/white"
-                                            android:textSize="@dimen/content_text_size"
-                                            android:textStyle="bold"
-                                            android:focusable="true" />
-
-
-                                    </RelativeLayout>
-                                    <RelativeLayout
-                                        android:layout_margin="@dimen/_5sdp"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        >
-                                        <Button
-                                            android:id="@+id/delivery_history"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerInParent="true"
-                                            android:layout_gravity="center_horizontal"
-                                            android:background="@drawable/grad_curve"
-                                            android:text="@string/view_delivery_history"
-                                            android:clickable="true"
-                                            android:textAlignment="center"
-                                            android:textAllCaps="true"
-                                            android:textColor="@color/white"
-                                            android:textSize="@dimen/content_text_size"
-                                            android:textStyle="bold"
-                                            android:focusable="true" />
-
-
-                                    </RelativeLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:id="@+id/sync_layout"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="30dp"
-                                    android:layout_marginRight="30dp"
                                     android:orientation="vertical">
-                                    <androidx.cardview.widget.CardView
+                                    <LinearLayout
+                                        android:visibility="gone"
+                                        android:padding="@dimen/_7sdp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        app:cardCornerRadius="@dimen/_7sdp"
-                                        app:cardBackgroundColor="@color/white"
-                                        app:cardElevation="@dimen/_7sdp">
-                                        <RelativeLayout
-                                            android:padding="@dimen/_7sdp"
-                                            android:id="@+id/sync"
-                                            android:layout_width="match_parent"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
+
+                                        <TextView
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:visibility="visible"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/nursery_id"
+                                            tools:ignore="TooDeepLayout" />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_id"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:visibility="gone"
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
-                                            android:orientation="vertical">
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/nursery_level_id"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_level_id"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
-                                            <RelativeLayout
-                                                android:layout_centerVertical="true"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:id="@+id/sync_name_layout">
-                                                <TextView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:text="@string/sync"
-                                                    android:id="@+id/syn_text"
-                                                    style="@style/font_circular_bold"
-                                                    android:textColor="#000080"
-                                                    android:textSize="@dimen/content_text_size"
-                                                    tools:ignore="RelativeOverlap" />
-                                                <TextView
-                                                    android:layout_below="@+id/syn_text"
-                                                    android:id="@+id/syn_1"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:fontFamily="sans-serif-light"
-                                                    android:text="@string/pending_uploads"
-                                                    android:textColor="#000000"
-                                                    android:textSize="@dimen/content_text_size" />
-                                            </RelativeLayout>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/nursery_name"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_name_en"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:visibility="gone"
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
-                                            <TextView
-                                                android:layout_toEndOf="@+id/sync_name_layout"
-                                                android:id="@+id/pendingCount"
-                                                android:layout_width="@dimen/_30sdp"
-                                                android:layout_height="@dimen/_30sdp"
-                                                android:fontFamily="sans-serif-light"
-                                                android:gravity="center"
-                                                android:layout_centerVertical="true"
-                                                android:background="@drawable/log_in_bg_circle_shadow"
-                                                android:layout_marginStart="@dimen/_18sdp"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/content_text_size" />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/_13sdp"
+                                            android:text="@string/nursery_name_ta"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_name_ta"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/nursery_address"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_address"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
-                                            <ImageView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_alignParentEnd="true"
-                                                android:layout_marginEnd="@dimen/_10sdp"
-                                                android:layout_centerVertical="true"
-                                                android:src="@drawable/ic_upload_icon"
-                                                android:contentDescription="@string/upload_icon" />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/district_name"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_dname"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/block_name"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_bname"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/pv_name_layout"
+                                        android:padding="@dimen/_7sdp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
 
-                                        </RelativeLayout>
-                                    </androidx.cardview.widget.CardView>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.2"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/village_name"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.3"
+                                            android:textAlignment="center"
+                                            android:textColor="@color/d_grey1"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            android:text="@string/semi_colan"/>
+                                        <TextView
+                                            android:id="@+id/nursery_pvname"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.5"
+                                            android:textAlignment="viewStart"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/large_content_text_size"
+                                            />
+                                    </LinearLayout>
                                 </LinearLayout>
+
 
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
+                        <LinearLayout
+                            android:layout_below="@+id/card_view1"
+                            android:layout_width="match_parent"
+                            android:id="@+id/sync_layout"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:orientation="vertical">
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="@dimen/_7sdp"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardElevation="@dimen/_7sdp">
+                                <RelativeLayout
+                                    android:padding="@dimen/_7sdp"
+                                    android:id="@+id/sync"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="visible"
+
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/sync_name_layout">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/sync"
+                                            android:id="@+id/syn_text"
+                                            style="@style/font_circular_bold"
+                                            android:textColor="#000080"
+                                            android:textSize="@dimen/content_text_size"
+                                            tools:ignore="RelativeOverlap" />
+                                        <TextView
+                                            android:layout_below="@+id/syn_text"
+                                            android:id="@+id/syn_1"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="sans-serif-light"
+                                            android:text="@string/pending_uploads"
+                                            android:textColor="#000000"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_toEndOf="@+id/sync_name_layout"
+                                        android:id="@+id/pendingCount"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
+                                        android:fontFamily="sans-serif-light"
+                                        android:gravity="center"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/log_in_bg_circle_shadow"
+                                        android:layout_marginStart="@dimen/_18sdp"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/content_text_size" />
+
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginEnd="@dimen/_10sdp"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/ic_upload_icon"
+                                        android:contentDescription="@string/upload_icon" />
+
+
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_below="@+id/sync_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/add_land"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:clickable="true"
+                                android:focusable="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/add_view_land"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/add_batch"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:focusable="true"
+                                android:clickable="true"
+                                android:background="@drawable/cornered_bg_new_light_green">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/add_view_batch"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/sapling_sale"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_width="match_parent"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:layout_height="@dimen/_50sdp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/sapling_sale"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:visibility="gone"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                >
+                                <Button
+                                    android:id="@+id/sapling_dead1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="@drawable/grad_curve"
+                                    android:text="@string/sapling_dead"
+                                    android:clickable="true"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    android:focusable="true" />
+
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/order_history"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/view_order_history"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/delivery_history"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/view_delivery_history"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/capital_expenditure"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/capital_expenditure"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/recurring_expenditure"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/recurring_expenditure"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:id="@+id/expenditure_view"
+                                android:background="@drawable/cornered_bg_new_light_green"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_15sdp"
+                                    android:text="@string/expenditure_view"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/blue_background"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    tools:ignore="RelativeOverlap" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginEnd="@dimen/_7sdp"
+                                    android:src="@drawable/ic_next"/>
+
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:visibility="gone"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                >
+                                <Button
+                                    android:id="@+id/sapling_dead"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="@drawable/grad_curve"
+                                    android:text="@string/sapling_dead"
+                                    android:clickable="true"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:textStyle="bold"
+                                    android:focusable="true" />
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
                     </RelativeLayout>
 
                     <RelativeLayout

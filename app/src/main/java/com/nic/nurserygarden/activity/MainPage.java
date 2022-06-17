@@ -16,6 +16,8 @@ import com.android.volley.VolleyError;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.BatchActivity.AddViewBatchDetails;
 import com.nic.nurserygarden.activity.DeadSaplingActivty.NewDeadSaplingEntry;
+import com.nic.nurserygarden.activity.Expenditure.CapitalRecurreingExpenditure;
+import com.nic.nurserygarden.activity.Expenditure.ExpenditureView;
 import com.nic.nurserygarden.activity.HistoryActivity.OrderHistory;
 import com.nic.nurserygarden.activity.LandActivity.AddViewLand;
 import com.nic.nurserygarden.activity.SellAndBuyActivity.SellSpecies;
@@ -60,6 +62,10 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             get_nursery_land_type();
             get_nursery_species_type();
             get_dead_stage();
+            get_nursery_expenditure_type();
+            get_nursery_expenditure_unit();
+            get_nursery_expenditure_found_src();
+            get_fin_year();
         }
 
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +117,24 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                 gotoOrderAndDeliveryHistory("Delivery");
             }
         });
+        mainPageBinding.capitalExpenditure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoOrderAndDeliveryHistory("Capital");
+            }
+        });
+        mainPageBinding.recurringExpenditure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoOrderAndDeliveryHistory("Recurring");
+            }
+        });
+        mainPageBinding.expenditureView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoExpenditureView();
+            }
+        });
         syncButtonVisibility();
     }
 
@@ -155,6 +179,34 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             e.printStackTrace();
         }
     }
+    public void get_nursery_expenditure_type() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("expenditure_type", Api.Method.POST, UrlGenerator.getNurseryGardenService(), expenditure_type_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void get_nursery_expenditure_unit() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("expenditure_unit", Api.Method.POST, UrlGenerator.getNurseryGardenService(), expenditure_unit_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void get_nursery_expenditure_found_src() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("expenditure_found_src", Api.Method.POST, UrlGenerator.getNurseryGardenService(), expenditure_found_src_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void get_fin_year() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("fin_year", Api.Method.POST, UrlGenerator.getNurseryGardenService(), expenditure_fin_year_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public JSONObject nutri_garden_master_form_listJsonParams() throws JSONException {
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.nutri_garden_master_form_listJsonParams(this).toString());
@@ -194,6 +246,38 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
         Log.d("dead_stage", "" + authKey);
+        return dataSet;
+    }
+    public JSONObject expenditure_type_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.expenditure_type_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("expenditure_type", "" + authKey);
+        return dataSet;
+    }
+    public JSONObject expenditure_unit_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.expenditure_unit_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("expenditure_unit", "" + authKey);
+        return dataSet;
+    }
+    public JSONObject expenditure_found_src_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.expenditure_found_src_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("expenditure_found_src", "" + authKey);
+        return dataSet;
+    }
+ public JSONObject expenditure_fin_year_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.expenditure_fin_year_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("fin_year", "" + authKey);
         return dataSet;
     }
 
@@ -248,6 +332,42 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                     new Insert_dead_stage().execute(jsonObject);
                 }
                 Log.d("dead_stage", "" + responseDecryptedBlockKey);
+            }
+            if ("expenditure_type".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_expenditure_type().execute(jsonObject);
+                }
+                Log.d("expenditure_type", "" + responseDecryptedBlockKey);
+            }
+            if ("expenditure_unit".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_expenditure_unit().execute(jsonObject);
+                }
+                Log.d("expenditure_unit", "" + responseDecryptedBlockKey);
+            }
+            if ("expenditure_found_src".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_expenditure_found_src().execute(jsonObject);
+                }
+                Log.d("expenditure_found_src", "" + responseDecryptedBlockKey);
+            }
+            if ("fin_year".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_fin_year().execute(jsonObject);
+                }
+                Log.d("fin_year", "" + responseDecryptedBlockKey);
             }
 
 
@@ -500,6 +620,174 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             super.onPostExecute(aVoid);
         }
     }
+    public class Insert_expenditure_type extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            dbData.delete_nursery_expenditure_type() ;
+
+            if (params.length > 0) {
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setExpense_category_id(jsonArray.getJSONObject(i).getInt("expense_category_id"));
+                        nurserySurvey.setExpenditure_type_id(jsonArray.getJSONObject(i).getInt("expenditure_type_id"));
+                        nurserySurvey.setExpense_category_en(jsonArray.getJSONObject(i).getString("expense_category_en"));
+                        nurserySurvey.setExpense_category_ta(jsonArray.getJSONObject(i).getString("expense_category_ta"));
+                        nurserySurvey.setIs_others(jsonArray.getJSONObject(i).getString("is_others"));
+                        dbData.insert_nursery_expenditure_type(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+    public class Insert_expenditure_unit extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            dbData.delete_nursery_expenditure_unit() ;
+
+            if (params.length > 0) {
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setExpense_category_id(jsonArray.getJSONObject(i).getInt("expense_category_id"));
+                        nurserySurvey.setExpenditure_unit_id(jsonArray.getJSONObject(i).getInt("expenditure_unit_id"));
+                        nurserySurvey.setExpenditure_unit_en(jsonArray.getJSONObject(i).getString("expenditure_unit_en"));
+                        nurserySurvey.setExpenditure_unit_ta(jsonArray.getJSONObject(i).getString("expenditure_unit_ta"));
+                        dbData.insert_nursery_expenditure_unit(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+    public class Insert_expenditure_found_src extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+
+            dbData.delete_nursery_expenditure_found_src() ;
+
+            if (params.length > 0) {
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setExpense_category_id(jsonArray.getJSONObject(i).getInt("expense_category_id"));
+                        nurserySurvey.setExpenditure_fund_src_id(jsonArray.getJSONObject(i).getInt("expenditure_fund_src_id"));
+                        nurserySurvey.setExpenditure_fund_src_en(jsonArray.getJSONObject(i).getString("expenditure_fund_src_en"));
+                        nurserySurvey.setExpenditure_fund_src_ta(jsonArray.getJSONObject(i).getString("expenditure_fund_src_ta"));
+                        dbData.insert_nursery_expenditure_found_src(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+    public class Insert_fin_year extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+
+            dbData.deletefin_year(); ;
+
+            if (params.length > 0) {
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setFin_year(jsonArray.getJSONObject(i).getString("fin_year"));
+                        dbData.insert_Master_Fin_Year(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
     private void showHomeScreen() {
         Intent intent = new Intent(MainPage.this, NewHomePage.class);
         startActivity(intent);
@@ -509,13 +797,15 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
     public void syncButtonVisibility() {
         dbData.open();
         ArrayList<NurserySurvey> workCount = dbData.get_dead_sapling_details_for_upload("","");
+        ArrayList<NurserySurvey> expenditureCount = dbData.get_All_Or_Particular_Expenditure("","");
 
-        if (workCount.size() > 0) {
+        int count = workCount.size()+expenditureCount.size();
+        if (workCount.size() > 0 || expenditureCount.size()>0) {
             mainPageBinding.syncLayout.setVisibility(View.VISIBLE);
-            mainPageBinding.pendingCount.setText(""+workCount.size());
+            mainPageBinding.pendingCount.setText(""+count);
         }else {
             mainPageBinding.syncLayout.setVisibility(View.GONE);
-            mainPageBinding.pendingCount.setText("0");
+            mainPageBinding.pendingCount.setText(""+count);
         }
     }
 
@@ -529,14 +819,15 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         dbData.open();
         //ArrayList<NurserySurvey> ImageCount = dbData.getAllTreeImages();
         ArrayList<NurserySurvey> deadworkCount = dbData.get_dead_sapling_details_for_upload("","");
+        ArrayList<NurserySurvey> expenditureCount = dbData.get_All_Or_Particular_Expenditure("","");
         ArrayList<NurserySurvey> getSpeciesCount = dbData.get_nursery_batch_species_details("","local","0","");
-        ArrayList<NurserySurvey> getGrowthSpeciesCount = dbData.get_batch_growth_species_details("","local","0","");
+        ArrayList<NurserySurvey> getGrowthSpeciesCount = dbData.get_batch_growth_species_details("","local","0","","");
 
 
         if (!Utils.isOnline()) {
             Utils.showAlert(this, getResources().getString(R.string.logging_out_while_offline_may_leads_to_loss_data));
         } else {
-            if (!(deadworkCount.size() > 0) &&(! (getSpeciesCount.size() > 0) && (!(getGrowthSpeciesCount.size() > 0)))) {
+            if (!(deadworkCount.size() > 0) && !(expenditureCount.size()>0) &&(! (getSpeciesCount.size() > 0) && (!(getGrowthSpeciesCount.size() > 0)))) {
                 closeApplication();
             } else {
                 Utils.showAlert(this, getResources().getString(R.string.sync_all_the_data_before_logout));
@@ -636,10 +927,26 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             intent = new Intent(MainPage.this, OrderHistory.class);
             intent.putExtra("Activity","Order");
         }
+        else if(type.equals("Capital")) {
+            intent = new Intent(MainPage.this, CapitalRecurreingExpenditure.class);
+            intent.putExtra("expenditure_type_id",1);
+        }
+        else if(type.equals("Recurring")) {
+            intent = new Intent(MainPage.this, CapitalRecurreingExpenditure.class);
+            intent.putExtra("expenditure_type_id",2);
+        }
         else {
             intent = new Intent(MainPage.this, OrderHistory.class);
             intent.putExtra("Activity","Delivery");
         }
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    private void gotoExpenditureView() {
+        Intent intent;
+        intent = new Intent(MainPage.this, ExpenditureView.class);
 
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

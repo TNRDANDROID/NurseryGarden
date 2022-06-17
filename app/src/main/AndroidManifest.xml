@@ -40,7 +40,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ChooseLanguageActivity"></activity>
+        <activity android:name=".activity.Expenditure.ExpenditureView"></activity>
+        <activity android:name=".activity.Expenditure.CapitalRecurreingExpenditure" />
+        <activity android:name=".activity.ChooseLanguageActivity" />
         <activity android:name=".activity.HistoryActivity.OrderHistory" />
         <activity android:name=".activity.DeadSaplingActivty.NewDeadSaplingEntry" />
         <activity android:name=".activity.SellAndBuyActivity.OrderItemActivity" />

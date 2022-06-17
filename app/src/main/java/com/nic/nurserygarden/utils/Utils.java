@@ -1018,7 +1018,7 @@ public class Utils {
         }
     }
 
-    public static final String md5(final String s) {
+    public static String md5(final String s) {
         final String MD5 = "MD5";
         try {
             // Create MD5 Hash
@@ -1201,6 +1201,20 @@ public class Utils {
         Log.d("nursery_user_details", "" + dataSet);
         return dataSet;
     }
+    public static JSONObject capital_expenditure_view_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, "capital_expenditure_view");
+        Log.d("expenditure_view", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject recurring_expenditure_view_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, "recurring_expenditure_view");
+        Log.d("expenditure_view", "" + dataSet);
+        return dataSet;
+    }
     public static JSONObject nursery_land_type_JsonParams_JsonParams(Activity activity) throws JSONException {
         prefManager = new PrefManager(activity);
         JSONObject dataSet = new JSONObject();
@@ -1227,6 +1241,34 @@ public class Utils {
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_dead_stage);
         Log.d("dead_stage", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject expenditure_type_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_expenditure_type);
+        Log.d("expenditure_type", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject expenditure_unit_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_expenditure_unit);
+        Log.d("expenditure_unit", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject expenditure_found_src_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nursery_expenditure_found_src);
+        Log.d("expenditure_found_src", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject expenditure_fin_year_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, "fin_year");
+        Log.d("fin_year", "" + dataSet);
         return dataSet;
     }
 

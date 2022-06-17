@@ -69,6 +69,7 @@
     <string name="nursery_id">நர்சரி ஐடி</string>
     <string name="nursery_level_id">Nursery Level Id</string>
     <string name="nursery_name_en">நர்சரி பெயர் ஆங்கிலம்</string>
+    <string name="nursery_name">நர்சரி பெயர்</string>
     <string name="nursery_name_ta">நர்சரி பெயர் தமிழ்</string>
     <string name="nursery_address">நர்சரி முகவரி</string>
     <string name="district_name">மாவட்டத்தின் பெயர்</string>
@@ -224,12 +225,22 @@
     <string name="view_captured_images">View Captured Images</string>
     <string name="view_data_from_server">View Data From Server</string>
     <string name="remark">Remark</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="beneficiary_details">Beneficiary Details</string>
     <string name="beneficiary_image">Beneficiary Image</string>
     <string name="existing_house_with_beneficiary">Existing House With Beneficiary</string>
     <string name="view_server_images">View Server Images</string>
     <string name="view_server_data">View Server Data</string>
     <string name="buyer_name">வாங்குபவர் பெயர்</string>
+    <string name="capital_expenditure">Capital Expenditure</string>
+    <string name="recurring_expenditure">Recurring Expenditure</string>
+    <string name="select_expenditure">Select Expenditure</string>
+    <string name="select_expenditure_unit">Select Expenditure Unit</string>
+    <string name="select_expenditure_found_src">Select Expenditure Found Src</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="please_specify">Please Specify</string>
+    <string name="dead_saplings">Dead Saplings</string>
+    <string name="expenditure">Expenditure</string>
+    <string name="expenditure_view">Expenditure View</string>
 
 </resources>

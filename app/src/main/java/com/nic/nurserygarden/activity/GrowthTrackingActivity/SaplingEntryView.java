@@ -251,7 +251,7 @@ public class SaplingEntryView extends AppCompatActivity {
     public void loadSaplingDetailsList(){
         dbData.open();
         growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id,getIntent().getStringExtra("entry_date"));
         if(growthSpeciesDetailsList.size()>0){
             saplingEntryViewBinding.saplingsDetailsLayout.setVisibility(View.VISIBLE);
             growthTrackingSpeciesSaplingAdapter = new GrowthTrackingSpeciesSaplingAdapter(growthSpeciesDetailsList, SaplingEntryView.this,dbData,"");
@@ -266,7 +266,7 @@ public class SaplingEntryView extends AppCompatActivity {
         dbData.open();
         int saplings_count=0;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id,getIntent().getStringExtra("entry_date"));
         if(growthSpeciesDetailsList.size()>0){
             for(int i=0;i<growthSpeciesDetailsList.size();i++){
                 if(growthSpeciesDetailsList.get(i).getAge_in_days()!=0 || !growthSpeciesDetailsList.get(i).getHeight_in_cm().equals("0")){
@@ -291,7 +291,7 @@ public class SaplingEntryView extends AppCompatActivity {
         dbData.open();
         int saplings_count=0;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id,getIntent().getStringExtra("entry_date"));
         if(growthSpeciesDetailsList.size()>0) {
             for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
                 if(growthSpeciesDetailsList.get(i).getAge_in_days()!=0 && !growthSpeciesDetailsList.get(i).getHeight_in_cm().equals("0")){
@@ -306,9 +306,9 @@ public class SaplingEntryView extends AppCompatActivity {
     public boolean getSaplingHeight(String height_entered_text){
         dbData.open();
         String sapling_height="";
-        boolean height_flag = true;
+        boolean height_flag = false;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
-        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id);
+        growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id,getIntent().getStringExtra("entry_date"));
         if(growthSpeciesDetailsList.size()>0) {
             for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
                 sapling_height = growthSpeciesDetailsList.get(i).getHeight_in_cm();

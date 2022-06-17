@@ -250,101 +250,101 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/rl1">
-                    <RelativeLayout
-                        android:id="@+id/batch_image_layout"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/plant5"
-                            android:id="@+id/tree_image"
-                            android:padding="@dimen/_5sdp"
-                            android:scaleType="fitXY"
-                            tools:ignore="ContentDescription" />
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/batch_name_layout"
-                        android:layout_width="match_parent"
-                        android:layout_toEndOf="@+id/batch_image_layout"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
                         <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:id="@+id/batch_image_layout"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_80sdp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/plant5"
+                                android:id="@+id/tree_image"
+                                android:padding="@dimen/_5sdp"
+                                android:scaleType="fitXY"
+                                tools:ignore="ContentDescription" />
+                        </RelativeLayout>
 
+                        <LinearLayout
+                            android:id="@+id/batch_name_layout"
+                            android:layout_width="match_parent"
+                            android:layout_toEndOf="@+id/batch_image_layout"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
                             <RelativeLayout
-                                android:layout_gravity="end"
-                                android:layout_alignParentEnd="true"
-                                android:layout_width="wrap_content"
-                                android:padding="@dimen/_4sdp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/text_bg"
-                                android:id="@+id/add_species"
-                                tools:ignore="RelativeOverlap">
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_gravity="end"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_width="wrap_content"
+                                    android:padding="@dimen/_4sdp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/text_bg"
+                                    android:id="@+id/add_species"
+                                    tools:ignore="RelativeOverlap">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/white"
+                                        android:text="@string/add_view_species"
+                                        android:textStyle="bold"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/large_content_text_size"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:paddingTop="@dimen/_1sdp"
+                                        android:paddingBottom="@dimen/_2sdp"
+                                        android:paddingLeft="@dimen/_5sdp"
+                                        android:paddingRight="@dimen/_5sdp"/>
+                                </RelativeLayout>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/white"
-                                    android:text="@string/add_view_species"
-                                    android:textStyle="bold"
-                                    android:layout_centerVertical="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:textSize="@dimen/large_content_text_size"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:paddingTop="@dimen/_1sdp"
-                                    android:paddingBottom="@dimen/_2sdp"
-                                    android:paddingLeft="@dimen/_5sdp"
-                                    android:paddingRight="@dimen/_5sdp"/>
+                                    android:textColor="@color/blue_background"
+                                    android:id="@+id/created_date"
+                                    android:layout_below="@+id/add_species"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:padding="@dimen/_2sdp"/>
                             </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/grey_7"
+                                android:id="@+id/batch_id"
+                                android:textSize="@dimen/content_text_size"
+                                android:padding="@dimen/_2sdp"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/blue_background"
-                                android:id="@+id/created_date"
-                                android:layout_below="@+id/add_species"
+                                android:id="@+id/batch_number"
                                 android:textSize="@dimen/content_text_size"
                                 android:padding="@dimen/_2sdp"/>
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/grey_7"
-                            android:id="@+id/batch_id"
-                            android:textSize="@dimen/content_text_size"
-                            android:padding="@dimen/_2sdp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/blue_background"
-                            android:id="@+id/batch_number"
-                            android:textSize="@dimen/content_text_size"
-                            android:padding="@dimen/_2sdp"/>
 
 
-                    </LinearLayout>
-                    <RelativeLayout
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="@dimen/_50sdp"
-                        android:id="@+id/check"
-                        android:visibility="gone"
-                        android:layout_marginBottom="1dp"
-                        android:background="@drawable/quater_circle_shape"
-                        android:layout_alignParentEnd="true"
-                        android:gravity="end"
-                        tools:ignore="UselessParent">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_35sdp"
+                        </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:id="@+id/check"
+                            android:visibility="gone"
+                            android:layout_marginBottom="1dp"
+                            android:background="@drawable/quater_circle_shape"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:src="@drawable/check3"
-                            />
-                    </RelativeLayout>
+                            android:gravity="end"
+                            tools:ignore="UselessParent">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:src="@drawable/check3"
+                                />
+                        </RelativeLayout>
                     </RelativeLayout>
                     <View
                         android:layout_width="match_parent"

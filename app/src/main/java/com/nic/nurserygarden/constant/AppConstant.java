@@ -47,6 +47,9 @@ public class AppConstant {
     public static String KEY_nursery_species_types = "nursery_species_types";
     public static String KEY_nursery_buyer_type = "nursery_buyer_type";
     public static String KEY_dead_stage = "dead_stage";
+    public static String KEY_nursery_expenditure_type = "nursery_expense_category";
+    public static String KEY_nursery_expenditure_unit = "nursery_expenditure_unit";
+    public static String KEY_nursery_expenditure_found_src = "nursery_expenditure_fund_src";
     public static String KEY_details_of_nursery_land_view = "details_of_nursery_land_view";
     public static String KEY_details_of_nursery_seeding_batch_view = "details_of_nursery_seeding_batch_view";
     public static String KEY_details_of_sapling_growth_tracking_view = "details_of_sapling_growth_tracking_view";

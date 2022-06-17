@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.nic.nurserygarden.R;
+import com.nic.nurserygarden.adapter.ExpenditureUploadAdapter;
 import com.nic.nurserygarden.adapter.NewPendingAdapter;
 import com.nic.nurserygarden.api.Api;
 import com.nic.nurserygarden.api.ApiService;
@@ -40,8 +41,10 @@ import es.dmoral.toasty.Toasty;
 
 public class NewPendingScreen extends AppCompatActivity implements Api.ServerResponseListener {
     public ActivityNewPendingScreenBinding pendingScreenBinding;
-    private RecyclerView recyclerView;
+    private RecyclerView deadSaplingRecyclerView;
+    private RecyclerView expenditureRecyclerView;
     private NewPendingAdapter pendingAdapter;
+    private ExpenditureUploadAdapter expenditureUploadAdapter;
     private PrefManager prefManager;
     public com.nic.nurserygarden.dataBase.dbData dbData = new dbData(this);
     public static DBHelper dbHelper;
@@ -51,6 +54,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
     String shg_code="";
     String shg_member_code="";
     String batch_id="";
+    String expenditure_primary_id="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,19 +69,46 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         } catch (Exception e) {
             e.printStackTrace();
         }
-        recyclerView = pendingScreenBinding.pendingList;
+        deadSaplingRecyclerView = pendingScreenBinding.pendingList;
+        expenditureRecyclerView = pendingScreenBinding.expenditurePendingRecycler;
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        deadSaplingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        expenditureRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        new fetchPendingtask().execute();
+        deadSaplingRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        deadSaplingRecyclerView.setNestedScrollingEnabled(false);
+        expenditureRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        expenditureRecyclerView.setNestedScrollingEnabled(false);
+
+        deadSaplingRecyclerView.setVisibility(View.GONE);
+        expenditureRecyclerView.setVisibility(View.GONE);
+        pendingScreenBinding.notFoundTv.setVisibility(View.GONE);
+
+        pendingScreenBinding.deadSaplingRl.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_side_curve_bg));
+        pendingScreenBinding.expenditureRl.setBackgroundDrawable(null);
+        new fetchDeadSaplingPendingTask().execute();
+
+        pendingScreenBinding.deadSaplingRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pendingScreenBinding.deadSaplingRl.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_side_curve_bg));
+                pendingScreenBinding.expenditureRl.setBackgroundDrawable(null);
+                new fetchDeadSaplingPendingTask().execute();
+            }
+        });
+        pendingScreenBinding.expenditureRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pendingScreenBinding.expenditureRl.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_side_curve_bg));
+                pendingScreenBinding.deadSaplingRl.setBackgroundDrawable(null);
+                new fetchExpenditurePendingTask().execute();
+            }
+        });
     }
 
 
 
-    public class fetchPendingtask extends AsyncTask<Void, Void,
-            ArrayList<NurserySurvey>> {
+    public class fetchDeadSaplingPendingTask extends AsyncTask<Void, Void,ArrayList<NurserySurvey>> {
         @Override
         protected ArrayList<NurserySurvey> doInBackground(Void... params) {
             dbData.open();
@@ -91,12 +122,43 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         protected void onPostExecute(ArrayList<NurserySurvey> nurseryDeadList) {
             super.onPostExecute(nurseryDeadList);
             if(nurseryDeadList.size()>0) {
-                recyclerView.setVisibility(View.VISIBLE);
+                deadSaplingRecyclerView.setVisibility(View.VISIBLE);
+                expenditureRecyclerView.setVisibility(View.GONE);
+                pendingScreenBinding.notFoundTv.setVisibility(View.GONE);
                 pendingAdapter = new NewPendingAdapter(NewPendingScreen.this, nurseryDeadList, dbData);
-                recyclerView.setAdapter(pendingAdapter);
+                deadSaplingRecyclerView.setAdapter(pendingAdapter);
             }
             else {
-                recyclerView.setVisibility(View.GONE);
+                deadSaplingRecyclerView.setVisibility(View.GONE);
+                expenditureRecyclerView.setVisibility(View.GONE);
+                pendingScreenBinding.notFoundTv.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+    public class fetchExpenditurePendingTask extends AsyncTask<Void, Void,ArrayList<NurserySurvey>> {
+        @Override
+        protected ArrayList<NurserySurvey> doInBackground(Void... params) {
+            dbData.open();
+            ArrayList<NurserySurvey> nurseryExpenditureList = new ArrayList<>();
+            nurseryExpenditureList = dbData.get_All_Or_Particular_Expenditure("","");
+            Log.d("COUNT", String.valueOf(nurseryExpenditureList.size()));
+            return nurseryExpenditureList;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<NurserySurvey> nurseryExpenditureList) {
+            super.onPostExecute(nurseryExpenditureList);
+            if(nurseryExpenditureList.size()>0) {
+                deadSaplingRecyclerView.setVisibility(View.GONE);
+                expenditureRecyclerView.setVisibility(View.VISIBLE);
+                pendingScreenBinding.notFoundTv.setVisibility(View.GONE);
+                expenditureUploadAdapter = new ExpenditureUploadAdapter(NewPendingScreen.this, nurseryExpenditureList, dbData);
+                expenditureRecyclerView.setAdapter(expenditureUploadAdapter);
+            }
+            else {
+                deadSaplingRecyclerView.setVisibility(View.GONE);
+                expenditureRecyclerView.setVisibility(View.GONE);
+                pendingScreenBinding.notFoundTv.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -120,6 +182,23 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         Log.d("uploadDead", "" + dataSet);
         return dataSet;
     }
+    public JSONObject uploadExpenditure(JSONObject uploadExpenditureData,String expenditure_primary_id_) {
+        expenditure_primary_id = expenditure_primary_id_;
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), uploadExpenditureData.toString());
+        JSONObject dataSet = new JSONObject();
+        try {
+            dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+            dataSet.put(AppConstant.DATA_CONTENT, authKey);
+
+            new ApiService(this).makeJSONObjectRequest("uploadExpenditure", Api.Method.POST, UrlGenerator.getNurseryGardenService(), dataSet, "not cache", this);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("uploadExpenditure", "" + dataSet);
+        return dataSet;
+    }
     @Override
     public void OnMyResponse(ServerResponse serverResponse) {
         try {
@@ -134,8 +213,25 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
                     Utils.showAlert(this, "Uploaded");
                     //int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, null,null);
                     int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, "batch_id = ? ", new String[]{batch_id});
-                    new fetchPendingtask().execute();
+                    new fetchDeadSaplingPendingTask().execute();
                     pendingAdapter.notifyDataSetChanged();
+                }
+                else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
+                    Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
+
+                }
+                Log.d("saved_response", "" + responseDecryptedBlockKey);
+            }
+            if ("uploadExpenditure".equals(urlType) && responseObj != null) {
+                String key = responseObj.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    Utils.showAlert(this, jsonObject.getString("MESSAGE"));
+                    //int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, null,null);
+                    int sdsm = db.delete(DBHelper.NURSERY_EXPENDITURE_SAVE, "expenditure_primary_id = ? ", new String[]{expenditure_primary_id});
+                    new fetchExpenditurePendingTask().execute();
+                    expenditureUploadAdapter.notifyDataSetChanged();
                 }
                 else if(jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")){
                     Toasty.error(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
