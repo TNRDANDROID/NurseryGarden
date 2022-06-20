@@ -2,8 +2,6 @@ package com.nic.nurserygarden.adapter;
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,32 +12,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.dataBase.DBHelper;
 import com.nic.nurserygarden.databinding.ExpenditureItemsViewBinding;
-import com.nic.nurserygarden.databinding.ExpenditureUploadItemViewBinding;
 import com.nic.nurserygarden.model.NurserySurvey;
 import com.nic.nurserygarden.session.PrefManager;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
 
-public class CapitalExpenditureViewAdapter  extends RecyclerView.Adapter<CapitalExpenditureViewAdapter.MyViewHolder> {
+public class RecurringExpenditureAdapter extends RecyclerView.Adapter<RecurringExpenditureAdapter.MyViewHolder> {
 
     private static Activity context;
     private PrefManager prefManager;
-    private List<NurserySurvey> capitalExpenditureList;
+    private List<NurserySurvey> recurringExpenditureList;
     JSONObject dataset = new JSONObject();
     private LayoutInflater layoutInflater;
     public DBHelper dbHelper;
     public SQLiteDatabase db;
-    public CapitalExpenditureViewAdapter(Activity context, List<NurserySurvey> capitalExpenditureList) {
+    public RecurringExpenditureAdapter(Activity context, List<NurserySurvey> recurringExpenditureList) {
 
         this.context = context;
         prefManager = new PrefManager(context);
-        this.capitalExpenditureList = capitalExpenditureList;
+        this.recurringExpenditureList = recurringExpenditureList;
 
         try {
             dbHelper = new DBHelper(context);
@@ -50,7 +46,7 @@ public class CapitalExpenditureViewAdapter  extends RecyclerView.Adapter<Capital
     }
 
     @Override
-    public CapitalExpenditureViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public RecurringExpenditureAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(viewGroup.getContext());
         }
@@ -72,15 +68,15 @@ public class CapitalExpenditureViewAdapter  extends RecyclerView.Adapter<Capital
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CapitalExpenditureViewAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecurringExpenditureAdapter.MyViewHolder holder, final int position) {
 
 
-        holder.expenditureItemsViewBinding.expenditureTypeText.setText(capitalExpenditureList.get(position).getExpenditure_type());
-        holder.expenditureItemsViewBinding.expenditureCategoryText.setText(capitalExpenditureList.get(position).getExpense_category_en());
-        holder.expenditureItemsViewBinding.expenditureUnitText.setText(capitalExpenditureList.get(position).getExpenditure_unit_en());
-        holder.expenditureItemsViewBinding.expenditureFoundSrcText.setText(capitalExpenditureList.get(position).getExpenditure_fund_src_en());
-        holder.expenditureItemsViewBinding.quantity.setText(capitalExpenditureList.get(position).getQuantity());
-        holder.expenditureItemsViewBinding.amount.setText(indianMoney(capitalExpenditureList.get(position).getAmount()));
+        holder.expenditureItemsViewBinding.expenditureTypeText.setText(recurringExpenditureList.get(position).getExpenditure_type());
+        holder.expenditureItemsViewBinding.expenditureCategoryText.setText(recurringExpenditureList.get(position).getExpense_category_en());
+        holder.expenditureItemsViewBinding.expenditureUnitText.setText(recurringExpenditureList.get(position).getExpenditure_unit_en());
+        holder.expenditureItemsViewBinding.expenditureFoundSrcText.setText(recurringExpenditureList.get(position).getExpenditure_fund_src_en());
+        holder.expenditureItemsViewBinding.quantity.setText(recurringExpenditureList.get(position).getQuantity());
+        holder.expenditureItemsViewBinding.amount.setText(indianMoney(recurringExpenditureList.get(position).getAmount()));
 
 
 
@@ -93,7 +89,7 @@ public class CapitalExpenditureViewAdapter  extends RecyclerView.Adapter<Capital
 
     @Override
     public int getItemCount() {
-        return capitalExpenditureList.size();
+        return recurringExpenditureList.size();
     }
 
     public String indianMoney(String amount){

@@ -14,6 +14,7 @@ import com.nic.nurserygarden.R;
 import com.nic.nurserygarden.activity.NewPendingScreen;
 import com.nic.nurserygarden.adapter.CapitalExpenditureViewAdapter;
 import com.nic.nurserygarden.adapter.ExpenditureUploadAdapter;
+import com.nic.nurserygarden.adapter.RecurringExpenditureAdapter;
 import com.nic.nurserygarden.api.Api;
 import com.nic.nurserygarden.api.ApiService;
 import com.nic.nurserygarden.api.ServerResponse;
@@ -38,6 +39,7 @@ public class ExpenditureView extends AppCompatActivity implements Api.ServerResp
     ArrayList<NurserySurvey> capitalExpenditureList;
     ArrayList<NurserySurvey> recurringExpenditureList;
     CapitalExpenditureViewAdapter capitalExpenditureViewAdapter;
+    RecurringExpenditureAdapter recurringExpenditureAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,6 +214,7 @@ public class ExpenditureView extends AppCompatActivity implements Api.ServerResp
                 activityExpenditureViewBinding.notFoundTv.setVisibility(View.GONE);
                 capitalExpenditureViewAdapter = new CapitalExpenditureViewAdapter(ExpenditureView.this, capitalExpenditureList);
                 activityExpenditureViewBinding.capitalRecycler.setAdapter(capitalExpenditureViewAdapter);
+                //capitalExpenditureViewAdapter.notifyDataSetChanged();
             }
             else {
                 activityExpenditureViewBinding.capitalRecycler.setVisibility(View.GONE);
@@ -274,8 +277,9 @@ public class ExpenditureView extends AppCompatActivity implements Api.ServerResp
                 activityExpenditureViewBinding.recurringRecycler.setVisibility(View.VISIBLE);
                 activityExpenditureViewBinding.capitalRecycler.setVisibility(View.GONE);
                 activityExpenditureViewBinding.notFoundTv.setVisibility(View.GONE);
-                capitalExpenditureViewAdapter = new CapitalExpenditureViewAdapter(ExpenditureView.this, recurringExpenditureList);
-                activityExpenditureViewBinding.recurringRecycler.setAdapter(capitalExpenditureViewAdapter);
+                recurringExpenditureAdapter = new RecurringExpenditureAdapter(ExpenditureView.this, recurringExpenditureList);
+                activityExpenditureViewBinding.recurringRecycler.setAdapter(recurringExpenditureAdapter);
+               // capitalExpenditureViewAdapter.notifyDataSetChanged();
             }
             else {
                 activityExpenditureViewBinding.capitalRecycler.setVisibility(View.GONE);
