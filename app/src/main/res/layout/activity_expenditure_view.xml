@@ -146,15 +146,17 @@
 
                 <TextView
                     android:id="@+id/not_found_tv"
-                    android:layout_width="match_parent"
+                    android:layout_below="@+id/split_layout"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_centerInParent="true"
                     android:text="@string/no_projects_found"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/title_text_size"
                     android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
 
             </RelativeLayout>

@@ -67,7 +67,7 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             get_nursery_expenditure_found_src();
             get_fin_year();
         }
-
+        mainPageBinding.recurringExpenditure.setEnabled(false);
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
