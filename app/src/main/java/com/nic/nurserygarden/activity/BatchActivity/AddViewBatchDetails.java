@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -128,7 +129,7 @@ public class AddViewBatchDetails extends AppCompatActivity implements View.OnCli
 
             ImageView close_icon = dialog.findViewById(R.id.close_icon);
             RelativeLayout capture_layout = dialog.findViewById(R.id.capture_layout);
-            LinearLayout land_layout = dialog.findViewById(R.id.land_layout);
+            ScrollView land_layout = dialog.findViewById(R.id.land_layout);
             LinearLayout batch_layout = dialog.findViewById(R.id.batch_layout);
             TextView tittle_text = dialog.findViewById(R.id.tittle_text);
             tittle_text.setText(getResources().getString(R.string.add_batch_details));

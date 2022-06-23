@@ -434,6 +434,7 @@ public class dbData {
         values.put("image", pmgsySurvey.getImageInByte());
         values.put("server_flag", pmgsySurvey.getServer_flag());
         values.put("land_address", pmgsySurvey.getLand_address());
+        values.put("other_land_type", pmgsySurvey.getOther_land_type());
         values.put("area", pmgsySurvey.getArea());
         values.put("survey_number", pmgsySurvey.getSurvey_number());
         values.put("sub_div_no", pmgsySurvey.getSub_div_no());
@@ -1068,6 +1069,8 @@ public class dbData {
                             .getColumnIndexOrThrow("server_flag")));
                     card.setLand_address(cursor.getString(cursor
                             .getColumnIndexOrThrow("land_address")));
+                    card.setOther_land_type(cursor.getString(cursor
+                            .getColumnIndexOrThrow("other_land_type")));
                     card.setArea(cursor.getString(cursor
                             .getColumnIndexOrThrow("area")));
                     card.setSurvey_number(cursor.getString(cursor

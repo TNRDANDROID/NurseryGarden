@@ -159,6 +159,42 @@
 
                         </RelativeLayout>
                         <TextView
+                            android:id="@+id/other_land_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:text="@string/other_land_type"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/content_title_text_size"
+                            />
+
+                        <RelativeLayout
+                            android:id="@+id/other_land_type_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/header"
+                            android:layout_marginLeft="@dimen/margin_left_20dp"
+                            android:layout_marginTop="@dimen/padding"
+                            android:layout_marginRight="@dimen/margin_left_20dp"
+                            android:background="@drawable/rectangle_box"
+                            android:orientation="vertical">
+
+                            <EditText
+                                android:inputType="text"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/full_transparent"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:textSize="@dimen/content_text_size"
+                                android:hint="@string/other_land_type"
+                                android:id="@+id/other_land_type_et"
+                                tools:ignore="Autofill,RtlSymmetry" />
+
+
+                        </RelativeLayout>
+                        <TextView
                             android:id="@+id/enter_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

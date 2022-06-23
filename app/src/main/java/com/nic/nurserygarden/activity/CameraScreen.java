@@ -112,6 +112,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     int land_type_id =0;
     int nursery_id =0;
     String land_address="";
+    String other_land_type="";
     String area="";
     String survey_number="";
     String sub_div_no="";
@@ -151,6 +152,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             land_type_name_en = getIntent().getStringExtra("land_type_name_en");
             land_type_name_ta = getIntent().getStringExtra("land_type_name_ta");
             land_address = getIntent().getStringExtra("land_address");
+            other_land_type = getIntent().getStringExtra("other_land_type");
             area = getIntent().getStringExtra("area");
             survey_number = getIntent().getStringExtra("survey_number");
             sub_div_no = getIntent().getStringExtra("sub_div_no");
@@ -306,6 +308,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             values.put("nursery_id",nursery_id);
             values.put("land_type_id", land_type_id);
             values.put("land_address", land_address);
+            values.put("other_land_type", other_land_type);
             values.put("area", area);
             values.put("survey_number", survey_number);
             values.put("sub_div_no", sub_div_no);

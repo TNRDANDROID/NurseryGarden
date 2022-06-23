@@ -399,10 +399,20 @@ public class NurserySurvey {
     private int land_primary_id;
     private String server_flag;
     private String land_address;
+    private String other_land_type;
     private String area;
     private String survey_number;
     private String sub_div_no;
     private String is_batch_closed;
+
+    public String getOther_land_type() {
+        return other_land_type;
+    }
+
+    public NurserySurvey setOther_land_type(String other_land_type) {
+        this.other_land_type = other_land_type;
+        return this;
+    }
 
     public String getArea() {
         return area;

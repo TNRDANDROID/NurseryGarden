@@ -200,6 +200,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "image BLOB,"+
                 "server_flag TEXT,"+
                 "land_address TEXT,"+
+                "other_land_type TEXT,"+
                 "area TEXT,"+
                 "survey_number TEXT,"+
                 "sub_div_no TEXT,"+

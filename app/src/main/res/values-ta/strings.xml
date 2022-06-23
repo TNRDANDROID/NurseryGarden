@@ -117,6 +117,7 @@
     <string name="batch">அலகு</string>
     <string name="select_land_type">நில வகையைத் தேர்ந்தெடுக்கவும்</string>
     <string name="enter_area">பரப்பளவை உள்ளிடவும்(ஏக்கரில்)</string>
+    <string name="other_land_type">மற்ற நில வகையைக் குறிப்பிடவும்</string>
     <string name="enter_survey_number">சர்வே எண்ணை உள்ளிடவும்</string>
     <string name="enter_sub_div_no">துணைப் பிரிவு எண்ணை உள்ளிடவும்</string>
     <string name="land_address">நில முகவரி</string>
