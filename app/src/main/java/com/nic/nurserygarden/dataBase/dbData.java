@@ -434,6 +434,9 @@ public class dbData {
         values.put("image", pmgsySurvey.getImageInByte());
         values.put("server_flag", pmgsySurvey.getServer_flag());
         values.put("land_address", pmgsySurvey.getLand_address());
+        values.put("area", pmgsySurvey.getArea());
+        values.put("survey_number", pmgsySurvey.getSurvey_number());
+        values.put("sub_div_no", pmgsySurvey.getSub_div_no());
         values.put("latitude", pmgsySurvey.getLatitude());
         values.put("longtitude", pmgsySurvey.getLongitude());
         long id = db.insert(DBHelper.NURSERY_LAND_SAVE_DETAILS,null,values);
@@ -1065,6 +1068,12 @@ public class dbData {
                             .getColumnIndexOrThrow("server_flag")));
                     card.setLand_address(cursor.getString(cursor
                             .getColumnIndexOrThrow("land_address")));
+                    card.setArea(cursor.getString(cursor
+                            .getColumnIndexOrThrow("area")));
+                    card.setSurvey_number(cursor.getString(cursor
+                            .getColumnIndexOrThrow("survey_number")));
+                    card.setSub_div_no(cursor.getString(cursor
+                            .getColumnIndexOrThrow("sub_div_no")));
                     card.setLand_type_name_en(cursor.getString(cursor
                             .getColumnIndexOrThrow("land_type_name_en")));
                     card.setLand_type_name_ta(cursor.getString(cursor

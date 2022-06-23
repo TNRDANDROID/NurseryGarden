@@ -116,6 +116,9 @@
     <string name="created_date">உருவாக்கப்பட்ட தேதி</string>
     <string name="batch">அலகு</string>
     <string name="select_land_type">நில வகையைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="enter_area">பரப்பளவை உள்ளிடவும்(ஏக்கரில்)</string>
+    <string name="enter_survey_number">சர்வே எண்ணை உள்ளிடவும்</string>
+    <string name="enter_sub_div_no">துணைப் பிரிவு எண்ணை உள்ளிடவும்</string>
     <string name="land_address">நில முகவரி</string>
     <string name="add_edit_species_details">இனங்கள் விவரங்களைச் சேர்/திருத்து</string>
     <string name="select_species_type">இனங்கள் வகையைத் தேர்ந்தெடுக்கவும்</string>

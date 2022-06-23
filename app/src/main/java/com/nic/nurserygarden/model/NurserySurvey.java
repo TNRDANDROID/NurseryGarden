@@ -399,7 +399,37 @@ public class NurserySurvey {
     private int land_primary_id;
     private String server_flag;
     private String land_address;
+    private String area;
+    private String survey_number;
+    private String sub_div_no;
     private String is_batch_closed;
+
+    public String getArea() {
+        return area;
+    }
+
+    public NurserySurvey setArea(String area) {
+        this.area = area;
+        return this;
+    }
+
+    public String getSurvey_number() {
+        return survey_number;
+    }
+
+    public NurserySurvey setSurvey_number(String survey_number) {
+        this.survey_number = survey_number;
+        return this;
+    }
+
+    public String getSub_div_no() {
+        return sub_div_no;
+    }
+
+    public NurserySurvey setSub_div_no(String sub_div_no) {
+        this.sub_div_no = sub_div_no;
+        return this;
+    }
 
     public String getIs_batch_closed() {
         return is_batch_closed;

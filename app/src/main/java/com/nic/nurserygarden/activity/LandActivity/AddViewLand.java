@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -117,11 +118,14 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
 
             ImageView close_icon = dialog.findViewById(R.id.close_icon);
             RelativeLayout capture_layout = dialog.findViewById(R.id.capture_layout);
-            LinearLayout land_layout = dialog.findViewById(R.id.land_layout);
+            ScrollView land_layout = dialog.findViewById(R.id.land_layout);
             LinearLayout batch_layout = dialog.findViewById(R.id.batch_layout);
             TextView tittle_text = dialog.findViewById(R.id.tittle_text);
             Spinner land_type_spinner = dialog.findViewById(R.id.land_type_spinner);
             EditText land_address = dialog.findViewById(R.id.land_address);
+            EditText area = dialog.findViewById(R.id.area);
+            EditText survey_number = dialog.findViewById(R.id.survey_number);
+            EditText sub_div_no = dialog.findViewById(R.id.sub_div_no);
             tittle_text.setText(getResources().getString(R.string.add_land_details));
             batch_layout.setVisibility(View.GONE);
             land_type_spinner.setAdapter(new CommonAdapter(AddViewLand.this,landTypeList,"landTypeList"));
@@ -155,14 +159,32 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                 public void onClick(View v) {
                     if(land_type_id!=0){
                         if(!land_address.getText().toString().equals("")){
-                            Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
-                            camera_screen.putExtra("activity_type","Land");
-                            camera_screen.putExtra("land_type_id",land_type_id);
-                            camera_screen.putExtra("land_address",land_address.getText().toString());
-                            camera_screen.putExtra("land_type_name_en",land_type_name_en);
-                            camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
-                            startActivity(camera_screen);
-                            dialog.dismiss();
+                            if(!area.getText().toString().equals("")){
+                                if(!survey_number.getText().toString().equals("")){
+                                    if(!sub_div_no.getText().toString().equals("")){
+                                        Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                        camera_screen.putExtra("activity_type","Land");
+                                        camera_screen.putExtra("land_type_id",land_type_id);
+                                        camera_screen.putExtra("land_address",land_address.getText().toString());
+                                        camera_screen.putExtra("area",area.getText().toString());
+                                        camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                        camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                        camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                        camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                        startActivity(camera_screen);
+                                        dialog.dismiss();
+                                    }
+                                    else {
+                                        Utils.showAlert(AddViewLand.this,getResources().getString(R.string.enter_sub_div_no));
+                                    }
+                                }
+                                else {
+                                    Utils.showAlert(AddViewLand.this,getResources().getString(R.string.enter_survey_number));
+                                }
+                            }
+                            else {
+                                Utils.showAlert(AddViewLand.this,getResources().getString(R.string.enter_area));
+                            }
                         }
                         else {
                             Utils.showAlert(AddViewLand.this,getResources().getString(R.string.land_address));
@@ -302,6 +324,9 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                         nurserySurvey.setLongitude(jsonArray.getJSONObject(i).getString("long"));
                         nurserySurvey.setServer_flag("1");
                         nurserySurvey.setLand_address(jsonArray.getJSONObject(i).getString("address"));
+                        nurserySurvey.setArea(jsonArray.getJSONObject(i).getString("area"));
+                        nurserySurvey.setSurvey_number(jsonArray.getJSONObject(i).getString("survey_no"));
+                        nurserySurvey.setSub_div_no(jsonArray.getJSONObject(i).getString("subdiv_no"));
                         dbData.insert_nursery_land_details(nurserySurvey);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -357,6 +382,7 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
             e.printStackTrace();
         }
 
+        Log.d("saveLandDataSet", "" + savePMAYDataSet);
         Log.d("saveLandImages", "" + dataSet);
         return dataSet;
     }

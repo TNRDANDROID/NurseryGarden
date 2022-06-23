@@ -176,6 +176,9 @@ public class NurseryLandAdapter extends RecyclerView.Adapter<NurseryLandAdapter.
             dataset.put(AppConstant.KEY_SERVICE_ID,"nursery_land_save");
             dataset1.put("land_type_id",landList.get(position).getLand_type_id());
             dataset1.put("address",landList.get(position).getLand_address());
+            dataset1.put("area",landList.get(position).getArea());
+            dataset1.put("survey_no",landList.get(position).getSurvey_number());
+            dataset1.put("subdiv_no",landList.get(position).getSub_div_no());
             dataset1.put("lat",landList.get(position).getLatitude());
             dataset1.put("long",landList.get(position).getLongitude());
             dataset1.put("image",BitMapToString(landList.get(position).getImage()));
