@@ -246,5 +246,22 @@
     <string name="dead_saplings">Dead Saplings</string>
     <string name="expenditure">Expenditure</string>
     <string name="expenditure_view">Expenditure View</string>
+    <string name="number_of_members">Number Of Members</string>
+    <string name="pia_type">PIA Type</string>
+    <string name="pia_name">PIA Name</string>
+    <string name="select_water_source_type">Select Water Source Type</string>
+    <string name="other_water_source_type">Other Water Source Type</string>
+    <string name="select_fencing_type">Select Fencing Type</string>
+    <string name="other_fencing_type">Other Fencing Type</string>
+    <string name="land_name_ta">Land Name Ta</string>
+    <string name="land_name_en">Land Name En</string>
+    <string name="area">Area</string>
+    <string name="survey_number">Survey Number</string>
+    <string name="sub_div_no">Sub_Div_No</string>
+    <string name="water_source">Water Source</string>
+    <string name="fencing">Fencing</string>
+    <string name="saplings_count">Saplings Count</string>
+    <string name="age_in_days">Age In Days</string>
+    <string name="species_type_id">Species Type Id</string>
 
 </resources>

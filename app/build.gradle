@@ -112,4 +112,7 @@ dependencies {
 
     ///Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    ///Camera
+    implementation 'com.github.maayyaannkk:ImagePicker:1.0.13'
 }

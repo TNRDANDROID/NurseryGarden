@@ -66,6 +66,8 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             get_nursery_expenditure_unit();
             get_nursery_expenditure_found_src();
             get_fin_year();
+            get_nursery_water_source_type();
+            get_nursery_fencing_type();
         }
         mainPageBinding.recurringExpenditure.setEnabled(false);
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +209,21 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             e.printStackTrace();
         }
     }
+    public void get_nursery_water_source_type() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("water_source_type", Api.Method.POST, UrlGenerator.getNurseryGardenService(), water_source_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void get_nursery_fencing_type() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("fencing_type", Api.Method.POST, UrlGenerator.getNurseryGardenService(),fencing_type_JsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public JSONObject nutri_garden_master_form_listJsonParams() throws JSONException {
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.nutri_garden_master_form_listJsonParams(this).toString());
@@ -281,6 +298,22 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
         return dataSet;
     }
 
+    public JSONObject water_source_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.water_source_type_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("water_source_type", "" + authKey);
+        return dataSet;
+    }
+    public JSONObject fencing_type_JsonParams() throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), Utils.fencing_type_JsonParams(this).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("water_source_type", "" + authKey);
+        return dataSet;
+    }
 
     @Override
     public void OnMyResponse(ServerResponse serverResponse) {
@@ -368,6 +401,24 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                     new Insert_fin_year().execute(jsonObject);
                 }
                 Log.d("fin_year", "" + responseDecryptedBlockKey);
+            }
+            if ("water_source_type".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_water_source_type().execute(jsonObject);
+                }
+                Log.d("water_source_type", "" + responseDecryptedBlockKey);
+            }
+            if ("fencing_type".equals(urlType) && loginResponse != null) {
+                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
+                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
+                    new Insert_fencing_type().execute(jsonObject);
+                }
+                Log.d("fencing_type", "" + responseDecryptedBlockKey);
             }
 
 
@@ -474,6 +525,11 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                         nurserySurvey.setNursery_dname(jsonArray.getJSONObject(i).getString("dname"));
                         nurserySurvey.setNursery_bname(jsonArray.getJSONObject(i).getString("bname"));
                         nurserySurvey.setNursery_pvname(jsonArray.getJSONObject(i).getString("pvname"));
+                        nurserySurvey.setPia_members_count(jsonArray.getJSONObject(i).getString("no_of_members"));
+                        nurserySurvey.setPia_type_name_en(jsonArray.getJSONObject(i).getString("pia_type_name_en"));
+                        nurserySurvey.setPia_type_name_ta(jsonArray.getJSONObject(i).getString("pia_type_name_ta"));
+                        nurserySurvey.setPia_name_en(jsonArray.getJSONObject(i).getString("pia_name_en"));
+                        nurserySurvey.setPia_name_ta(jsonArray.getJSONObject(i).getString("pia_name_ta"));
                         dbData.insert_nursery_user_details(nurserySurvey);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -517,6 +573,7 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                         nurserySurvey.setLand_type_id(jsonArray.getJSONObject(i).getInt("land_type_id"));
                         nurserySurvey.setLand_type_name_en(jsonArray.getJSONObject(i).getString("land_type_name_en"));
                         nurserySurvey.setLand_type_name_ta(jsonArray.getJSONObject(i).getString("land_type_name_ta"));
+                        nurserySurvey.setIs_others(jsonArray.getJSONObject(i).getString("is_others"));
                         dbData.insert_nursery_land_type(nurserySurvey);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -788,6 +845,86 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             super.onPostExecute(aVoid);
         }
     }
+    public class Insert_water_source_type extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            if (params.length > 0) {
+                dbData.delete_nursery_water_source_types(); ;
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setWater_source_type_id(jsonArray.getJSONObject(i).getString("water_source_type_id"));
+                        nurserySurvey.setWater_source_type_name(jsonArray.getJSONObject(i).getString("water_source_type_name"));
+                        nurserySurvey.setIs_others(jsonArray.getJSONObject(i).getString("is_others"));
+                        dbData.insert_nursery_water_source_type(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+    public class Insert_fencing_type extends AsyncTask<JSONObject, Void, Void> {
+
+        @Override
+        protected Void doInBackground(JSONObject... params) {
+            dbData.open();
+            if (params.length > 0) {
+                dbData.delete_nursery_fencing_types();
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        NurserySurvey nurserySurvey = new NurserySurvey();
+                        nurserySurvey.setFencing_type_id(jsonArray.getJSONObject(i).getString("fencing_type_id"));
+                        nurserySurvey.setFencing_type_name(jsonArray.getJSONObject(i).getString("fencing_type_name"));
+                        nurserySurvey.setIs_others(jsonArray.getJSONObject(i).getString("is_others"));
+                        dbData.insert_nursery_fencing_type(nurserySurvey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
     private void showHomeScreen() {
         Intent intent = new Intent(MainPage.this, NewHomePage.class);
         startActivity(intent);
@@ -890,6 +1027,9 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
                     mainPageBinding.nurseryDname.setText(""+nurseryDetails.get(i).getNursery_dname());
                     mainPageBinding.nurseryBname.setText(""+nurseryDetails.get(i).getNursery_bname());
                     mainPageBinding.nurseryPvname.setText(""+nurseryDetails.get(i).getNursery_pvname());
+                    mainPageBinding.memberCount.setText(""+nurseryDetails.get(i).getPia_members_count());
+                    mainPageBinding.piaType.setText(""+nurseryDetails.get(i).getPia_type_name_en());
+                    mainPageBinding.piaName.setText(""+nurseryDetails.get(i).getPia_name_en());
                 }
 
             }

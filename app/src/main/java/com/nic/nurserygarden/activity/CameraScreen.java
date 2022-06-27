@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Criteria;
@@ -71,6 +72,7 @@ import java.util.List;
 import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
+import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
@@ -119,6 +121,12 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
     String entry_date="";
     int batch_id=0;
     int batch_primary_id=0;
+    String water_source_type_id="";
+    String water_source_type_name="";
+    String fencing_type_id="";
+    String fencing_type_name="";
+    String other_fencing_type_name="";
+    String other_water_source_type_name="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -156,6 +164,14 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             area = getIntent().getStringExtra("area");
             survey_number = getIntent().getStringExtra("survey_number");
             sub_div_no = getIntent().getStringExtra("sub_div_no");
+
+            water_source_type_id = getIntent().getStringExtra("water_source_type_id");
+            water_source_type_name = getIntent().getStringExtra("water_source_type_name");
+            fencing_type_id = getIntent().getStringExtra("fencing_type_id");
+            fencing_type_name = getIntent().getStringExtra("fencing_type_name");
+            other_fencing_type_name = getIntent().getStringExtra("other_fencing_type_name");
+            other_water_source_type_name = getIntent().getStringExtra("other_water_source_type_name");
+
             cameraScreenBinding.singleCaptureLayout.setVisibility(View.VISIBLE);
             cameraScreenBinding.multiCaptureLayout.setVisibility(View.GONE);
         }
@@ -318,6 +334,12 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             values.put("server_flag", "0");
             values.put("latitude", offlatTextValue.toString());
             values.put("longtitude", offlongTextValue.toString());
+            values.put("water_source_type_id", water_source_type_id);
+            values.put("water_source_type_name", water_source_type_name);
+            values.put("fencing_type_id", fencing_type_id);
+            values.put("fencing_type_name", fencing_type_name);
+            values.put("other_fencing_type_name", other_fencing_type_name);
+            values.put("other_water_source_type_name", other_water_source_type_name);
 
             id = db.insert(DBHelper.NURSERY_LAND_SAVE_DETAILS, null, values);
 
@@ -348,7 +370,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         return dist;
     }
     private void captureImage() {
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+        /*if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
@@ -368,7 +390,13 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             // start the image capture Intent
             startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-        }
+        }*/
+        Intent intent = new Intent(this, ImageSelectActivity.class);
+        intent.putExtra(ImageSelectActivity.FLAG_COMPRESS, true);//default is true
+        intent.putExtra(ImageSelectActivity.FLAG_CAMERA, true);//default is true
+        intent.putExtra(ImageSelectActivity.FLAG_GALLERY, false);//default is true
+        intent.putExtra(ImageSelectActivity.FLAG_CROP, false);//default is false
+        startActivityForResult(intent, 1213);
         if (MyLocationListener.latitude > 0) {
             offlatTextValue = MyLocationListener.latitude;
             offlongTextValue = MyLocationListener.longitude;
@@ -565,7 +593,21 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         getResources().getString(R.string.sorry_failed_to_capture_image), Toast.LENGTH_SHORT)
                         .show();
             }
-        } else if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
+        }
+        else if(requestCode == 1213){
+            String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
+            Bitmap rotatedBitmap = BitmapFactory.decodeFile(filePath);
+            imageView.setImageBitmap(rotatedBitmap);
+            image_view_preview.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
+            latitude_text.setText(""+offlatTextValue);
+            longtitude_text.setText(""+offlongTextValue);
+
+            cameraScreenBinding.imageViewPreview.setVisibility(View.GONE);
+            cameraScreenBinding.imageView.setVisibility(View.VISIBLE);
+            cameraScreenBinding.imageView.setImageBitmap(rotatedBitmap);
+        }
+        else if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Refreshing the gallery
                 CameraUtils.refreshGallery(getApplicationContext(), imageStoragePath);
@@ -573,12 +615,14 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                 // video successfully recorded
                 // preview the recorded video
 //                previewVideo();
-            } else if (resultCode == RESULT_CANCELED) {
+            }
+            else if (resultCode == RESULT_CANCELED) {
                 // user cancelled recording
                 Toast.makeText(getApplicationContext(),
                         getResources().getString(R.string.user_cancelled_video_recording), Toast.LENGTH_SHORT)
                         .show();
-            } else {
+            }
+            else {
                 // failed to record video
                 Toast.makeText(getApplicationContext(),
                         getResources().getString(R.string.sorry_faild_to_record_video), Toast.LENGTH_SHORT)
@@ -707,7 +751,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         focusOnView(cameraScreenBinding.scrollView);
     }
     public void addImageButtonClick(){
-        if(viewArrayList.size() < 3) {
+        if(viewArrayList.size() < 2) {
             if (imageView.getDrawable() != null && viewArrayList.size() > 0) {
                 updateView(CameraScreen.this, cameraScreenBinding.cameraLayout, "", "");
             } else {

@@ -61,9 +61,10 @@ public class GrowthTrackingSpeciesSaplingAdapter extends RecyclerView.Adapter<Gr
     @Override
     public void onBindViewHolder(@NonNull GrowthTrackingSpeciesSaplingAdapter.MyViewHolder holder, int position) {
 
-        holder.batchGrowthTrackingSpeciesItemViewBinding.speciesTypeId.setText("Species Type Id   : "+speciesList.get(position).getSpecies_type_id());
-        holder.batchGrowthTrackingSpeciesItemViewBinding.noOfSaplings.setText("Saplings Count     : "+speciesList.get(position).getNo_of_saplings());
-        holder.batchGrowthTrackingSpeciesItemViewBinding.heightInCm.setText("Height               :"+speciesList.get(position).getHeight_in_cm());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.speciesTypeId.setText(""+speciesList.get(position).getSpecies_type_id());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.noOfSaplings.setText(""+speciesList.get(position).getNo_of_saplings());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.heightInCm.setText(""+speciesList.get(position).getHeight_in_cm());
+        holder.batchGrowthTrackingSpeciesItemViewBinding.ageInDays.setText(""+speciesList.get(position).getAge_in_days());
 
         if(type.equals("")){
             if(speciesList.get(position).getServer_flag().equals("0")){

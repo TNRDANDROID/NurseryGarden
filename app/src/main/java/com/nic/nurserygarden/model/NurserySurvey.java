@@ -389,6 +389,12 @@ public class NurserySurvey {
     private String nursery_dname;
     private String nursery_bname;
     private String nursery_pvname;
+    private String pia_members_count;
+    private String pia_type_name_en;
+    private String pia_type_name_ta;
+    private String pia_name_en;
+    private String pia_name_ta;
+
 
     ///Master Table Land Type getter Setter
     private int land_type_id;
@@ -404,6 +410,46 @@ public class NurserySurvey {
     private String survey_number;
     private String sub_div_no;
     private String is_batch_closed;
+
+    public String getPia_type_name_ta() {
+        return pia_type_name_ta;
+    }
+
+    public void setPia_type_name_ta(String pia_type_name_ta) {
+        this.pia_type_name_ta = pia_type_name_ta;
+    }
+
+    public String getPia_name_ta() {
+        return pia_name_ta;
+    }
+
+    public void setPia_name_ta(String pia_name_ta) {
+        this.pia_name_ta = pia_name_ta;
+    }
+
+    public String getPia_members_count() {
+        return pia_members_count;
+    }
+
+    public void setPia_members_count(String pia_members_count) {
+        this.pia_members_count = pia_members_count;
+    }
+
+    public String getPia_type_name_en() {
+        return pia_type_name_en;
+    }
+
+    public void setPia_type_name_en(String pia_type_name_en) {
+        this.pia_type_name_en = pia_type_name_en;
+    }
+
+    public String getPia_name_en() {
+        return pia_name_en;
+    }
+
+    public void setPia_name_en(String pia_name_en) {
+        this.pia_name_en = pia_name_en;
+    }
 
     public String getOther_land_type() {
         return other_land_type;
@@ -1130,5 +1176,58 @@ public class NurserySurvey {
     }
 
     private String expenditure_unit_ta;
+    private String fencing_type_id;
+    private String fencing_type_name;
+    private String water_source_type_id;
+    private String water_source_type_name;
+    private String other_fencing_type_name;
+    private String other_water_source_type_name;
 
+    public String getOther_fencing_type_name() {
+        return other_fencing_type_name;
+    }
+
+    public void setOther_fencing_type_name(String other_fencing_type_name) {
+        this.other_fencing_type_name = other_fencing_type_name;
+    }
+
+    public String getOther_water_source_type_name() {
+        return other_water_source_type_name;
+    }
+
+    public void setOther_water_source_type_name(String other_water_source_type_name) {
+        this.other_water_source_type_name = other_water_source_type_name;
+    }
+
+    public String getFencing_type_id() {
+        return fencing_type_id;
+    }
+
+    public void setFencing_type_id(String fencing_type_id) {
+        this.fencing_type_id = fencing_type_id;
+    }
+
+    public String getFencing_type_name() {
+        return fencing_type_name;
+    }
+
+    public void setFencing_type_name(String fencing_type_name) {
+        this.fencing_type_name = fencing_type_name;
+    }
+
+    public String getWater_source_type_id() {
+        return water_source_type_id;
+    }
+
+    public void setWater_source_type_id(String water_source_type_id) {
+        this.water_source_type_id = water_source_type_id;
+    }
+
+    public String getWater_source_type_name() {
+        return water_source_type_name;
+    }
+
+    public void setWater_source_type_name(String water_source_type_name) {
+        this.water_source_type_name = water_source_type_name;
+    }
 }

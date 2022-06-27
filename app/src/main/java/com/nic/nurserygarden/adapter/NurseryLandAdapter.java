@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,21 +80,55 @@ public class NurseryLandAdapter extends RecyclerView.Adapter<NurseryLandAdapter.
                 .into(holder.nurseryLandItemViewBinding.landImage);*/
         holder.nurseryLandItemViewBinding.landNumber.setText("Number "+landList.get(position).getLand_primary_id());
         holder.nurseryLandItemViewBinding.landAddressName.setText(landList.get(position).getLand_address());
-        holder.nurseryLandItemViewBinding.landNameTa.setText(landList.get(position).getLand_type_name_ta());
-        holder.nurseryLandItemViewBinding.landNameEn.setText(landList.get(position).getLand_type_name_en());
+        //holder.nurseryLandItemViewBinding.landNameTa.setText(landList.get(position).getLand_type_name_ta());
         holder.nurseryLandItemViewBinding.landImage.setImageBitmap(landList.get(position).getImage());
+
+        holder.nurseryLandItemViewBinding.area.setText(landList.get(position).getArea());
+        holder.nurseryLandItemViewBinding.surveyNumber.setText(landList.get(position).getSurvey_number());
+        holder.nurseryLandItemViewBinding.subDivNumber.setText(landList.get(position).getSub_div_no());
+        if(landList.get(position).getOther_land_type()!= null && !landList.get(position).getOther_land_type().equals("")){
+            holder.nurseryLandItemViewBinding.landNameEn.setText(landList.get(position).getLand_type_name_en()+" ("+
+                    landList.get(position).getOther_land_type()+" )");
+        }
+        else {
+            holder.nurseryLandItemViewBinding.landNameEn.setText(landList.get(position).getLand_type_name_en());
+        }
+        if(landList.get(position).getOther_water_source_type_name()!= null && !landList.get(position).getOther_water_source_type_name().equals("")){
+            holder.nurseryLandItemViewBinding.waterSourceName.setText(landList.get(position).getWater_source_type_name()+" ("+
+                    landList.get(position).getOther_water_source_type_name()+" )");
+        }
+        else {
+            holder.nurseryLandItemViewBinding.waterSourceName.setText(landList.get(position).getWater_source_type_name());
+        }
+
+        if(landList.get(position).getOther_fencing_type_name()!= null && !landList.get(position).getOther_fencing_type_name().equals("")){
+            holder.nurseryLandItemViewBinding.fencingName.setText(landList.get(position).getFencing_type_name()+" ("+
+                    landList.get(position).getOther_fencing_type_name()+" )");
+        }
+        else {
+            holder.nurseryLandItemViewBinding.fencingName.setText(landList.get(position).getFencing_type_name());
+        }
+
 
         if(landList.get(position).getServer_flag().equals("0")){
             holder.nurseryLandItemViewBinding.upload.setVisibility(View.VISIBLE);
+            holder.nurseryLandItemViewBinding.delete.setVisibility(View.VISIBLE);
         }
         else {
             holder.nurseryLandItemViewBinding.upload.setVisibility(View.GONE);
+            holder.nurseryLandItemViewBinding.delete.setVisibility(View.GONE);
         }
 
         holder.nurseryLandItemViewBinding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 save_and_delete_alert(position,"save");
+            }
+        });
+        holder.nurseryLandItemViewBinding.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save_and_delete_alert(position,"delete");
             }
         });
     }
@@ -177,6 +213,10 @@ public class NurseryLandAdapter extends RecyclerView.Adapter<NurseryLandAdapter.
             dataset1.put("land_type_id",landList.get(position).getLand_type_id());
             dataset1.put("address",landList.get(position).getLand_address());
             dataset1.put("land_type_others",landList.get(position).getOther_land_type());
+            dataset1.put("water_source_type_id",landList.get(position).getWater_source_type_id());
+            dataset1.put("fencing_type_id",landList.get(position).getFencing_type_id());
+            dataset1.put("water_source_type_others",landList.get(position).getOther_water_source_type_name());
+            dataset1.put("fencing_type_others",landList.get(position).getOther_fencing_type_name());
             dataset1.put("area",landList.get(position).getArea());
             dataset1.put("survey_no",landList.get(position).getSurvey_number());
             dataset1.put("subdiv_no",landList.get(position).getSub_div_no());

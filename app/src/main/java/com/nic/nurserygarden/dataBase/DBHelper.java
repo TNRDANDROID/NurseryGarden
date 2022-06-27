@@ -29,6 +29,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NURSERY_USER_DETAILS = "nursery_user_details";
     public static final String NURSERY_LAND_TYPE = "nursery_land_type";
     public static final String NURSERY_SPECIES_TYPE = "nursery_species_types";
+    public static final String NURSERY_WATER_SOURCE_TYPE = "nursery_water_source_types";
+    public static final String NURSERY_FENCING_TYPE = "nursery_fencing_types";
 
     public static final String NURSERY_LAND_SAVE_DETAILS = "nursery_land_save_details";
 
@@ -175,12 +177,28 @@ public class DBHelper extends SQLiteOpenHelper {
                 "nursery_address TEXT," +
                 "dname TEXT," +
                 "bname TEXT," +
+                "pia_member_count TEXT," +
+                "pia_type_name_en TEXT," +
+                "pia_type_name_ta TEXT," +
+                "pia_name_en TEXT," +
+                "pia_name_ta TEXT," +
                 "pvname TEXT)");
 
         db.execSQL("CREATE TABLE " + NURSERY_LAND_TYPE + " ("
                 +"land_type_id INTEGER,"+
                 "land_type_name_en TEXT,"+
+                "is_others TEXT,"+
                 "land_type_name_ta TEXT)");
+
+        db.execSQL("CREATE TABLE " + NURSERY_WATER_SOURCE_TYPE + " ("
+                +"water_source_type_id TEXT," +
+                 "is_others TEXT," +
+                "water_source_type_name TEXT)");
+
+        db.execSQL("CREATE TABLE " + NURSERY_FENCING_TYPE + " ("
+                +"fencing_type_id TEXT,"+
+                 "is_others TEXT,"+
+                "fencing_type_name TEXT)");
 
         db.execSQL("CREATE TABLE " + NURSERY_SPECIES_TYPE + " ("
                 +"species_type_id INTEGER,"+
@@ -201,6 +219,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "server_flag TEXT,"+
                 "land_address TEXT,"+
                 "other_land_type TEXT,"+
+                "water_source_type_id TEXT,"+
+                "water_source_type_name TEXT,"+
+                "fencing_type_id TEXT,"+
+                "fencing_type_name TEXT,"+
+                "other_fencing_type_name TEXT,"+
+                "other_water_source_type_name TEXT,"+
                 "area TEXT,"+
                 "survey_number TEXT,"+
                 "sub_div_no TEXT,"+
@@ -395,6 +419,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_UNIT);
             db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_FOUND_SRC);
             db.execSQL("DROP TABLE IF EXISTS " + NURSERY_EXPENDITURE_SAVE);
+
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_WATER_SOURCE_TYPE);
+            db.execSQL("DROP TABLE IF EXISTS " + NURSERY_FENCING_TYPE);
             onCreate(db);
         }
     }

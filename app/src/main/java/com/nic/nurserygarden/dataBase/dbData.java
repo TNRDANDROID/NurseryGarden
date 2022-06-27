@@ -413,6 +413,11 @@ public class dbData {
         values.put("dname", pmgsySurvey.getNursery_dname());
         values.put("bname", pmgsySurvey.getNursery_bname());
         values.put("pvname", pmgsySurvey.getNursery_pvname());
+        values.put("pia_member_count", pmgsySurvey.getPia_members_count());
+        values.put("pia_type_name_en", pmgsySurvey.getPia_type_name_en());
+        values.put("pia_type_name_ta", pmgsySurvey.getPia_type_name_ta());
+        values.put("pia_name_en", pmgsySurvey.getPia_name_en());
+        values.put("pia_name_ta", pmgsySurvey.getPia_name_ta());
         long id = db.insert(DBHelper.NURSERY_USER_DETAILS,null,values);
         Log.d("Insert_NURSERY_USER", String.valueOf(id));
     }
@@ -421,6 +426,7 @@ public class dbData {
         values.put("land_type_id", pmgsySurvey.getLand_type_id());
         values.put("land_type_name_en", pmgsySurvey.getLand_type_name_en());
         values.put("land_type_name_ta", pmgsySurvey.getLand_type_name_ta());
+        values.put("is_others", pmgsySurvey.getIs_others());
         long id = db.insert(DBHelper.NURSERY_LAND_TYPE,null,values);
         Log.d("Insert_nursery_land", String.valueOf(id));
     }
@@ -440,6 +446,14 @@ public class dbData {
         values.put("sub_div_no", pmgsySurvey.getSub_div_no());
         values.put("latitude", pmgsySurvey.getLatitude());
         values.put("longtitude", pmgsySurvey.getLongitude());
+
+        values.put("water_source_type_id", pmgsySurvey.getWater_source_type_id());
+        values.put("water_source_type_name", pmgsySurvey.getWater_source_type_name());
+        values.put("fencing_type_id", pmgsySurvey.getFencing_type_id());
+        values.put("fencing_type_name", pmgsySurvey.getFencing_type_name());
+        values.put("other_fencing_type_name", pmgsySurvey.getOther_fencing_type_name());
+        values.put("other_water_source_type_name", pmgsySurvey.getOther_water_source_type_name());
+
         long id = db.insert(DBHelper.NURSERY_LAND_SAVE_DETAILS,null,values);
         Log.d("Insert_NURSERY_land", String.valueOf(id));
     }
@@ -569,6 +583,22 @@ public class dbData {
         values.put("expenditure_fund_src_en", pmgsySurvey.getExpenditure_fund_src_en());
         values.put("expenditure_fund_src_ta", pmgsySurvey.getExpenditure_fund_src_ta());
         long id = db.insert(DBHelper.NURSERY_EXPENDITURE_FOUND_SRC,null,values);
+        Log.d("Insert_expen_found", String.valueOf(id));
+    }
+    public void insert_nursery_water_source_type(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("water_source_type_id", pmgsySurvey.getWater_source_type_id());
+        values.put("water_source_type_name", pmgsySurvey.getWater_source_type_name());
+        values.put("is_others", pmgsySurvey.getIs_others());
+        long id = db.insert(DBHelper.NURSERY_WATER_SOURCE_TYPE,null,values);
+        Log.d("Insert_expen_found", String.valueOf(id));
+    }
+    public void insert_nursery_fencing_type(NurserySurvey pmgsySurvey) {
+        ContentValues values = new ContentValues();
+        values.put("fencing_type_id", pmgsySurvey.getFencing_type_id());
+        values.put("fencing_type_name", pmgsySurvey.getFencing_type_name());
+        values.put("is_others", pmgsySurvey.getIs_others());
+        long id = db.insert(DBHelper.NURSERY_FENCING_TYPE,null,values);
         Log.d("Insert_expen_found", String.valueOf(id));
     }
 
@@ -852,6 +882,16 @@ public class dbData {
                             .getColumnIndexOrThrow("bname")));
                     card.setNursery_pvname(cursor.getString(cursor
                             .getColumnIndexOrThrow("pvname")));
+                    card.setPia_members_count(cursor.getString(cursor
+                            .getColumnIndexOrThrow("pia_member_count")));
+                    card.setPia_type_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("pia_type_name_en")));
+                    card.setPia_type_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("pia_type_name_ta")));
+                    card.setPia_name_en(cursor.getString(cursor
+                            .getColumnIndexOrThrow("pia_name_en")));
+                    card.setPia_name_ta(cursor.getString(cursor
+                            .getColumnIndexOrThrow("pia_name_ta")));
                     cards.add(card);
                 }
             }
@@ -879,6 +919,8 @@ public class dbData {
                             .getColumnIndexOrThrow("land_type_name_en")));
                     card.setLand_type_name_ta(cursor.getString(cursor
                             .getColumnIndexOrThrow("land_type_name_ta")));
+                    card.setIs_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("is_others")));
                     cards.add(card);
                 }
             }
@@ -933,6 +975,62 @@ public class dbData {
                             .getColumnIndexOrThrow("dead_stage_name_en")));
                     card.setDead_stage_name_ta(cursor.getString(cursor
                             .getColumnIndexOrThrow("dead_stage_name_ta")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+
+
+    public ArrayList<NurserySurvey> get_nursery_water_source_type() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_WATER_SOURCE_TYPE,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setWater_source_type_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow("water_source_type_id")));
+                    card.setWater_source_type_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("water_source_type_name")));
+                    card.setIs_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("is_others")));
+                    cards.add(card);
+                }
+            }
+        } catch (Exception e){
+            //   Log.d(DEBUG_TAG, "Exception raised with a value of " + e);
+        } finally{
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return cards;
+    }
+    public ArrayList<NurserySurvey> get_nursery_fencing_type() {
+        ArrayList<NurserySurvey> cards = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("select * from "+DBHelper.NURSERY_FENCING_TYPE,null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    NurserySurvey card = new NurserySurvey();
+                    card.setFencing_type_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow("fencing_type_id")));
+                    card.setFencing_type_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("fencing_type_name")));
+                    card.setIs_others(cursor.getString(cursor
+                            .getColumnIndexOrThrow("is_others")));
                     cards.add(card);
                 }
             }
@@ -1085,6 +1183,18 @@ public class dbData {
                             .getColumnIndexOrThrow("latitude")));
                     card.setLongitude(cursor.getString(cursor
                             .getColumnIndexOrThrow("longtitude")));
+                    card.setWater_source_type_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow("water_source_type_id")));
+                    card.setWater_source_type_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("water_source_type_name")));
+                    card.setFencing_type_id(cursor.getString(cursor
+                            .getColumnIndexOrThrow("fencing_type_id")));
+                    card.setFencing_type_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("fencing_type_name")));
+                    card.setOther_fencing_type_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("other_fencing_type_name")));
+                    card.setOther_water_source_type_name(cursor.getString(cursor
+                            .getColumnIndexOrThrow("other_water_source_type_name")));
                     byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options);
@@ -1744,6 +1854,9 @@ public class dbData {
     public void delete_nursery_expenditure_found_src() { db.execSQL("delete from " + DBHelper.NURSERY_EXPENDITURE_FOUND_SRC);}
     public void delete_nursery_expenditure_save() { db.execSQL("delete from " + DBHelper.NURSERY_EXPENDITURE_SAVE);}
 
+    public void delete_nursery_water_source_types() { db.execSQL("delete from " + DBHelper.NURSERY_WATER_SOURCE_TYPE);}
+    public void delete_nursery_fencing_types() { db.execSQL("delete from " + DBHelper.NURSERY_FENCING_TYPE);}
+
 
 
     public void deleteAll() {
@@ -1785,6 +1898,9 @@ public class dbData {
         delete_nursery_expenditure_unit();
         delete_nursery_expenditure_found_src();
         delete_nursery_expenditure_save();
+
+        delete_nursery_water_source_types();
+        delete_nursery_fencing_types();
     }
 
 

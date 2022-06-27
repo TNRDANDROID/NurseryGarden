@@ -89,6 +89,12 @@ public class CommonAdapter extends BaseAdapter {
         else if (type.equalsIgnoreCase("expenditureFoundSrcList")) {
             tv_type.setText(pmgsySurvey.getExpenditure_fund_src_en());
         }
+        else if (type.equalsIgnoreCase("waterSourceTypeList")) {
+            tv_type.setText(pmgsySurvey.getWater_source_type_name());
+        }
+        else if (type.equalsIgnoreCase("fencingTypeList")) {
+            tv_type.setText(pmgsySurvey.getFencing_type_name());
+        }
         return view;
     }
 

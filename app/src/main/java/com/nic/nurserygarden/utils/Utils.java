@@ -1282,6 +1282,21 @@ public class Utils {
         return dataSet;
     }
 
+    public static JSONObject water_source_type_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, "nursery_water_source_type");
+        Log.d("water_source_type", "" + dataSet);
+        return dataSet;
+    }
+    public static JSONObject fencing_type_JsonParams(Activity activity) throws JSONException {
+        prefManager = new PrefManager(activity);
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, "nursery_fencing_type");
+        Log.d("fencing_type", "" + dataSet);
+        return dataSet;
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

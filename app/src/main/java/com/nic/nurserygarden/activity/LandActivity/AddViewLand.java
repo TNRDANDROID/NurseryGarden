@@ -58,12 +58,21 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
     private com.nic.nurserygarden.dataBase.dbData dbData = new dbData(this);
 
     ArrayList<NurserySurvey> landTypeList;
+    ArrayList<NurserySurvey> waterSourceTypeList;
+    ArrayList<NurserySurvey> fencingTypeList;
     int land_type_id = 0;
     PrefManager prefManager;
     NurseryLandAdapter nurseryLandAdapter;
     String land_primary_id;
     String land_type_name_en;
     String land_type_name_ta;
+    String water_source_type_id="";
+    String water_source_type_name="";
+    String water_source_is_others="";
+    String fencing_type_id="";
+    String fencing_type_name="";
+    String fencing_type_is_others="";
+    String land_type_is_others="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +88,8 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
         }
 
         loadLandTypeList();
+        loadWaterSourceTypeList();
+        loadFencingTypeList();
         landBinding.addLandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,14 +130,22 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
             ImageView close_icon = dialog.findViewById(R.id.close_icon);
             RelativeLayout capture_layout = dialog.findViewById(R.id.capture_layout);
             RelativeLayout other_land_type_layout = dialog.findViewById(R.id.other_land_type_layout);
+            RelativeLayout other_water_source_layout = dialog.findViewById(R.id.other_water_source_layout);
+            RelativeLayout other_fencing_layout = dialog.findViewById(R.id.other_fencing_layout);
             ScrollView land_layout = dialog.findViewById(R.id.land_layout);
             LinearLayout batch_layout = dialog.findViewById(R.id.batch_layout);
             TextView tittle_text = dialog.findViewById(R.id.tittle_text);
             TextView other_land_type = dialog.findViewById(R.id.other_land_type);
+            TextView other_water_source_type = dialog.findViewById(R.id.other_water_source_type);
+            TextView other_fencing_type = dialog.findViewById(R.id.other_fencing_type);
             Spinner land_type_spinner = dialog.findViewById(R.id.land_type_spinner);
+            Spinner water_source_spinner = dialog.findViewById(R.id.water_source_spinner);
+            Spinner fencing_type_spinner = dialog.findViewById(R.id.fencing_type_spinner);
             EditText land_address = dialog.findViewById(R.id.land_address);
             EditText area = dialog.findViewById(R.id.area);
             EditText other_land_type_et = dialog.findViewById(R.id.other_land_type_et);
+            EditText other_fencing_et = dialog.findViewById(R.id.other_fencing_et);
+            EditText other_water_source_et = dialog.findViewById(R.id.other_water_source_et);
             EditText survey_number = dialog.findViewById(R.id.survey_number);
             EditText sub_div_no = dialog.findViewById(R.id.sub_div_no);
             tittle_text.setText(getResources().getString(R.string.add_land_details));
@@ -134,14 +153,17 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
             other_land_type.setVisibility(View.GONE);
             other_land_type_layout.setVisibility(View.GONE);
             land_type_spinner.setAdapter(new CommonAdapter(AddViewLand.this,landTypeList,"landTypeList"));
+            water_source_spinner.setAdapter(new CommonAdapter(AddViewLand.this,waterSourceTypeList,"waterSourceTypeList"));
+            fencing_type_spinner.setAdapter(new CommonAdapter(AddViewLand.this,fencingTypeList,"fencingTypeList"));
             land_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if(position>0){
-                        land_type_id = landTypeList.get(land_type_spinner.getSelectedItemPosition()).getLand_type_id();
-                        land_type_name_ta = landTypeList.get(land_type_spinner.getSelectedItemPosition()).getLand_type_name_ta();
-                        land_type_name_en = landTypeList.get(land_type_spinner.getSelectedItemPosition()).getLand_type_name_en();
-                        if(land_type_id == 3){
+                        land_type_id = landTypeList.get(position).getLand_type_id();
+                        land_type_name_ta = landTypeList.get(position).getLand_type_name_ta();
+                        land_type_name_en = landTypeList.get(position).getLand_type_name_en();
+                        land_type_is_others = landTypeList.get(position).getIs_others();
+                        if(land_type_is_others.equals("Y")){
                             other_land_type.setVisibility(View.VISIBLE);
                             other_land_type_layout.setVisibility(View.VISIBLE);
                         }else {
@@ -151,6 +173,9 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                     }
                     else {
                         land_type_id =0;
+                        land_type_is_others ="";
+                        land_type_name_ta ="";
+                        land_type_name_en ="";
                         other_land_type.setVisibility(View.GONE);
                         other_land_type_layout.setVisibility(View.GONE);
                     }
@@ -160,6 +185,66 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                 public void onNothingSelected(AdapterView<?> parent) {
                     other_land_type.setVisibility(View.GONE);
                     other_land_type_layout.setVisibility(View.GONE);
+                }
+            });
+            water_source_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position>0){
+                        water_source_type_id = waterSourceTypeList.get(position).getWater_source_type_id();
+                        water_source_type_name = waterSourceTypeList.get(position).getWater_source_type_name();
+                        water_source_is_others = waterSourceTypeList.get(position).getIs_others();
+                        if(water_source_is_others.equals("Y")){
+                            other_water_source_type.setVisibility(View.VISIBLE);
+                            other_water_source_layout.setVisibility(View.VISIBLE);
+                        }else {
+                            other_water_source_type.setVisibility(View.GONE);
+                            other_water_source_layout.setVisibility(View.GONE);
+                        }
+                    }
+                    else {
+                        water_source_type_id ="";
+                        water_source_type_name ="";
+                        water_source_is_others ="";
+                        other_water_source_type.setVisibility(View.GONE);
+                        other_water_source_layout.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    other_water_source_type.setVisibility(View.GONE);
+                    other_water_source_layout.setVisibility(View.GONE);
+                }
+            });
+            fencing_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position>0){
+                        fencing_type_id = fencingTypeList.get(position).getFencing_type_id();
+                        fencing_type_name = fencingTypeList.get(position).getFencing_type_name();
+                        fencing_type_is_others = fencingTypeList.get(position).getIs_others();
+                        if(fencing_type_is_others.equals("Y")){
+                            other_fencing_type.setVisibility(View.VISIBLE);
+                            other_fencing_layout.setVisibility(View.VISIBLE);
+                        }else {
+                            other_fencing_type.setVisibility(View.GONE);
+                            other_fencing_layout.setVisibility(View.GONE);
+                        }
+                    }
+                    else {
+                        fencing_type_id ="";
+                        fencing_type_name ="";
+                        fencing_type_is_others ="";
+                        other_fencing_type.setVisibility(View.GONE);
+                        other_fencing_layout.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    other_fencing_type.setVisibility(View.GONE);
+                    other_fencing_layout.setVisibility(View.GONE);
                 }
             });
             close_icon.setOnClickListener(new View.OnClickListener() {
@@ -180,18 +265,125 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                                     if(!survey_number.getText().toString().equals("")){
                                         if(!sub_div_no.getText().toString().equals("")){
                                             if(!land_address.getText().toString().equals("")){
-                                                Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
-                                                camera_screen.putExtra("activity_type","Land");
-                                                camera_screen.putExtra("land_type_id",land_type_id);
-                                                camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
-                                                camera_screen.putExtra("land_address",land_address.getText().toString());
-                                                camera_screen.putExtra("area",area.getText().toString());
-                                                camera_screen.putExtra("survey_number",survey_number.getText().toString());
-                                                camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
-                                                camera_screen.putExtra("land_type_name_en",land_type_name_en);
-                                                camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
-                                                startActivity(camera_screen);
-                                                dialog.dismiss();
+                                                if(!water_source_type_id.equals("")){
+                                                    if(water_source_is_others.equals("Y")){
+                                                        if(!other_water_source_et.getText().toString().equals("")){
+                                                            if(!fencing_type_id.equals("")){
+                                                                if(fencing_type_is_others.equals("Y")){
+                                                                    if(!other_fencing_et.getText().toString().equals("")){
+                                                                        Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                        camera_screen.putExtra("activity_type","Land");
+                                                                        camera_screen.putExtra("land_type_id",land_type_id);
+                                                                        camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                        camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                        camera_screen.putExtra("area",area.getText().toString());
+                                                                        camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                        camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                        camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                        camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                        camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                        camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                        camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                        camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                        camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                        camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                        startActivity(camera_screen);
+                                                                        dialog.dismiss();
+                                                                    }
+                                                                    else {
+                                                                        Utils.showAlert(AddViewLand.this,getResources().getString(R.string.other_fencing_type));
+
+                                                                    }
+                                                                }
+                                                                else {
+                                                                    Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                    camera_screen.putExtra("activity_type","Land");
+                                                                    camera_screen.putExtra("land_type_id",land_type_id);
+                                                                    camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                    camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                    camera_screen.putExtra("area",area.getText().toString());
+                                                                    camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                    camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                    camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                    camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                    camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                    camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                    camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                    camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                    camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                    camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                    startActivity(camera_screen);
+                                                                    dialog.dismiss();
+                                                                }
+                                                            }
+                                                            else {
+                                                                Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_fencing_type));
+
+                                                            }
+                                                        }
+                                                        else {
+                                                            Utils.showAlert(AddViewLand.this,getResources().getString(R.string.other_water_source_type));
+                                                        }
+                                                    }
+                                                    else {
+                                                        if(!fencing_type_id.equals("")){
+                                                            if(fencing_type_is_others.equals("Y")){
+                                                                if(!other_fencing_et.getText().toString().equals("")){
+                                                                    Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                    camera_screen.putExtra("activity_type","Land");
+                                                                    camera_screen.putExtra("land_type_id",land_type_id);
+                                                                    camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                    camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                    camera_screen.putExtra("area",area.getText().toString());
+                                                                    camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                    camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                    camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                    camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                    camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                    camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                    camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                    camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                    camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                    camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                    startActivity(camera_screen);
+                                                                    dialog.dismiss();
+                                                                }
+                                                                else {
+                                                                    Utils.showAlert(AddViewLand.this,getResources().getString(R.string.other_fencing_type));
+
+                                                                }
+                                                            }
+                                                            else {
+                                                                Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                camera_screen.putExtra("activity_type","Land");
+                                                                camera_screen.putExtra("land_type_id",land_type_id);
+                                                                camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                camera_screen.putExtra("area",area.getText().toString());
+                                                                camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                startActivity(camera_screen);
+                                                                dialog.dismiss();
+                                                            }
+                                                        }
+                                                        else {
+                                                            Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_fencing_type));
+
+                                                        }
+                                                    }
+                                                }
+                                                else {
+                                                    Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_water_source_type));
+                                                }
+
                                             }
                                             else {
                                                 Utils.showAlert(AddViewLand.this,getResources().getString(R.string.land_address));
@@ -219,7 +411,125 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                                     if(!survey_number.getText().toString().equals("")){
                                         if(!sub_div_no.getText().toString().equals("")){
                                         if(!land_address.getText().toString().equals("")){
-                                            Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                            if(!water_source_type_id.equals("")){
+                                                if(water_source_is_others.equals("Y")){
+                                                    if(!other_water_source_et.getText().toString().equals("")){
+                                                        if(!fencing_type_id.equals("")){
+                                                            if(fencing_type_is_others.equals("Y")){
+                                                                if(!other_fencing_et.getText().toString().equals("")){
+                                                                    Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                    camera_screen.putExtra("activity_type","Land");
+                                                                    camera_screen.putExtra("land_type_id",land_type_id);
+                                                                    camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                    camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                    camera_screen.putExtra("area",area.getText().toString());
+                                                                    camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                    camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                    camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                    camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                    camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                    camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                    camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                    camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                    camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                    camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                    startActivity(camera_screen);
+                                                                    dialog.dismiss();
+                                                                }
+                                                                else {
+                                                                    Utils.showAlert(AddViewLand.this,getResources().getString(R.string.other_fencing_type));
+
+                                                                }
+                                                            }
+                                                            else {
+                                                                Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                camera_screen.putExtra("activity_type","Land");
+                                                                camera_screen.putExtra("land_type_id",land_type_id);
+                                                                camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                camera_screen.putExtra("area",area.getText().toString());
+                                                                camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                startActivity(camera_screen);
+                                                                dialog.dismiss();
+                                                            }
+                                                        }
+                                                        else {
+                                                            Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_fencing_type));
+
+                                                        }
+                                                    }
+                                                    else {
+                                                        Utils.showAlert(AddViewLand.this,getResources().getString(R.string.other_water_source_type));
+                                                    }
+                                                }
+                                                else {
+                                                    if(!fencing_type_id.equals("")){
+                                                        if(fencing_type_is_others.equals("Y")){
+                                                            if(!other_fencing_et.getText().toString().equals("")){
+                                                                Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                                camera_screen.putExtra("activity_type","Land");
+                                                                camera_screen.putExtra("land_type_id",land_type_id);
+                                                                camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                                camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                                camera_screen.putExtra("area",area.getText().toString());
+                                                                camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                                camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                                camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                                camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                                camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                                camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                                camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                                camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                                camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                                camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                                startActivity(camera_screen);
+                                                                dialog.dismiss();
+                                                            }
+                                                            else {
+                                                                Utils.showAlert(AddViewLand.this,getResources().getString(R.string.other_fencing_type));
+
+                                                            }
+                                                        }
+                                                        else {
+                                                            Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
+                                                            camera_screen.putExtra("activity_type","Land");
+                                                            camera_screen.putExtra("land_type_id",land_type_id);
+                                                            camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
+                                                            camera_screen.putExtra("land_address",land_address.getText().toString());
+                                                            camera_screen.putExtra("area",area.getText().toString());
+                                                            camera_screen.putExtra("survey_number",survey_number.getText().toString());
+                                                            camera_screen.putExtra("sub_div_no",sub_div_no.getText().toString());
+                                                            camera_screen.putExtra("land_type_name_en",land_type_name_en);
+                                                            camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
+                                                            camera_screen.putExtra("water_source_type_id",water_source_type_id);
+                                                            camera_screen.putExtra("water_source_type_name",water_source_type_name);
+                                                            camera_screen.putExtra("fencing_type_id",fencing_type_id);
+                                                            camera_screen.putExtra("fencing_type_name",fencing_type_name);
+                                                            camera_screen.putExtra("other_fencing_type_name",other_fencing_et.getText().toString());
+                                                            camera_screen.putExtra("other_water_source_type_name",other_water_source_et.getText().toString());
+                                                            startActivity(camera_screen);
+                                                            dialog.dismiss();
+                                                        }
+                                                    }
+                                                    else {
+                                                        Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_fencing_type));
+
+                                                    }
+                                                }
+                                            }
+                                            else {
+                                                Utils.showAlert(AddViewLand.this,getResources().getString(R.string.select_water_source_type));
+                                            }
+                                          /*  Intent camera_screen = new Intent(AddViewLand.this, CameraScreen.class);
                                             camera_screen.putExtra("activity_type","Land");
                                             camera_screen.putExtra("land_type_id",land_type_id);
                                             camera_screen.putExtra("other_land_type", other_land_type_et.getText().toString());
@@ -230,7 +540,7 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                                             camera_screen.putExtra("land_type_name_en",land_type_name_en);
                                             camera_screen.putExtra("land_type_name_ta",land_type_name_ta);
                                             startActivity(camera_screen);
-                                            dialog.dismiss();
+                                            dialog.dismiss();*/
                                         }
                                         else {
                                             Utils.showAlert(AddViewLand.this,getResources().getString(R.string.land_address));
@@ -272,9 +582,34 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
         landTypeList_item.setLand_type_id(0);
         landTypeList_item.setLand_type_name_en(getResources().getString(R.string.select_land_type));
         landTypeList_item.setLand_type_name_ta(getResources().getString(R.string.select_land_type));
+        landTypeList_item.setIs_others("");
         landTypeList.add(landTypeList_item);
         landTypeList.addAll(dbData.get_nursery_land_type());
         Log.d("Size",""+landTypeList.size());
+
+    }
+    public void loadWaterSourceTypeList(){
+        waterSourceTypeList = new ArrayList<>();
+        dbData.open();
+        NurserySurvey water_source_item = new NurserySurvey();
+        water_source_item.setWater_source_type_id("0");
+        water_source_item.setIs_others("0");
+        water_source_item.setWater_source_type_name(getResources().getString(R.string.select_water_source_type));
+        waterSourceTypeList.add(water_source_item);
+        waterSourceTypeList.addAll(dbData.get_nursery_water_source_type());
+        Log.d("Size",""+waterSourceTypeList.size());
+
+    }
+    public void loadFencingTypeList(){
+        fencingTypeList = new ArrayList<>();
+        dbData.open();
+        NurserySurvey water_source_item = new NurserySurvey();
+        water_source_item.setFencing_type_id("0");
+        water_source_item.setIs_others("0");
+        water_source_item.setFencing_type_name(getResources().getString(R.string.select_fencing_type));
+        fencingTypeList.add(water_source_item);
+        fencingTypeList.addAll(dbData.get_nursery_fencing_type());
+        Log.d("Size",""+fencingTypeList.size());
 
     }
 
@@ -389,6 +724,13 @@ public class AddViewLand extends AppCompatActivity implements Api.ServerResponse
                         nurserySurvey.setArea(jsonArray.getJSONObject(i).getString("area"));
                         nurserySurvey.setSurvey_number(jsonArray.getJSONObject(i).getString("survey_no"));
                         nurserySurvey.setSub_div_no(jsonArray.getJSONObject(i).getString("subdiv_no"));
+
+                        nurserySurvey.setWater_source_type_id(jsonArray.getJSONObject(i).getString("water_source_type_id"));
+                        nurserySurvey.setOther_water_source_type_name(jsonArray.getJSONObject(i).getString("water_source_type_others"));
+                        nurserySurvey.setFencing_type_id(jsonArray.getJSONObject(i).getString("fencing_type_id"));
+                        nurserySurvey.setOther_fencing_type_name(jsonArray.getJSONObject(i).getString("fencing_type_others"));
+                        nurserySurvey.setFencing_type_name(jsonArray.getJSONObject(i).getString("fencing_type_name"));
+                        nurserySurvey.setWater_source_type_name(jsonArray.getJSONObject(i).getString("water_source_type_name"));
                         dbData.insert_nursery_land_details(nurserySurvey);
                     } catch (JSONException e) {
                         e.printStackTrace();
