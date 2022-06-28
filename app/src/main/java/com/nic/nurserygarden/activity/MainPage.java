@@ -69,7 +69,7 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
             get_nursery_water_source_type();
             get_nursery_fencing_type();
         }
-        mainPageBinding.recurringExpenditure.setEnabled(false);
+        //mainPageBinding.recurringExpenditure.setEnabled(false);
         mainPageBinding.syncLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

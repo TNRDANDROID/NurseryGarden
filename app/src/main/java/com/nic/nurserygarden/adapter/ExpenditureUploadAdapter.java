@@ -32,8 +32,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ExpenditureUploadAdapter extends RecyclerView.Adapter<ExpenditureUploadAdapter.MyViewHolder> {
 
@@ -92,10 +95,15 @@ public class ExpenditureUploadAdapter extends RecyclerView.Adapter<ExpenditureUp
         else {
             holder.expenditureUploadItemViewBinding.expenditureTypeText.setText(context.getResources().getString(R.string.recurring_expenditure));
         }
+      /*  holder.expenditureUploadItemViewBinding.expenditureCategoryText.setText(pendingListValues.get(position).getExpense_category_name());
+        holder.expenditureUploadItemViewBinding.expenditureUnitText.setText(pendingListValues.get(position).getExpense_unit_name());
+        holder.expenditureUploadItemViewBinding.expenditureFoundSrcText.setText(pendingListValues.get(position).getExpense_found_src_name());
+*/
         holder.expenditureUploadItemViewBinding.expenditureCategoryText.setText(pendingListValues.get(position).getExpense_category_name());
         holder.expenditureUploadItemViewBinding.expenditureUnitText.setText(pendingListValues.get(position).getExpense_unit_name());
         holder.expenditureUploadItemViewBinding.expenditureFoundSrcText.setText(pendingListValues.get(position).getExpense_found_src_name());
-
+        holder.expenditureUploadItemViewBinding.quantity.setText(pendingListValues.get(position).getQuantity());
+        holder.expenditureUploadItemViewBinding.amount.setText(indianMoney(pendingListValues.get(position).getAmount()));
 
         holder.expenditureUploadItemViewBinding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,5 +242,23 @@ public class ExpenditureUploadAdapter extends RecyclerView.Adapter<ExpenditureUp
         }
 
     }
+
+    public String indianMoney(String amount){
+        String amount_value="";
+        try{
+            Locale locale = new Locale("en","IN");
+            DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
+            DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance(locale);
+            dfs.setCurrencySymbol("\u20B9");
+            decimalFormat.setDecimalFormatSymbols(dfs);
+            System.out.println(decimalFormat.format(Integer.parseInt(amount)));
+            amount_value = decimalFormat.format(Integer.parseInt(amount));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return amount_value;
+    }
+
 
 }

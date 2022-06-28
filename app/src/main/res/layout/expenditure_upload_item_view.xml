@@ -29,9 +29,9 @@
 
                 <RelativeLayout
                     android:id="@+id/icon_id"
-                    android:layout_width="@dimen/_60sdp"
+                    android:layout_width="@dimen/_40sdp"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/_100sdp">
+                    android:layout_centerVertical="true">
                     <ImageView
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
@@ -60,6 +60,365 @@
                             tools:ignore="UselessParent">
 
                             <LinearLayout
+                                android:id="@+id/batch_name_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/expenditure_type_text"
+                                    android:textStyle="bold"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:textSize="@dimen/content_text_size"
+                                    android:padding="@dimen/_2sdp"/>
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:baselineAligned="false">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="5dp"
+                                            android:textAlignment="viewStart"
+                                            android:text="Category"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:text="@string/semi_colan"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/expenditure_category_text"
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:textAlignment="inherit"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <!--
+                                                                <TextView
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:textColor="@color/white"
+                                                                    android:id="@+id/expenditure_category_text"
+                                                                    android:textStyle="bold"
+                                                                    android:layout_marginTop="@dimen/_5sdp"
+                                                                    android:textSize="@dimen/content_text_size"
+                                                                    android:padding="@dimen/_2sdp"/>
+                                -->
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:baselineAligned="false">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+
+                                        android:orientation="vertical">
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="5dp"
+                                            android:text="Expenditure Unit"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:text="@string/semi_colan"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/expenditure_unit_text"
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:textAlignment="inherit"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <!--
+                                                                <TextView
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:textColor="@color/white"
+                                                                    android:id="@+id/expenditure_unit_text"
+                                                                    android:textSize="@dimen/_11sdp"
+                                                                    android:padding="@dimen/_2sdp"/>
+                                -->
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:baselineAligned="false">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="5dp"
+                                            android:text="Expenditure Found Src"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:text="@string/semi_colan"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/expenditure_found_src_text"
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:textAlignment="inherit"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <!--
+                                                                <TextView
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:textColor="@color/white"
+                                                                    android:id="@+id/expenditure_found_src_text"
+                                                                    android:textSize="@dimen/_11sdp"
+                                                                    android:padding="@dimen/_2sdp"/>
+                                -->
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:baselineAligned="false">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="5dp"
+                                            android:text="Quantity"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:text="@string/semi_colan"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/quantity"
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:textAlignment="inherit"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <!--
+                                                                <TextView
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:textColor="@color/white"
+                                                                    android:id="@+id/quantity"
+                                                                    android:textSize="@dimen/_11sdp"
+                                                                    android:padding="@dimen/_2sdp"/>
+                                -->
+                                <LinearLayout
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:baselineAligned="false">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="5dp"
+                                            android:text="Amount"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:text="@string/semi_colan"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/amount"
+                                            style="@string/font_circular_book"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="10dp"
+                                            android:textAlignment="inherit"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/content_text_size" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <!--
+                                                                <TextView
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:textColor="@color/white"
+                                                                    android:id="@+id/amount"
+                                                                    android:textSize="@dimen/_11sdp"
+                                                                    android:padding="@dimen/_2sdp"/>
+                                -->
+
+
+                            </LinearLayout>
+                            <!--<LinearLayout
                                 android:id="@+id/batch_name_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -99,7 +458,7 @@
                                     android:padding="@dimen/_2sdp"/>
 
 
-                            </LinearLayout>
+                            </LinearLayout>-->
 
                             <LinearLayout
                                 android:layout_below="@+id/batch_name_layout"
@@ -107,6 +466,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_10sdp"
                                 android:orientation="horizontal">
 
                                 <RelativeLayout

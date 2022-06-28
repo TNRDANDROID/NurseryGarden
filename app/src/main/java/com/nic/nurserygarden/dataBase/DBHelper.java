@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "Nursery";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "New_Nursery_Garden";
+    private static final int DATABASE_VERSION = 2;
 
 
     public static final String VILLAGE_TABLE_NAME = " villageTable";
