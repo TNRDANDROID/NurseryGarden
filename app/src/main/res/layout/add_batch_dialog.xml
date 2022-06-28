@@ -183,6 +183,7 @@
 
                             <EditText
                                 android:inputType="text"
+                                android:singleLine="true"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@color/full_transparent"
@@ -226,6 +227,7 @@
                                 android:textSize="@dimen/content_text_size"
                                 android:hint="@string/enter_area"
                                 android:id="@+id/area"
+                                android:singleLine="true"
                                 tools:ignore="Autofill,RtlSymmetry" />
 
 
@@ -262,6 +264,7 @@
                                 android:hint="@string/enter_survey_number"
                                 android:id="@+id/survey_number"
                                 android:maxLength="5"
+                                android:singleLine="true"
                                 android:inputType="text"
                                 android:digits="/0123456789"
                                 tools:ignore="Autofill,RtlSymmetry" />
@@ -302,6 +305,7 @@
                                 android:hint="@string/enter_sub_div_no"
                                 android:id="@+id/sub_div_no"
                                 android:maxLength="10"
+                                android:singleLine="true"
                                 tools:ignore="Autofill,RtlSymmetry" />
 
 
