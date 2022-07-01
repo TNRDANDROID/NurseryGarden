@@ -294,7 +294,7 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         if (Utils.isOnline()) {
             ((GrowthTracking)context).UploadData(dataset,batch_growth_tracking_primary_id,batch_id);
         } else {
-            Utils.showAlert((Activity) context, "Turn On Mobile Data To Upload");
+            Utils.showAlert((Activity) context, context.getResources().getString(R.string.no_internet));
         }
 
     }

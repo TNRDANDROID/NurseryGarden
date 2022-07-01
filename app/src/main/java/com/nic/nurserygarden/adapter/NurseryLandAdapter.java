@@ -232,7 +232,7 @@ public class NurseryLandAdapter extends RecyclerView.Adapter<NurseryLandAdapter.
         if (Utils.isOnline()) {
             ((AddViewLand)context).UploadData(dataset,land_primary_id);
         } else {
-            Utils.showAlert((Activity) context, "Turn On Mobile Data To Upload");
+            Utils.showAlert((Activity) context, context.getResources().getString(R.string.no_internet));
         }
 
     }

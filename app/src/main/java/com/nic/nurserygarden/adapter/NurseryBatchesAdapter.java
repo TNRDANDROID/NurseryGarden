@@ -369,7 +369,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         if (Utils.isOnline()) {
             ((AddViewBatchDetails)context).UploadData(dataset,batch_primary_id);
         } else {
-            Utils.showAlert((Activity) context, "Turn On Mobile Data To Upload");
+            Utils.showAlert((Activity) context, context.getResources().getString(R.string.no_internet));
         }
 
     }

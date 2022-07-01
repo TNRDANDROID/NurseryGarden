@@ -265,7 +265,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
 
                 }
                 else {
-                    Toasty.error(OrderItemActivity.this,jsonObject.getString("MESSAGE"), Toast.LENGTH_SHORT);
+                    Toasty.error(OrderItemActivity.this,jsonObject.getString("MESSAGE"), Toast.LENGTH_SHORT,true).show();
                 }
                 Log.d("searchDetails", "" + responseDecryptedBlockKey);
             }
@@ -279,7 +279,7 @@ public class OrderItemActivity extends AppCompatActivity implements Api.ServerRe
                     onBackPress();
                 }
                 else {
-                    Toasty.error(OrderItemActivity.this,jsonObject.getString("MESSAGE"),Toast.LENGTH_SHORT);
+                    Toasty.error(OrderItemActivity.this,jsonObject.getString("MESSAGE"),Toast.LENGTH_SHORT,true).show();
                 }
                 Log.d("order_save", "" + responseDecryptedBlockKey);
             }

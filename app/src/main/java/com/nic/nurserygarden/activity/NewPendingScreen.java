@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -135,6 +136,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
             }
         }
     }
+    @SuppressLint("StaticFieldLeak")
     public class fetchExpenditurePendingTask extends AsyncTask<Void, Void,ArrayList<NurserySurvey>> {
         @Override
         protected ArrayList<NurserySurvey> doInBackground(Void... params) {
@@ -165,7 +167,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
 
 
 
-    public JSONObject uploadDeadOrder(JSONObject deadOrderJson,String batch_id_) {
+    public void uploadDeadOrder(JSONObject deadOrderJson, String batch_id_) {
         batch_id = batch_id_;
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), deadOrderJson.toString());
         JSONObject dataSet = new JSONObject();
@@ -180,9 +182,8 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         }
 
         Log.d("uploadDead", "" + dataSet);
-        return dataSet;
     }
-    public JSONObject uploadExpenditure(JSONObject uploadExpenditureData,String expenditure_primary_id_) {
+    public void uploadExpenditure(JSONObject uploadExpenditureData, String expenditure_primary_id_) {
         expenditure_primary_id = expenditure_primary_id_;
         String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), uploadExpenditureData.toString());
         JSONObject dataSet = new JSONObject();
@@ -197,7 +198,6 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
         }
 
         Log.d("uploadExpenditure", "" + dataSet);
-        return dataSet;
     }
     @Override
     public void OnMyResponse(ServerResponse serverResponse) {
@@ -210,7 +210,7 @@ public class NewPendingScreen extends AppCompatActivity implements Api.ServerRes
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    Utils.showAlert(this, "Uploaded");
+                    Utils.showAlert(this, jsonObject.getString("MESSAGE"));
                     //int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, null,null);
                     int sdsm = db.delete(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE, "batch_id = ? ", new String[]{batch_id});
                     new fetchDeadSaplingPendingTask().execute();

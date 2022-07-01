@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.bumptech.glide.util.Util;
 import com.nic.nurserygarden.R;
@@ -590,7 +591,7 @@ public class CapitalRecurreingExpenditure extends AppCompatActivity {
                 whereArgs = new String[]{entry_date};
                 insert_updated_id = db.insert(DBHelper.NURSERY_EXPENDITURE_SAVE,null,contentValues);
                 if (insert_updated_id>0){
-                    Toasty.success(CapitalRecurreingExpenditure.this,getResources().getString(R.string.inserted_success),Toasty.LENGTH_SHORT);
+                    Toasty.success(CapitalRecurreingExpenditure.this,getResources().getString(R.string.inserted_success), Toast.LENGTH_SHORT,true).show();
                     onBackPressed();
                 }
                /* if(dbData.get_All_Or_Particular_Expenditure("Particular",entry_date).size() > 0){

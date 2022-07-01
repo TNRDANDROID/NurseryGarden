@@ -225,7 +225,7 @@ public class SellSpecies extends AppCompatActivity implements Api.ServerResponse
 
                 }
                 else {
-                    Toasty.error(SellSpecies.this,jsonObject.getString("MESSAGE"),Toast.LENGTH_SHORT);
+                    Toasty.error(SellSpecies.this,jsonObject.getString("MESSAGE"),Toast.LENGTH_SHORT,true).show();
                 }
                 Log.d("nursery_buyer_type", "" + responseDecryptedBlockKey);
             }

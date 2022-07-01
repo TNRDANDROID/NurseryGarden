@@ -163,25 +163,25 @@ public class DeadSaplingEntry extends AppCompatActivity {
                             saveDataLocally(no_of_dead_sapling,dead_reason);
                         }
                         else {
-                            Utils.showAlert(DeadSaplingEntry.this,"Please Enter Dead Reason");
+                            Utils.showAlert(DeadSaplingEntry.this,getResources().getString(R.string.please_enter_dead_reason));
                         }
                     }
                     else {
-                        Utils.showAlert(DeadSaplingEntry.this,"Choose Dead Stage Type");
+                        Utils.showAlert(DeadSaplingEntry.this,getResources().getString(R.string.choose_dead_stage_type));
                     }
                 }
                 else {
-                    Utils.showAlert(DeadSaplingEntry.this,"Counting Mismatched");
+                    Utils.showAlert(DeadSaplingEntry.this,getResources().getString(R.string.count_mismatched));
                 }
 
             }
             else {
-                Utils.showAlert(DeadSaplingEntry.this,"Please Enter Dead Sapling Count");
+                Utils.showAlert(DeadSaplingEntry.this,getResources().getString(R.string.enter_dead_sapling_count));
             }
 
         }
         else {
-            Utils.showAlert(DeadSaplingEntry.this,"Choose Species Type");
+            Utils.showAlert(DeadSaplingEntry.this,getResources().getString(R.string.choose_your_species));
         }
     }
 
@@ -205,7 +205,7 @@ public class DeadSaplingEntry extends AppCompatActivity {
             if(deadSaplingDetailsCount.size() < 1) {
                 id = db.insert(DBHelper.DEAD_SAPLING_DETAILS_SAVE, null, contentValues);
                 if (id > 0) {
-                    Toasty.success(this, "Inserted Success!", Toast.LENGTH_SHORT, true).show();
+                    Toasty.success(this, getResources().getString(R.string.inserted_success), Toast.LENGTH_SHORT, true).show();
                     super.onBackPressed();
                     overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
 
@@ -214,7 +214,7 @@ public class DeadSaplingEntry extends AppCompatActivity {
             else {
                 id = db.update(DBHelper.DEAD_SAPLING_DETAILS_SAVE, contentValues, whereClause, whereArgs);
                 if (id > 0) {
-                    Toasty.success(this, "Updated Success!", Toast.LENGTH_SHORT, true).show();
+                    Toasty.success(this, getResources().getString(R.string.updated_success), Toast.LENGTH_SHORT, true).show();
                     super.onBackPressed();
                     overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
 

@@ -263,5 +263,7 @@
     <string name="saplings_count">Saplings Count</string>
     <string name="age_in_days">Age In Days</string>
     <string name="species_type_id">Species Type Id</string>
+    <string name="please_enter_dead_reason">Please Enter Dead Reason</string>
+    <string name="choose_dead_stage_type">Choose Dead Stage Type</string>
 
 </resources>

@@ -95,6 +95,9 @@ public class CommonAdapter extends BaseAdapter {
         else if (type.equalsIgnoreCase("fencingTypeList")) {
             tv_type.setText(pmgsySurvey.getFencing_type_name());
         }
+        else {
+            tv_type.setText("");
+        }
         return view;
     }
 

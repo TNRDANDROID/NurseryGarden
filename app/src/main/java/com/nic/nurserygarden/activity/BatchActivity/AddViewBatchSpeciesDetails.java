@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.util.Util;
 import com.nic.nurserygarden.R;
@@ -191,12 +192,12 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
 
                                 long inserted_id = db.insert(DBHelper.BATCH_SPECIES_DETAILS,null,contentValues);
                                 if(inserted_id>0){
-                                    Toasty.success(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.inserted_success),Toasty.LENGTH_SHORT);
+                                    Toasty.success(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.inserted_success),Toasty.LENGTH_SHORT,true).show();
                                     new fetchNurserySpeciesDetails().execute();
                                     dialog.dismiss();
                                 }
                                 else {
-                                    Toasty.error(AddViewBatchSpeciesDetails.this, getResources().getString(R.string.something_wrong),Toasty.LENGTH_SHORT);
+                                    Toasty.error(AddViewBatchSpeciesDetails.this, getResources().getString(R.string.something_wrong),Toasty.LENGTH_SHORT,true).show();
                                     dialog.dismiss();
                                 }
 
@@ -313,12 +314,12 @@ public class AddViewBatchSpeciesDetails extends AppCompatActivity {
 
                                 long inserted_id = db.update(DBHelper.BATCH_SPECIES_DETAILS,contentValues,whereClause,whereArgs);
                                 if(inserted_id>0){
-                                    Toasty.success(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.updated_success),Toasty.LENGTH_SHORT);
+                                    Toasty.success(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.updated_success), Toast.LENGTH_SHORT,true).show();
                                     new fetchNurserySpeciesDetails().execute();
                                     dialog.dismiss();
                                 }
                                 else {
-                                    Toasty.error(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.something_wrong),Toasty.LENGTH_SHORT);
+                                    Toasty.error(AddViewBatchSpeciesDetails.this,getResources().getString(R.string.something_wrong),Toast.LENGTH_SHORT,true).show();
                                     dialog.dismiss();
                                 }
 

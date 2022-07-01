@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -196,7 +197,7 @@ public class FullImageActivity extends AppCompatActivity implements View.OnClick
                 }
                 else if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD")) {
 
-                    Toasty.error(FullImageActivity.this,jsonObject.getString("MESSAGE"),Toasty.LENGTH_SHORT,true).show();
+                    Toasty.error(FullImageActivity.this,jsonObject.getString("MESSAGE"), Toast.LENGTH_SHORT,true).show();
                 }
                 Log.d("resp_OnlineImage", "" + responseDecryptedBlockKey);
             }

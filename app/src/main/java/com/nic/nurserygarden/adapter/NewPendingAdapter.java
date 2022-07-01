@@ -151,7 +151,7 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
         if (Utils.isOnline()) {
             ((NewPendingScreen)context).uploadDeadOrder(data_set,batch_id);
         } else {
-            Utils.showAlert(context, "Turn On Mobile Data To Upload");
+            Utils.showAlert(context, context.getResources().getString(R.string.no_internet));
         }
 
     }

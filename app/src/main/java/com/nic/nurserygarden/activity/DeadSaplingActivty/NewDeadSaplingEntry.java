@@ -258,7 +258,7 @@ public class NewDeadSaplingEntry extends AppCompatActivity implements Api.Server
 
                 }
                 else {
-                    Toasty.error(NewDeadSaplingEntry.this,jsonObject.getString("MESSAGE"), Toast.LENGTH_SHORT);
+                    Toasty.error(NewDeadSaplingEntry.this,jsonObject.getString("MESSAGE"), Toast.LENGTH_SHORT,true).show();
                 }
                 Log.d("searchDetails", "" + responseDecryptedBlockKey);
             }
@@ -522,11 +522,11 @@ public class NewDeadSaplingEntry extends AppCompatActivity implements Api.Server
                 insert_id = db.insert(DBHelper.DEAD_SAPLING_DETAILS_NEW_SAVE,null,values);
                 if(deadOrderList.size()==count){
                     if(insert_id>0){
-                        Toasty.success(NewDeadSaplingEntry.this, getResources().getString(R.string.success),Toasty.LENGTH_SHORT);
+                        Toasty.success(NewDeadSaplingEntry.this, getResources().getString(R.string.success),Toast.LENGTH_SHORT,true).show();
                         onBackPress();
                     }
                     else {
-                        Toasty.error(NewDeadSaplingEntry.this, getResources().getString(R.string.faild),Toasty.LENGTH_SHORT);
+                        Toasty.error(NewDeadSaplingEntry.this, getResources().getString(R.string.faild),Toast.LENGTH_SHORT,true).show();
                     }
                 }
 

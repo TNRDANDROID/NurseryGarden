@@ -824,7 +824,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("CheckResult")
     public void showToast(){
-        Toasty.success(CameraScreen.this,getResources().getString(R.string.inserted_success),Toasty.LENGTH_SHORT);
+        Toasty.success(CameraScreen.this,getResources().getString(R.string.inserted_success),Toast.LENGTH_SHORT,true).show();
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
     }
