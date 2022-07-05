@@ -176,7 +176,7 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         }
     }
 
-    public void save_and_delete_alert(int position,String save_delete){
+    private void save_and_delete_alert(int position, String save_delete){
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -220,7 +220,7 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         }
 
     }
-    public void deletePending(int position) {
+    private void deletePending(int position) {
         String batch_growth_tracking_primary_id = String.valueOf(growthList.get(position).getBatch_growth_tracking_primary_id());
         int bpd = db.delete(DBHelper.BATCH_GROWTH_TRACKING_DETAILS, "batch_growth_tracking_primary_id = ? ", new String[]{batch_growth_tracking_primary_id});
         int bid = db.delete(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, "batch_growth_tracking_primary_id = ? ", new String[]{batch_growth_tracking_primary_id});
@@ -234,7 +234,7 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
     }
 
 
-    public void uploadPending(int position) {
+    private void uploadPending(int position) {
         JSONObject dataset = new JSONObject();
         JSONObject dataset1 = new JSONObject();
         JSONArray nursery_seeding_batch_sapling_growth_tracking = new JSONArray();
@@ -298,7 +298,7 @@ public class TrackingGrowthAdapter extends RecyclerView.Adapter<TrackingGrowthAd
         }
 
     }
-    public String BitMapToString(Bitmap bitmap){
+    private String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
         byte [] b=baos.toByteArray();

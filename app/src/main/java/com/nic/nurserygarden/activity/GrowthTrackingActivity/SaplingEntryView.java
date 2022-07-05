@@ -63,6 +63,8 @@ public class SaplingEntryView extends AppCompatActivity {
     SpeciesListAdapter speciesListAdapter;
     NurserySpeciesAdapter nurserySpeciesAdapter;
     GrowthTrackingSpeciesSaplingAdapter growthTrackingSpeciesSaplingAdapter;
+    int initial_count =1;
+    int species_position=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,11 +115,45 @@ public class SaplingEntryView extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(initial_count==2){
+            if(conditionForOnBackPress().equals("false")){
+                String msg = "Please Entry the "+speciesTypeList.get(species_position).getSpecies_name_en()+ " Species Details ";
+                Utils.showAlert(SaplingEntryView.this,msg);
+            }
+            else {
+                super.onBackPressed();
+                setResult(Activity.RESULT_CANCELED);
+                overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+            }
+
+        }
+        else {
+            super.onBackPressed();
+            setResult(Activity.RESULT_CANCELED);
+            overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        }
+    }
 
     public void onBackPress() {
-        super.onBackPressed();
-        setResult(Activity.RESULT_CANCELED);
-        overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        if(initial_count==2){
+            if(conditionForOnBackPress().equals("false")){
+                String msg = "Please Entry the "+speciesTypeList.get(species_position).getSpecies_name_en()+ " Species Details ";
+                Utils.showAlert(SaplingEntryView.this,msg);
+            }
+            else {
+                super.onBackPressed();
+                setResult(Activity.RESULT_CANCELED);
+                overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+            }
+
+        }
+        else {
+            super.onBackPressed();
+            setResult(Activity.RESULT_CANCELED);
+            overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit);
+        }
     }
 
     public void speciesdapterItemClicked(int pos){
@@ -167,7 +203,7 @@ public class SaplingEntryView extends AppCompatActivity {
                     int total_count =0;
                     boolean sapling_height_ = false;
                     if(!saplings_count.getText().toString().equals("")){
-                        total_count = getSaplingCountLimitationNumber()+Integer.parseInt(saplings_count.getText().toString());
+                        total_count = getSaplingCountLimitationNumber(species_type_id)+Integer.parseInt(saplings_count.getText().toString());
                     }
                     if(!height_in_cm.getText().toString().equals("")){
                         sapling_height_= getSaplingHeight(height_in_cm.getText().toString());
@@ -175,7 +211,7 @@ public class SaplingEntryView extends AppCompatActivity {
 
                     if(particular_species_count>=total_count){
                         if(getSaplingCountLimitation()){
-                            if(!saplings_count.getText().toString().equals("")){
+                            if(!saplings_count.getText().toString().equals("")&&!saplings_count.getText().toString().equals("0")){
                                 if(!height_in_cm.getText().toString().equals("")&&(!height_in_cm.getText().toString().equals("0"))){
                                     if(!sapling_height_){
                                         saveSaplingDetails(saplings_count.getText().toString(),height_in_cm.getText().toString());
@@ -236,6 +272,7 @@ public class SaplingEntryView extends AppCompatActivity {
             id = db.insert(DBHelper.BATCH_GROWTH_TRACKING_SPECIES_DETAILS, null, values);
 
             if (id > 0) {
+                initial_count = 2;
                 Toasty.success(this, getResources().getString(R.string.success), Toast.LENGTH_SHORT, true).show();
                 loadSaplingDetailsList();
 
@@ -287,14 +324,14 @@ public class SaplingEntryView extends AppCompatActivity {
 
         return false;
     }
-    public int getSaplingCountLimitationNumber(){
+    public int getSaplingCountLimitationNumber(String species_type_id){
         dbData.open();
         int saplings_count=0;
         ArrayList<NurserySurvey>growthSpeciesDetailsList = new ArrayList<>();
         growthSpeciesDetailsList = dbData.get_batch_growth_species_details(String.valueOf(batch_id),"species_type_id","",species_type_id,getIntent().getStringExtra("entry_date"));
         if(growthSpeciesDetailsList.size()>0) {
             for (int i = 0; i < growthSpeciesDetailsList.size(); i++) {
-                if(growthSpeciesDetailsList.get(i).getAge_in_days()!=0 && !growthSpeciesDetailsList.get(i).getHeight_in_cm().equals("0")){
+                if(!growthSpeciesDetailsList.get(i).getHeight_in_cm().equals("0")){
                     saplings_count = saplings_count+growthSpeciesDetailsList.get(i).getNo_of_saplings();
                 }
                 //saplings_count = saplings_count + growthSpeciesDetailsList.get(i).getNo_of_saplings();
@@ -324,6 +361,30 @@ public class SaplingEntryView extends AppCompatActivity {
         }
 
         return height_flag;
+    }
+
+    private String conditionForOnBackPress(){
+        dbData.open();
+        species_position = 0;
+        String condition = "true";
+        for(int i=0;i<speciesTypeList.size();i++){
+            String  species_type_id = String.valueOf(speciesTypeList.get(i).getSpecies_type_id());
+            ArrayList<NurserySurvey> batch_species_detailsList = new ArrayList<>();
+            batch_species_detailsList =dbData.get_nursery_batch_species_details(String.valueOf(batch_primary_id),"species_type_id","",species_type_id);
+            int particular_species_count = batch_species_detailsList.get(0).getNo_of_count();
+            //int batch_species_id = growthSpeciesDetailsList.get(0).getBatch_species_id();
+            int entry_count = getSaplingCountLimitationNumber(species_type_id);
+            if(particular_species_count==entry_count){
+                condition  = "true";
+            }
+            else {
+                species_position = i;
+                condition  = "false";
+                break;
+            }
+
+        }
+       return condition;
     }
 
 

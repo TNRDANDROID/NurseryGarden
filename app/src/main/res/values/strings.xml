@@ -116,7 +116,7 @@
     <string name="created_date">Created Date</string>
     <string name="batch">Batch</string>
     <string name="select_land_type">Select Land Type</string>
-    <string name="enter_area">Enter Area (in acres)</string>
+    <string name="enter_area">Enter Area (in Sq.m)</string>
     <string name="other_land_type">Specify other land type</string>
     <string name="enter_survey_number">Enter Survey Number</string>
     <string name="enter_sub_div_no">Enter Sub Division Number</string>

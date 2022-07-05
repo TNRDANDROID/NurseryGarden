@@ -109,13 +109,13 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 holder.nurseryBatchItemViewBinding.check.setVisibility(View.VISIBLE);
                 holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-
-
+                holder.nurseryBatchItemViewBinding.batchView.setVisibility(View.GONE);
             }
             else {
                 holder.nurseryBatchItemViewBinding.check.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.VISIBLE);
                 holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+                holder.nurseryBatchItemViewBinding.batchView.setVisibility(View.VISIBLE);
 
             }
         }
@@ -128,6 +128,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.deadSaplingUpload.setVisibility(View.GONE);
             }
+
             else {
                 holder.nurseryBatchItemViewBinding.upload.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.VISIBLE);
@@ -143,12 +144,14 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                 }
             }
             holder.nurseryBatchItemViewBinding.delete.setVisibility(View.GONE);
+            holder.nurseryBatchItemViewBinding.batchView.setVisibility(View.VISIBLE);
             if (batchList.get(position).getIs_batch_closed().equals("Y")){
                 holder.nurseryBatchItemViewBinding.check.setVisibility(View.VISIBLE);
                 holder.nurseryBatchItemViewBinding.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
                 holder.nurseryBatchItemViewBinding.addSpecies.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.trackGrowth.setVisibility(View.GONE);
                 holder.nurseryBatchItemViewBinding.deadSapling.setVisibility(View.GONE);
+                holder.nurseryBatchItemViewBinding.batchView.setVisibility(View.GONE);
             }
          /*   else {
                 holder.nurseryBatchItemViewBinding.check.setVisibility(View.GONE);
@@ -186,21 +189,33 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         holder.nurseryBatchItemViewBinding.trackGrowth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoGrowthTrackingClass = new Intent(context, GrowthTracking.class);
-                gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
-                gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
-                gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
-                context.startActivity(gotoGrowthTrackingClass);
+                ArrayList<NurserySurvey> deadList = new ArrayList<>(dbData.get_dead_sapling_details_for_upload("Particular", String.valueOf(batchList.get(position).getBatch_id())));
+                if(deadList.size()>0){
+                    Utils.showAlert((Activity) context,"Please Upload Your Dead List first");
+                }
+                else {
+                    Intent gotoGrowthTrackingClass = new Intent(context, GrowthTracking.class);
+                    gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
+                    gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
+                    gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                    context.startActivity(gotoGrowthTrackingClass);
+                }
             }
         });
         holder.nurseryBatchItemViewBinding.deadSapling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoGrowthTrackingClass = new Intent(context, NewDeadSaplingEntry.class);
-                gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
-                //gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
-                //gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
-                context.startActivity(gotoGrowthTrackingClass);
+                ArrayList<NurserySurvey> batch_growth_species_detailsList = new ArrayList<>(dbData.get_batch_growth_species_details(String.valueOf(batchList.get(position).getBatch_id()), "batch", "0", "", ""));
+                if(batch_growth_species_detailsList.size()>0){
+                    Utils.showAlert((Activity) context,"Please Upload Your Growth Sapling Entry first");
+                }
+                else {
+                    Intent gotoGrowthTrackingClass = new Intent(context, NewDeadSaplingEntry.class);
+                    gotoGrowthTrackingClass.putExtra("batch_id",batchList.get(position).getBatch_id());
+                    //gotoGrowthTrackingClass.putExtra("batch_species_id",batchList.get(position).getBatch_species_id());
+                    //gotoGrowthTrackingClass.putExtra("batch_primary_id",batchList.get(position).getBatch_primary_id());
+                    context.startActivity(gotoGrowthTrackingClass);
+                }
             }
         });
         holder.nurseryBatchItemViewBinding.deadSaplingUpload.setOnClickListener(new View.OnClickListener() {
@@ -249,7 +264,7 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         }
     }
 
-    public void save_and_delete_alert(int position,String save_delete){
+    private void save_and_delete_alert(int position, String save_delete){
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

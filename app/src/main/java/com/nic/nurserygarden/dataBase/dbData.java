@@ -1505,6 +1505,10 @@ public class dbData {
                     selection = "server_flag = ? ";
                     selectionArgs = new String[]{server_flag};
                     break;
+                case "batch":
+                    selection = "batch_id = ? and server_flag = ? ";
+                    selectionArgs = new String[]{value, server_flag};
+                    break;
                 default:
                     selection = "batch_id = ? and species_type_id = ?  and entry_date = ? ";
                     selectionArgs = new String[]{value, species_type_id, entry_date};
