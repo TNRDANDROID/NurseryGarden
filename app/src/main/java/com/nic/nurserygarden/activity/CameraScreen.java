@@ -370,7 +370,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         return dist;
     }
     private void captureImage() {
-        /*if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
@@ -390,13 +390,13 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             // start the image capture Intent
             startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-        }*/
-        Intent intent = new Intent(this, ImageSelectActivity.class);
+        }
+       /* Intent intent = new Intent(this, ImageSelectActivity.class);
         intent.putExtra(ImageSelectActivity.FLAG_COMPRESS, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_CAMERA, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_GALLERY, false);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_CROP, false);//default is false
-        startActivityForResult(intent, 1213);
+        startActivityForResult(intent, 1213);*/
         if (MyLocationListener.latitude > 0) {
             offlatTextValue = MyLocationListener.latitude;
             offlongTextValue = MyLocationListener.longitude;
