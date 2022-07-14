@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -355,7 +357,8 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
                     JSONObject photosDetails = new JSONObject();
                     photosDetails.put("lat",batchPhotosDetails.get(j).getLatitude());
                     photosDetails.put("long",batchPhotosDetails.get(j).getLongitude());
-                    photosDetails.put("image",BitMapToString(batchPhotosDetails.get(j).getImage()));
+                    //photosDetails.put("image",BitMapToString(batchPhotosDetails.get(j).getImage()));
+                    photosDetails.put("image",imageString(batchPhotosDetails.get(j).getImage_path()));
                     seeding_batch_photos.put(photosDetails);
                 }
                 dataset1.put("seeding_batch_photos",seeding_batch_photos);
@@ -427,6 +430,28 @@ public class NurseryBatchesAdapter extends RecyclerView.Adapter<NurseryBatchesAd
         } else {
             Utils.showAlert((Activity) context, "Turn On Mobile Data To Upload");
         }
+
+    }
+
+    private String imageString(String file_path){
+        String image_string = "";
+        File imgFile = new File(file_path);
+
+        if(imgFile.exists()) {
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            image_string = BitMapToString(myBitmap);
+            deleteFileDirectory(file_path);
+
+        }
+        return image_string;
+    }
+
+    private void deleteFileDirectory(String file_path){
+        File file = new File(file_path);
+        // call deleteDirectory method to delete directory
+        // recursively
+        file.delete();
 
     }
 }

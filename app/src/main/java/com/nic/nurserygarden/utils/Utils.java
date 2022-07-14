@@ -40,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.FileProvider;
 
@@ -1159,11 +1160,12 @@ public class Utils {
 
 
     public static String getCurrentDateTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         Date date = new Date();
         return formatter.format(date);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static String getCurrentDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
         Date date = new Date();

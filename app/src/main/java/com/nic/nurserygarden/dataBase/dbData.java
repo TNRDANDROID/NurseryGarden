@@ -1283,14 +1283,16 @@ public class dbData {
                             .getColumnIndexOrThrow("batch_primary_id")));
                     card.setBatch_id(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_id")));
-                    byte[] photo = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
+                    /*byte[] photo = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length, options);
-                    card.setImage(bitmap);
+                    card.setImage(bitmap);*/
                     card.setLatitude(cursor.getString(cursor
                             .getColumnIndexOrThrow("lattitude")));
                     card.setLongitude(cursor.getString(cursor
                             .getColumnIndexOrThrow("longtitude")));
+                    card.setImage_path(cursor.getString(cursor
+                            .getColumnIndexOrThrow("image_path")));
                     cards.add(card);
                 }
             }
@@ -1464,16 +1466,18 @@ public class dbData {
                             .getColumnIndexOrThrow("batch_primary_id")));
                     card.setBatch_id(cursor.getInt(cursor
                             .getColumnIndexOrThrow("batch_id")));
-                    byte[] photo = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
+                    /*byte[] photo = cursor.getBlob(cursor.getColumnIndexOrThrow("image"));
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length, options);
-                    card.setImage(bitmap);
+                    card.setImage(bitmap);*/
                     card.setServer_flag(cursor.getString(cursor
                             .getColumnIndexOrThrow("server_flag")));
                     card.setLatitude(cursor.getString(cursor
                             .getColumnIndexOrThrow("lattitude")));
                     card.setLongitude(cursor.getString(cursor
                             .getColumnIndexOrThrow("longtitude")));
+                    card.setImage_path(cursor.getString(cursor
+                            .getColumnIndexOrThrow("image_path")));
                     cards.add(card);
                 }
             }

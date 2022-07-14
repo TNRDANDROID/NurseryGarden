@@ -245,7 +245,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 +"batch_images_primary_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "batch_primary_id INTEGER,"+
                 "batch_id INTEGER,"+
-                "image BLOB,"+
+                //"image BLOB,"+
+                "image_path TEXT,"+
                 "server_flag TEXT,"+
                 "lattitude TEXT,"+
                 "longtitude TEXT)");
@@ -281,7 +282,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "batch_growth_tracking_primary_id INTEGER,"+
                 "batch_primary_id INTEGER,"+
                 "batch_id INTEGER,"+
-                "image BLOB,"+
+                //"image BLOB,"+
+                "image_path TEXT,"+
                 "server_flag TEXT,"+
                 "entry_date TEXT,"+
                 "lattitude TEXT,"+

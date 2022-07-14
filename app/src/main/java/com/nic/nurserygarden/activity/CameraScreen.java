@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -63,6 +64,7 @@ import org.json.JSONArray;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -370,7 +372,7 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
         return dist;
     }
     private void captureImage() {
-        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+        /*if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
@@ -390,13 +392,13 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
 
             // start the image capture Intent
             startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-        }
-       /* Intent intent = new Intent(this, ImageSelectActivity.class);
+        }*/
+        Intent intent = new Intent(this, ImageSelectActivity.class);
         intent.putExtra(ImageSelectActivity.FLAG_COMPRESS, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_CAMERA, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_GALLERY, false);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_CROP, false);//default is false
-        startActivityForResult(intent, 1213);*/
+        startActivityForResult(intent, 1213);
         if (MyLocationListener.latitude > 0) {
             offlatTextValue = MyLocationListener.latitude;
             offlongTextValue = MyLocationListener.longitude;
@@ -709,12 +711,14 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         byte[] imageInByte = new byte[0];
                         String image_str = "";
                         String description = "";
+                        String image_path = "";
                         try {
                             description = myEditTextView.getText().toString();
                             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             imageInByte = baos.toByteArray();
+                            image_path = fileDirectory(bitmap,"batch",String.valueOf(i));
 
 
                         } catch (Exception e) {
@@ -726,9 +730,10 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         imageValue.put("batch_primary_id", batch_primary_id);
                         imageValue.put("batch_id", 0);
                         imageValue.put("server_flag", "0");
-                        imageValue.put("image", imageInByte);
+                        //imageValue.put("image", imageInByte);
                         imageValue.put("lattitude", latitude_text.getText().toString());
                         imageValue.put("longtitude", longtitude_text.getText().toString());
+                        imageValue.put("image_path", image_path);
 
 
                         rowInserted = db.insert(DBHelper.BATCH_IMAGES_DETAILS, null, imageValue);
@@ -869,12 +874,14 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         byte[] imageInByte = new byte[0];
                         String image_str = "";
                         String description = "";
+                        String image_path = "";
                         try {
                             description = myEditTextView.getText().toString();
                             Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             imageInByte = baos.toByteArray();
+                            image_path = fileDirectory(bitmap,"growth_track",String.valueOf(i));
 
 
                         } catch (Exception e) {
@@ -888,9 +895,10 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
                         imageValue.put("batch_id", batch_id);
                         imageValue.put("server_flag", "0");
                         imageValue.put("entry_date", entry_date);
-                        imageValue.put("image", imageInByte);
+                        //imageValue.put("image", imageInByte);
                         imageValue.put("lattitude", latitude_text.getText().toString());
                         imageValue.put("longtitude", longtitude_text.getText().toString());
+                        imageValue.put("image_path", image_path);
 
 
                         rowInserted = db.insert(DBHelper.BATCH_GROWTH_TRACKING_PHOTOS_DETAILS, null, imageValue);
@@ -1001,6 +1009,26 @@ public class CameraScreen extends AppCompatActivity implements View.OnClickListe
             }
         }
         focusOnView(cameraScreenBinding.scrollView);
+    }
+
+    public String fileDirectory(Bitmap bitmap,String type,String count){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir(type, Context.MODE_PRIVATE);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        String child_path = Utils.getCurrentDateTime()+"_"+count+".png";
+        File mypath = new File(directory, child_path);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            Log.e("SAVE_IMAGE", e.getMessage(), e);
+        }
+        return mypath.toString();
     }
 
 }

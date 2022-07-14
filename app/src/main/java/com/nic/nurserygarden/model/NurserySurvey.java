@@ -1230,4 +1230,14 @@ public class NurserySurvey {
     public void setWater_source_type_name(String water_source_type_name) {
         this.water_source_type_name = water_source_type_name;
     }
+
+    private String image_path;
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
 }
